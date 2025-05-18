@@ -1,0 +1,6 @@
+# Numerical Methods
+
+{{< include linear-algebra.qmd >}}
+
+{{< include monte-carlo.qmd >}}
+

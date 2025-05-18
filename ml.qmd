@@ -1,0 +1,7 @@
+# Machine Learning
+
+{{< include regression.qmd >}}
+
+{{< include neural-nets.qmd >}}
+
+{{< include cnn.qmd >}}

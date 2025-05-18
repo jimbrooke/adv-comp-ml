@@ -1,0 +1,4 @@
+## Programming with Objects
+
+This isn't a full introduction to object oriented (OO) programming, but we will introduce the main concepts and some practical recommendations.
+ 

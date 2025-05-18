@@ -1,12 +1,72 @@
 [
   {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "1  Introduction",
+    "objectID": "adv-python.html",
+    "href": "adv-python.html",
+    "title": "2  Advanced Python",
     "section": "",
-    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "text": "2.1 Programming with Objects\nThis isn’t a full introduction to object oriented (OO) programming, but we will introduce the main concepts and some practical recommendations.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Advanced Python</span>"
+    ]
+  },
+  {
+    "objectID": "adv-python.html#exceptions",
+    "href": "adv-python.html#exceptions",
+    "title": "2  Advanced Python",
+    "section": "2.2 Exceptions",
+    "text": "2.2 Exceptions\nWhat exceptions are, how to handle them, and when to generate (throw) them.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Advanced Python</span>"
+    ]
+  },
+  {
+    "objectID": "ml.html",
+    "href": "ml.html",
+    "title": "5  Machine Learning",
+    "section": "",
+    "text": "5.1 Regression\nasdfsadf\n1234\n## Neural Networks\nasdfasd\naerqewrxs",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "numerical-methods.html",
+    "href": "numerical-methods.html",
+    "title": "3  Numerical Methods",
+    "section": "",
+    "text": "3.1 Linear Algebra",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Numerical Methods</span>"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Advanced Computational Physics & Machine Learning",
+    "section": "",
+    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "numerical-methods.html#monte-carlo-methods",
+    "href": "numerical-methods.html#monte-carlo-methods",
+    "title": "3  Numerical Methods",
+    "section": "3.2 Monte Carlo Methods",
+    "text": "3.2 Monte Carlo Methods",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Numerical Methods</span>"
+    ]
+  },
+  {
+    "objectID": "ml.html#convolutional-neural-networks",
+    "href": "ml.html#convolutional-neural-networks",
+    "title": "5  Machine Learning",
+    "section": "5.2 Convolutional Neural Networks",
+    "text": "5.2 Convolutional Neural Networks\nasds",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Machine Learning</span>"
     ]
   },
   {
@@ -20,23 +80,33 @@
     ]
   },
   {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "objectID": "adv-python.html#compilation-with-numba",
+    "href": "adv-python.html#compilation-with-numba",
+    "title": "2  Advanced Python",
+    "section": "2.3 Compilation with Numba",
+    "text": "2.3 Compilation with Numba",
     "crumbs": [
-      "References"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Advanced Python</span>"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Advanced Computational Physics & Machine Learning",
+    "objectID": "parallel.html",
+    "href": "parallel.html",
+    "title": "4  Parallel Programming",
     "section": "",
-    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "text": "4.1 Message Passing Interface (mpi)",
     "crumbs": [
-      "Preface"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Parallel Programming</span>"
+    ]
+  },
+  {
+    "objectID": "parallel.html#cloud-technology",
+    "href": "parallel.html#cloud-technology",
+    "title": "4  Parallel Programming",
+    "section": "4.2 Cloud Technology",
+    "text": "4.2 Cloud Technology",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Parallel Programming</span>"
     ]
   }
 ]

@@ -2,3 +2,8 @@
 
 THis section will cover some advanced python programming concepts.
 
+{{< include objects.qmd >}}
+
+{{< include exceptions.qmd >}}
+
+{{< include numba.qmd >}}

@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./linear-algebra.html" rel="next">
+<link href="./numerical-methods.html" rel="next">
 <link href="./intro.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./adv-prog.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Advanced Python</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./adv-python.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Advanced Python</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -120,20 +120,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./adv-prog.html" class="sidebar-item-text sidebar-link active">
+  <a href="./adv-python.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Advanced Python</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./linear-algebra.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+  <a href="./numerical-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Numerical Methods</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./monte-carlo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
+  <a href="./parallel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Parallel Programming</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -160,7 +160,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#programming-with-objects" id="toc-programming-with-objects" class="nav-link active" data-scroll-target="#programming-with-objects"><span class="header-section-number">2.1</span> Programming with Objects</a></li>
+  <li><a href="#exceptions" id="toc-exceptions" class="nav-link" data-scroll-target="#exceptions"><span class="header-section-number">2.2</span> Exceptions</a></li>
+  <li><a href="#compilation-with-numba" id="toc-compilation-with-numba" class="nav-link" data-scroll-target="#compilation-with-numba"><span class="header-section-number">2.3</span> Compilation with Numba</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -184,8 +192,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>THis section will cover some advanced python programming concepts.</p>
+<section id="programming-with-objects" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="programming-with-objects"><span class="header-section-number">2.1</span> Programming with Objects</h2>
+<p>This isn’t a full introduction to object oriented (OO) programming, but we will introduce the main concepts and some practical recommendations.</p>
+</section>
+<section id="exceptions" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="exceptions"><span class="header-section-number">2.2</span> Exceptions</h2>
+<p>What exceptions are, how to handle them, and when to generate (throw) them.</p>
+</section>
+<section id="compilation-with-numba" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="compilation-with-numba"><span class="header-section-number">2.3</span> Compilation with Numba</h2>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -604,8 +624,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./linear-algebra.html" class="pagination-link" aria-label="Linear Algebra">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./numerical-methods.html" class="pagination-link" aria-label="Numerical Methods">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Numerical Methods</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,0 +1,7 @@
+# Parallel Programming
+
+
+
+{{< include mpi.qmd >}}
+
+{{< include cloud-tech.qmd >}}
