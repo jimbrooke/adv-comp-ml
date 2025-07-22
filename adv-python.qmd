@@ -1,9 +1,22 @@
-# Advanced Python
+---
+title: "Advanced Programming"
+format: html
+execute:
+  error: true
+---
 
-THis section will cover some advanced python programming concepts.
+This section will cover some advanced programming concepts.
 
-{{< include objects.qmd >}}
+Maybe it should also cover concepts like clusters, networks, compilation, etc.
 
-{{< include exceptions.qmd >}}
+## Classes & Objects
 
-{{< include numba.qmd >}}
+But Simon already covered this, FFS
+
+## Exceptions
+
+
+## Numba
+
+
+

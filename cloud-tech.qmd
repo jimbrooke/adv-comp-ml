@@ -1,2 +1,22 @@
-## Cloud Technology
+---
+title: "Cloud Technology"
+format: html
+execute:
+  error: true
+---
+
+Or High Throughput Computing
+
+## Computing Concepts
+
+Could move this to the advanced python section ?
+
+## Containers
+
+
+## Message Queues
+
+
+## Orchestration
+
 

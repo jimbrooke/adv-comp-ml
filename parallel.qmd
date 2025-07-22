@@ -1,7 +1,10 @@
-# Parallel Programming
+---
+title: "Parallel Programming"
+format: html
+execute:
+  error: true
+---
 
 
 
-{{< include mpi.qmd >}}
-
-{{< include cloud-tech.qmd >}}
+## Parallel Programming with MPI

@@ -1,7 +1,30 @@
-# Machine Learning
+---
+title: "Machine Learning"
+format: html
+execute:
+  error: true
+---
 
-{{< include regression.qmd >}}
+This could be part 1....?
 
-{{< include neural-nets.qmd >}}
 
-{{< include cnn.qmd >}}
+## Bayesian Inference
+
+
+## Maximum Likelihood Estimation
+
+
+## Supervised vs Unsupervised Learning
+
+
+
+## Classification
+
+### Binary Logistic Regression
+
+
+
+## Neural Networks
+
+
+
