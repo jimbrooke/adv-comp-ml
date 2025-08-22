@@ -7,6 +7,8 @@ execute:
 
 ## Basic Matrix Operations
 
+This is a test.
+
 Python/numpy/scipy provide a range of options for achieving basic matrix operations. You will need to take a little care to ensure that your code implements the operations you intend it to. This is largely due to the fact that some operators/functions will change their behaviour depending on the input you provide. This section includes some recommendations for simple linear algebra, which should ensure your code behaves as desired.
 
 Matrices can be implemented as a 2D `np.ndarray`. Basic matrix arithmetic can then be performed using standard operators `+`,`-` and `@`. You can also use `np.matmul()` for matrix multiplication. Numpy will also perform matrix multiplication with `np.dot()`, but this is not recommended if you can use `@` or `np.matmul()`.

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Advanced Computational Physics &amp; Machine Learning - 5&nbsp; Machine Learning</title>
+<title>Advanced Computational Physics &amp; Machine Learning - 4&nbsp; Machine Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./summary.html" rel="next">
-<link href="./parallel.html" rel="prev">
+<link href="./adv-python.html" rel="next">
+<link href="./monte-carlo.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ml.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ml.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Machine Learning</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -120,32 +120,38 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./adv-python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Advanced Python</span></span></a>
+  <a href="./linear-algebra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./numerical-methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Numerical Methods</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./parallel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Parallel Programming</span></span></a>
+  <a href="./monte-carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ml.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  <a href="./adv-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Advanced Programming</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parallel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parallel Programming</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cloud-tech.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cloud Technology</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -164,8 +170,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#regression" id="toc-regression" class="nav-link active" data-scroll-target="#regression"><span class="header-section-number">5.1</span> Regression</a></li>
-  <li><a href="#convolutional-neural-networks" id="toc-convolutional-neural-networks" class="nav-link" data-scroll-target="#convolutional-neural-networks"><span class="header-section-number">5.2</span> Convolutional Neural Networks</a></li>
+  <li><a href="#bayesian-inference" id="toc-bayesian-inference" class="nav-link active" data-scroll-target="#bayesian-inference"><span class="header-section-number">4.1</span> Bayesian Inference</a></li>
+  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation"><span class="header-section-number">4.2</span> Maximum Likelihood Estimation</a></li>
+  <li><a href="#supervised-vs-unsupervised-learning" id="toc-supervised-vs-unsupervised-learning" class="nav-link" data-scroll-target="#supervised-vs-unsupervised-learning"><span class="header-section-number">4.3</span> Supervised vs Unsupervised Learning</a></li>
+  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification"><span class="header-section-number">4.4</span> Classification</a>
+  <ul class="collapse">
+  <li><a href="#binary-logistic-regression" id="toc-binary-logistic-regression" class="nav-link" data-scroll-target="#binary-logistic-regression"><span class="header-section-number">4.4.1</span> Binary Logistic Regression</a></li>
+  </ul></li>
+  <li><a href="#neural-networks" id="toc-neural-networks" class="nav-link" data-scroll-target="#neural-networks"><span class="header-section-number">4.5</span> Neural Networks</a></li>
   </ul>
 </nav>
     </div>
@@ -174,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Machine Learning</span></h1>
 </div>
 
 
@@ -191,17 +203,24 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="regression" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="regression"><span class="header-section-number">5.1</span> Regression</h2>
-<p>asdfsadf</p>
-<p>1234</p>
-<p>##&nbsp;Neural Networks</p>
-<p>asdfasd</p>
-<p>aerqewrxs</p>
+<p>This could be part 1….?</p>
+<section id="bayesian-inference" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="bayesian-inference"><span class="header-section-number">4.1</span> Bayesian Inference</h2>
 </section>
-<section id="convolutional-neural-networks" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="convolutional-neural-networks"><span class="header-section-number">5.2</span> Convolutional Neural Networks</h2>
-<p>asds</p>
+<section id="maximum-likelihood-estimation" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="maximum-likelihood-estimation"><span class="header-section-number">4.2</span> Maximum Likelihood Estimation</h2>
+</section>
+<section id="supervised-vs-unsupervised-learning" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="supervised-vs-unsupervised-learning"><span class="header-section-number">4.3</span> Supervised vs Unsupervised Learning</h2>
+</section>
+<section id="classification" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="classification"><span class="header-section-number">4.4</span> Classification</h2>
+<section id="binary-logistic-regression" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="binary-logistic-regression"><span class="header-section-number">4.4.1</span> Binary Logistic Regression</h3>
+</section>
+</section>
+<section id="neural-networks" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="neural-networks"><span class="header-section-number">4.5</span> Neural Networks</h2>
 
 
 </section>
@@ -618,13 +637,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./parallel.html" class="pagination-link" aria-label="Parallel Programming">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Parallel Programming</span></span>
+      <a href="./monte-carlo.html" class="pagination-link" aria-label="Monte Carlo Methods">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./summary.html" class="pagination-link" aria-label="Summary">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./adv-python.html" class="pagination-link" aria-label="Advanced Programming">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Advanced Programming</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,0 +1,202 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Advanced Computational Physics & Machine Learning",
+    "section": "",
+    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "linear-algebra.html",
+    "href": "linear-algebra.html",
+    "title": "2  Linear Algebra",
+    "section": "",
+    "text": "2.1 Basic Matrix Operations\nThis is a test.\nPython/numpy/scipy provide a range of options for achieving basic matrix operations. You will need to take a little care to ensure that your code implements the operations you intend it to. This is largely due to the fact that some operators/functions will change their behaviour depending on the input you provide. This section includes some recommendations for simple linear algebra, which should ensure your code behaves as desired.\nMatrices can be implemented as a 2D np.ndarray. Basic matrix arithmetic can then be performed using standard operators +,- and @. You can also use np.matmul() for matrix multiplication. Numpy will also perform matrix multiplication with np.dot(), but this is not recommended if you can use @ or np.matmul().\nimport numpy as np\n\nA = np.array([[1, 2, 3,],[4, 5, 6],[1, 0, 0]])\nB = np.array([[1, 0, 0,],[0, 1, 0],[0, 0, 1]])\n\n# addition\nprint(A + B)\n\n# subtraction\nprint(A - B)\n\n# scalar multiplication\nprint(3*B)\n\n# matrix multiplication\nprint(np.matmul(A, B))\nprint(A @ B)\n\n[[2 2 3]\n [4 6 6]\n [1 0 1]]\n[[ 0  2  3]\n [ 4  4  6]\n [ 1  0 -1]]\n[[3 0 0]\n [0 3 0]\n [0 0 3]]\n[[1 2 3]\n [4 5 6]\n [1 0 0]]\n[[1 2 3]\n [4 5 6]\n [1 0 0]]\nVectors can be implemented as 1D arrays, or as 2D arrays. A 1D array will be interpreted as row or column vector depending on the context in which it is used. Use of 2D arrays allows you to specify row or column form. This can be useful, since np.matmul() or @ will throw an exception if you accidentally try to perform an illegal matrix operation.\nv  = np.array([1,2,3])\nvr = np.array([[1,2,3]])\nvc = np.array([[1],[2],[3]])\n\n# two options for matrix * vector\nprint(A@v)\nprint(A@vc)\n\n# two options for vector * matrix\nprint(v@A)\nprint(vr@A)\n\n# this is not a valid matrix multiplication !\nprint(A@vr)\n\n[14 32  1]\n[[14]\n [32]\n [ 1]]\n[12 12 15]\n[[12 12 15]]\n\n\nValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)-&gt;(n?,m?) (size 1 is different from 3)\nNumpy will also provide the usual forms of vector product via np.vdot(), np.cross(), np.inner() and np.outer(). Again, np.dot() will provide a vector dot product, but is not recommended if you can use vdot().\nOther useful matrix operations are provided by numpy, such as : - np.transpose() (also available via ndarray.T) - np.norm() - np.trace()\nFor further information, look at the reference pages : https://numpy.org/doc/stable/reference/routines.array-manipulation.html https://numpy.org/doc/stable/reference/routines.linalg.html\nFinally, scipy.linalg provides some additional basic operations such as the determinant and the inverse.\nimport numpy as np\nimport scipy.linalg as linalg\n\nA = np.array([[1, 2, 3,],[4, 5, 6],[1, 0, 0]])\ndetA = linalg.det(A)\nprint(detA)\n\ninvA = linalg.inv(A)\nprint(invA)\n\n-3.000000000000001\n[[-0.          0.          1.        ]\n [-2.          1.         -2.        ]\n [ 1.66666667 -0.66666667  1.        ]]",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "linear-algebra.html#simultaneous-equations",
+    "href": "linear-algebra.html#simultaneous-equations",
+    "title": "2  Linear Algebra",
+    "section": "2.2 Simultaneous Equations",
+    "text": "2.2 Simultaneous Equations\nMany problems in physics require solving simultaneous equations. When these become large and complex, numerical routines are required.\nA set of simultaneous equations can always be written in matrix form, for example, two equations in two unknowns (\\(x_1\\) and \\(x_2\\))\n\\[\n\\begin{aligned}\nax_1 + bx_2 &= y_1 \\\\\ncx_1 + dx_2 &= y_2\n\\end{aligned}\n\\tag{2.1}\\]\ncan be rewritten as\n\\[\n\\left(\\begin{array}{cc} a & b \\\\ c & d\\end{array}\\right)\n\\left(\\begin{array}{c} x_1 \\\\ x_2 \\end{array}\\right) =\n\\left(\\begin{array}{c} y_1 \\\\ y_2 \\end{array}\\right)\n\\tag{2.2}\\]\nAn arbitrary set of equations is\n\\[Ax = y \\tag{2.3}\\]\nwhere A is the matrix of coefficients, x is the vector of unknown variables \\(x_1\\), \\(x_2\\), … and y is the known vector of constants.\n\n2.2.1 Inverse Matrix\nOne way to solve the above equation is to multiply both sides by the inverse of A:\n\\[A^{-1} A x = A^{-1} y \\tag{2.4}\\]\ngiving :\n\\[x = A^{-1} y \\tag{2.5}\\]\nThis is demonstrated in the example below for a simple test case :\n\\[\n\\left(\\begin{array}{ccc} 1 & 2 & 2 \\\\\n                        3 & 1 & 6 \\\\\n                        0 & 2 & 2\\end{array}\\right)\n\\left(\\begin{array}{c} x_1 \\\\ x_2 \\\\ x_3\\end{array}\\right) =\n\\left(\\begin{array}{c} 2 \\\\ 7 \\\\ 1\\end{array}\\right)\n\\tag{2.6}\\]\n\nimport numpy as np\nimport scipy.linalg as linalg\n\ndef solve_inv(a,y):\n    x = linalg.inv(a) @ y\n    return x\n\na = np.array([[1, 2, 2,],[3, 1, 6],[0, 2, 2]])\ny = np.array([[2], [7], [1]])\nprint(a)\nprint(y)\n\nx = solve_inv(a,y)\nprint(x)\n\n[[1 2 2]\n [3 1 6]\n [0 2 2]]\n[[2]\n [7]\n [1]]\n[[ 1. ]\n [-0.2]\n [ 0.7]]\n\n\nIs this the solution? We can easily check by inserting the solution into the original equation.\n\nprint(a @ x)\n\n[[2.]\n [7.]\n [1.]]\n\n\nWhich is indeed equal to our y above. This kind of test is known as a ‘closure test’ and will be used frequently throughout this unit to verify our code.\nBefore using this method for solving simultaneous equations, though, we should understand how scipy.linalg.inv finds the matrix inverse. Unfortunately, this is tricky to understand from the reference page, (scipy.linalg.inv). But, if you examine the source code for this function you’ll see that it uses a function called DGETRI. This is defined in the LAPACK library, and its reference page is here. As you can see this routine uses LU decomposition to find the inverse! It doesn’t make sense, therefore, to find a matrix inverse simply to solve a simultaneous equation, and using LU decomposition directly will involve fewer operations. However, there are exceptions when dealing with many simultaneous equations. For example, suppose you have a sequence of problems which all feature the same matrix \\(A\\), but have different RHS \\(y\\). In this case it would be efficient to invert \\(A\\) once, then multiply by \\(y\\) to solve each problem, since multiplication involves fewer operations than LU decomposition.\nAs an aside, LAPACK is a linear algebra library written in FORTRAN - which remains one of the most efficient languages for writing numerical methods - and most routines in scipy.linalg basically provide a Python interface to this library.\n\n\n2.2.2 Gaussian Elimination\nSome sets of simultaneous equations are easy to solve. For example :\n\\[\n\\begin{aligned}\na x_1 &= y_1 \\\\\nb x_2 &= y_2 \\\\\nc x_3 &= y_3\n\\end{aligned}\n\\tag{2.7}\\] This can be written in what is known as row echelon form :\n\\[\n\\left(\\begin{array}{ccc} a & 0 & 0 \\\\\n                        0 & b & 0 \\\\\n                        0 & 0 & c\\end{array}\\right)\n\\left(\\begin{array}{c} x_1 \\\\ x_2 \\\\ x_3\\end{array}\\right) =\n\\left(\\begin{array}{c} y_1 \\\\ y_2 \\\\ y_3\\end{array}\\right)\n\\tag{2.8}\\]\nAnd then reduced row echelon form :\n\\[\n\\left(\\begin{array}{ccc} 1 & 0 & 0 \\\\\n                        0 & 1 & 0 \\\\\n                        0 & 0 & 1\\end{array}\\right)\n\\left(\\begin{array}{c} x_1 \\\\ x_2 \\\\ x_3\\end{array}\\right) =\n\\left(\\begin{array}{c} y_1/a \\\\ y_2/b \\\\ y_3/c\\end{array}\\right)\n\\tag{2.9}\\]\nGauss-Jordan elimination is a process which reduces any linear equation set to this form. It can be shown that the reduced row echelon form is unique, and therefore independent of the order of operations which are used to find it. The technique is illustrated using the example problem from earlier. It’s convenient to use the ‘augmented’ matrix, which includes the right-hand side. \\[\n\\left(\\begin{array}{ccc|c}\n    1 & 2 & 2 & 2 \\\\\n    3 & 1 & 6 & 7 \\\\\n    0 & 2 & 2 & 1\n\\end{array}\\right)\n\\tag{2.10}\\]\nThen we apply simple operations until we obtain the equation in row echelon form. These operations include:\n\nMultiply a row by a constant\nSwap two rows\nSum two rows in a linear combination\n\n(Hopefully, these sound reasonably familiar - we are just formalising techniques you will have used before)\nReplace \\(R_1\\) (row 1) with \\(R_1 - R_3\\) : \\[\n\\left(\\begin{array}{ccc|c}\n    1 & 0 & 0 & 1 \\\\\n    3 & 1 & 6 & 7 \\\\\n    0 & 2 & 2 & 1\n\\end{array}\\right)\n\\tag{2.11}\\]\nReplace \\(R_2\\) with \\(R_2 - 3R_1\\) : \\[\n\\left(\\begin{array}{ccc|c}\n    1 & 0 & 0 & 1 \\\\\n    0 & 1 & 6 & 4 \\\\\n    0 & 2 & 2 & 1\n\\end{array}\\right)\n\\tag{2.12}\\]\nReplace \\(R_2\\) with \\(R_2 - \\frac{2}{5}R_2\\) : \\[\n\\left(\\begin{array}{ccc|c}\n    1 & 0 & 0 & 1 \\\\\n    0 & -5 & 0 & 1 \\\\\n    0 & 0 & 2 & \\frac{7}{5}\n\\end{array}\\right)\n\\tag{2.13}\\]\nAnd then finally for reduced row echelon form, replace \\(R_2\\) with \\(\\frac{-1}{5}R_2\\) and \\(R_3\\) with \\(\\frac{1}{2}R_3\\) \\[\n\\left(\\begin{array}{ccc|c}\n    1 & 0 & 0 & 1 \\\\\n    0 & 1 & 0 & -\\frac{1}{5} \\\\\n    0 & 0 & 1 & \\frac{7}{10}\n\\end{array}\\right)\n\\tag{2.14}\\]\nSo the solution is : \\[\n\\begin{aligned}\nx_1 &= 1 \\\\\nx_2 &= -\\frac{1}{5} \\\\\nx_3 &= \\frac{7}{10}\n\\end{aligned}\n\\tag{2.15}\\]\n\n\n2.2.3 LU Decomposition\nMatrix decomposition techniques involve factorising a general matrix into a product of several matrices. LU decomposition involves writing the general matrix, \\(A\\), as the product of two triangular matrices, \\(L\\) and \\(U\\).\n\\[\nA=\n\\left(\\begin{array}{ccc} a_{11} & a_{12} & a_{13} \\\\\n                         a_{21} & a_{22} & a_{23} \\\\\n                         a_{31} & a_{32} & a_{33}\n\\end{array}\\right)\n\\tag{2.16}\\]\n\\[\nA=LU=\n\\left(\\begin{array}{ccc} 1      & 0      & 0 \\\\\n                         l_{21} & 1      & 0 \\\\\n                         l_{31} & l_{32} & 1\n\\end{array}\\right)\n\\left(\\begin{array}{ccc} u_{11} & u_{12} & u_{13} \\\\\n                         0      & u_{22} & u_{23} \\\\\n                         0      & 0      & u_{33}\n\\end{array}\\right)\n\\tag{2.17}\\]\nWe can use LU decomposition to solve matrix equations since it allows us to write the equation \\[Ax = y\\] as \\(L(Ux)=y\\). This can then be written as two equations \\(Lc=y\\) and \\(Ux=c\\), which are trivially solved, first for \\(c\\), and then for \\(x\\).\nThe matrices \\(L\\) and \\(U\\) can be found using the operations described above for Gaussian elimination. There are several algorithmic formulations that define the sequence of operations. Scipy provides an LU decomposition routine: scipy.linalg.lu(). Note that this performs a variation on the LU decomposition described above, since it also computes a permutation matrix \\(P\\), such that\n\\[PA = LU \\tag{2.18}\\]\nScipy also provides a simple function to obtain the solutions to a matrix equation. scipy.linalg.lu_solve() expects the \\(L\\), \\(U\\) and \\(P\\) matrices as arguments, as shown in the example below.\n\nscipy.linalg.lu\nscipy.linalg.lu_solve\n\n\ndef solve_lu(a,y):\n    lu, piv = linalg.lu_factor(a)\n    x = linalg.lu_solve((lu, piv), y)\n    return x\n\nprint(solve_lu(a,y))\n\n[[ 1. ]\n [-0.2]\n [ 0.7]]\n\n\nNote that the general purpose solvers provided by both numpy and scipy both utilise LU decomposition :\n\nnumpy.linalg.solve\nscipy.linalg.solve\n\n\n\n2.2.4 SVD Decomposition\nLU decomposition will find an exact solution to the matrix equation in a wide variety of cases. However, a solution may not exist, or there may be infinite solutions. In such cases, the Singular Value Decomposition may be of use.\nFor an \\(m \\times n\\) matrix \\(A\\), the singular values, \\(\\sigma\\) are given by the solutions to\n\\[\n\\begin{aligned}\nAv &= \\sigma u \\\\\nA^Tu &=\\sigma v\n\\end{aligned}\n\\tag{2.19}\\]\nwhere \\(u\\) and \\(v\\) are two non-zero vectors. These equations are closely related to the eigenvalue equation. Indeed, the singular values are also the square roots of the eigenvalues of \\(A^TA\\).\nThe singular value decomposition of \\(A\\) is\n\\[A = U\\Sigma V^T \\tag{2.20}\\]\nwhere \\(U\\) and \\(V\\) are orthonormal matrices, and \\(\\Sigma\\) is a matrix with the singular values on its leading diagonal, and zero elsewhere.\nThe SVD decomposition allows use to compute the pseudo-inverse of \\(A\\), which is given by :\n\\[A^\\dagger = V \\Sigma^\\dagger U^T \\tag{2.21}\\]\nwhere \\(\\Sigma^\\dagger\\) is the pseudo-inverse of \\(\\Sigma\\) and is obtained by transposing \\(\\Sigma\\) and replacing each non-zero element with it’s reciprocal.\nThe pseudoinverse (also known as the Moore-Penrose inverse) can always be computed, even when \\(A\\) is singular, ie. when when \\(\\frac{1}{|A|}=0\\) and the inverse cannot be found.\nIn the context of solving a matrix equation \\(Ax=y\\), the product of pseudoinverse and the RHS, (i.e. \\(\\bar{X}=A^\\dagger y\\)) has various properties. When A is non-singular, \\(\\bar{x}\\) gives the solution to \\(Ax=y\\). When \\(A\\) is singular, \\(\\bar{x}\\) is a least squares approximation to the nearest solution. When \\(Ax=y\\) has a space of solutions (equivalent to a set of simultaneous equations with degeneracy), then \\(\\bar{x}\\) is a vector which describes this space.\nSVD decomposition is available in Scipy using scipy.linalg.svd(). For further information, see scipy.linalg.svd. Note that, unlike LU decomposition, no solve() function is supplied, and instead we must write some code to calculate \\(\\bar{x}\\).\n\ndef solve_svd(a,y):\n    u, s, v = linalg.svd(a)\n    x = v.T @ np.diag(1/s) @ u.T @ y\n    return x\n\nprint(solve_svd(a,y))\n\n[[ 1. ]\n [-0.2]\n [ 0.7]]\n\n\nAlternatively, a function to compute the pseudoinverse directly is provided, scipy.linalg.pinv.\n\nprint( linalg.pinv(a) @ y)\n\n[[ 1. ]\n [-0.2]\n [ 0.7]]\n\n\n\n\n2.2.5 Physics Example\nHere we illustrate the use of simultaneous equation solvers in a familiar context - the use of Kirchoff’s laws and Ohm’s law to understand resistor networks. Typically, analysis of a resistor network will involve solving simultaneous equations, to calculate voltage and current at the desired points in the network. Consider the electronic circuit shown in the diagram.\n\n\n\nFigure 1 - Example resistor network.\n\n\nWhere : \\(V_1 = 12V\\), \\(V_2 = 12V\\), \\(R_1 = 3 \\Omega\\), \\(R_2 = 3 \\Omega\\), \\(R_3 = 10 \\Omega\\), \\(R_4 = 2 \\Omega\\), \\(R_5 = 2 \\Omega\\).\nBy identifying the three current loops indicated, we can use Kirchoff’s loop rule and Ohm’s law to write : \\[\n\\begin{aligned}\nV_1 &= I_1 R_1 + (I_1 - I_2) R_2 \\\\\n0   &= (I_2 - I_1) R_2 + I_2 R_3 + (I_2 - I_3) R_4 \\\\\n-V_2 &= (I_3 - I_2) R_4 + I_3 R_5\n\\end{aligned}\n\\tag{2.22}\\]\nSo we have a set of simultaneous equations, which we can write as a matrix equation :\n\\[\n\\begin{pmatrix}\nR_1+R_2 & -R_2 & 0 \\\\\n-R_2 & R_2+R_3+R_4 & -R_4 \\\\\n0  & -R_4 & R_4+R_5 \\\\\n\\end{pmatrix}\n\\begin{pmatrix}\nI_1 \\\\\nI_2 \\\\\nI_3\n\\end{pmatrix}\n=\n\\begin{pmatrix}\nV_1 \\\\\n0 \\\\\n-V_2\n\\end{pmatrix}\n\\tag{2.23}\\]\nSolving this matrix equation will provide the current at all points in the circuit. This method is known as “mesh analysis” of circuits.\nWe can write a simple function that, given the voltage and resistor values, will return the currents :\n\ndef meshAnalysis(v1, v2, r1, r2, r3, r4, r5):\n    m = np.array ([[r1+r2, -r2, 0],[-r2,r2+r3+r4,-r4],[0,-r4,r4+r5]])\n    v = np.array([[v1],[0],[-v2]])\n    i = linalg.solve(m,v)\n    return i\n\nWhich, for the values given, will return the three currents :\n\ni = meshAnalysis(12, 12, 3, 3, 10, 2, 2)\n\nprint(i)\n\n[[ 2.]\n [ 0.]\n [-3.]]\n\n\nOr we could calculate, for example, how \\(I_2\\) will vary as a function of \\(R_4\\), with all other values fixed :\n\nr4s = np.linspace(0.1, 5.0, 100)\ni2s = np.empty(len(r4s))\n\nfor j,r4 in enumerate(r4s):\n    i     = meshAnalysis(12, 12, 3, 3, 10, r4, 2)\n    i2s[j] = i[1][0]\n\nimport matplotlib.pyplot as plt\n\nplt.plot(r4s, i2s)\nplt.ylabel('$I_2$ (A)')\nplt.xlabel('$R_4$ (ohm)')\nplt.show()",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "linear-algebra.html#eigenproblems",
+    "href": "linear-algebra.html#eigenproblems",
+    "title": "2  Linear Algebra",
+    "section": "2.3 Eigenproblems",
+    "text": "2.3 Eigenproblems\nA square NxN matrix \\(A\\), has eigenvector \\(u\\) and eigenvalue \\(\\lambda\\) that satisfy :\n\\[(A - \\lambda I)u = 0 \\tag{2.24}\\]\nDetails of the numerical methods used for solving eigenproblems are beyond the scope of this course, but they are usually iterative methods, similar to those described in ?sec-relax.\nIt’s also worth noting that solving eigenproblems is closely related to finding the roots of polynomials. You may be familiar with one method for finding eigenvalues, which is to find the roots of the N-th degree polynomial found by expanding :\n\\[p(t) = \\det{|A - t I|} = 0 \\tag{2.25}\\]\nMany eigenproblem solving routines are provided by SciPy. In particular, scipy.linalg.eig(A) will return a tuple containing the eigenvalues and eigenvectors of A. If only the eigenvalues are required, scipy.linalg.eigenvals(A) can be used.\nCare should be taken when using scipy.linalg.eig, since it will find “left” and “right” eigenvectors, as specified, which are the solutions to \\(v A = \\lambda v\\) and \\(A v = \\lambda v\\) respectively.\nFor further details see scipy.linalg.eig\nAdditional routines include :\n\nscipy.linalg.eigh (for Hermitian matrices)\nscipy.linalg.eig_banded (for banded matrices)\nscipy.sparse.linalg.eigs (for sparse, square symmetric matrices)\n\n\n2.3.1 Simple example\nWe can test these sovlers using the matrix :\n\\[A =\n\\pmatrix{\n-2 & -4 & 2 \\\\\n-2 &  1 & 2 \\\\\n4  &  2 & 5}\n\\tag{2.26}\\]\nfor which the eigenvalues are \\(\\lambda^{(0)}=6\\), \\(\\lambda^{(1)}=-5\\), \\(\\lambda^{(2)}=3\\).\nNote that the algorithms discussed here will all find unit eigenvectors. The eigenvector corresponding to \\(\\lambda^{(0)}\\) is then :\n\\[\\hat{u}^{(0)}=\\pmatrix{\\frac{1}{\\sqrt{293}} \\\\\n\\frac{6}{\\sqrt{293}} \\\\\n\\frac{16}{\\sqrt{293}}\n}\n=\n\\pmatrix{0.058 \\\\\n0.351 \\\\\n0.935} \\tag{2.27}\\]\nwith numerical values given to 3 decimal places on the RHS.\n\nimport numpy as np\nimport scipy.linalg as linalg\n\nm = np.array([[-2,-4,2],[-2,1,2],[4,2,5]])\n\n# set seed for repeatability\nnp.random.seed(2)\n\n# run the algorithm\nmus, vs = linalg.eig(m)\n\n# print results\nnp.set_printoptions(precision=3)\nfor i in range(3):\n    print(\"Eigenvalue/vector : {:.1f} {}\".format(mus[i], vs.T[i]))\n\nEigenvalue/vector : -5.0+0.0j [ 0.816  0.408 -0.408]\nEigenvalue/vector : 3.0+0.0j [ 0.535 -0.802 -0.267]\nEigenvalue/vector : 6.0+0.0j [0.058 0.351 0.935]\n\n\nWhich includes the solution expected.\nNote that we have transposed the array of eigenvectors returned by linalg.eig(). This is a feature of the function, as described in the reference manual : “The normalized left eigenvector corresponding to the eigenvalue w[i] is the column vl[:,i]”.\n\n\n2.3.2 Physics Example\nIn this section, we illustrate the use of eigenvalue solvers in finding stable solutions of the coupled system of oscillators shown below.\n\n\n\nFigure 2 - Coupled oscillators, masses on springs.\n\n\nIf the displacement of the \\(i\\)th mass from its equilibrium position is denoted as \\(x_i\\), the force on the mass is given by the tension in the two springs as :\n\\[F_i = −k(x_i − x_{i−1}) + k(x_{i+1} − x_i) = −k(2x_i − x_{i−1} − x_{i+1}) \\tag{2.28}\\]\nWe can assume that there are normal mode solutions, i.e. solutions of the form \\(x_i = z_i e^{i\\omega t}\\) in which all masses oscillate with the same frequency \\(\\omega\\) but with unknown phasors \\(z_i\\). Then the above equation becomes :\n\\[F_i = m\\ddot{x}_i = −m\\omega^2x_i = −k(2x_i − x_{i−1} − x_{i+1}) \\tag{2.29}\\]\nThis is one row of a matrix equation describing the entire system :\n\\[m\\omega^2x_i \\left(\\begin{array}{c} \\vdots \\\\ \\\\ x_i \\\\ \\\\ \\vdots \\end{array}\\right) =\n\\left(\\begin{array}{ccccccc} & & & \\vdots & & & \\\\ \\cdots & 0 & -1 & 2 & -1 & 0 & \\cdots \\\\ & & & \\vdots & & & \\end{array}\\right)\n\\left(\\begin{array}{c} \\vdots \\\\ x_{i-1} \\\\ x_i \\\\ x_{i+1} \\\\ \\vdots \\end{array}\\right)\n\\tag{2.30}\\]\nThis example is a typical eigenvalue problem, in that many of the matrix elements are zero, which can greatly simplify the computational challenge and make even large systems solvable. The matrix is symmetric, which means it is suitable for solving with our eigenproblem solving function above, or one of the solvers from scipy.linalg.\n\nm = np.array([[2, -1,  0,  0,  0,  0,  0],\n              [-1, 2, -1,  0,  0,  0,  0],\n              [0, -1,  2, -1,  0,  0,  0],\n              [0,  0, -1,  2, -1,  0,  0],\n              [0,  0,  0, -1,  2, -1,  0],\n              [0,  0,  0,  0, -1,  2, -1],\n              [0,  0,  0,  0,  0, -1,  2]])\n\nmus, vs = linalg.eig(m)\n\nThe eigenvalue associated with each mode gives the frequency, while the (complex) eigenvector provides the magnitude and phase of oscillation for each mass. We can plot the displacement of each mass as a function of time for each mode.\n\nimport numpy as np\nimport scipy.linalg as linalg\nimport matplotlib.pyplot as plt\n\n# a function to calculate the (real) displacement from complex phase\ndef disp(zi, omega, t):\n    return np.real(zi * np.exp(1j * omega * t))\n\n# set up some pretty colours for plotting\ncm  = plt.cm.viridis\ncol = [cm(int(x*cm.N/7)) for x in range(7)]\n\n# time period\nts = np.arange(0,40, 0.001)\n\n# loop over eigenmodes\nfor i in range(7):\n    \n    print(\"Mode       : \",i)\n    print(\"Eigenvalue : \", mus[i])\n\n    fig=plt.figure(figsize=(16, 4))\n\n    xs = []\n    \n    # loop over masses\n    for j in range(7):\n        \n        # get the displacement, and add an offset to separate out each line\n        offset = (2*j)-6\n        \n        # create displacement values from function using eigenvectors and eigenvalues\n        xs     = disp(vs.T[i][j], mus[i], ts) + offset\n        \n        # plot displacement\n        plt.plot(ts, xs, color=col[j])\n        \n        # plot central position to guide the eye\n        plt.plot([0, 40], [offset, offset], color=col[j], linestyle='dotted') \n\n    plt.xlabel(\"t\")\n    plt.show()\n\nMode       :  0\nEigenvalue :  (3.8477590650225726+0j)\nMode       :  1\nEigenvalue :  (3.4142135623730923+0j)\nMode       :  2\nEigenvalue :  (2.765366864730178+0j)\nMode       :  3\nEigenvalue :  (1.9999999999999984+0j)\nMode       :  4\nEigenvalue :  (0.1522409349774269+0j)\nMode       :  5\nEigenvalue :  (0.585786437626905+0j)\nMode       :  6\nEigenvalue :  (1.2346331352698203+0j)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "monte-carlo.html",
+    "href": "monte-carlo.html",
+    "title": "3  Monte Carlo Methods",
+    "section": "",
+    "text": "3.1 Pseudo Random Number Sampling\nWe will frequently want to generate random numbers according to a particular probability distribution, or in the jargon ‘sampling’ from the given distribution. There are two basic methods for achieving this; an analytical method, and the accept/reject method.\nIn the below, we assume we are provided with a random number generator that returns pseudo-random numbers with a uniform probability distribution in the interval \\([0,1)\\). In Python, numpy.random provides the random() function, which does exactly this. A variety of other probability distributions are provided by numpy.random, and in general these should be used when possible. However, the techniques described here allow any desired PDF to be sampled.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Monte Carlo Methods</span>"
+    ]
+  },
+  {
+    "objectID": "monte-carlo.html#pseudo-random-number-sampling",
+    "href": "monte-carlo.html#pseudo-random-number-sampling",
+    "title": "3  Monte Carlo Methods",
+    "section": "",
+    "text": "3.1.1 Uniform Probability Distributions\nWe will often need uniform probability distributions over an interval other than \\([0,1)\\). It is straightforward to map this interval to the desired one, as shown in the example below.\n\nimport numpy.random as random\nimport matplotlib.pyplot as plt\n\n# produce random numbers in the range 150-250\na = 100*random.random(int(1e5))+150\nplt.hist(a)\nplt.show()\n\n\n\n\n\n\n\n\n\n\n3.1.2 Analytical Method\nThe above transformation is a special case of the method described in this section. We can consider a random number generator that produces values x over the interval \\((x_1, x_2)\\) with probability \\(P(x)\\), which we wish to convert to values y on the interval \\((y_1, y_2)\\), with probability \\(P'(y)\\). To construct a transformation from a generated value \\(x_{in}\\) to an output value with the required distribution, \\(y_{out}\\), we require that the cumulative distributions are equal :\n\\[\\int_{x_0}^{x_{in}} P(x) dx = \\int_{y_0}^{y_{out}} P'(y) dy \\tag{3.1}\\]\nNote that for \\(x_{in} = x_2\\), \\(y_{out} = y_2\\) both integrals must equal 1.\nIf the LHS of the above equation is uniform on the interval \\([0,1)\\), then we have :\n\\[x_{in} = \\int_{y_0}^{y_{out}} P'(y) dy \\tag{3.2}\\]\nIf we then define the function \\(Q(y_{out})\\) such that :\n\\[Q(y_{out}) = x_{in} = \\int_{y_0}^{y_{out}} P'(y) dy \\tag{3.3}\\]\nThen the transformation we must apply to \\(x_{in}\\), in order to obtain \\(y_{out}\\), is simply the inverse function, ie :\n\\[y_{out} = Q^{-1}(x_{in}) \\tag{3.4}\\]\n\n\n\n3.1.3 Analytical Method Example\nIn this example, we will write a function to produce values \\(y\\) in the interval \\([0, \\pi)\\) with probability distribution proportional to \\(\\sin(y)\\).\nHere, the integral above becomes :\n\\[\n\\begin{aligned}\nQ(y_{out}) &= \\frac{1}{2}\\int_{0}^{y_{out}} \\sin(y) dy \\\\\n           &= -\\frac{1}{2}\\cos(y_{out}) + C\n\\end{aligned}\n\\tag{3.5}\\]\nNote the factor \\(\\frac{1}{2}\\) is required to ensure the integral from \\(0\\) to \\(\\pi\\) is equal to 1. We can determine the constant of integration by requiring that \\(Q(0) = 0\\), for \\(x_{in}=0\\) and \\(Q(\\pi)=1\\) for \\(x_{in}=1\\).\nWe then find that\n\\[Q(y_{out}) = -\\frac{1}{2}\\cos(y_{out}) + \\frac{1}{2} \\tag{3.6}\\]\nAnd our inverse transformation is :\n\\[y_{out} = Q^{-1}(x_{in}) = \\cos^{-1}(1-2x_{in})  \\tag{3.7}\\]\n\ndef randSinAna():\n    \"\"\"Generate a random theta between 0 and pi, with PDF sin(theta) using analytical method\"\"\"\n    x = random.random()\n    return np.arccos(1-2*x)\n\n\nimport numpy as np\n\n# generate 50,000 points using a list comprehension\nn1s = [randSinAna() for _ in range(50000)]\n\n# plot a histogram\nhist1, bins1, patches1 = plt.hist(n1s, bins=50, density=True, label=\"Analytic Method\")\n\n# plot a sin(theta) function for comparison\nbin_centres = (bins1[1:] + bins1[:-1])/2\nplt.plot(bin_centres, np.sin(bin_centres)/2, label=r'$sin(\\theta)$')\n\nplt.xlabel(r'$\\theta$')\nplt.ylabel(r'$P(\\theta)$')\nplt.legend()\nplt.show()\n\n\n\n\n\n\n\n\nIt might be worth highlighing the method used here (and in examples below) to generate a large number of points. This is a list comprehension. The list is generated by calling the first argument in the square brackets (here randSinAna()) for every iteration of the for loop. The for loop uses the underscore instead of a loop variable, since no variable is required. But in other cases, one could use a standard for loop to generate values in a list, eg :\n\n[i for i in range(5)]\n\n[0, 1, 2, 3, 4]\n\n\n\n\n\n3.1.4 Accept/Reject Method\nFor some PDFs, the integral required by the previous method cannot be determined analytically. In such cases, the accept/reject method provides a simple alternative. This method involves three steps : 1. a random number, \\(y\\), is generated in the desired interval \\((y_1, y_2)\\) 2. a second random number, \\(p\\), is generated between 0 and the maximum value of \\(P'(y)\\) 3. if \\(p &lt; P'(y)\\) then \\(y\\) is returned, otherwise it is rejected and the process is repeated\nThis method is clearly less efficient than the analytical method, since two random numbers are generated for each number returned, and some fraction of these are rejected. However, it allows us to generate any arbitrary probability distribution.\n\n\n\n3.1.5 Accept/Reject Example\nHere we demonstrate the accept/reject method for the same example as above, to produce values \\(y\\) in the interval \\([0, \\pi)\\), with probability distribution proportional to \\(\\sin(y)\\).\n\ndef randSinAR():\n    \"\"\"Generate a random theta between 0 and pi, with PDF sin(theta) using accept/reject method\"\"\"\n    while True:\n        x = np.pi * np.random.random()\n        y = np.random.random()\n        if y &lt; np.sin(x):\n            return x\n        else:\n            continue\n\n\n# generate 50,000 points using a list comprehension\nn2s = [randSinAR() for _ in range(50000)]\n\n# plot a histogram from the analytic method\nhist1, bins1, patches1 = plt.hist(n1s, bins=50, density=True, label=\"Analytic Method\")\n\n# plot another histogram from the accept/reject method\nhist2, bins2, patches2 = plt.hist(n2s, bins=bins1, density=True, label=\"Accept/reject\")\n\n# and the sin(theta) function for comparison\nplt.plot(bin_centres, np.sin(bin_centres)/2, label=r'$sin(\\theta)$')\n\nplt.xlabel(r'$\\theta$')\nplt.ylabel(r'$P(\\theta)$')\nplt.legend()\nplt.show()",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Monte Carlo Methods</span>"
+    ]
+  },
+  {
+    "objectID": "monte-carlo.html#multivariate-sampling",
+    "href": "monte-carlo.html#multivariate-sampling",
+    "title": "3  Monte Carlo Methods",
+    "section": "3.2 Multivariate Sampling",
+    "text": "3.2 Multivariate Sampling\nBoth analytic and accept/reject methods can be used to generate distributions of more than one variable. This often requires a bit of thought - the two methods may be more or less suitable to particular problems.\nHere we illustrate the two approaches to generating uniformly distributed random numbers on the unit disc.\n\n3.2.1 Analytic Example\nAn analytic method for the unit disc problem needs to ensure that the density of points is constant over the disc, ie that \\(P(x,y) \\propto dA\\) for area element \\(dA\\). In polar coordinates, we can write this as :\n\\[P(x,y) \\propto dA = r dr d\\phi\\]\nSince we will start by generating values with uniform distributions (let’s say \\(u\\) and \\(v\\)), we want to obtain transformations \\((u,v) \\rightarrow (r, \\phi)\\) such that :\n\\[dA = r dr d\\phi= du dv\\]\nClearly these substitutions are sufficient :\n\\[du = r dr\\] \\[dv = d\\phi\\]\nClearly we can just generate \\(\\phi\\) with a uniform distribution. The function to produce \\(r\\) from uniformly distributed \\(u\\) is obtained by integration :\n\\[u = \\frac{1}{2}r^2\\]\nand\n\\[r = \\sqrt{2u}\\]\nHowever, this will produce a disc with incorrect area. The required area is \\(\\pi\\), so we can obtain the constant of integration by requiring \\(\\int dA = \\pi\\), which gives :\n\\[r = \\sqrt{u}\\]\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\ndef unitDiscAna():\n    phi = 2 * np.pi * np.random.random()\n    r = np.sqrt(np.random.random())\n    \n    # convert to cartesian coordinates\n    x = r * np.cos(phi)\n    y = r * np.sin(phi)\n    \n    return np.array([x, y])\n\nps = np.array([unitDiscAna() for _ in range(1000)])\n\nplt.axis('equal')\nplt.scatter(ps[:,0], ps[:,1], marker='.', c='r')\nplt.show()\n\n\n\n\n\n\n\n\n\n\n3.2.2 Accept/Reject Example\nSuppose we want to randomly generate points \\((x,y)\\) within a unit disc. A simple approach is to generate uniform distributions of \\(x\\) and \\(y\\) separately, and then use an accept/reject method to remove any points not in the disc (ie. where \\(\\sqrt{x^2 + y^2} \\gt 1\\)). This is illustrated in the example below.\n\ndef unitDiscAR():\n    x = 2 * np.random.random() - 1\n    y = 2 * np.random.random() - 1\n    while np.sqrt(x**2+ y**2) &gt; 1:\n        x = 2 * np.random.random() - 1\n        y = 2 * np.random.random() - 1\n    return np.array([x, y])\n\nps = np.array([unitDiscAR() for _ in range(1000)])\n\nplt.axis('equal')\nplt.scatter(ps[:,0], ps[:,1], marker='.', c='r')\nplt.show()\n\n\n\n\n\n\n\n\nNote that since the unitDisc() method returns a vector, we need to :\n\nconvert the list generated by the list comprehension (which calls unitDisc() many times) into a 2D array\nuse array slicing to obtain arrays of \\(x\\) and \\(y\\) values separately when plotting, ie. ps[:,0] gives a 1D array of \\(x\\) values.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Monte Carlo Methods</span>"
+    ]
+  },
+  {
+    "objectID": "ml.html",
+    "href": "ml.html",
+    "title": "4  Machine Learning",
+    "section": "",
+    "text": "4.1 Bayesian Inference",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "ml.html#maximum-likelihood-estimation",
+    "href": "ml.html#maximum-likelihood-estimation",
+    "title": "4  Machine Learning",
+    "section": "4.2 Maximum Likelihood Estimation",
+    "text": "4.2 Maximum Likelihood Estimation",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "ml.html#supervised-vs-unsupervised-learning",
+    "href": "ml.html#supervised-vs-unsupervised-learning",
+    "title": "4  Machine Learning",
+    "section": "4.3 Supervised vs Unsupervised Learning",
+    "text": "4.3 Supervised vs Unsupervised Learning",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "ml.html#classification",
+    "href": "ml.html#classification",
+    "title": "4  Machine Learning",
+    "section": "4.4 Classification",
+    "text": "4.4 Classification\n\n4.4.1 Binary Logistic Regression",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "ml.html#neural-networks",
+    "href": "ml.html#neural-networks",
+    "title": "4  Machine Learning",
+    "section": "4.5 Neural Networks",
+    "text": "4.5 Neural Networks",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "adv-python.html",
+    "href": "adv-python.html",
+    "title": "5  Advanced Programming",
+    "section": "",
+    "text": "5.1 Classes & Objects\nBut Simon already covered this, FFS",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Advanced Programming</span>"
+    ]
+  },
+  {
+    "objectID": "adv-python.html#exceptions",
+    "href": "adv-python.html#exceptions",
+    "title": "5  Advanced Programming",
+    "section": "5.2 Exceptions",
+    "text": "5.2 Exceptions",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Advanced Programming</span>"
+    ]
+  },
+  {
+    "objectID": "adv-python.html#numba",
+    "href": "adv-python.html#numba",
+    "title": "5  Advanced Programming",
+    "section": "5.3 Numba",
+    "text": "5.3 Numba",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Advanced Programming</span>"
+    ]
+  },
+  {
+    "objectID": "parallel.html",
+    "href": "parallel.html",
+    "title": "6  Parallel Programming",
+    "section": "",
+    "text": "6.1 Parallel Programming with MPI",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Parallel Programming</span>"
+    ]
+  },
+  {
+    "objectID": "cloud-tech.html",
+    "href": "cloud-tech.html",
+    "title": "7  Cloud Technology",
+    "section": "",
+    "text": "7.1 Computing Concepts\nCould move this to the advanced python section ?",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Cloud Technology</span>"
+    ]
+  },
+  {
+    "objectID": "cloud-tech.html#containers",
+    "href": "cloud-tech.html#containers",
+    "title": "7  Cloud Technology",
+    "section": "7.2 Containers",
+    "text": "7.2 Containers",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Cloud Technology</span>"
+    ]
+  },
+  {
+    "objectID": "cloud-tech.html#message-queues",
+    "href": "cloud-tech.html#message-queues",
+    "title": "7  Cloud Technology",
+    "section": "7.3 Message Queues",
+    "text": "7.3 Message Queues",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Cloud Technology</span>"
+    ]
+  },
+  {
+    "objectID": "cloud-tech.html#orchestration",
+    "href": "cloud-tech.html#orchestration",
+    "title": "7  Cloud Technology",
+    "section": "7.4 Orchestration",
+    "text": "7.4 Orchestration",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Cloud Technology</span>"
+    ]
+  }
+]

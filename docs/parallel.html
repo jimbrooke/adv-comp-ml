@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Advanced Computational Physics &amp; Machine Learning - 4&nbsp; Parallel Programming</title>
+<title>Advanced Computational Physics &amp; Machine Learning - 6&nbsp; Parallel Programming</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ml.html" rel="next">
-<link href="./numerical-methods.html" rel="prev">
+<link href="./cloud-tech.html" rel="next">
+<link href="./adv-python.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parallel.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Parallel Programming</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parallel.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parallel Programming</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -120,32 +120,38 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./adv-python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Advanced Python</span></span></a>
+  <a href="./linear-algebra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./numerical-methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Numerical Methods</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./parallel.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Parallel Programming</span></span></a>
+  <a href="./monte-carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  <a href="./adv-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Advanced Programming</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parallel.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parallel Programming</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cloud-tech.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cloud Technology</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -164,8 +170,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#message-passing-interface-mpi" id="toc-message-passing-interface-mpi" class="nav-link active" data-scroll-target="#message-passing-interface-mpi"><span class="header-section-number">4.1</span> Message Passing Interface (mpi)</a></li>
-  <li><a href="#cloud-technology" id="toc-cloud-technology" class="nav-link" data-scroll-target="#cloud-technology"><span class="header-section-number">4.2</span> Cloud Technology</a></li>
+  <li><a href="#parallel-programming-with-mpi" id="toc-parallel-programming-with-mpi" class="nav-link active" data-scroll-target="#parallel-programming-with-mpi"><span class="header-section-number">6.1</span> Parallel Programming with MPI</a></li>
   </ul>
 </nav>
     </div>
@@ -174,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Parallel Programming</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parallel Programming</span></h1>
 </div>
 
 
@@ -191,11 +196,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="message-passing-interface-mpi" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="message-passing-interface-mpi"><span class="header-section-number">4.1</span> Message Passing Interface (mpi)</h2>
-</section>
-<section id="cloud-technology" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="cloud-technology"><span class="header-section-number">4.2</span> Cloud Technology</h2>
+<section id="parallel-programming-with-mpi" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="parallel-programming-with-mpi"><span class="header-section-number">6.1</span> Parallel Programming with MPI</h2>
 
 
 </section>
@@ -612,13 +614,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./numerical-methods.html" class="pagination-link" aria-label="Numerical Methods">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Numerical Methods</span></span>
+      <a href="./adv-python.html" class="pagination-link" aria-label="Advanced Programming">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Advanced Programming</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ml.html" class="pagination-link" aria-label="Machine Learning">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./cloud-tech.html" class="pagination-link" aria-label="Cloud Technology">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cloud Technology</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

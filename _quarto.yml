@@ -9,11 +9,12 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - adv-python.qmd
     - linear-algebra.qmd
     - monte-carlo.qmd
-    - intro-ml.qmd
-    - summary.qmd
+    - ml.qmd
+    - adv-python.qmd
+    - parallel.qmd
+    - cloud-tech.qmd
     - references.qmd
 
 bibliography: references.bib
