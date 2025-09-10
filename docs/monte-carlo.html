@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Advanced Computational Physics &amp; Machine Learning - 3&nbsp; Monte Carlo Methods</title>
+<title>Advanced Computational Physics &amp; Machine Learning - 4&nbsp; Monte Carlo Methods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +64,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ml.html" rel="next">
 <link href="./linear-algebra.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -144,7 +143,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./monte-carlo.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./monte-carlo.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -183,44 +182,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./adv-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Advanced Programming</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./linear-algebra.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./monte-carlo.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./adv-python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Advanced Programming</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./parallel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parallel Programming</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./cloud-tech.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cloud Technology</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
   </div>
 </li>
     </ul>
@@ -233,18 +208,18 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pseudo-random-number-sampling" id="toc-pseudo-random-number-sampling" class="nav-link active" data-scroll-target="#pseudo-random-number-sampling"><span class="header-section-number">3.1</span> Pseudo Random Number Sampling</a>
+  <li><a href="#pseudo-random-number-sampling" id="toc-pseudo-random-number-sampling" class="nav-link active" data-scroll-target="#pseudo-random-number-sampling"><span class="header-section-number">4.1</span> Pseudo Random Number Sampling</a>
   <ul class="collapse">
-  <li><a href="#uniform-probability-distributions" id="toc-uniform-probability-distributions" class="nav-link" data-scroll-target="#uniform-probability-distributions"><span class="header-section-number">3.1.1</span> Uniform Probability Distributions</a></li>
-  <li><a href="#analytical-method" id="toc-analytical-method" class="nav-link" data-scroll-target="#analytical-method"><span class="header-section-number">3.1.2</span> Analytical Method</a></li>
-  <li><a href="#analytical-method-example" id="toc-analytical-method-example" class="nav-link" data-scroll-target="#analytical-method-example"><span class="header-section-number">3.1.3</span> Analytical Method Example</a></li>
-  <li><a href="#acceptreject-method" id="toc-acceptreject-method" class="nav-link" data-scroll-target="#acceptreject-method"><span class="header-section-number">3.1.4</span> Accept/Reject Method</a></li>
-  <li><a href="#acceptreject-example" id="toc-acceptreject-example" class="nav-link" data-scroll-target="#acceptreject-example"><span class="header-section-number">3.1.5</span> Accept/Reject Example</a></li>
+  <li><a href="#uniform-probability-distributions" id="toc-uniform-probability-distributions" class="nav-link" data-scroll-target="#uniform-probability-distributions"><span class="header-section-number">4.1.1</span> Uniform Probability Distributions</a></li>
+  <li><a href="#analytical-method" id="toc-analytical-method" class="nav-link" data-scroll-target="#analytical-method"><span class="header-section-number">4.1.2</span> Analytical Method</a></li>
+  <li><a href="#analytical-method-example" id="toc-analytical-method-example" class="nav-link" data-scroll-target="#analytical-method-example"><span class="header-section-number">4.1.3</span> Analytical Method Example</a></li>
+  <li><a href="#acceptreject-method" id="toc-acceptreject-method" class="nav-link" data-scroll-target="#acceptreject-method"><span class="header-section-number">4.1.4</span> Accept/Reject Method</a></li>
+  <li><a href="#acceptreject-example" id="toc-acceptreject-example" class="nav-link" data-scroll-target="#acceptreject-example"><span class="header-section-number">4.1.5</span> Accept/Reject Example</a></li>
   </ul></li>
-  <li><a href="#multivariate-sampling" id="toc-multivariate-sampling" class="nav-link" data-scroll-target="#multivariate-sampling"><span class="header-section-number">3.2</span> Multivariate Sampling</a>
+  <li><a href="#multivariate-sampling" id="toc-multivariate-sampling" class="nav-link" data-scroll-target="#multivariate-sampling"><span class="header-section-number">4.2</span> Multivariate Sampling</a>
   <ul class="collapse">
-  <li><a href="#analytic-example" id="toc-analytic-example" class="nav-link" data-scroll-target="#analytic-example"><span class="header-section-number">3.2.1</span> Analytic Example</a></li>
-  <li><a href="#acceptreject-example-1" id="toc-acceptreject-example-1" class="nav-link" data-scroll-target="#acceptreject-example-1"><span class="header-section-number">3.2.2</span> Accept/Reject Example</a></li>
+  <li><a href="#analytic-example" id="toc-analytic-example" class="nav-link" data-scroll-target="#analytic-example"><span class="header-section-number">4.2.1</span> Analytic Example</a></li>
+  <li><a href="#acceptreject-example-1" id="toc-acceptreject-example-1" class="nav-link" data-scroll-target="#acceptreject-example-1"><span class="header-section-number">4.2.2</span> Accept/Reject Example</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -254,7 +229,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></h1>
 </div>
 
 
@@ -271,12 +246,12 @@ window.Quarto = {
 </header>
 
 
-<section id="pseudo-random-number-sampling" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="pseudo-random-number-sampling"><span class="header-section-number">3.1</span> Pseudo Random Number Sampling</h2>
+<section id="pseudo-random-number-sampling" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="pseudo-random-number-sampling"><span class="header-section-number">4.1</span> Pseudo Random Number Sampling</h2>
 <p>We will frequently want to generate random numbers according to a particular probability distribution, or in the jargon ‘sampling’ from the given distribution. There are two basic methods for achieving this; an analytical method, and the accept/reject method.</p>
 <p>In the below, we assume we are provided with a random number generator that returns pseudo-random numbers with a uniform probability distribution in the interval <span class="math inline">\([0,1)\)</span>. In Python, <code>numpy.random</code> provides the <code>random()</code> function, which does exactly this. A variety of other probability distributions are provided by <code>numpy.random</code>, and in general these should be used when possible. However, the techniques described here allow any desired PDF to be sampled.</p>
-<section id="uniform-probability-distributions" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="uniform-probability-distributions"><span class="header-section-number">3.1.1</span> Uniform Probability Distributions</h3>
+<section id="uniform-probability-distributions" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="uniform-probability-distributions"><span class="header-section-number">4.1.1</span> Uniform Probability Distributions</h3>
 <p>We will often need uniform probability distributions over an interval other than <span class="math inline">\([0,1)\)</span>. It is straightforward to map this interval to the desired one, as shown in the example below.</p>
 <div id="88982733" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.random <span class="im">as</span> random</span>
@@ -295,21 +270,21 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="analytical-method" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="analytical-method"><span class="header-section-number">3.1.2</span> Analytical Method</h3>
+<section id="analytical-method" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="analytical-method"><span class="header-section-number">4.1.2</span> Analytical Method</h3>
 <p>The above transformation is a special case of the method described in this section. We can consider a random number generator that produces values x over the interval <span class="math inline">\((x_1, x_2)\)</span> with probability <span class="math inline">\(P(x)\)</span>, which we wish to convert to values y on the interval <span class="math inline">\((y_1, y_2)\)</span>, with probability <span class="math inline">\(P'(y)\)</span>. To construct a transformation from a generated value <span class="math inline">\(x_{in}\)</span> to an output value with the required distribution, <span class="math inline">\(y_{out}\)</span>, we require that the cumulative distributions are equal :</p>
-<p><span id="eq-a"><span class="math display">\[\int_{x_0}^{x_{in}} P(x) dx = \int_{y_0}^{y_{out}} P'(y) dy \tag{3.1}\]</span></span></p>
+<p><span id="eq-a"><span class="math display">\[\int_{x_0}^{x_{in}} P(x) dx = \int_{y_0}^{y_{out}} P'(y) dy \tag{4.1}\]</span></span></p>
 <p>Note that for <span class="math inline">\(x_{in} = x_2\)</span>, <span class="math inline">\(y_{out} = y_2\)</span> both integrals must equal 1.</p>
 <p>If the LHS of the above equation is uniform on the interval <span class="math inline">\([0,1)\)</span>, then we have :</p>
-<p><span id="eq-b"><span class="math display">\[x_{in} = \int_{y_0}^{y_{out}} P'(y) dy \tag{3.2}\]</span></span></p>
+<p><span id="eq-b"><span class="math display">\[x_{in} = \int_{y_0}^{y_{out}} P'(y) dy \tag{4.2}\]</span></span></p>
 <p>If we then define the function <span class="math inline">\(Q(y_{out})\)</span> such that :</p>
-<p><span id="eq-c"><span class="math display">\[Q(y_{out}) = x_{in} = \int_{y_0}^{y_{out}} P'(y) dy \tag{3.3}\]</span></span></p>
+<p><span id="eq-c"><span class="math display">\[Q(y_{out}) = x_{in} = \int_{y_0}^{y_{out}} P'(y) dy \tag{4.3}\]</span></span></p>
 <p>Then the transformation we must apply to <span class="math inline">\(x_{in}\)</span>, in order to obtain <span class="math inline">\(y_{out}\)</span>, is simply the inverse function, ie :</p>
-<p><span id="eq-d"><span class="math display">\[y_{out} = Q^{-1}(x_{in}) \tag{3.4}\]</span></span></p>
+<p><span id="eq-d"><span class="math display">\[y_{out} = Q^{-1}(x_{in}) \tag{4.4}\]</span></span></p>
 <div style="page-break-after: always;"></div>
 </section>
-<section id="analytical-method-example" class="level3" data-number="3.1.3">
-<h3 data-number="3.1.3" class="anchored" data-anchor-id="analytical-method-example"><span class="header-section-number">3.1.3</span> Analytical Method Example</h3>
+<section id="analytical-method-example" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="analytical-method-example"><span class="header-section-number">4.1.3</span> Analytical Method Example</h3>
 <p>In this example, we will write a function to produce values <span class="math inline">\(y\)</span> in the interval <span class="math inline">\([0, \pi)\)</span> with probability distribution proportional to <span class="math inline">\(\sin(y)\)</span>.</p>
 <p>Here, the integral above becomes :</p>
 <p><span id="eq-e"><span class="math display">\[
@@ -317,12 +292,12 @@ window.Quarto = {
 Q(y_{out}) &amp;= \frac{1}{2}\int_{0}^{y_{out}} \sin(y) dy \\
            &amp;= -\frac{1}{2}\cos(y_{out}) + C
 \end{aligned}
-\tag{3.5}\]</span></span></p>
+\tag{4.5}\]</span></span></p>
 <p>Note the factor <span class="math inline">\(\frac{1}{2}\)</span> is required to ensure the integral from <span class="math inline">\(0\)</span> to <span class="math inline">\(\pi\)</span> is equal to 1. We can determine the constant of integration by requiring that <span class="math inline">\(Q(0) = 0\)</span>, for <span class="math inline">\(x_{in}=0\)</span> and <span class="math inline">\(Q(\pi)=1\)</span> for <span class="math inline">\(x_{in}=1\)</span>.</p>
 <p>We then find that</p>
-<p><span id="eq-f"><span class="math display">\[Q(y_{out}) = -\frac{1}{2}\cos(y_{out}) + \frac{1}{2} \tag{3.6}\]</span></span></p>
+<p><span id="eq-f"><span class="math display">\[Q(y_{out}) = -\frac{1}{2}\cos(y_{out}) + \frac{1}{2} \tag{4.6}\]</span></span></p>
 <p>And our inverse transformation is :</p>
-<p><span id="eq-g"><span class="math display">\[y_{out} = Q^{-1}(x_{in}) = \cos^{-1}(1-2x_{in})  \tag{3.7}\]</span></span></p>
+<p><span id="eq-g"><span class="math display">\[y_{out} = Q^{-1}(x_{in}) = \cos^{-1}(1-2x_{in})  \tag{4.7}\]</span></span></p>
 <div id="3606fe2b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> randSinAna():</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Generate a random theta between 0 and pi, with PDF sin(theta) using analytical method"""</span></span>
@@ -363,14 +338,14 @@ Q(y_{out}) &amp;= \frac{1}{2}\int_{0}^{y_{out}} \sin(y) dy \\
 </div>
 <div style="page-break-after: always;"></div>
 </section>
-<section id="acceptreject-method" class="level3" data-number="3.1.4">
-<h3 data-number="3.1.4" class="anchored" data-anchor-id="acceptreject-method"><span class="header-section-number">3.1.4</span> Accept/Reject Method</h3>
+<section id="acceptreject-method" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="acceptreject-method"><span class="header-section-number">4.1.4</span> Accept/Reject Method</h3>
 <p>For some PDFs, the integral required by the previous method cannot be determined analytically. In such cases, the accept/reject method provides a simple alternative. This method involves three steps : 1. a random number, <span class="math inline">\(y\)</span>, is generated in the desired interval <span class="math inline">\((y_1, y_2)\)</span> 2. a second random number, <span class="math inline">\(p\)</span>, is generated between 0 and the maximum value of <span class="math inline">\(P'(y)\)</span> 3. if <span class="math inline">\(p &lt; P'(y)\)</span> then <span class="math inline">\(y\)</span> is returned, otherwise it is rejected and the process is repeated</p>
 <p>This method is clearly less efficient than the analytical method, since two random numbers are generated for each number returned, and some fraction of these are rejected. However, it allows us to generate any arbitrary probability distribution.</p>
 <div style="page-break-after: always;"></div>
 </section>
-<section id="acceptreject-example" class="level3" data-number="3.1.5">
-<h3 data-number="3.1.5" class="anchored" data-anchor-id="acceptreject-example"><span class="header-section-number">3.1.5</span> Accept/Reject Example</h3>
+<section id="acceptreject-example" class="level3" data-number="4.1.5">
+<h3 data-number="4.1.5" class="anchored" data-anchor-id="acceptreject-example"><span class="header-section-number">4.1.5</span> Accept/Reject Example</h3>
 <p>Here we demonstrate the accept/reject method for the same example as above, to produce values <span class="math inline">\(y\)</span> in the interval <span class="math inline">\([0, \pi)\)</span>, with probability distribution proportional to <span class="math inline">\(\sin(y)\)</span>.</p>
 <div id="8ca18db4" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> randSinAR():</span>
@@ -410,12 +385,12 @@ Q(y_{out}) &amp;= \frac{1}{2}\int_{0}^{y_{out}} \sin(y) dy \\
 </div>
 </section>
 </section>
-<section id="multivariate-sampling" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="multivariate-sampling"><span class="header-section-number">3.2</span> Multivariate Sampling</h2>
+<section id="multivariate-sampling" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="multivariate-sampling"><span class="header-section-number">4.2</span> Multivariate Sampling</h2>
 <p>Both analytic and accept/reject methods can be used to generate distributions of more than one variable. This often requires a bit of thought - the two methods may be more or less suitable to particular problems.</p>
 <p>Here we illustrate the two approaches to generating uniformly distributed random numbers on the unit disc.</p>
-<section id="analytic-example" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="analytic-example"><span class="header-section-number">3.2.1</span> Analytic Example</h3>
+<section id="analytic-example" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="analytic-example"><span class="header-section-number">4.2.1</span> Analytic Example</h3>
 <p>An analytic method for the unit disc problem needs to ensure that the density of points is constant over the disc, ie that <span class="math inline">\(P(x,y) \propto dA\)</span> for area element <span class="math inline">\(dA\)</span>. In polar coordinates, we can write this as :</p>
 <p><span class="math display">\[P(x,y) \propto dA = r dr d\phi\]</span></p>
 <p>Since we will start by generating values with uniform distributions (let’s say <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>), we want to obtain transformations <span class="math inline">\((u,v) \rightarrow (r, \phi)\)</span> such that :</p>
@@ -456,8 +431,8 @@ Q(y_{out}) &amp;= \frac{1}{2}\int_{0}^{y_{out}} \sin(y) dy \\
 </div>
 </div>
 </section>
-<section id="acceptreject-example-1" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="acceptreject-example-1"><span class="header-section-number">3.2.2</span> Accept/Reject Example</h3>
+<section id="acceptreject-example-1" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="acceptreject-example-1"><span class="header-section-number">4.2.2</span> Accept/Reject Example</h3>
 <p>Suppose we want to randomly generate points <span class="math inline">\((x,y)\)</span> within a unit disc. A simple approach is to generate uniform distributions of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> separately, and then use an accept/reject method to remove any points not in the disc (ie. where <span class="math inline">\(\sqrt{x^2 + y^2} \gt 1\)</span>). This is illustrated in the example below.</p>
 <div id="5948a7d7" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unitDiscAR():</span>
@@ -904,13 +879,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./linear-algebra.html" class="pagination-link" aria-label="Linear Algebra">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ml.html" class="pagination-link" aria-label="Machine Learning">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Machine Learning</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

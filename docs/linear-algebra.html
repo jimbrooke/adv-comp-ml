@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Advanced Computational Physics &amp; Machine Learning - 2&nbsp; Linear Algebra</title>
+<title>Advanced Computational Physics &amp; Machine Learning - 3&nbsp; Linear Algebra</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./monte-carlo.html" rel="next">
-<link href="./intro.html" rel="prev">
+<link href="./adv-python.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -144,7 +144,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./linear-algebra.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Linear Algebra</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./linear-algebra.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linear Algebra</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -183,44 +183,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./adv-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Advanced Python Programming</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./linear-algebra.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./monte-carlo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./adv-python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Advanced Programming</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./parallel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parallel Programming</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./cloud-tech.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cloud Technology</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
   </div>
 </li>
     </ul>
@@ -233,19 +209,19 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#basic-matrix-operations" id="toc-basic-matrix-operations" class="nav-link active" data-scroll-target="#basic-matrix-operations"><span class="header-section-number">2.1</span> Basic Matrix Operations</a></li>
-  <li><a href="#simultaneous-equations" id="toc-simultaneous-equations" class="nav-link" data-scroll-target="#simultaneous-equations"><span class="header-section-number">2.2</span> Simultaneous Equations</a>
+  <li><a href="#basic-matrix-operations" id="toc-basic-matrix-operations" class="nav-link active" data-scroll-target="#basic-matrix-operations"><span class="header-section-number">3.1</span> Basic Matrix Operations</a></li>
+  <li><a href="#simultaneous-equations" id="toc-simultaneous-equations" class="nav-link" data-scroll-target="#simultaneous-equations"><span class="header-section-number">3.2</span> Simultaneous Equations</a>
   <ul class="collapse">
-  <li><a href="#inverse-matrix" id="toc-inverse-matrix" class="nav-link" data-scroll-target="#inverse-matrix"><span class="header-section-number">2.2.1</span> Inverse Matrix</a></li>
-  <li><a href="#gaussian-elimination" id="toc-gaussian-elimination" class="nav-link" data-scroll-target="#gaussian-elimination"><span class="header-section-number">2.2.2</span> Gaussian Elimination</a></li>
-  <li><a href="#lu-decomposition" id="toc-lu-decomposition" class="nav-link" data-scroll-target="#lu-decomposition"><span class="header-section-number">2.2.3</span> LU Decomposition</a></li>
-  <li><a href="#svd-decomposition" id="toc-svd-decomposition" class="nav-link" data-scroll-target="#svd-decomposition"><span class="header-section-number">2.2.4</span> SVD Decomposition</a></li>
-  <li><a href="#physics-example" id="toc-physics-example" class="nav-link" data-scroll-target="#physics-example"><span class="header-section-number">2.2.5</span> Physics Example</a></li>
+  <li><a href="#inverse-matrix" id="toc-inverse-matrix" class="nav-link" data-scroll-target="#inverse-matrix"><span class="header-section-number">3.2.1</span> Inverse Matrix</a></li>
+  <li><a href="#gaussian-elimination" id="toc-gaussian-elimination" class="nav-link" data-scroll-target="#gaussian-elimination"><span class="header-section-number">3.2.2</span> Gaussian Elimination</a></li>
+  <li><a href="#lu-decomposition" id="toc-lu-decomposition" class="nav-link" data-scroll-target="#lu-decomposition"><span class="header-section-number">3.2.3</span> LU Decomposition</a></li>
+  <li><a href="#svd-decomposition" id="toc-svd-decomposition" class="nav-link" data-scroll-target="#svd-decomposition"><span class="header-section-number">3.2.4</span> SVD Decomposition</a></li>
+  <li><a href="#physics-example" id="toc-physics-example" class="nav-link" data-scroll-target="#physics-example"><span class="header-section-number">3.2.5</span> Physics Example</a></li>
   </ul></li>
-  <li><a href="#eigenproblems" id="toc-eigenproblems" class="nav-link" data-scroll-target="#eigenproblems"><span class="header-section-number">2.3</span> Eigenproblems</a>
+  <li><a href="#eigenproblems" id="toc-eigenproblems" class="nav-link" data-scroll-target="#eigenproblems"><span class="header-section-number">3.3</span> Eigenproblems</a>
   <ul class="collapse">
-  <li><a href="#simple-example" id="toc-simple-example" class="nav-link" data-scroll-target="#simple-example"><span class="header-section-number">2.3.1</span> Simple example</a></li>
-  <li><a href="#physics-example-1" id="toc-physics-example-1" class="nav-link" data-scroll-target="#physics-example-1"><span class="header-section-number">2.3.2</span> Physics Example</a></li>
+  <li><a href="#simple-example" id="toc-simple-example" class="nav-link" data-scroll-target="#simple-example"><span class="header-section-number">3.3.1</span> Simple example</a></li>
+  <li><a href="#physics-example-1" id="toc-physics-example-1" class="nav-link" data-scroll-target="#physics-example-1"><span class="header-section-number">3.3.2</span> Physics Example</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -255,7 +231,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Linear Algebra</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linear Algebra</span></h1>
 </div>
 
 
@@ -272,12 +248,11 @@ window.Quarto = {
 </header>
 
 
-<section id="basic-matrix-operations" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="basic-matrix-operations"><span class="header-section-number">2.1</span> Basic Matrix Operations</h2>
-<p>This is a test.</p>
+<section id="basic-matrix-operations" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="basic-matrix-operations"><span class="header-section-number">3.1</span> Basic Matrix Operations</h2>
 <p>Python/numpy/scipy provide a range of options for achieving basic matrix operations. You will need to take a little care to ensure that your code implements the operations you intend it to. This is largely due to the fact that some operators/functions will change their behaviour depending on the input you provide. This section includes some recommendations for simple linear algebra, which should ensure your code behaves as desired.</p>
 <p>Matrices can be implemented as a 2D <code>np.ndarray</code>. Basic matrix arithmetic can then be performed using standard operators <code>+</code>,<code>-</code> and <code>@</code>. You can also use <code>np.matmul()</code> for matrix multiplication. Numpy will also perform matrix multiplication with <code>np.dot()</code>, but this is not recommended if you can use <code>@</code> or <code>np.matmul()</code>.</p>
-<div id="a209327b" class="cell" data-execution_count="1">
+<div id="e37d2d48" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,],[<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>]])</span>
@@ -314,7 +289,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Vectors can be implemented as 1D arrays, or as 2D arrays. A 1D array will be interpreted as row or column vector depending on the context in which it is used. Use of 2D arrays allows you to specify row or column form. This can be useful, since <code>np.matmul()</code> or <code>@</code> will throw an exception if you accidentally try to perform an illegal matrix operation.</p>
-<div id="18403c7d" class="cell" data-execution_count="2">
+<div id="9d4b5eb5" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>v  <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>vr <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]])</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>vc <span class="op">=</span> np.array([[<span class="dv">1</span>],[<span class="dv">2</span>],[<span class="dv">3</span>]])</span>
@@ -345,7 +320,7 @@ window.Quarto = {
 <p>Other useful matrix operations are provided by numpy, such as : - <code>np.transpose()</code> (also available via <code>ndarray.T</code>) - <code>np.norm()</code> - <code>np.trace()</code></p>
 <p>For further information, look at the reference pages : <a href="https://numpy.org/doc/stable/reference/routines.array-manipulation.html">https://numpy.org/doc/stable/reference/routines.array-manipulation.html</a> <a href="https://numpy.org/doc/stable/reference/routines.linalg.html">https://numpy.org/doc/stable/reference/routines.linalg.html</a></p>
 <p>Finally, <code>scipy.linalg</code> provides some additional basic operations such as the determinant and the inverse.</p>
-<div id="37596daa" class="cell" data-execution_count="3">
+<div id="15168490" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -363,8 +338,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="simultaneous-equations" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="simultaneous-equations"><span class="header-section-number">2.2</span> Simultaneous Equations</h2>
+<section id="simultaneous-equations" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="simultaneous-equations"><span class="header-section-number">3.2</span> Simultaneous Equations</h2>
 <p>Many problems in physics require solving simultaneous equations. When these become large and complex, numerical routines are required.</p>
 <p>A set of simultaneous equations can always be written in matrix form, for example, two equations in two unknowns (<span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>)</p>
 <p><span id="eq-a"><span class="math display">\[
@@ -372,22 +347,22 @@ window.Quarto = {
 ax_1 + bx_2 &amp;= y_1 \\
 cx_1 + dx_2 &amp;= y_2
 \end{aligned}
-\tag{2.1}\]</span></span></p>
+\tag{3.1}\]</span></span></p>
 <p>can be rewritten as</p>
 <p><span id="eq-b"><span class="math display">\[
 \left(\begin{array}{cc} a &amp; b \\ c &amp; d\end{array}\right)
 \left(\begin{array}{c} x_1 \\ x_2 \end{array}\right) =
 \left(\begin{array}{c} y_1 \\ y_2 \end{array}\right)
-\tag{2.2}\]</span></span></p>
+\tag{3.2}\]</span></span></p>
 <p>An arbitrary set of equations is</p>
-<p><span id="eq-c"><span class="math display">\[Ax = y \tag{2.3}\]</span></span></p>
+<p><span id="eq-c"><span class="math display">\[Ax = y \tag{3.3}\]</span></span></p>
 <p>where A is the matrix of coefficients, x is the vector of unknown variables <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span>, … and y is the known vector of constants.</p>
-<section id="inverse-matrix" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="inverse-matrix"><span class="header-section-number">2.2.1</span> Inverse Matrix</h3>
+<section id="inverse-matrix" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="inverse-matrix"><span class="header-section-number">3.2.1</span> Inverse Matrix</h3>
 <p>One way to solve the above equation is to multiply both sides by the inverse of A:</p>
-<p><span id="eq-d"><span class="math display">\[A^{-1} A x = A^{-1} y \tag{2.4}\]</span></span></p>
+<p><span id="eq-d"><span class="math display">\[A^{-1} A x = A^{-1} y \tag{3.4}\]</span></span></p>
 <p>giving :</p>
-<p><span id="eq-e"><span class="math display">\[x = A^{-1} y \tag{2.5}\]</span></span></p>
+<p><span id="eq-e"><span class="math display">\[x = A^{-1} y \tag{3.5}\]</span></span></p>
 <p>This is demonstrated in the example below for a simple test case :</p>
 <p><span id="eq-f"><span class="math display">\[
 \left(\begin{array}{ccc} 1 &amp; 2 &amp; 2 \\
@@ -395,8 +370,8 @@ cx_1 + dx_2 &amp;= y_2
                         0 &amp; 2 &amp; 2\end{array}\right)
 \left(\begin{array}{c} x_1 \\ x_2 \\ x_3\end{array}\right) =
 \left(\begin{array}{c} 2 \\ 7 \\ 1\end{array}\right)
-\tag{2.6}\]</span></span></p>
-<div id="ba1753bd" class="cell" data-execution_count="4">
+\tag{3.6}\]</span></span></p>
+<div id="feb719d7" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -424,7 +399,7 @@ cx_1 + dx_2 &amp;= y_2
 </div>
 </div>
 <p>Is this the solution? We can easily check by inserting the solution into the original equation.</p>
-<div id="ca9967ca" class="cell" data-execution_count="5">
+<div id="6c6d1bbf" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">@</span> x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[2.]
@@ -436,8 +411,8 @@ cx_1 + dx_2 &amp;= y_2
 <p>Before using this method for solving simultaneous equations, though, we should understand how <code>scipy.linalg.inv</code> finds the matrix inverse. Unfortunately, this is tricky to understand from the reference page, (<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.inv.html">scipy.linalg.inv</a>). But, if you examine the source code for this function you’ll see that it uses a function called DGETRI. This is defined in the LAPACK library, and its reference page is <a href="https://www.netlib.org/lapack/explore-html-3.6.1/dd/d9a/group__double_g_ecomputational_ga56d9c860ce4ce42ded7f914fdb0683ff.html">here</a>. As you can see this routine uses LU decomposition to find the inverse! It doesn’t make sense, therefore, to find a matrix inverse simply to solve a simultaneous equation, and using LU decomposition directly will involve fewer operations. However, there are exceptions when dealing with many simultaneous equations. For example, suppose you have a sequence of problems which all feature the same matrix <span class="math inline">\(A\)</span>, but have different RHS <span class="math inline">\(y\)</span>. In this case it would be efficient to invert <span class="math inline">\(A\)</span> once, then multiply by <span class="math inline">\(y\)</span> to solve each problem, since multiplication involves fewer operations than LU decomposition.</p>
 <p>As an aside, LAPACK is a linear algebra library written in FORTRAN - which remains one of the most efficient languages for writing numerical methods - and most routines in <code>scipy.linalg</code> basically provide a Python interface to this library.</p>
 </section>
-<section id="gaussian-elimination" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="gaussian-elimination"><span class="header-section-number">2.2.2</span> Gaussian Elimination</h3>
+<section id="gaussian-elimination" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="gaussian-elimination"><span class="header-section-number">3.2.2</span> Gaussian Elimination</h3>
 <p>Some sets of simultaneous equations are easy to solve. For example :</p>
 <p><span id="eq-g"><span class="math display">\[
 \begin{aligned}
@@ -445,14 +420,14 @@ a x_1 &amp;= y_1 \\
 b x_2 &amp;= y_2 \\
 c x_3 &amp;= y_3
 \end{aligned}
-\tag{2.7}\]</span></span> This can be written in what is known as row echelon form :</p>
+\tag{3.7}\]</span></span> This can be written in what is known as row echelon form :</p>
 <p><span id="eq-h"><span class="math display">\[
 \left(\begin{array}{ccc} a &amp; 0 &amp; 0 \\
                         0 &amp; b &amp; 0 \\
                         0 &amp; 0 &amp; c\end{array}\right)
 \left(\begin{array}{c} x_1 \\ x_2 \\ x_3\end{array}\right) =
 \left(\begin{array}{c} y_1 \\ y_2 \\ y_3\end{array}\right)
-\tag{2.8}\]</span></span></p>
+\tag{3.8}\]</span></span></p>
 <p>And then reduced row echelon form :</p>
 <p><span id="eq-i"><span class="math display">\[
 \left(\begin{array}{ccc} 1 &amp; 0 &amp; 0 \\
@@ -460,14 +435,14 @@ c x_3 &amp;= y_3
                         0 &amp; 0 &amp; 1\end{array}\right)
 \left(\begin{array}{c} x_1 \\ x_2 \\ x_3\end{array}\right) =
 \left(\begin{array}{c} y_1/a \\ y_2/b \\ y_3/c\end{array}\right)
-\tag{2.9}\]</span></span></p>
+\tag{3.9}\]</span></span></p>
 <p>Gauss-Jordan elimination is a process which reduces any linear equation set to this form. It can be shown that the reduced row echelon form is unique, and therefore independent of the order of operations which are used to find it. The technique is illustrated using the example problem from earlier. It’s convenient to use the ‘augmented’ matrix, which includes the right-hand side. <span id="eq-j"><span class="math display">\[
 \left(\begin{array}{ccc|c}
     1 &amp; 2 &amp; 2 &amp; 2 \\
     3 &amp; 1 &amp; 6 &amp; 7 \\
     0 &amp; 2 &amp; 2 &amp; 1
 \end{array}\right)
-\tag{2.10}\]</span></span></p>
+\tag{3.10}\]</span></span></p>
 <p>Then we apply simple operations until we obtain the equation in row echelon form. These operations include:</p>
 <ul>
 <li>Multiply a row by a constant</li>
@@ -481,38 +456,38 @@ c x_3 &amp;= y_3
     3 &amp; 1 &amp; 6 &amp; 7 \\
     0 &amp; 2 &amp; 2 &amp; 1
 \end{array}\right)
-\tag{2.11}\]</span></span></p>
+\tag{3.11}\]</span></span></p>
 <p>Replace <span class="math inline">\(R_2\)</span> with <span class="math inline">\(R_2 - 3R_1\)</span> : <span id="eq-l"><span class="math display">\[
 \left(\begin{array}{ccc|c}
     1 &amp; 0 &amp; 0 &amp; 1 \\
     0 &amp; 1 &amp; 6 &amp; 4 \\
     0 &amp; 2 &amp; 2 &amp; 1
 \end{array}\right)
-\tag{2.12}\]</span></span></p>
+\tag{3.12}\]</span></span></p>
 <p>Replace <span class="math inline">\(R_2\)</span> with <span class="math inline">\(R_2 - \frac{2}{5}R_2\)</span> : <span id="eq-m"><span class="math display">\[
 \left(\begin{array}{ccc|c}
     1 &amp; 0 &amp; 0 &amp; 1 \\
     0 &amp; -5 &amp; 0 &amp; 1 \\
     0 &amp; 0 &amp; 2 &amp; \frac{7}{5}
 \end{array}\right)
-\tag{2.13}\]</span></span></p>
+\tag{3.13}\]</span></span></p>
 <p>And then finally for reduced row echelon form, replace <span class="math inline">\(R_2\)</span> with <span class="math inline">\(\frac{-1}{5}R_2\)</span> and <span class="math inline">\(R_3\)</span> with <span class="math inline">\(\frac{1}{2}R_3\)</span> <span id="eq-n"><span class="math display">\[
 \left(\begin{array}{ccc|c}
     1 &amp; 0 &amp; 0 &amp; 1 \\
     0 &amp; 1 &amp; 0 &amp; -\frac{1}{5} \\
     0 &amp; 0 &amp; 1 &amp; \frac{7}{10}
 \end{array}\right)
-\tag{2.14}\]</span></span></p>
+\tag{3.14}\]</span></span></p>
 <p>So the solution is : <span id="eq-o"><span class="math display">\[
 \begin{aligned}
 x_1 &amp;= 1 \\
 x_2 &amp;= -\frac{1}{5} \\
 x_3 &amp;= \frac{7}{10}
 \end{aligned}
-\tag{2.15}\]</span></span></p>
+\tag{3.15}\]</span></span></p>
 </section>
-<section id="lu-decomposition" class="level3" data-number="2.2.3">
-<h3 data-number="2.2.3" class="anchored" data-anchor-id="lu-decomposition"><span class="header-section-number">2.2.3</span> LU Decomposition</h3>
+<section id="lu-decomposition" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="lu-decomposition"><span class="header-section-number">3.2.3</span> LU Decomposition</h3>
 <p>Matrix decomposition techniques involve factorising a general matrix into a product of several matrices. LU decomposition involves writing the general matrix, <span class="math inline">\(A\)</span>, as the product of two triangular matrices, <span class="math inline">\(L\)</span> and <span class="math inline">\(U\)</span>.</p>
 <p><span id="eq-p"><span class="math display">\[
 A=
@@ -520,7 +495,7 @@ A=
                          a_{21} &amp; a_{22} &amp; a_{23} \\
                          a_{31} &amp; a_{32} &amp; a_{33}
 \end{array}\right)
-\tag{2.16}\]</span></span></p>
+\tag{3.16}\]</span></span></p>
 <p><span id="eq-q"><span class="math display">\[
 A=LU=
 \left(\begin{array}{ccc} 1      &amp; 0      &amp; 0 \\
@@ -531,16 +506,16 @@ A=LU=
                          0      &amp; u_{22} &amp; u_{23} \\
                          0      &amp; 0      &amp; u_{33}
 \end{array}\right)
-\tag{2.17}\]</span></span></p>
+\tag{3.17}\]</span></span></p>
 <p>We can use LU decomposition to solve matrix equations since it allows us to write the equation <span class="math display">\[Ax = y\]</span> as <span class="math inline">\(L(Ux)=y\)</span>. This can then be written as two equations <span class="math inline">\(Lc=y\)</span> and <span class="math inline">\(Ux=c\)</span>, which are trivially solved, first for <span class="math inline">\(c\)</span>, and then for <span class="math inline">\(x\)</span>.</p>
 <p>The matrices <span class="math inline">\(L\)</span> and <span class="math inline">\(U\)</span> can be found using the operations described above for Gaussian elimination. There are several algorithmic formulations that define the sequence of operations. Scipy provides an LU decomposition routine: <code>scipy.linalg.lu()</code>. Note that this performs a variation on the LU decomposition described above, since it also computes a permutation matrix <span class="math inline">\(P\)</span>, such that</p>
-<p><span id="eq-r"><span class="math display">\[PA = LU \tag{2.18}\]</span></span></p>
+<p><span id="eq-r"><span class="math display">\[PA = LU \tag{3.18}\]</span></span></p>
 <p>Scipy also provides a simple function to obtain the solutions to a matrix equation. <code>scipy.linalg.lu_solve()</code> expects the <span class="math inline">\(L\)</span>, <span class="math inline">\(U\)</span> and <span class="math inline">\(P\)</span> matrices as arguments, as shown in the example below.</p>
 <ul>
 <li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu.html">scipy.linalg.lu</a></p></li>
 <li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_solve.html">scipy.linalg.lu_solve</a></p></li>
 </ul>
-<div id="8fc31a68" class="cell" data-execution_count="6">
+<div id="94a1fd94" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> solve_lu(a,y):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    lu, piv <span class="op">=</span> linalg.lu_factor(a)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> linalg.lu_solve((lu, piv), y)</span>
@@ -559,8 +534,8 @@ A=LU=
 <li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.solve.html">scipy.linalg.solve</a></p></li>
 </ul>
 </section>
-<section id="svd-decomposition" class="level3" data-number="2.2.4">
-<h3 data-number="2.2.4" class="anchored" data-anchor-id="svd-decomposition"><span class="header-section-number">2.2.4</span> SVD Decomposition</h3>
+<section id="svd-decomposition" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="svd-decomposition"><span class="header-section-number">3.2.4</span> SVD Decomposition</h3>
 <p>LU decomposition will find an exact solution to the matrix equation in a wide variety of cases. However, a solution may not exist, or there may be infinite solutions. In such cases, the Singular Value Decomposition may be of use.</p>
 <p>For an <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(A\)</span>, the singular values, <span class="math inline">\(\sigma\)</span> are given by the solutions to</p>
 <p><span id="eq-s"><span class="math display">\[
@@ -568,18 +543,18 @@ A=LU=
 Av &amp;= \sigma u \\
 A^Tu &amp;=\sigma v
 \end{aligned}
-\tag{2.19}\]</span></span></p>
+\tag{3.19}\]</span></span></p>
 <p>where <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are two non-zero vectors. These equations are closely related to the eigenvalue equation. Indeed, the singular values are also the square roots of the eigenvalues of <span class="math inline">\(A^TA\)</span>.</p>
 <p>The singular value decomposition of <span class="math inline">\(A\)</span> is</p>
-<p><span id="eq-t"><span class="math display">\[A = U\Sigma V^T \tag{2.20}\]</span></span></p>
+<p><span id="eq-t"><span class="math display">\[A = U\Sigma V^T \tag{3.20}\]</span></span></p>
 <p>where <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are orthonormal matrices, and <span class="math inline">\(\Sigma\)</span> is a matrix with the singular values on its leading diagonal, and zero elsewhere.</p>
 <p>The SVD decomposition allows use to compute the pseudo-inverse of <span class="math inline">\(A\)</span>, which is given by :</p>
-<p><span id="eq-u"><span class="math display">\[A^\dagger = V \Sigma^\dagger U^T \tag{2.21}\]</span></span></p>
+<p><span id="eq-u"><span class="math display">\[A^\dagger = V \Sigma^\dagger U^T \tag{3.21}\]</span></span></p>
 <p>where <span class="math inline">\(\Sigma^\dagger\)</span> is the pseudo-inverse of <span class="math inline">\(\Sigma\)</span> and is obtained by transposing <span class="math inline">\(\Sigma\)</span> and replacing each non-zero element with it’s reciprocal.</p>
 <p>The pseudoinverse (also known as the Moore-Penrose inverse) can always be computed, even when <span class="math inline">\(A\)</span> is singular, ie. when when <span class="math inline">\(\frac{1}{|A|}=0\)</span> and the inverse cannot be found.</p>
 <p>In the context of solving a matrix equation <span class="math inline">\(Ax=y\)</span>, the product of pseudoinverse and the RHS, (i.e.&nbsp;<span class="math inline">\(\bar{X}=A^\dagger y\)</span>) has various properties. When A is non-singular, <span class="math inline">\(\bar{x}\)</span> gives the solution to <span class="math inline">\(Ax=y\)</span>. When <span class="math inline">\(A\)</span> is singular, <span class="math inline">\(\bar{x}\)</span> is a least squares approximation to the nearest solution. When <span class="math inline">\(Ax=y\)</span> has a space of solutions (equivalent to a set of simultaneous equations with degeneracy), then <span class="math inline">\(\bar{x}\)</span> is a vector which describes this space.</p>
 <p>SVD decomposition is available in Scipy using <code>scipy.linalg.svd()</code>. For further information, see <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.svd.html">scipy.linalg.svd</a>. Note that, unlike LU decomposition, no <code>solve()</code> function is supplied, and instead we must write some code to calculate <span class="math inline">\(\bar{x}\)</span>.</p>
-<div id="7be681d6" class="cell" data-execution_count="7">
+<div id="35d1a3b3" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> solve_svd(a,y):</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    u, s, v <span class="op">=</span> linalg.svd(a)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> v.T <span class="op">@</span> np.diag(<span class="dv">1</span><span class="op">/</span>s) <span class="op">@</span> u.T <span class="op">@</span> y</span>
@@ -593,7 +568,7 @@ A^Tu &amp;=\sigma v
 </div>
 </div>
 <p>Alternatively, a function to compute the pseudoinverse directly is provided, <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.pinv.html">scipy.linalg.pinv</a>.</p>
-<div id="c6d277d9" class="cell" data-execution_count="8">
+<div id="5a7dc260" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( linalg.pinv(a) <span class="op">@</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[ 1. ]
@@ -602,8 +577,8 @@ A^Tu &amp;=\sigma v
 </div>
 </div>
 </section>
-<section id="physics-example" class="level3" data-number="2.2.5">
-<h3 data-number="2.2.5" class="anchored" data-anchor-id="physics-example"><span class="header-section-number">2.2.5</span> Physics Example</h3>
+<section id="physics-example" class="level3" data-number="3.2.5">
+<h3 data-number="3.2.5" class="anchored" data-anchor-id="physics-example"><span class="header-section-number">3.2.5</span> Physics Example</h3>
 <p>Here we illustrate the use of simultaneous equation solvers in a familiar context - the use of Kirchoff’s laws and Ohm’s law to understand resistor networks. Typically, analysis of a resistor network will involve solving simultaneous equations, to calculate voltage and current at the desired points in the network. Consider the electronic circuit shown in the diagram.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -618,7 +593,7 @@ V_1 &amp;= I_1 R_1 + (I_1 - I_2) R_2 \\
 0   &amp;= (I_2 - I_1) R_2 + I_2 R_3 + (I_2 - I_3) R_4 \\
 -V_2 &amp;= (I_3 - I_2) R_4 + I_3 R_5
 \end{aligned}
-\tag{2.22}\]</span></span></p>
+\tag{3.22}\]</span></span></p>
 <p>So we have a set of simultaneous equations, which we can write as a matrix equation :</p>
 <p><span id="eq-w"><span class="math display">\[
 \begin{pmatrix}
@@ -637,10 +612,10 @@ V_1 \\
 0 \\
 -V_2
 \end{pmatrix}
-\tag{2.23}\]</span></span></p>
+\tag{3.23}\]</span></span></p>
 <p>Solving this matrix equation will provide the current at all points in the circuit. This method is known as “mesh analysis” of circuits.</p>
 <p>We can write a simple function that, given the voltage and resistor values, will return the currents :</p>
-<div id="31d7878e" class="cell" data-execution_count="9">
+<div id="4ff36255" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> meshAnalysis(v1, v2, r1, r2, r3, r4, r5):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> np.array ([[r1<span class="op">+</span>r2, <span class="op">-</span>r2, <span class="dv">0</span>],[<span class="op">-</span>r2,r2<span class="op">+</span>r3<span class="op">+</span>r4,<span class="op">-</span>r4],[<span class="dv">0</span>,<span class="op">-</span>r4,r4<span class="op">+</span>r5]])</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> np.array([[v1],[<span class="dv">0</span>],[<span class="op">-</span>v2]])</span>
@@ -648,7 +623,7 @@ V_1 \\
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Which, for the values given, will return the three currents :</p>
-<div id="4c276148" class="cell" data-execution_count="10">
+<div id="4a37cac4" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> meshAnalysis(<span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">10</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -659,7 +634,7 @@ V_1 \\
 </div>
 </div>
 <p>Or we could calculate, for example, how <span class="math inline">\(I_2\)</span> will vary as a function of <span class="math inline">\(R_4\)</span>, with all other values fixed :</p>
-<div id="dcf5074c" class="cell" data-execution_count="11">
+<div id="78a6250c" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>r4s <span class="op">=</span> np.linspace(<span class="fl">0.1</span>, <span class="fl">5.0</span>, <span class="dv">100</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>i2s <span class="op">=</span> np.empty(<span class="bu">len</span>(r4s))</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -683,13 +658,13 @@ V_1 \\
 </div>
 </section>
 </section>
-<section id="eigenproblems" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="eigenproblems"><span class="header-section-number">2.3</span> Eigenproblems</h2>
+<section id="eigenproblems" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="eigenproblems"><span class="header-section-number">3.3</span> Eigenproblems</h2>
 <p>A square NxN matrix <span class="math inline">\(A\)</span>, has eigenvector <span class="math inline">\(u\)</span> and eigenvalue <span class="math inline">\(\lambda\)</span> that satisfy :</p>
-<p><span id="eq-a"><span class="math display">\[(A - \lambda I)u = 0 \tag{2.24}\]</span></span></p>
+<p><span id="eq-a"><span class="math display">\[(A - \lambda I)u = 0 \tag{3.24}\]</span></span></p>
 <p>Details of the numerical methods used for solving eigenproblems are beyond the scope of this course, but they are usually iterative methods, similar to those described in <span class="quarto-unresolved-ref">?sec-relax</span>.</p>
 <p>It’s also worth noting that solving eigenproblems is closely related to finding the roots of polynomials. You may be familiar with one method for finding eigenvalues, which is to find the roots of the N-th degree polynomial found by expanding :</p>
-<p><span id="eq-b"><span class="math display">\[p(t) = \det{|A - t I|} = 0 \tag{2.25}\]</span></span></p>
+<p><span id="eq-b"><span class="math display">\[p(t) = \det{|A - t I|} = 0 \tag{3.25}\]</span></span></p>
 <p>Many eigenproblem solving routines are provided by SciPy. In particular, <code>scipy.linalg.eig(A)</code> will return a tuple containing the eigenvalues and eigenvectors of A. If only the eigenvalues are required, <code>scipy.linalg.eigenvals(A)</code> can be used.</p>
 <p>Care should be taken when using <code>scipy.linalg.eig</code>, since it will find “left” and “right” eigenvectors, as specified, which are the solutions to <span class="math inline">\(v A = \lambda v\)</span> and <span class="math inline">\(A v = \lambda v\)</span> respectively.</p>
 <p>For further details see <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.eig.html">scipy.linalg.eig</a></p>
@@ -699,15 +674,15 @@ V_1 \\
 <li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.eig_banded.html">scipy.linalg.eig_banded</a> (for banded matrices)</p></li>
 <li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.eigs.html">scipy.sparse.linalg.eigs</a> (for sparse, square symmetric matrices)</p></li>
 </ul>
-<section id="simple-example" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="simple-example"><span class="header-section-number">2.3.1</span> Simple example</h3>
+<section id="simple-example" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="simple-example"><span class="header-section-number">3.3.1</span> Simple example</h3>
 <p>We can test these sovlers using the matrix :</p>
 <p><span id="eq-c"><span class="math display">\[A =
 \pmatrix{
 -2 &amp; -4 &amp; 2 \\
 -2 &amp;  1 &amp; 2 \\
 4  &amp;  2 &amp; 5}
-\tag{2.26}\]</span></span></p>
+\tag{3.26}\]</span></span></p>
 <p>for which the eigenvalues are <span class="math inline">\(\lambda^{(0)}=6\)</span>, <span class="math inline">\(\lambda^{(1)}=-5\)</span>, <span class="math inline">\(\lambda^{(2)}=3\)</span>.</p>
 <p>Note that the algorithms discussed here will all find <em>unit</em> eigenvectors. The eigenvector corresponding to <span class="math inline">\(\lambda^{(0)}\)</span> is then :</p>
 <p><span id="eq-d"><span class="math display">\[\hat{u}^{(0)}=\pmatrix{\frac{1}{\sqrt{293}} \\
@@ -717,9 +692,9 @@ V_1 \\
 =
 \pmatrix{0.058 \\
 0.351 \\
-0.935} \tag{2.27}\]</span></span></p>
+0.935} \tag{3.27}\]</span></span></p>
 <p>with numerical values given to 3 decimal places on the RHS.</p>
-<div id="367b14ca" class="cell" data-execution_count="12">
+<div id="6b88dd74" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -744,8 +719,8 @@ Eigenvalue/vector : 6.0+0.0j [0.058 0.351 0.935]</code></pre>
 <p>Which includes the solution expected.</p>
 <p>Note that we have transposed the array of eigenvectors returned by <code>linalg.eig()</code>. This is a feature of the function, as described in the reference manual : <em>“The normalized left eigenvector corresponding to the eigenvalue <code>w[i]</code> is the column <code>vl[:,i]</code>”</em>.</p>
 </section>
-<section id="physics-example-1" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="physics-example-1"><span class="header-section-number">2.3.2</span> Physics Example</h3>
+<section id="physics-example-1" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="physics-example-1"><span class="header-section-number">3.3.2</span> Physics Example</h3>
 <p>In this section, we illustrate the use of eigenvalue solvers in finding stable solutions of the coupled system of oscillators shown below.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -754,16 +729,16 @@ Eigenvalue/vector : 6.0+0.0j [0.058 0.351 0.935]</code></pre>
 </figure>
 </div>
 <p>If the displacement of the <span class="math inline">\(i\)</span>th mass from its equilibrium position is denoted as <span class="math inline">\(x_i\)</span>, the force on the mass is given by the tension in the two springs as :</p>
-<p><span id="eq-e"><span class="math display">\[F_i = −k(x_i − x_{i−1}) + k(x_{i+1} − x_i) = −k(2x_i − x_{i−1} − x_{i+1}) \tag{2.28}\]</span></span></p>
+<p><span id="eq-e"><span class="math display">\[F_i = −k(x_i − x_{i−1}) + k(x_{i+1} − x_i) = −k(2x_i − x_{i−1} − x_{i+1}) \tag{3.28}\]</span></span></p>
 <p>We can assume that there are normal mode solutions, i.e.&nbsp;solutions of the form <span class="math inline">\(x_i = z_i e^{i\omega t}\)</span> in which all masses oscillate with the same frequency <span class="math inline">\(\omega\)</span> but with unknown phasors <span class="math inline">\(z_i\)</span>. Then the above equation becomes :</p>
-<p><span id="eq-f"><span class="math display">\[F_i = m\ddot{x}_i = −m\omega^2x_i = −k(2x_i − x_{i−1} − x_{i+1}) \tag{2.29}\]</span></span></p>
+<p><span id="eq-f"><span class="math display">\[F_i = m\ddot{x}_i = −m\omega^2x_i = −k(2x_i − x_{i−1} − x_{i+1}) \tag{3.29}\]</span></span></p>
 <p>This is one row of a matrix equation describing the entire system :</p>
 <p><span id="eq-g"><span class="math display">\[m\omega^2x_i \left(\begin{array}{c} \vdots \\ \\ x_i \\ \\ \vdots \end{array}\right) =
 \left(\begin{array}{ccccccc} &amp; &amp; &amp; \vdots &amp; &amp; &amp; \\ \cdots &amp; 0 &amp; -1 &amp; 2 &amp; -1 &amp; 0 &amp; \cdots \\ &amp; &amp; &amp; \vdots &amp; &amp; &amp; \end{array}\right)
 \left(\begin{array}{c} \vdots \\ x_{i-1} \\ x_i \\ x_{i+1} \\ \vdots \end{array}\right)
-\tag{2.30}\]</span></span></p>
+\tag{3.30}\]</span></span></p>
 <p>This example is a typical eigenvalue problem, in that many of the matrix elements are zero, which can greatly simplify the computational challenge and make even large systems solvable. The matrix is symmetric, which means it is suitable for solving with our eigenproblem solving function above, or one of the solvers from <code>scipy.linalg</code>.</p>
-<div id="be38dfe8" class="cell" data-execution_count="13">
+<div id="fb625509" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>],</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>              [<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>],</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>],</span>
@@ -775,7 +750,7 @@ Eigenvalue/vector : 6.0+0.0j [0.058 0.351 0.935]</code></pre>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>mus, vs <span class="op">=</span> linalg.eig(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The eigenvalue associated with each mode gives the frequency, while the (complex) eigenvector provides the magnitude and phase of oscillation for each mass. We can plot the displacement of each mass as a function of time for each mode.</p>
-<div id="70955602" class="cell" data-execution_count="14">
+<div id="6bbe5bbc" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1301,13 +1276,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./intro.html" class="pagination-link" aria-label="Introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      <a href="./adv-python.html" class="pagination-link" aria-label="Advanced Python Programming">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Advanced Python Programming</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./monte-carlo.html" class="pagination-link" aria-label="Monte Carlo Methods">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

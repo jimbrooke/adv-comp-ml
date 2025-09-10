@@ -1,4 +1,19 @@
 # Introduction
 
+Welcome to the course notes for Advanced Computational Physics and Machine Learning.
 
+These notes will introduce the material covered in lectures and problems classes. They will be supplemented by lecture slides and example programming problems.
+
+The notes will be released in four blocks for each half teaching block. The first block will cover numerical methods, as well as some advanced programming techniques :
+
+1. Introduction
+2. Advanced Python Programming
+3. Linear Algebra
+4. Monte Carlo Methods
+
+Future blocks will cover further data science techniques, machine learning and high performance computing.
+
+## Pre-requisites
+
+These notes assume you have studied computational physics up to 2nd year (Level 5), such as PHYS20035 (Computational Physics and Data Science) or SCIF20002 (Programming and Data Analysis for Scientists).
 
