@@ -1,3 +1,0 @@
-## Exceptions
-
-What exceptions are, how to handle them, and when to generate (throw) them.
