@@ -5,7 +5,7 @@ project:
 book:
   title: "Advanced Computational Physics & Machine Learning"
   author: "Jim Brooke & Sudan Paramesvaran"
-  date: "5/18/2025"
+  date: "15 Sept 2025"
   chapters:
     - index.qmd
     - intro.qmd
