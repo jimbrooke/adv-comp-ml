@@ -15,32 +15,228 @@ Object oriented programming is a programming paradigm that organises code around
 
 ### Classes & Objects
 
-Like functions, classes are a useful tool for structuring and organising your code. They are a pre-requisite for a style of programming known as “object orientiation”. You will have already used classes built-in to Python, or defined in numpy and scipy. In this section, we introduce user-defined classes.
+Unsurprisingly, the fundamental building block of OO programming is the 'object'.  An object can be thought of as an entity which encapsulates some data and some functions.  The data associated with an object are often known as its 'attributes', while the functions are often called its 'methods'.  An object can be assigned to a variable, which can then be used to access the data and call the functions.
 
-### Encapsulation
+A class is a definition for a type of object.  It will describe the attributes and methods that an object of this class must contain.  Multiple objects of the same class can be generated in a program.  Typically, these objects will contain different data.  The method definitions are usually common to all objects of a given class, but are always called in the context of a particular object, whose data they will likely act upon.
 
+To illustrate these, we will define a class that describes a 3D vector.  Note that this is purely an example - if you need a representation of 3D vectors in practise, there are already many good ones available, eg. numpy.ndarray
+
+```{python}
+import math
+
+class Vector():
+    n_dimensions = 3
+    def __init__(self, x=0., y=0., z=0.):
+        self._x = x
+        self._y = y
+        self._z = z
+    
+    def __str__(self):
+        return "x:{0} y:{1} z:{2} norm:{3}".format(self._x, self._y, self._z, self.magnitude())
+    
+    def x(self):
+        return self._x
+
+    def y(self):
+        return self._y
+    
+    def z(self):
+        return self._z
+
+    def magnitude(self):
+        return math.sqrt(self._x**2 + self._y**2 + self._z**2)
+```
+
+The class defines an attribute `n_dimensions` which will be the same for all objects of this type, and is equal to 3.
+
+The `__init__()` method is as special method, sometimes known as the constructor. If it is defined, it will be called when an object is created. We can use this to create and initialise attributes which are unique to the object, here the three components, `_x`, `_y`, and `_z`.  These have a leading underscore to indicate the data is internal to the object. 
+
+The `x()`, `y()`, `z()` methods provide access to the internal data values.  (See Section {#sec-encapsulation} for details on why this is needed).
+
+The `__str__()` method is a useful method which Python will call if you try to convert the object to a string type, eg. by calling `print()` with the object as an argument, as in the example below.  Again, the 
+
+Again, the double-underscore convention is used to indicate that methods are intended for internal use only, and not by the end user of the class. The two methods here are used by other Python code, but you can define your own internal methods if you find it useful.
+
+The `magnitude()` method does what it says on the tin and returns the magnitude of the vector.  This method is intended for the end-user, so it doesn't include the double-underscores.
+
+Note the `self` keyword as an argument to all methods.  This is used within a method definition to refer to the particular object upon which the method is being called. Eg. when we call `v.magnitude()` in the example below, `self` is equal to `v`.
+
+Now we can create some vectors and access their components.
+
+```{python}
+# use the constructor to create a vector and set its components
+v = Vector(3., 4., 0.)
+print(v)
+
+# now change one of the components
+v.z = 5.
+print(v)
+
+print(v.magnitude())
+```
+
+### Operator overloading
+
+Python defines a large number of “internal” functions, some of which correspond to operators, such as +, -, /, *. For example, the operation `a + a` result in a call to the `__add__()` function.  We can redefine these functions to change how these operators behave when operating on a particular class.  This is known as operator overloading.
+
+In the context of our Vector class, we can encode vector algebra in the class methods.
+In the code below, note that we pass TWO arguments to each of the operator methods __add__(), __sub__(), __mul__(). The first, self, is the LHS of the operator, the second, a, is the RHS. Also note how we create and return a new Vector object for the + and - methods.
+
+```{python}
+class Vector():
+    n_dimensions = 3
+    def __init__(self, x=0., y=0., z=0.):
+        self._x = x
+        self._y = y
+        self._z = z
+    
+    def __str__(self):
+        return "x:{0} y:{1} z:{2} norm:{3}".format(self._x, self._y, self._z, self.magnitude())
+    
+    def x(self):
+        return self._x
+
+    def y(self):
+        return self._y
+    
+    def z(self):
+        return self._z
+
+    def magnitude(self):
+        return math.sqrt(self._x**2 + self._y**2 + self._z**2)
+        
+    def __add__(self, a):
+        return Vector(self._x+a._x, self._y+a._y, self._z+a._z)
+    def __sub__(self, a):
+        return Vector(self._x-a._x, self._y-a._y, self._z-a._z)
+    def __mul__(self, a):
+        return self._x*a._x + self._y*a._y + self._z*a._z
+
+```
+
+Clearly we have made a choice to define * as the dot product.  We could have defined it as the cross product. 
+
+```{python}
+v = Vector(4., 3., 0.)
+u = Vector(1., 1., 1.)
+print(u+v)
+print(u-v)
+print(u*v)
+```
+
+
+### Encapsulation {#sec-encapsulation}
+
+Encapsulation regards the bundling of data and methods into a class.  Typically, good encapsulation will also involve restricting access to some of the data/methods in the class.  This 'data hiding' prevents the outside world from directly operating on, or modifying, the class data.  The only way to interact with an object of the class will be via its methods.   This has several benefits :
+
+* **Code re-use**.  The class is designed for a well-defined purpose, and can be easily re-used when required, just by creating a new object of that class.
+* **Simplifying external code**.  Users of the class don't need to know about any complexities of its internal implementation.
+* **Increased maintainability**.  Since the interface to the class is fixed by its methods, the internal operations of the class can be modified without affecting users of the class.
+* **Security**.  Modification of the class data via unauthorized or unintended methods is prevented.
+
+These benefits are only realised when classes are well designed.  The role of the class, and its interfaces (ie. the class methods), need to be clearly defined, and a developer will need to have understood all the realistic ways the class will be used. (Which we sometimes call the "use cases").
+
+In our example, encapsulation is provided by accessing the internal data of the Vector class (ie. the `_x`, `_y`, `_z`) members via the methods (ie. `x()`, `y()`, `z()`). Note that Python does not provide a way to make data private. The leading underscore convention is an indication to the user that these data should not be directly accessed.  But there is no way to enforce it.  Other languages, such as C++, do provide mechanisms enforce privacy and will produce errors if access of private data is attempted.
 
 ### Inheritance
 
+Inheritance is a mechanism of OO programming whereby a class can be derived from another class, "inheriting" its properties.  Here we'll talk about a child class inheriting attributes and methods from a parent class. Usually, the child class will have some additional attributes or methods that do not belong to the parent class.
 
-### Abstraction
+To illustrate this, we could consider extending the Vector class to represent a force acting on a point, which might be a useful class in describing problems in mechanics.  The force vector would be inherited from Vector, and the point would be an additional Vector member.
 
+```{python}
+
+class ForceOnPoint(Vector):
+    def __init__(self, x=0., y=0., z=0., rx=0., ry=0., rz=0.):
+        Vector.__init__(self,x, y, z)
+        self._r = Vector(rx, ry, rz)
+
+    def rx(self):
+        return _r.x()
+
+    def ry(self):
+        return _r.y()
+
+    def rz(self):
+        return _r.z()
+
+```
+
+Note how the ForceOnPoint defines a new constructor, which calls the Vector constructor and then an additional line to add the new attribute (the point). We have provided methods to access components of the point vector, which themselves use the component access methods of Vector.  So if we wanted to change the internal representation of Vector later, we could do that.
+
+Note that we've used the Vector class to define the `r` attribute that represents the point.  This inclusion of a class within a class is known as "composition". This is an alternative method to inheritance that will incorporate a class within a class.  We could extend this to define the ForceOnPoint class using composition and not inheritance :
+
+```{python}
+
+class ForceOnPoint(object):
+    def __init__(self, x=0., y=0., z=0., rx=0., ry=0., rz=0.):
+        # the force vector
+        self._f = Vector(x, y, z)
+        # the point vector
+        self._r = Vector(rx, ry, rz)
+
+```
+
+Here, the new class represents the force and the point using two separate Vector attributes.  We would need to define all the access methods for components of the force and the point.
+
+### Abstraction {#sec-abstraction}
+
+Abstraction refers to defining the interface to a type of object as a set of methods. It is related to encapsulation, since it is another way of hiding internal details or complexity.  To fully exploit this concept, we can define a so-called "abstract base class" which contains only method definitions (not implementation) and no attributes.  The abstract class cannot be instantiated as an object, because it has no attributes and no methods that can be called - it is simply an interface definition. Sometimes it is referred to as a blueprint for real classes. A child class which inherits from this class must provide implementations for the methods, together with any required attributes.  Sometimes the child class is called a "concrete class", as it can be instantiated.
+
+Typically, abstract base classes are used when we have a collection of related classes, which we want to have some common features.  This is illustrated with a simple example of an abstract base class that describes a vehicle, with several concrete classes that inherit from it.
+
+```{python}
+class Vehicle(object):
+    def n_wheels(self):
+        pass
+    def motorised(self):
+        pass
+    def mass(self):
+        pass
+
+class Car(Vehicle):
+    def __init__(self, m):
+        self._m = m
+    def n_wheels(self):
+        return 4
+    def motorised(self):
+        return True
+    def mass(self):
+        return _m
+
+class Bicycle(Vehicle):
+    def __init__(self, m):
+        self._m = m
+    def n_wheels(self):
+        return 2
+    def motorised(self):
+        return False
+    def mass(self):
+        return _m
+
+```
+
+Note the use of the `pass` keyword in the abstract base class to complete the method definition without providing any functionality.
+
+(Note that Python does not support 'true' abstract base classes natively. There are several reasons the Vehicle class in the example above is not truly abstract, which are beyond the scope of this unit.  A simple reason is that you can create an instance of the Vehicle class without errors. For the purists, true abstraction is supported via the `abc` module).
 
 ### Polymorphism
 
+Polymorphism means "many forms", and refers to an ability to treat objects of many different types as if they are of a single common type.  In OO programming, this is usually  achieved through inheritance and abstraction.  For example, in the previous example, we can treat objects of type `Car` and `Bicycle` as if they are both just of type `Vehicle`.  If we're only interested in computing the mass of the `Vehicle`s in the list, it doesn't matter that some are `Car`s and some are `Bicycle`s - we just call the `mass()` method on each one.
 
-### OO Programming in Practise
-
+Python supports polymorphism even without use of OO/inheritance/abstraction.  The Python interpreter will attempt to call a method on object; if the method exists then it will run, and if it doesn't an error will be generated.  So it doesn't matter if two objects have the same method via inheritance, or simply because we gave them both a method with the same name.  This is known as "duck typing" - if an object quacks like a duck, then Python will treat it as a duck. (Python will also treat the same object as a horse, provided it finds the methods expected of a horse).
 
 ## Functional Programming & Lambdas
 
-Functional programming is another programming paradigm.
+Functional programming is another programming paradigm.  In some respects it is quite the opposite of OO programming.  Objects intrinsically have some 'state' associated with them, due to their attributes (internal data).  So the result of a function call in OO programming (ie. a method) will depend on both the arguments passed to the function, and the state of the object upon which the method is called.
 
+Conversely, in functional programming, computation is expressed in terms of functions which have no state. This paradigm is based on a formal system called λ-calculus, which has been shown to be Turing-complete, ie. it can simulate any Turing machine, or it can implement any computer algorithm. There are several languages (eg. Haskell, Erlang) which are designed to enforce functional programming.  It is possible to write fully functional programs in Python, using lambda functions.
+
+Developing full functional programs is beyond the scope of this unit, but it should be noted that functional programming can be extremely useful in distributed computing. Because functions have no state, all the data they need to operate is passed as an argument.  This means it doesn't really matter _where_ the function runs.  Provided there is a network connection to the computer which is running the function, the arguments to the function call and the returned value can be communicated.  Conversely, in OO programming, methods need to be run in the same location as the obect attributes they are associated with.  This means OO programs can be harder to run in a distributed fashion than functional ones.
+
+A full introduction to functional programming is beyond the scope of the unit, but below we introduce the syntax for lambda functions, and some particular cases where they can be useful.
 
 ### Lambda Functions
-
-λ-calculus is a branch of logic in which computation is expressed in terms of functions that have no state. It is Turing-complete, ie. it can simulate any Turing machine.
-Programming with lambda functions is known as functional programming, and several languages (eg. Haskell, Erlang) are designed to enforce this style. It is possible to write fully functional programs in Python, although this is beyond the scope of this tutorial. There are some practical cases where lambda functions can be useful, mentioned below.
 
 In Python, lambda functions are created using the lambda keyword, eg.: lambda: x, x**2 returns an “anonymous” function that takes one argument, and returns a value that depends only on the argument (in this case, the square). Compare this to regular functions, which are declared with def and are named
  :
@@ -92,7 +288,7 @@ Another useful function when working with lists is filter(). This takes a functi
 ## Exceptions
 
 This section is a short introduction to “Exceptions”, an error handling technique commonly used in modern programming languages. It is the standard way to deal with errors in Python and both numpy and scipy use them. Raising exceptions in your own functions, and knowing how to deal with exceptions raised by other code, will help you write more robust code.
-It’s worth noting that exceptions are not the only way of handling errors. Code using the sim- ple method below will be entirely adequate in many cases. You will need to decide what is ap- propriate for your particular case. However, understanding exceptions is important when using libbraries (such as SciPy) which raise exceptions when they encounter errors.
+It’s worth noting that exceptions are not the only way of handling errors. Code using the simple method below will be entirely adequate in many cases. You will need to decide what is appropriate for your particular case. However, understanding exceptions is important when using libbraries (such as SciPy) which raise exceptions when they encounter errors.
 First we’ll look at error handling in a simple case, without using exceptions.
 
 ### Simple Error Handling
@@ -106,7 +302,7 @@ import numpy as np
 def mySqrt(x):
     if x<0:
         print("Input must be positive.")
-        return np.NaN
+        return np.nan
     return math.sqrt(x)
 ```
 
@@ -174,10 +370,6 @@ try:
 except scipy.linalg.LinAlgError as err:
     print("Caught an exception :", err)
 ```
-
-
-## Generative AI
-
 
 
 
