@@ -10,6 +10,66 @@
     ]
   },
   {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "1.1 Pre-requisites\nThese notes assume you have studied computational physics up to 2nd year (Level 5), such as PHYS20035 (Computational Physics and Data Science) or SCIF20002 (Programming and Data Analysis for Scientists).",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "adv-python.html",
+    "href": "adv-python.html",
+    "title": "2  Advanced Python Programming",
+    "section": "",
+    "text": "2.1 Object Oriented Programming\nObject oriented programming is a programming paradigm that organises code around objects rather than functions and logic. Here we introduce some of the fundamental concepts (which you may have encountered before) including classes and objects. The four core principles of OO programming are then introduced, followed by some practical tips.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Advanced Python Programming</span>"
+    ]
+  },
+  {
+    "objectID": "adv-python.html#object-oriented-programming",
+    "href": "adv-python.html#object-oriented-programming",
+    "title": "2  Advanced Python Programming",
+    "section": "",
+    "text": "2.1.1 Classes & Objects\nLike functions, classes are a useful tool for structuring and organising your code. They are a pre-requisite for a style of programming known as “object orientiation”. You will have already used classes built-in to Python, or defined in numpy and scipy. In this section, we introduce user-defined classes.\n\n\n2.1.2 Encapsulation\n\n\n2.1.3 Inheritance\n\n\n2.1.4 Abstraction\n\n\n2.1.5 Polymorphism\n\n\n2.1.6 OO Programming in Practise",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Advanced Python Programming</span>"
+    ]
+  },
+  {
+    "objectID": "adv-python.html#functional-programming-lambdas",
+    "href": "adv-python.html#functional-programming-lambdas",
+    "title": "2  Advanced Python Programming",
+    "section": "2.2 Functional Programming & Lambdas",
+    "text": "2.2 Functional Programming & Lambdas\nFunctional programming is another programming paradigm.\n\n2.2.1 Lambda Functions\nλ-calculus is a branch of logic in which computation is expressed in terms of functions that have no state. It is Turing-complete, ie. it can simulate any Turing machine. Programming with lambda functions is known as functional programming, and several languages (eg. Haskell, Erlang) are designed to enforce this style. It is possible to write fully functional programs in Python, although this is beyond the scope of this tutorial. There are some practical cases where lambda functions can be useful, mentioned below.\nIn Python, lambda functions are created using the lambda keyword, eg.: lambda: x, x**2 returns an “anonymous” function that takes one argument, and returns a value that depends only on the argument (in this case, the square). Compare this to regular functions, which are declared with def and are named :\n\ndef function(x):\n    return 0.5*x**2 + x + 1\nfunction(4)\n\n13.0\n\n\nThe equivalent using a lambda function would be :\n\n(lambda x: 0.5*x**2 + x + 1)(4)\n\n13.0\n\n\n\n\n2.2.2 Anonymous functions\nLambdas can be useful when implementing mathematical expressions, and when working with functions that expect other functions as arguments. Eg. suppose I want to calculate \\(\\int_1^4 e^{−x}\\). I can do this in one line with a lambda function :\n\nimport scipy.integrate\nimport math\n\nscipy.integrate.quad(lambda x: math.exp(-1*x), 1., 4.)\n\n(0.3495638022827081, 3.880937818697784e-15)\n\n\n\n\n2.2.3 Map-Reduce with Lists\nAnother area where lambda functions are useful is in the “map-reduce” paradigm. The idea here is that when processing large amounts of data, you want to do as much processing in parallel as possible. A given algorithm is divided into a parallel part (map), and a non-parallel part (reduce). When processing huge datasets, the map will be running in parallel on multiple machines. In Python, the map() function takes a function and a list as arguments. The function is applied to each element in the list, and then a list of the results is returned. Eg. to calculate the expression below for for n = 1000 : \\[\n\\sum_{i=1}^n i^2\n\\]\n\nimport numpy as np\nfrom functools import reduce\n\nx = np.arange(0,1000)\n\nsquares = list(map((lambda x: x**2), x))\nsum = reduce((lambda x, y: x+y), squares)\n\nprint(sum)\n\n332833500\n\n\nAnother useful function when working with lists is filter(). This takes a function and a list, applies the function to each element, and retains that element if the function returns True. For example, you can try writing a function that accepts the odd values in a list of integers.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Advanced Python Programming</span>"
+    ]
+  },
+  {
+    "objectID": "adv-python.html#exceptions",
+    "href": "adv-python.html#exceptions",
+    "title": "2  Advanced Python Programming",
+    "section": "2.3 Exceptions",
+    "text": "2.3 Exceptions\nThis section is a short introduction to “Exceptions”, an error handling technique commonly used in modern programming languages. It is the standard way to deal with errors in Python and both numpy and scipy use them. Raising exceptions in your own functions, and knowing how to deal with exceptions raised by other code, will help you write more robust code. It’s worth noting that exceptions are not the only way of handling errors. Code using the sim- ple method below will be entirely adequate in many cases. You will need to decide what is ap- propriate for your particular case. However, understanding exceptions is important when using libbraries (such as SciPy) which raise exceptions when they encounter errors. First we’ll look at error handling in a simple case, without using exceptions.\n\n2.3.1 Simple Error Handling\nSuppose I have a function that works for positive number, but I know it will fail if given a negative input. Rather than let the code crash, or (worse) return incorrect results, we can detect this problem and do something sensible. One option might be to test the argument given to the function, print an error message, and return a default value (NaN, in this case) :\n\nimport math\nimport numpy as np\ndef mySqrt(x):\n    if x&lt;0:\n        print(\"Input must be positive.\")\n        return np.NaN\n    return math.sqrt(x)\n\nLet’s test this with a couple of examples :\n\nprint(mySqrt(4))\nprint(mySqrt(-3))\n\n2.0\nInput must be positive.\n\n\nAttributeError: `np.NaN` was removed in the NumPy 2.0 release. Use `np.nan` instead.\n\n\nThis method for dealing with errors is better than nothing, but it has limitations. In particular : 1. Returning a default value when the input is invalid may cause further knock-on problems 2. We have no way of knowing what caused our function to be called with an invalid argument\nWe can avoid 1. by eg. halting execution of the program after printing the error message, eg. by calling sys.exit(). However, this is quite extreme and maybe not appropriate for all cases. And even if halting execution is the only option - we still have no way of dealing with point 2.\n\n\n2.3.2 Error Handling with Exceptions\nExceptions are the standard way to deal with errors in Python, and both numpy and scipy use them. Raising exceptions in your own functions, and knowing how to deal with exceptions raised by other code, can help you write more robust code. However, exceptions are just an error han- dling technique - you will still need to analyse where errors can occur in your code and make suitable provisions for handling them. The key feature of exceptions is that they allow the programmer to decide where in the code is the appropriate place to take action. In the example here, this might be in the function that calls mySqrt(). But in other circumstances, it might be in the function that calls that function. When an exception is generated, it is communciated back through all function calls until a block of code ‘catches’ the exception(and takes some action. Ultimately, if nothing handles the exception, the program will stop. Here is how we would handle this error using an exception :\n\ndef mySqrt(x):\n    if x&lt;0:\n        raise Exception(\"Negative input\")\n    return math.sqrt(x)\n\nprint(mySqrt(4))\nprint(mySqrt(-4))\n\n2.0\n\n\nException: Negative input\n\n\nYou might have seen this kind of print out when debugging code. The “Traceback” lists the function calls that led to the exception being raised.\n\n\n2.3.3 Catching Exceptions\nRaising an exception is only half of the process. The other half is “catching” them. Let’s say we have a function that calls mySqrt() but it knows what to do if the exception is raised. We can use a “try-except” (also known as “try-catch”, from the corresponding C++ keywords) block to catch that exception and take the correct course of action.\n\n    try:\n        y = mySqrt(x)\n    except Exception:\n        y = 1j * mySqrt(abs(x))\nreturn y\n\nprint(mySqrtComplex(16))\nprint(mySqrtComplex(-16))\n\nValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()\n\n\n\n\n2.3.4 Handling Other Exceptions\nYou might find you can get away without raising any exceptions in your code. However, scipy and numpy will raise exceptions, and knowing how to handle them can be useful. For example, a number of linear algebra routines in scipy.linalg cannot proceed if given a singular matrix. In this case, they will raise a numpy.linalg.LinAlgError exception : https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.LinAlgError.html#numpy.linalg.LinAlg As well as the built-in Exception, Python allows us to define dedicated exception types, like this one. This allows exception handling code to distinguish different classes of error condition, which is useful when deciding what to do. An example of how to catch this kind of exception is below.\n\nimport scipy.linalg\nm = np.zeros((2,2))\nprint(m)\ntry:\n    scipy.linalg.inv(m)\nexcept scipy.linalg.LinAlgError as err:\n    print(\"Caught an exception :\", err)\n\n[[0. 0.]\n [0. 0.]]\nCaught an exception : singular matrix",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Advanced Python Programming</span>"
+    ]
+  },
+  {
+    "objectID": "adv-python.html#generative-ai",
+    "href": "adv-python.html#generative-ai",
+    "title": "2  Advanced Python Programming",
+    "section": "2.4 Generative AI",
+    "text": "2.4 Generative AI",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Advanced Python Programming</span>"
+    ]
+  },
+  {
     "objectID": "linear-algebra.html",
     "href": "linear-algebra.html",
     "title": "3  Linear Algebra",
@@ -67,186 +127,6 @@
     "text": "4.2 Multivariate Sampling\nBoth analytic and accept/reject methods can be used to generate distributions of more than one variable. This often requires a bit of thought - the two methods may be more or less suitable to particular problems.\nHere we illustrate the two approaches to generating uniformly distributed random numbers on the unit disc.\n\n4.2.1 Analytic Example\nAn analytic method for the unit disc problem needs to ensure that the density of points is constant over the disc, ie that \\(P(x,y) \\propto dA\\) for area element \\(dA\\). In polar coordinates, we can write this as :\n\\[P(x,y) \\propto dA = r dr d\\phi\\]\nSince we will start by generating values with uniform distributions (let’s say \\(u\\) and \\(v\\)), we want to obtain transformations \\((u,v) \\rightarrow (r, \\phi)\\) such that :\n\\[dA = r dr d\\phi= du dv\\]\nClearly these substitutions are sufficient :\n\\[du = r dr\\] \\[dv = d\\phi\\]\nClearly we can just generate \\(\\phi\\) with a uniform distribution. The function to produce \\(r\\) from uniformly distributed \\(u\\) is obtained by integration :\n\\[u = \\frac{1}{2}r^2\\]\nand\n\\[r = \\sqrt{2u}\\]\nHowever, this will produce a disc with incorrect area. The required area is \\(\\pi\\), so we can obtain the constant of integration by requiring \\(\\int dA = \\pi\\), which gives :\n\\[r = \\sqrt{u}\\]\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\ndef unitDiscAna():\n    phi = 2 * np.pi * np.random.random()\n    r = np.sqrt(np.random.random())\n    \n    # convert to cartesian coordinates\n    x = r * np.cos(phi)\n    y = r * np.sin(phi)\n    \n    return np.array([x, y])\n\nps = np.array([unitDiscAna() for _ in range(1000)])\n\nplt.axis('equal')\nplt.scatter(ps[:,0], ps[:,1], marker='.', c='r')\nplt.show()\n\n\n\n\n\n\n\n\n\n\n4.2.2 Accept/Reject Example\nSuppose we want to randomly generate points \\((x,y)\\) within a unit disc. A simple approach is to generate uniform distributions of \\(x\\) and \\(y\\) separately, and then use an accept/reject method to remove any points not in the disc (ie. where \\(\\sqrt{x^2 + y^2} \\gt 1\\)). This is illustrated in the example below.\n\ndef unitDiscAR():\n    x = 2 * np.random.random() - 1\n    y = 2 * np.random.random() - 1\n    while np.sqrt(x**2+ y**2) &gt; 1:\n        x = 2 * np.random.random() - 1\n        y = 2 * np.random.random() - 1\n    return np.array([x, y])\n\nps = np.array([unitDiscAR() for _ in range(1000)])\n\nplt.axis('equal')\nplt.scatter(ps[:,0], ps[:,1], marker='.', c='r')\nplt.show()\n\n\n\n\n\n\n\n\nNote that since the unitDisc() method returns a vector, we need to :\n\nconvert the list generated by the list comprehension (which calls unitDisc() many times) into a 2D array\nuse array slicing to obtain arrays of \\(x\\) and \\(y\\) values separately when plotting, ie. ps[:,0] gives a 1D array of \\(x\\) values.",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Monte Carlo Methods</span>"
-    ]
-  },
-  {
-    "objectID": "ml.html",
-    "href": "ml.html",
-    "title": "4  Machine Learning",
-    "section": "",
-    "text": "4.1 Bayesian Inference",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Machine Learning</span>"
-    ]
-  },
-  {
-    "objectID": "ml.html#maximum-likelihood-estimation",
-    "href": "ml.html#maximum-likelihood-estimation",
-    "title": "4  Machine Learning",
-    "section": "4.2 Maximum Likelihood Estimation",
-    "text": "4.2 Maximum Likelihood Estimation",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Machine Learning</span>"
-    ]
-  },
-  {
-    "objectID": "ml.html#supervised-vs-unsupervised-learning",
-    "href": "ml.html#supervised-vs-unsupervised-learning",
-    "title": "4  Machine Learning",
-    "section": "4.3 Supervised vs Unsupervised Learning",
-    "text": "4.3 Supervised vs Unsupervised Learning",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Machine Learning</span>"
-    ]
-  },
-  {
-    "objectID": "ml.html#classification",
-    "href": "ml.html#classification",
-    "title": "4  Machine Learning",
-    "section": "4.4 Classification",
-    "text": "4.4 Classification\n\n4.4.1 Binary Logistic Regression",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Machine Learning</span>"
-    ]
-  },
-  {
-    "objectID": "ml.html#neural-networks",
-    "href": "ml.html#neural-networks",
-    "title": "4  Machine Learning",
-    "section": "4.5 Neural Networks",
-    "text": "4.5 Neural Networks",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Machine Learning</span>"
-    ]
-  },
-  {
-    "objectID": "adv-python.html",
-    "href": "adv-python.html",
-    "title": "2  Advanced Python Programming",
-    "section": "",
-    "text": "2.1 Object Oriented Programming\nObject oriented programming is a programming paradigm that organises code around objects rather than functions and logic. Here we introduce some of the fundamental concepts (which you may have encountered before) including classes and objects. The four core principles of OO programming are then introduced, followed by some practical tips.",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Advanced Python Programming</span>"
-    ]
-  },
-  {
-    "objectID": "adv-python.html#exceptions",
-    "href": "adv-python.html#exceptions",
-    "title": "2  Advanced Python Programming",
-    "section": "2.3 Exceptions",
-    "text": "2.3 Exceptions\nThis section is a short introduction to “Exceptions”, an error handling technique commonly used in modern programming languages. It is the standard way to deal with errors in Python and both numpy and scipy use them. Raising exceptions in your own functions, and knowing how to deal with exceptions raised by other code, will help you write more robust code. It’s worth noting that exceptions are not the only way of handling errors. Code using the sim- ple method below will be entirely adequate in many cases. You will need to decide what is ap- propriate for your particular case. However, understanding exceptions is important when using libbraries (such as SciPy) which raise exceptions when they encounter errors. First we’ll look at error handling in a simple case, without using exceptions.\n\n2.3.1 Simple Error Handling\nSuppose I have a function that works for positive number, but I know it will fail if given a negative input. Rather than let the code crash, or (worse) return incorrect results, we can detect this problem and do something sensible. One option might be to test the argument given to the function, print an error message, and return a default value (NaN, in this case) :\n\nimport math\nimport numpy as np\ndef mySqrt(x):\n    if x&lt;0:\n        print(\"Input must be positive.\")\n        return np.NaN\n    return math.sqrt(x)\n\nLet’s test this with a couple of examples :\n\nprint(mySqrt(4))\nprint(mySqrt(-3))\n\n2.0\nInput must be positive.\n\n\nAttributeError: `np.NaN` was removed in the NumPy 2.0 release. Use `np.nan` instead.\n\n\nThis method for dealing with errors is better than nothing, but it has limitations. In particular : 1. Returning a default value when the input is invalid may cause further knock-on problems 2. We have no way of knowing what caused our function to be called with an invalid argument\nWe can avoid 1. by eg. halting execution of the program after printing the error message, eg. by calling sys.exit(). However, this is quite extreme and maybe not appropriate for all cases. And even if halting execution is the only option - we still have no way of dealing with point 2.\n\n\n2.3.2 Error Handling with Exceptions\nExceptions are the standard way to deal with errors in Python, and both numpy and scipy use them. Raising exceptions in your own functions, and knowing how to deal with exceptions raised by other code, can help you write more robust code. However, exceptions are just an error han- dling technique - you will still need to analyse where errors can occur in your code and make suitable provisions for handling them. The key feature of exceptions is that they allow the programmer to decide where in the code is the appropriate place to take action. In the example here, this might be in the function that calls mySqrt(). But in other circumstances, it might be in the function that calls that function. When an exception is generated, it is communciated back through all function calls until a block of code ‘catches’ the exception(and takes some action. Ultimately, if nothing handles the exception, the program will stop. Here is how we would handle this error using an exception :\n\ndef mySqrt(x):\n    if x&lt;0:\n        raise Exception(\"Negative input\")\n    return math.sqrt(x)\n\nprint(mySqrt(4))\nprint(mySqrt(-4))\n\n2.0\n\n\nException: Negative input\n\n\nYou might have seen this kind of print out when debugging code. The “Traceback” lists the function calls that led to the exception being raised.\n\n\n2.3.3 Catching Exceptions\nRaising an exception is only half of the process. The other half is “catching” them. Let’s say we have a function that calls mySqrt() but it knows what to do if the exception is raised. We can use a “try-except” (also known as “try-catch”, from the corresponding C++ keywords) block to catch that exception and take the correct course of action.\n\n    try:\n        y = mySqrt(x)\n    except Exception:\n        y = 1j * mySqrt(abs(x))\nreturn y\n\nprint(mySqrtComplex(16))\nprint(mySqrtComplex(-16))\n\nValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()\n\n\n\n\n2.3.4 Handling Other Exceptions\nYou might find you can get away without raising any exceptions in your code. However, scipy and numpy will raise exceptions, and knowing how to handle them can be useful. For example, a number of linear algebra routines in scipy.linalg cannot proceed if given a singular matrix. In this case, they will raise a numpy.linalg.LinAlgError exception : https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.LinAlgError.html#numpy.linalg.LinAlg As well as the built-in Exception, Python allows us to define dedicated exception types, like this one. This allows exception handling code to distinguish different classes of error condition, which is useful when deciding what to do. An example of how to catch this kind of exception is below.\n\nimport scipy.linalg\nm = np.zeros((2,2))\nprint(m)\ntry:\n    scipy.linalg.inv(m)\nexcept scipy.linalg.LinAlgError as err:\n    print(\"Caught an exception :\", err)\n\n[[0. 0.]\n [0. 0.]]\nCaught an exception : singular matrix",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Advanced Python Programming</span>"
-    ]
-  },
-  {
-    "objectID": "adv-python.html#numba",
-    "href": "adv-python.html#numba",
-    "title": "2  Advanced Programming",
-    "section": "2.3 Numba",
-    "text": "2.3 Numba",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Advanced Programming</span>"
-    ]
-  },
-  {
-    "objectID": "parallel.html",
-    "href": "parallel.html",
-    "title": "6  Parallel Programming",
-    "section": "",
-    "text": "6.1 Parallel Programming with MPI",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Parallel Programming</span>"
-    ]
-  },
-  {
-    "objectID": "cloud-tech.html",
-    "href": "cloud-tech.html",
-    "title": "7  Cloud Technology",
-    "section": "",
-    "text": "7.1 Computing Concepts\nCould move this to the advanced python section ?",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Cloud Technology</span>"
-    ]
-  },
-  {
-    "objectID": "cloud-tech.html#containers",
-    "href": "cloud-tech.html#containers",
-    "title": "7  Cloud Technology",
-    "section": "7.2 Containers",
-    "text": "7.2 Containers",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Cloud Technology</span>"
-    ]
-  },
-  {
-    "objectID": "cloud-tech.html#message-queues",
-    "href": "cloud-tech.html#message-queues",
-    "title": "7  Cloud Technology",
-    "section": "7.3 Message Queues",
-    "text": "7.3 Message Queues",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Cloud Technology</span>"
-    ]
-  },
-  {
-    "objectID": "cloud-tech.html#orchestration",
-    "href": "cloud-tech.html#orchestration",
-    "title": "7  Cloud Technology",
-    "section": "7.4 Orchestration",
-    "text": "7.4 Orchestration",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Cloud Technology</span>"
-    ]
-  },
-  {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "1  Introduction",
-    "section": "",
-    "text": "1.1 Pre-requisites\nThese notes assume you have studied computational physics up to 2nd year (Level 5), such as PHYS20035 (Computational Physics and Data Science) or SCIF20002 (Programming and Data Analysis for Scientists).",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
-    ]
-  },
-  {
-    "objectID": "adv-python.html#object-oriented-programming",
-    "href": "adv-python.html#object-oriented-programming",
-    "title": "2  Advanced Python Programming",
-    "section": "",
-    "text": "2.1.1 Classes & Objects\nLike functions, classes are a useful tool for structuring and organising your code. They are a pre-requisite for a style of programming known as “object orientiation”. You will have already used classes built-in to Python, or defined in numpy and scipy. In this section, we introduce user-defined classes.\n\n\n2.1.2 Encapsulation\n\n\n2.1.3 Inheritance\n\n\n2.1.4 Abstraction\n\n\n2.1.5 Polymorphism\n\n\n2.1.6 OO Programming in Practise",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Advanced Python Programming</span>"
-    ]
-  },
-  {
-    "objectID": "adv-python.html#functional-programming",
-    "href": "adv-python.html#functional-programming",
-    "title": "2  Advanced Python Programming",
-    "section": "2.2 Functional Programming",
-    "text": "2.2 Functional Programming\nFunctional programming is another programming paradigm.\n\n2.2.1 Lambda Functions\nλ-calculus is a branch of logic in which computation is expressed in terms of functions that have no state. It is Turing-complete, ie. it can simulate any Turing machine. Programming with lambda functions is known as functional programming, and several languages (eg. Haskell, Erlang) are designed to enforce this style. It is possible to write fully functional programs in Python, although this is beyond the scope of this tutorial. There are some practical cases where lambda functions can be useful, mentioned below.\nIn Python, lambda functions are created using the lambda keyword, eg.: lambda: x, x**2 returns an “anonymous” function that takes one argument, and returns a value that depends only on the argument (in this case, the square). Compare this to regular functions, which are declared with def and are named :\n\ndef function(x):\n    return 0.5*x**2 + x + 1\nfunction(4)\n\n13.0\n\n\nThe equivalent using a lambda function would be :\n\n(lambda x: 0.5*x**2 + x + 1)(4)\n\n13.0\n\n\n\n2.2.1.1 Anonymous functions\nLambdas can be useful when implementing mathematical expressions, and when working with functions that expect other functions as arguments. Eg. suppose I want to calculate \\(\\int_1^4 e^{−x}\\). I can do this in one line with a lambda function :\n\nimport scipy.integrate\nimport math\n\nscipy.integrate.quad(lambda x: math.exp(-1*x), 1., 4.)\n\n(0.3495638022827081, 3.880937818697784e-15)\n\n\n\n\n2.2.1.2 Map-Reduce with Lists\nAnother area where lambda functions are useful is in the “map-reduce” paradigm. The idea here is that when processing large amounts of data, you want to do as much processing in parallel as possible. A given algorithm is divided into a parallel part (map), and a non-parallel part (reduce). When processing huge datasets, the map will be running in parallel on multiple machines. In Python, the map() function takes a function and a list as arguments. The function is applied to each element in the list, and then a list of the results is returned. Eg. to calculate the expression below for for n = 1000 : \\[\n\\sum_{i=1}^n i^2\n\\]\n\nimport numpy as np\nfrom functools import reduce\n\nx = np.arange(0,1000)\n\nsquares = list(map((lambda x: x**2), x))\nsum = reduce((lambda x, y: x+y), squares)\n\nprint(sum)\n\n332833500\n\n\nAnother useful function when working with lists is filter(). This takes a function and a list, applies the function to each element, and retains that element if the function returns True. For example, you can try writing a function that accepts the odd values in a list of integers.",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Advanced Python Programming</span>"
-    ]
-  },
-  {
-    "objectID": "adv-python.html#generative-ai",
-    "href": "adv-python.html#generative-ai",
-    "title": "2  Advanced Python Programming",
-    "section": "2.4 Generative AI",
-    "text": "2.4 Generative AI",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Advanced Python Programming</span>"
-    ]
-  },
-  {
-    "objectID": "adv-python.html#functional-programming-lambdas",
-    "href": "adv-python.html#functional-programming-lambdas",
-    "title": "2  Advanced Python Programming",
-    "section": "2.2 Functional Programming & Lambdas",
-    "text": "2.2 Functional Programming & Lambdas\nFunctional programming is another programming paradigm.\n\n2.2.1 Lambda Functions\nλ-calculus is a branch of logic in which computation is expressed in terms of functions that have no state. It is Turing-complete, ie. it can simulate any Turing machine. Programming with lambda functions is known as functional programming, and several languages (eg. Haskell, Erlang) are designed to enforce this style. It is possible to write fully functional programs in Python, although this is beyond the scope of this tutorial. There are some practical cases where lambda functions can be useful, mentioned below.\nIn Python, lambda functions are created using the lambda keyword, eg.: lambda: x, x**2 returns an “anonymous” function that takes one argument, and returns a value that depends only on the argument (in this case, the square). Compare this to regular functions, which are declared with def and are named :\n\ndef function(x):\n    return 0.5*x**2 + x + 1\nfunction(4)\n\n13.0\n\n\nThe equivalent using a lambda function would be :\n\n(lambda x: 0.5*x**2 + x + 1)(4)\n\n13.0\n\n\n\n\n2.2.2 Anonymous functions\nLambdas can be useful when implementing mathematical expressions, and when working with functions that expect other functions as arguments. Eg. suppose I want to calculate \\(\\int_1^4 e^{−x}\\). I can do this in one line with a lambda function :\n\nimport scipy.integrate\nimport math\n\nscipy.integrate.quad(lambda x: math.exp(-1*x), 1., 4.)\n\n(0.3495638022827081, 3.880937818697784e-15)\n\n\n\n\n2.2.3 Map-Reduce with Lists\nAnother area where lambda functions are useful is in the “map-reduce” paradigm. The idea here is that when processing large amounts of data, you want to do as much processing in parallel as possible. A given algorithm is divided into a parallel part (map), and a non-parallel part (reduce). When processing huge datasets, the map will be running in parallel on multiple machines. In Python, the map() function takes a function and a list as arguments. The function is applied to each element in the list, and then a list of the results is returned. Eg. to calculate the expression below for for n = 1000 : \\[\n\\sum_{i=1}^n i^2\n\\]\n\nimport numpy as np\nfrom functools import reduce\n\nx = np.arange(0,1000)\n\nsquares = list(map((lambda x: x**2), x))\nsum = reduce((lambda x, y: x+y), squares)\n\nprint(sum)\n\n332833500\n\n\nAnother useful function when working with lists is filter(). This takes a function and a list, applies the function to each element, and retains that element if the function returns True. For example, you can try writing a function that accepts the odd values in a list of integers.",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Advanced Python Programming</span>"
     ]
   }
 ]
