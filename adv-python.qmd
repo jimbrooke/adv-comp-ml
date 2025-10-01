@@ -43,6 +43,18 @@ class Vector():
     def z(self):
         return self._z
 
+    def set_x(self, x):
+        self._x = x
+        return
+
+    def set_y(self, y):
+        self._y = y
+        return
+    
+    def set_z(self, z):
+        self._z = z
+        return
+
     def magnitude(self):
         return math.sqrt(self._x**2 + self._y**2 + self._z**2)
 ```
@@ -51,7 +63,7 @@ The class defines an attribute `n_dimensions` which will be the same for all obj
 
 The `__init__()` method is as special method, sometimes known as the constructor. If it is defined, it will be called when an object is created. We can use this to create and initialise attributes which are unique to the object, here the three components, `_x`, `_y`, and `_z`.  These have a leading underscore to indicate the data is internal to the object. 
 
-The `x()`, `y()`, `z()` methods provide access to the internal data values.  (See Section {#sec-encapsulation} for details on why this is needed).
+The `x()`, `y()`, `z()` methods provide access to the internal data values.  The `set_x()`, `set_y()`, `set_z()` methods allow these attributes to be updated.  (See @sec-encapsulation for details on why this is needed).
 
 The `__str__()` method is a useful method which Python will call if you try to convert the object to a string type, eg. by calling `print()` with the object as an argument, as in the example below.  Again, the 
 
@@ -69,7 +81,7 @@ v = Vector(3., 4., 0.)
 print(v)
 
 # now change one of the components
-v.z = 5.
+v.set_z(5.)
 print(v)
 
 print(v.magnitude())
@@ -160,6 +172,17 @@ class ForceOnPoint(Vector):
     def rz(self):
         return _r.z()
 
+    def set_rx(self, rx):
+        _r.x = rx
+        return
+
+    def set_ry(self), ry:
+        _r.y = ry
+        return
+
+    def set_rz(self, rz):
+        _r.z = rz
+        return
 ```
 
 Note how the ForceOnPoint defines a new constructor, which calls the Vector constructor and then an additional line to add the new attribute (the point). We have provided methods to access components of the point vector, which themselves use the component access methods of Vector.  So if we wanted to change the internal representation of Vector later, we could do that.
