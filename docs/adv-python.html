@@ -199,6 +199,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./neural-networks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -266,7 +278,7 @@ window.Quarto = {
 <p>Unsurprisingly, the fundamental building block of OO programming is the ‘object’. An object can be thought of as an entity which encapsulates some data and some functions. The data associated with an object are often known as its ‘attributes’, while the functions are often called its ‘methods’. An object can be assigned to a variable, which can then be used to access the data and call the functions.</p>
 <p>A class is a definition for a type of object. It will describe the attributes and methods that an object of this class must contain. Multiple objects of the same class can be generated in a program. Typically, these objects will contain different data. The method definitions are usually common to all objects of a given class, but are always called in the context of a particular object, whose data they will likely act upon.</p>
 <p>To illustrate these, we will define a class that describes a 3D vector. Note that this is purely an example - if you need a representation of 3D vectors in practise, there are already many good ones available, eg. numpy.ndarray</p>
-<div id="b1a34a08" class="cell" data-execution_count="1">
+<div id="1d47857e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vector():</span>
@@ -311,7 +323,7 @@ window.Quarto = {
 <p>The <code>magnitude()</code> method does what it says on the tin and returns the magnitude of the vector. This method is intended for the end-user, so it doesn’t include the double-underscores.</p>
 <p>Note the <code>self</code> keyword as an argument to all methods. This is used within a method definition to refer to the particular object upon which the method is being called. Eg. when we call <code>v.magnitude()</code> in the example below, <code>self</code> is equal to <code>v</code>.</p>
 <p>Now we can create some vectors and access their components.</p>
-<div id="49b8bf8e" class="cell" data-execution_count="2">
+<div id="77f43eea" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use the constructor to create a vector and set its components</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> Vector(<span class="fl">3.</span>, <span class="fl">4.</span>, <span class="fl">0.</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(v)</span>
@@ -332,7 +344,7 @@ x:3.0 y:4.0 z:5.0 norm:7.0710678118654755
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="operator-overloading"><span class="header-section-number">2.1.2</span> Operator overloading</h3>
 <p>Python defines a large number of “internal” functions, some of which correspond to operators, such as +, -, /, *. For example, the operation <code>a + a</code> result in a call to the <code>__add__()</code> function. We can redefine these functions to change how these operators behave when operating on a particular class. This is known as operator overloading.</p>
 <p>In the context of our Vector class, we can encode vector algebra in the class methods. In the code below, note that we pass TWO arguments to each of the operator methods <strong>add</strong>(), <strong>sub</strong>(), <strong>mul</strong>(). The first, self, is the LHS of the operator, the second, a, is the RHS. Also note how we create and return a new Vector object for the + and - methods.</p>
-<div id="0fe5b297" class="cell" data-execution_count="3">
+<div id="c85d539f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vector():</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    n_dimensions <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x<span class="op">=</span><span class="fl">0.</span>, y<span class="op">=</span><span class="fl">0.</span>, z<span class="op">=</span><span class="fl">0.</span>):</span>
@@ -363,7 +375,7 @@ x:3.0 y:4.0 z:5.0 norm:7.0710678118654755
 <span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._x<span class="op">*</span>a._x <span class="op">+</span> <span class="va">self</span>._y<span class="op">*</span>a._y <span class="op">+</span> <span class="va">self</span>._z<span class="op">*</span>a._z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Clearly we have made a choice to define * as the dot product. We could have defined it as the cross product.</p>
-<div id="afc0683e" class="cell" data-execution_count="4">
+<div id="63fa20b4" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> Vector(<span class="fl">4.</span>, <span class="fl">3.</span>, <span class="fl">0.</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> Vector(<span class="fl">1.</span>, <span class="fl">1.</span>, <span class="fl">1.</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(u<span class="op">+</span>v)</span>
@@ -392,7 +404,7 @@ x:-3.0 y:-2.0 z:1.0 norm:3.7416573867739413
 <h3 data-number="2.1.4" class="anchored" data-anchor-id="inheritance"><span class="header-section-number">2.1.4</span> Inheritance</h3>
 <p>Inheritance is a mechanism of OO programming whereby a class can be derived from another class, “inheriting” its properties. Here we’ll talk about a child class inheriting attributes and methods from a parent class. Usually, the child class will have some additional attributes or methods that do not belong to the parent class.</p>
 <p>To illustrate this, we could consider extending the Vector class to represent a force acting on a point, which might be a useful class in describing problems in mechanics. The force vector would be inherited from Vector, and the point would be an additional Vector member.</p>
-<div id="e5869781" class="cell" data-execution_count="5">
+<div id="bbfe5a10" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ForceOnPoint(Vector):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x<span class="op">=</span><span class="fl">0.</span>, y<span class="op">=</span><span class="fl">0.</span>, z<span class="op">=</span><span class="fl">0.</span>, rx<span class="op">=</span><span class="fl">0.</span>, ry<span class="op">=</span><span class="fl">0.</span>, rz<span class="op">=</span><span class="fl">0.</span>):</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        Vector.<span class="fu">__init__</span>(<span class="va">self</span>,x, y, z)</span>
@@ -424,7 +436,7 @@ x:-3.0 y:-2.0 z:1.0 norm:3.7416573867739413
 </div>
 <p>Note how the ForceOnPoint defines a new constructor, which calls the Vector constructor and then an additional line to add the new attribute (the point). We have provided methods to access components of the point vector, which themselves use the component access methods of Vector. So if we wanted to change the internal representation of Vector later, we could do that.</p>
 <p>Note that we’ve used the Vector class to define the <code>r</code> attribute that represents the point. This inclusion of a class within a class is known as “composition”. This is an alternative method to inheritance that will incorporate a class within a class. We could extend this to define the ForceOnPoint class using composition and not inheritance :</p>
-<div id="1697a7b0" class="cell" data-execution_count="6">
+<div id="a41bd7c4" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ForceOnPoint(<span class="bu">object</span>):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x<span class="op">=</span><span class="fl">0.</span>, y<span class="op">=</span><span class="fl">0.</span>, z<span class="op">=</span><span class="fl">0.</span>, rx<span class="op">=</span><span class="fl">0.</span>, ry<span class="op">=</span><span class="fl">0.</span>, rz<span class="op">=</span><span class="fl">0.</span>):</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the force vector</span></span>
@@ -438,7 +450,7 @@ x:-3.0 y:-2.0 z:1.0 norm:3.7416573867739413
 <h3 data-number="2.1.5" class="anchored" data-anchor-id="sec-abstraction"><span class="header-section-number">2.1.5</span> Abstraction</h3>
 <p>Abstraction refers to defining the interface to a type of object as a set of methods. It is related to encapsulation, since it is another way of hiding internal details or complexity. To fully exploit this concept, we can define a so-called “abstract base class” which contains only method definitions (not implementation) and no attributes. The abstract class cannot be instantiated as an object, because it has no attributes and no methods that can be called - it is simply an interface definition. Sometimes it is referred to as a blueprint for real classes. A child class which inherits from this class must provide implementations for the methods, together with any required attributes. Sometimes the child class is called a “concrete class”, as it can be instantiated.</p>
 <p>Typically, abstract base classes are used when we have a collection of related classes, which we want to have some common features. This is illustrated with a simple example of an abstract base class that describes a vehicle, with several concrete classes that inherit from it.</p>
-<div id="54bc82f3" class="cell" data-execution_count="7">
+<div id="cec66f8e" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vehicle(<span class="bu">object</span>):</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> n_wheels(<span class="va">self</span>):</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span>
@@ -485,7 +497,7 @@ x:-3.0 y:-2.0 z:1.0 norm:3.7416573867739413
 <section id="lambda-functions" class="level3" data-number="2.2.1">
 <h3 data-number="2.2.1" class="anchored" data-anchor-id="lambda-functions"><span class="header-section-number">2.2.1</span> Lambda Functions</h3>
 <p>In Python, lambda functions are created using the lambda keyword, eg.: lambda: x, x**2 returns an “anonymous” function that takes one argument, and returns a value that depends only on the argument (in this case, the square). Compare this to regular functions, which are declared with def and are named :</p>
-<div id="8f794f9c" class="cell" data-execution_count="8">
+<div id="143ff834" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> function(x):</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.5</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> x <span class="op">+</span> <span class="dv">1</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>function(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -494,7 +506,7 @@ x:-3.0 y:-2.0 z:1.0 norm:3.7416573867739413
 </div>
 </div>
 <p>The equivalent using a lambda function would be :</p>
-<div id="02eb458e" class="cell" data-execution_count="9">
+<div id="2f0cd49c" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">lambda</span> x: <span class="fl">0.5</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> x <span class="op">+</span> <span class="dv">1</span>)(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>13.0</code></pre>
@@ -504,7 +516,7 @@ x:-3.0 y:-2.0 z:1.0 norm:3.7416573867739413
 <section id="anonymous-functions" class="level3" data-number="2.2.2">
 <h3 data-number="2.2.2" class="anchored" data-anchor-id="anonymous-functions"><span class="header-section-number">2.2.2</span> Anonymous functions</h3>
 <p>Lambdas can be useful when implementing mathematical expressions, and when working with functions that expect other functions as arguments. Eg. suppose I want to calculate <span class="math inline">\(\int_1^4 e^{−x}\)</span>. I can do this in one line with a lambda function :</p>
-<div id="d60f43b3" class="cell" data-execution_count="10">
+<div id="959db06d" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.integrate</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -519,7 +531,7 @@ x:-3.0 y:-2.0 z:1.0 norm:3.7416573867739413
 <p>Another area where lambda functions are useful is in the “map-reduce” paradigm. The idea here is that when processing large amounts of data, you want to do as much processing in parallel as possible. A given algorithm is divided into a parallel part (map), and a non-parallel part (reduce). When processing huge datasets, the map will be running in parallel on multiple machines. In Python, the map() function takes a function and a list as arguments. The function is applied to each element in the list, and then a list of the results is returned. Eg. to calculate the expression below for for n = 1000 : <span class="math display">\[
 \sum_{i=1}^n i^2
 \]</span></p>
-<div id="704ae738" class="cell" data-execution_count="11">
+<div id="61c308f4" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -542,7 +554,7 @@ x:-3.0 y:-2.0 z:1.0 norm:3.7416573867739413
 <section id="simple-error-handling" class="level3" data-number="2.3.1">
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="simple-error-handling"><span class="header-section-number">2.3.1</span> Simple Error Handling</h3>
 <p>Suppose I have a function that works for positive number, but I know it will fail if given a negative input. Rather than let the code crash, or (worse) return incorrect results, we can detect this problem and do something sensible. One option might be to test the argument given to the function, print an error message, and return a default value (NaN, in this case) :</p>
-<div id="ac401219" class="cell" data-execution_count="12">
+<div id="e890e2de" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mySqrt(x):</span>
@@ -552,7 +564,7 @@ x:-3.0 y:-2.0 z:1.0 norm:3.7416573867739413
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> math.sqrt(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s test this with a couple of examples :</p>
-<div id="d90e9f54" class="cell" data-execution_count="13">
+<div id="10cab8bb" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mySqrt(<span class="dv">4</span>))</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mySqrt(<span class="op">-</span><span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -567,7 +579,7 @@ nan</code></pre>
 <section id="error-handling-with-exceptions" class="level3" data-number="2.3.2">
 <h3 data-number="2.3.2" class="anchored" data-anchor-id="error-handling-with-exceptions"><span class="header-section-number">2.3.2</span> Error Handling with Exceptions</h3>
 <p>Exceptions are the standard way to deal with errors in Python, and both numpy and scipy use them. Raising exceptions in your own functions, and knowing how to deal with exceptions raised by other code, can help you write more robust code. However, exceptions are just an error han- dling technique - you will still need to analyse where errors can occur in your code and make suitable provisions for handling them. The key feature of exceptions is that they allow the programmer to decide where in the code is the appropriate place to take action. In the example here, this might be in the function that calls mySqrt(). But in other circumstances, it might be in the function that calls that function. When an exception is generated, it is communciated back through all function calls until a block of code ‘catches’ the exception(and takes some action. Ultimately, if nothing handles the exception, the program will stop. Here is how we would handle this error using an exception :</p>
-<div id="ee05aafe" class="cell" data-execution_count="14">
+<div id="9940763d" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mySqrt(x):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x<span class="op">&lt;</span><span class="dv">0</span>:</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">"Negative input"</span>)</span>
@@ -587,7 +599,7 @@ nan</code></pre>
 <section id="catching-exceptions" class="level3" data-number="2.3.3">
 <h3 data-number="2.3.3" class="anchored" data-anchor-id="catching-exceptions"><span class="header-section-number">2.3.3</span> Catching Exceptions</h3>
 <p>Raising an exception is only half of the process. The other half is “catching” them. Let’s say we have a function that calls mySqrt() but it knows what to do if the exception is raised. We can use a “try-except” (also known as “try-catch”, from the corresponding C++ keywords) block to catch that exception and take the correct course of action.</p>
-<div id="0e3812d5" class="cell" data-execution_count="15">
+<div id="2448d841" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> mySqrt(x)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span>:</span>
@@ -604,7 +616,7 @@ nan</code></pre>
 <section id="handling-other-exceptions" class="level3" data-number="2.3.4">
 <h3 data-number="2.3.4" class="anchored" data-anchor-id="handling-other-exceptions"><span class="header-section-number">2.3.4</span> Handling Other Exceptions</h3>
 <p>You might find you can get away without raising any exceptions in your code. However, scipy and numpy will raise exceptions, and knowing how to handle them can be useful. For example, a number of linear algebra routines in scipy.linalg cannot proceed if given a singular matrix. In this case, they will raise a <code>numpy.linalg.LinAlgError</code> exception : https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.LinAlgError.html#numpy.linalg.LinAlg As well as the built-in Exception, Python allows us to define dedicated exception types, like this one. This allows exception handling code to distinguish different classes of error condition, which is useful when deciding what to do. An example of how to catch this kind of exception is below.</p>
-<div id="7890588a" class="cell" data-execution_count="16">
+<div id="ade863a1" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> np.zeros((<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(m)</span>

@@ -12,6 +12,8 @@ book:
     - adv-python.qmd
     - linear-algebra.qmd
     - monte-carlo.qmd
+    - intro-ml.qmd
+    - neural-networks.qmd
 
 bibliography: references.bib
 

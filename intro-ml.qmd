@@ -1,0 +1,26 @@
+---
+title: "Introduction to Machine Learning"
+format: html
+execute:
+  error: true
+---
+
+## What is Machine Learning ?
+
+
+## Examples in Physics
+
+
+## Types of learning
+
+### Supervised
+
+
+### Unsupervised
+
+
+### Reinforcement
+
+
+
+

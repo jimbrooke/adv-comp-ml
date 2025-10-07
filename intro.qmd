@@ -1,4 +1,7 @@
-# Introduction
+---
+title: "Introduction"
+format: html
+---
 
 Welcome to the course notes for Advanced Computational Physics and Machine Learning.
 

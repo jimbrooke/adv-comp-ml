@@ -1,0 +1,27 @@
+---
+title: "Neural Networks"
+format: html
+execute:
+  error: true
+---
+
+## Multi-Layer Perceptron
+
+
+## Activation Function
+
+
+## Loss
+
+
+
+## Training
+
+Training as model fitting.
+
+### Backpropagation
+
+
+### Gradient Descent
+
+

@@ -429,9 +429,7 @@ A square NxN matrix $A$, has eigenvector $u$ and eigenvalue $\lambda$ that satis
 
 $$(A - \lambda I)u = 0$$  {#eq-a}
 
-Details of the numerical methods used for solving eigenproblems are beyond the scope of this course, but they are usually iterative methods, similar to those described in [@sec-relax].
-
-It's also worth noting that solving eigenproblems is closely related to finding the roots of polynomials. You may be familiar with one method for finding eigenvalues, which is to find the roots of the N-th degree polynomial found by expanding :
+Solving eigenproblems is closely related to finding the roots of polynomials. You may be familiar with one method for finding eigenvalues, which is to find the roots of the N-th degree polynomial found by expanding :
 
 $$p(t) = \det{|A - t I|} = 0$$ {#eq-b}
 
