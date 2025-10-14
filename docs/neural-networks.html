@@ -173,9 +173,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#anatomy-of-a-neural-network" id="toc-anatomy-of-a-neural-network" class="nav-link active" data-scroll-target="#anatomy-of-a-neural-network"><span class="header-section-number">6.1</span> Anatomy of a Neural Network</a></li>
   <li><a href="#activation-function" id="toc-activation-function" class="nav-link" data-scroll-target="#activation-function"><span class="header-section-number">6.2</span> Activation Function</a></li>
   <li><a href="#forward-pass" id="toc-forward-pass" class="nav-link" data-scroll-target="#forward-pass"><span class="header-section-number">6.3</span> Forward Pass</a></li>
-  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent"><span class="header-section-number">6.4</span> Gradient Descent</a></li>
-  <li><a href="#training" id="toc-training" class="nav-link" data-scroll-target="#training"><span class="header-section-number">6.5</span> Training</a></li>
-  <li><a href="#deep-learning" id="toc-deep-learning" class="nav-link" data-scroll-target="#deep-learning"><span class="header-section-number">6.6</span> Deep Learning</a></li>
+  <li><a href="#backpropagation" id="toc-backpropagation" class="nav-link" data-scroll-target="#backpropagation"><span class="header-section-number">6.4</span> Backpropagation</a></li>
+  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent"><span class="header-section-number">6.5</span> Gradient Descent</a></li>
+  <li><a href="#training" id="toc-training" class="nav-link" data-scroll-target="#training"><span class="header-section-number">6.6</span> Training</a></li>
+  <li><a href="#deep-learning" id="toc-deep-learning" class="nav-link" data-scroll-target="#deep-learning"><span class="header-section-number">6.7</span> Deep Learning</a></li>
   </ul>
 </nav>
     </div>
@@ -213,15 +214,18 @@ ul.task-list li input[type="checkbox"] {
 <section id="forward-pass" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="forward-pass"><span class="header-section-number">6.3</span> Forward Pass</h2>
 <p>Compute the output from input. Calculate loss (MSE, cross-entropy)</p>
-<p>##&nbsp;Backpropagation Use chain rule to compute gradients of loss w.r.t. weights.</p>
+</section>
+<section id="backpropagation" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="backpropagation"><span class="header-section-number">6.4</span> Backpropagation</h2>
+<p>Use chain rule to compute gradients of loss w.r.t. weights.</p>
 <p>Intuitive derivation, no need for full algebraic proof.</p>
 </section>
-<section id="gradient-descent" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">6.4</span> Gradient Descent</h2>
+<section id="gradient-descent" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">6.5</span> Gradient Descent</h2>
 <p>Rule for updating weights</p>
 </section>
-<section id="training" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="training"><span class="header-section-number">6.5</span> Training</h2>
+<section id="training" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="training"><span class="header-section-number">6.6</span> Training</h2>
 <p>Batch vs stochastic gradient descent Loss evolution: training loss vs.&nbsp;validation loss → early stopping to prevent overfitting.</p>
 <p>Hyperparameters: learning rate, network depth, regularization, batch size.</p>
 <p>Regularization techniques:</p>
@@ -229,8 +233,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Dropout</p>
 <p>Early stopping</p>
 </section>
-<section id="deep-learning" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="deep-learning"><span class="header-section-number">6.6</span> Deep Learning</h2>
+<section id="deep-learning" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="deep-learning"><span class="header-section-number">6.7</span> Deep Learning</h2>
 <p>Multiple hidden layers allow hierarchical feature extraction. Early layers learn simple features (edges, patterns). Deeper layers combine them into complex representations. Featurisation.</p>
 
 
