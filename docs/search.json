@@ -124,7 +124,7 @@
     "href": "intro-ml.html",
     "title": "5  Introduction to Machine Learning",
     "section": "",
-    "text": "5.1 What is Machine Learning ?",
+    "text": "5.1 What is Machine Learning ?\nMachine learning is the study of algorithms that enable computers to learn patterns or relationships from data and make predictions or decisions without being explicitly programmed.\nCore idea: Instead of coding physics laws explicitly, we let algorithms infer structure or relationships.\nTraditional physics → build models from first principles. Machine learning → learn models from data when physical models are incomplete, complex, or computationally expensive.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Introduction to Machine Learning</span>"
     ]
@@ -134,7 +134,7 @@
     "href": "intro-ml.html#examples-in-physics",
     "title": "5  Introduction to Machine Learning",
     "section": "5.2 Examples in Physics",
-    "text": "5.2 Examples in Physics",
+    "text": "5.2 Examples in Physics\n\n\n\n\n\n\n\nArea\nExample Use\n\n\n\n\nHigh-energy physics\nEvent classification in particle detectors\n\n\nCondensed matter\nDetecting phase transitions in spin models\n\n\nAstrophysics\nGalaxy morphology classification, transient detection\n\n\nQuantum physics\nNeural-network quantum states (Carleo & Troyer, 2017)\n\n\nPlasma physics\nML-based control of magnetic confinement\n\n\nComputational materials science\nSurrogate models for interatomic potentials",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Introduction to Machine Learning</span>"
     ]
@@ -144,7 +144,17 @@
     "href": "intro-ml.html#types-of-learning",
     "title": "5  Introduction to Machine Learning",
     "section": "5.3 Types of learning",
-    "text": "5.3 Types of learning\n\n5.3.1 Supervised\n\n\n5.3.2 Unsupervised\n\n\n5.3.3 Reinforcement",
+    "text": "5.3 Types of learning\n\n\n\n\n\n\n\n\n\nCategory\nGoal\nExample Task\nExample Physics Application\n\n\n\n\nSupervised Learning\nLearn mapping (x y) from labelled data\nRegression, classification\nPredict energy levels from system parameters; classify detector events\n\n\nUnsupervised Learning\nDiscover structure in unlabelled data\nClustering, dimensionality reduction\nIdentify phases of matter, cluster spectral data\n\n\nReinforcement Learning\nLearn by interacting with environment\nSequential decision-making\nControl plasma confinement, optimize experiments",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Introduction to Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "intro-ml.html#opportunities-challenges-ethics",
+    "href": "intro-ml.html#opportunities-challenges-ethics",
+    "title": "5  Introduction to Machine Learning",
+    "section": "5.4 Opportunities, Challenges, Ethics",
+    "text": "5.4 Opportunities, Challenges, Ethics\nOpportunities:\nHandle high-dimensional, noisy data.\nSpeed up simulations (surrogate modeling).\nEnable discovery in large datasets.\nChallenges:\nInterpretability — what does the ML model “understand”?\nOverfitting — learning noise, not physics.\nData bias and uncertainty quantification.\nEthical use — transparency, reproducibility, sustainability.\nHow do we ensure scientific rigor when using ML in physics?",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Introduction to Machine Learning</span>"
     ]
@@ -154,7 +164,7 @@
     "href": "neural-networks.html",
     "title": "6  Neural Networks",
     "section": "",
-    "text": "6.1 Multi-Layer Perceptron",
+    "text": "6.1 Anatomy of a Neural Network\nLayers: Input → Hidden layers → Output.\nEach neuron computes… Introduce weights, bias, act8ivation function",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Neural Networks</span>"
     ]
@@ -164,17 +174,27 @@
     "href": "neural-networks.html#activation-function",
     "title": "6  Neural Networks",
     "section": "6.2 Activation Function",
-    "text": "6.2 Activation Function",
+    "text": "6.2 Activation Function\nSigmoid, ReLU, tanh",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Neural Networks</span>"
     ]
   },
   {
-    "objectID": "neural-networks.html#loss",
-    "href": "neural-networks.html#loss",
+    "objectID": "neural-networks.html#forward-pass",
+    "href": "neural-networks.html#forward-pass",
     "title": "6  Neural Networks",
-    "section": "6.3 Loss",
-    "text": "6.3 Loss",
+    "section": "6.3 Forward Pass",
+    "text": "6.3 Forward Pass\nCompute the output from input. Calculate loss (MSE, cross-entropy)\n## Backpropagation Use chain rule to compute gradients of loss w.r.t. weights.\nIntuitive derivation, no need for full algebraic proof.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "neural-networks.html#gradient-descent",
+    "href": "neural-networks.html#gradient-descent",
+    "title": "6  Neural Networks",
+    "section": "6.4 Gradient Descent",
+    "text": "6.4 Gradient Descent\nRule for updating weights",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Neural Networks</span>"
     ]
@@ -183,10 +203,100 @@
     "objectID": "neural-networks.html#training",
     "href": "neural-networks.html#training",
     "title": "6  Neural Networks",
-    "section": "6.4 Training",
-    "text": "6.4 Training\nTraining as model fitting.\n### Backpropagation\n\n6.4.1 Gradient Descent",
+    "section": "6.5 Training",
+    "text": "6.5 Training\nBatch vs stochastic gradient descent Loss evolution: training loss vs. validation loss → early stopping to prevent overfitting.\nHyperparameters: learning rate, network depth, regularization, batch size.\nRegularization techniques:\nL2 weight decay\nDropout\nEarly stopping",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "neural-networks.html#deep-learning",
+    "href": "neural-networks.html#deep-learning",
+    "title": "6  Neural Networks",
+    "section": "6.6 Deep Learning",
+    "text": "6.6 Deep Learning\nMultiple hidden layers allow hierarchical feature extraction. Early layers learn simple features (edges, patterns). Deeper layers combine them into complex representations. Featurisation.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "supervised-ml.html",
+    "href": "supervised-ml.html",
+    "title": "7  Supervised Learning",
+    "section": "",
+    "text": "7.1 Supervised Learning Framework\nTraining set, model, loss, optimisation, validation",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Supervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "supervised-ml.html#regression",
+    "href": "supervised-ml.html#regression",
+    "title": "7  Supervised Learning",
+    "section": "7.2 Regression",
+    "text": "7.2 Regression\nLinear regression\nMinimisation of mean squared error\nConnection to maximum likelihood estimation under Gaussian noise\nPolynomial regression and basis expansion\nRegularisation (L2, L1)",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Supervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "supervised-ml.html#classification",
+    "href": "supervised-ml.html#classification",
+    "title": "7  Supervised Learning",
+    "section": "7.3 Classification",
+    "text": "7.3 Classification\nLogistic regression\nNegative log-likelihood loss (cross-entropy)\nConnection to MLE under Bernoulli model\nAlternatives : k-Nearest Neighbours (KNN). Support Vector Machines (SVMs)",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Supervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "supervised-ml.html#evaluating-model-performance",
+    "href": "supervised-ml.html#evaluating-model-performance",
+    "title": "7  Supervised Learning",
+    "section": "7.4 Evaluating model performance",
+    "text": "7.4 Evaluating model performance\nRegression metrics. MSE, RMSE, \\(R^2\\)\nClassification metrics. accuracy, precision, recall, F1 score, ROC curves.\nTrain/test split. Cross-validation.\nDemonstrate visually how overfitting and underfitting appear in training vs. validation error plots.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Supervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "supervised-ml.html#bias-variance-overfitting",
+    "href": "supervised-ml.html#bias-variance-overfitting",
+    "title": "7  Supervised Learning",
+    "section": "7.5 Bias, Variance, Overfitting",
+    "text": "7.5 Bias, Variance, Overfitting\nDefine bias–variance trade-off.\nOverfitting in physics context: model fits noise rather than real phenomena.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Supervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "unsupervised-ml.html",
+    "href": "unsupervised-ml.html",
+    "title": "8  Unsupervised Learning",
+    "section": "",
+    "text": "8.1 Clustering\nK-means clustering Hierarchical clustering. DBSCAN.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Unsupervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "unsupervised-ml.html#dimensionality-reduction",
+    "href": "unsupervised-ml.html#dimensionality-reduction",
+    "title": "8  Unsupervised Learning",
+    "section": "8.2 Dimensionality Reduction",
+    "text": "8.2 Dimensionality Reduction\nPCA t-SNE UMAP",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Unsupervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "unsupervised-ml.html#evaluation-interpretation",
+    "href": "unsupervised-ml.html#evaluation-interpretation",
+    "title": "8  Unsupervised Learning",
+    "section": "8.3 Evaluation & Interpretation",
+    "text": "8.3 Evaluation & Interpretation\nNo ground truth: how do we know if unsupervised learning succeeded?\nUse internal validation (e.g., silhouette score for clustering).\nCompare discovered patterns to known physics features.\nInterpretability:\nPCA axes may correspond to physical modes or may not.\nClusters may or may not align with real physical classes.\nVisualization:\n2D projections, cluster coloring, dendrograms.\nDemonstrate how PCA + k-means can reveal structure in physical datasets.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Unsupervised Learning</span>"
     ]
   }
 ]

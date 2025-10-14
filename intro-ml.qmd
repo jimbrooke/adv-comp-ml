@@ -7,20 +7,52 @@ execute:
 
 ## What is Machine Learning ?
 
+Machine learning is the study of algorithms that enable computers to learn patterns or relationships from data and make predictions or decisions without being explicitly programmed.
+
+Core idea: Instead of coding physics laws explicitly, we let algorithms infer structure or relationships.
+
+Traditional physics → build models from first principles.
+Machine learning → learn models from data when physical models are incomplete, complex, or computationally expensive.
 
 ## Examples in Physics
+
+| Area                                | Example Use                                           |
+| ----------------------------------- | ----------------------------------------------------- |
+| **High-energy physics**             | Event classification in particle detectors            |
+| **Condensed matter**                | Detecting phase transitions in spin models            |
+| **Astrophysics**                    | Galaxy morphology classification, transient detection |
+| **Quantum physics**                 | Neural-network quantum states (Carleo & Troyer, 2017) |
+| **Plasma physics**                  | ML-based control of magnetic confinement              |
+| **Computational materials science** | Surrogate models for interatomic potentials           |
 
 
 ## Types of learning
 
-### Supervised
+| Category                   | Goal                                       | Example Task                         | Example Physics Application                                            |
+| -------------------------- | ------------------------------------------ | ------------------------------------ | ---------------------------------------------------------------------- |
+| **Supervised Learning**    | Learn mapping (x \to y) from labelled data | Regression, classification           | Predict energy levels from system parameters; classify detector events |
+| **Unsupervised Learning**  | Discover structure in unlabelled data      | Clustering, dimensionality reduction | Identify phases of matter, cluster spectral data                       |
+| **Reinforcement Learning** | Learn by interacting with environment      | Sequential decision-making           | Control plasma confinement, optimize experiments                       |
 
 
-### Unsupervised
+## Opportunities, Challenges, Ethics
 
+Opportunities:
 
-### Reinforcement
+Handle high-dimensional, noisy data.
 
+Speed up simulations (surrogate modeling).
 
+Enable discovery in large datasets.
 
+Challenges:
 
+Interpretability — what does the ML model “understand”?
+
+Overfitting — learning noise, not physics.
+
+Data bias and uncertainty quantification.
+
+Ethical use — transparency, reproducibility, sustainability.
+
+How do we ensure scientific rigor when using ML in physics?

@@ -148,6 +148,18 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./supervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./unsupervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -160,12 +172,8 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#what-is-machine-learning" id="toc-what-is-machine-learning" class="nav-link active" data-scroll-target="#what-is-machine-learning"><span class="header-section-number">5.1</span> What is Machine Learning ?</a></li>
   <li><a href="#examples-in-physics" id="toc-examples-in-physics" class="nav-link" data-scroll-target="#examples-in-physics"><span class="header-section-number">5.2</span> Examples in Physics</a></li>
-  <li><a href="#types-of-learning" id="toc-types-of-learning" class="nav-link" data-scroll-target="#types-of-learning"><span class="header-section-number">5.3</span> Types of learning</a>
-  <ul class="collapse">
-  <li><a href="#supervised" id="toc-supervised" class="nav-link" data-scroll-target="#supervised"><span class="header-section-number">5.3.1</span> Supervised</a></li>
-  <li><a href="#unsupervised" id="toc-unsupervised" class="nav-link" data-scroll-target="#unsupervised"><span class="header-section-number">5.3.2</span> Unsupervised</a></li>
-  <li><a href="#reinforcement" id="toc-reinforcement" class="nav-link" data-scroll-target="#reinforcement"><span class="header-section-number">5.3.3</span> Reinforcement</a></li>
-  </ul></li>
+  <li><a href="#types-of-learning" id="toc-types-of-learning" class="nav-link" data-scroll-target="#types-of-learning"><span class="header-section-number">5.3</span> Types of learning</a></li>
+  <li><a href="#opportunities-challenges-ethics" id="toc-opportunities-challenges-ethics" class="nav-link" data-scroll-target="#opportunities-challenges-ethics"><span class="header-section-number">5.4</span> Opportunities, Challenges, Ethics</a></li>
   </ul>
 </nav>
     </div>
@@ -193,23 +201,104 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="what-is-machine-learning" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="what-is-machine-learning"><span class="header-section-number">5.1</span> What is Machine Learning ?</h2>
+<p>Machine learning is the study of algorithms that enable computers to learn patterns or relationships from data and make predictions or decisions without being explicitly programmed.</p>
+<p>Core idea: Instead of coding physics laws explicitly, we let algorithms infer structure or relationships.</p>
+<p>Traditional physics → build models from first principles. Machine learning → learn models from data when physical models are incomplete, complex, or computationally expensive.</p>
 </section>
 <section id="examples-in-physics" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="examples-in-physics"><span class="header-section-number">5.2</span> Examples in Physics</h2>
+<table class="table">
+<colgroup>
+<col style="width: 39%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Area</th>
+<th>Example Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>High-energy physics</strong></td>
+<td>Event classification in particle detectors</td>
+</tr>
+<tr class="even">
+<td><strong>Condensed matter</strong></td>
+<td>Detecting phase transitions in spin models</td>
+</tr>
+<tr class="odd">
+<td><strong>Astrophysics</strong></td>
+<td>Galaxy morphology classification, transient detection</td>
+</tr>
+<tr class="even">
+<td><strong>Quantum physics</strong></td>
+<td>Neural-network quantum states (Carleo &amp; Troyer, 2017)</td>
+</tr>
+<tr class="odd">
+<td><strong>Plasma physics</strong></td>
+<td>ML-based control of magnetic confinement</td>
+</tr>
+<tr class="even">
+<td><strong>Computational materials science</strong></td>
+<td>Surrogate models for interatomic potentials</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="types-of-learning" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="types-of-learning"><span class="header-section-number">5.3</span> Types of learning</h2>
-<section id="supervised" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="supervised"><span class="header-section-number">5.3.1</span> Supervised</h3>
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 24%">
+<col style="width: 20%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>Goal</th>
+<th>Example Task</th>
+<th>Example Physics Application</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Supervised Learning</strong></td>
+<td>Learn mapping (x y) from labelled data</td>
+<td>Regression, classification</td>
+<td>Predict energy levels from system parameters; classify detector events</td>
+</tr>
+<tr class="even">
+<td><strong>Unsupervised Learning</strong></td>
+<td>Discover structure in unlabelled data</td>
+<td>Clustering, dimensionality reduction</td>
+<td>Identify phases of matter, cluster spectral data</td>
+</tr>
+<tr class="odd">
+<td><strong>Reinforcement Learning</strong></td>
+<td>Learn by interacting with environment</td>
+<td>Sequential decision-making</td>
+<td>Control plasma confinement, optimize experiments</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="unsupervised" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="unsupervised"><span class="header-section-number">5.3.2</span> Unsupervised</h3>
-</section>
-<section id="reinforcement" class="level3" data-number="5.3.3">
-<h3 data-number="5.3.3" class="anchored" data-anchor-id="reinforcement"><span class="header-section-number">5.3.3</span> Reinforcement</h3>
+<section id="opportunities-challenges-ethics" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="opportunities-challenges-ethics"><span class="header-section-number">5.4</span> Opportunities, Challenges, Ethics</h2>
+<p>Opportunities:</p>
+<p>Handle high-dimensional, noisy data.</p>
+<p>Speed up simulations (surrogate modeling).</p>
+<p>Enable discovery in large datasets.</p>
+<p>Challenges:</p>
+<p>Interpretability — what does the ML model “understand”?</p>
+<p>Overfitting — learning noise, not physics.</p>
+<p>Data bias and uncertainty quantification.</p>
+<p>Ethical use — transparency, reproducibility, sustainability.</p>
+<p>How do we ensure scientific rigor when using ML in physics?</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

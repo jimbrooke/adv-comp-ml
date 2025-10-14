@@ -5,23 +5,49 @@ execute:
   error: true
 ---
 
-## Multi-Layer Perceptron
+## Anatomy of a Neural Network
 
+
+Layers: Input → Hidden layers → Output.
+
+Each neuron computes... Introduce weights, bias, act8ivation function
 
 ## Activation Function
 
+Sigmoid, ReLU, tanh
 
-## Loss
+
+## Forward Pass
+
+Compute the output from input.
+Calculate loss (MSE, cross-entropy)
+
+## Backpropagation
+Use chain rule to compute gradients of loss w.r.t. weights.
+
+Intuitive derivation, no need for full algebraic proof.
 
 
+## Gradient Descent
+Rule for updating weights
 
 ## Training
+Batch vs stochastic gradient descent
+Loss evolution: training loss vs. validation loss → early stopping to prevent overfitting.
 
-Training as model fitting.
+Hyperparameters: learning rate, network depth, regularization, batch size.
 
-### Backpropagation
+Regularization techniques:
 
+L2 weight decay
 
-### Gradient Descent
+Dropout
 
+Early stopping
 
+## Deep Learning
+
+Multiple hidden layers allow hierarchical feature extraction.
+Early layers learn simple features (edges, patterns).
+Deeper layers combine them into complex representations.
+Featurisation.

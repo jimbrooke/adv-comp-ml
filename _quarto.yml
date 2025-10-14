@@ -14,6 +14,8 @@ book:
     - monte-carlo.qmd
     - intro-ml.qmd
     - neural-networks.qmd
+    - supervised-ml.qmd
+    - unsupervised-ml.qmd
 
 bibliography: references.bib
 

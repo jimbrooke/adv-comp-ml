@@ -1,0 +1,39 @@
+---
+title: "Unsupervised Learning"
+format: html
+execute:
+  error: true
+---
+
+
+
+## Clustering
+K-means clustering
+Hierarchical clustering.
+DBSCAN.
+
+
+## Dimensionality Reduction
+PCA
+t-SNE
+UMAP
+
+## Evaluation & Interpretation
+
+No ground truth: how do we know if unsupervised learning succeeded?
+
+Use internal validation (e.g., silhouette score for clustering).
+
+Compare discovered patterns to known physics features.
+
+Interpretability:
+
+PCA axes may correspond to physical modes or may not.
+
+Clusters may or may not align with real physical classes.
+
+Visualization:
+
+2D projections, cluster coloring, dendrograms.
+
+Demonstrate how PCA + k-means can reveal structure in physical datasets.

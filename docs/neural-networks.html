@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./supervised-ml.html" rel="next">
 <link href="./intro-ml.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -147,6 +148,18 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./supervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./unsupervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -157,13 +170,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#multi-layer-perceptron" id="toc-multi-layer-perceptron" class="nav-link active" data-scroll-target="#multi-layer-perceptron"><span class="header-section-number">6.1</span> Multi-Layer Perceptron</a></li>
+  <li><a href="#anatomy-of-a-neural-network" id="toc-anatomy-of-a-neural-network" class="nav-link active" data-scroll-target="#anatomy-of-a-neural-network"><span class="header-section-number">6.1</span> Anatomy of a Neural Network</a></li>
   <li><a href="#activation-function" id="toc-activation-function" class="nav-link" data-scroll-target="#activation-function"><span class="header-section-number">6.2</span> Activation Function</a></li>
-  <li><a href="#loss" id="toc-loss" class="nav-link" data-scroll-target="#loss"><span class="header-section-number">6.3</span> Loss</a></li>
-  <li><a href="#training" id="toc-training" class="nav-link" data-scroll-target="#training"><span class="header-section-number">6.4</span> Training</a>
-  <ul class="collapse">
-  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent"><span class="header-section-number">6.4.1</span> Gradient Descent</a></li>
-  </ul></li>
+  <li><a href="#forward-pass" id="toc-forward-pass" class="nav-link" data-scroll-target="#forward-pass"><span class="header-section-number">6.3</span> Forward Pass</a></li>
+  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent"><span class="header-section-number">6.4</span> Gradient Descent</a></li>
+  <li><a href="#training" id="toc-training" class="nav-link" data-scroll-target="#training"><span class="header-section-number">6.5</span> Training</a></li>
+  <li><a href="#deep-learning" id="toc-deep-learning" class="nav-link" data-scroll-target="#deep-learning"><span class="header-section-number">6.6</span> Deep Learning</a></li>
   </ul>
 </nav>
     </div>
@@ -189,24 +201,39 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="multi-layer-perceptron" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="multi-layer-perceptron"><span class="header-section-number">6.1</span> Multi-Layer Perceptron</h2>
+<section id="anatomy-of-a-neural-network" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="anatomy-of-a-neural-network"><span class="header-section-number">6.1</span> Anatomy of a Neural Network</h2>
+<p>Layers: Input → Hidden layers → Output.</p>
+<p>Each neuron computes… Introduce weights, bias, act8ivation function</p>
 </section>
 <section id="activation-function" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="activation-function"><span class="header-section-number">6.2</span> Activation Function</h2>
+<p>Sigmoid, ReLU, tanh</p>
 </section>
-<section id="loss" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="loss"><span class="header-section-number">6.3</span> Loss</h2>
+<section id="forward-pass" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="forward-pass"><span class="header-section-number">6.3</span> Forward Pass</h2>
+<p>Compute the output from input. Calculate loss (MSE, cross-entropy)</p>
+<p>##&nbsp;Backpropagation Use chain rule to compute gradients of loss w.r.t. weights.</p>
+<p>Intuitive derivation, no need for full algebraic proof.</p>
 </section>
-<section id="training" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="training"><span class="header-section-number">6.4</span> Training</h2>
-<p>Training as model fitting.</p>
-<p>###&nbsp;Backpropagation</p>
-<section id="gradient-descent" class="level3" data-number="6.4.1">
-<h3 data-number="6.4.1" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">6.4.1</span> Gradient Descent</h3>
+<section id="gradient-descent" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">6.4</span> Gradient Descent</h2>
+<p>Rule for updating weights</p>
+</section>
+<section id="training" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="training"><span class="header-section-number">6.5</span> Training</h2>
+<p>Batch vs stochastic gradient descent Loss evolution: training loss vs.&nbsp;validation loss → early stopping to prevent overfitting.</p>
+<p>Hyperparameters: learning rate, network depth, regularization, batch size.</p>
+<p>Regularization techniques:</p>
+<p>L2 weight decay</p>
+<p>Dropout</p>
+<p>Early stopping</p>
+</section>
+<section id="deep-learning" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="deep-learning"><span class="header-section-number">6.6</span> Deep Learning</h2>
+<p>Multiple hidden layers allow hierarchical feature extraction. Early layers learn simple features (edges, patterns). Deeper layers combine them into complex representations. Featurisation.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -626,6 +653,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./supervised-ml.html" class="pagination-link" aria-label="Supervised Learning">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

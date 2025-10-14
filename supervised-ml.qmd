@@ -1,0 +1,51 @@
+---
+title: "Supervised Learning"
+format: html
+execute:
+  error: true
+---
+
+This could come before/after the section on NNs.
+
+## Supervised Learning Framework
+
+Training set, model, loss, optimisation, validation
+
+
+## Regression
+
+Linear regression
+
+Minimisation of mean squared error
+
+Connection to maximum likelihood estimation under Gaussian noise
+
+Polynomial regression and basis expansion
+
+Regularisation (L2, L1)
+
+## Classification
+
+Logistic regression
+
+Negative log-likelihood loss (cross-entropy)
+
+Connection to MLE under Bernoulli model
+
+Alternatives : k-Nearest Neighbours (KNN). Support Vector Machines (SVMs)
+
+## Evaluating model performance
+
+Regression metrics. MSE, RMSE, $R^2$
+
+Classification metrics. accuracy, precision, recall, F1 score, ROC curves.
+
+Train/test split.  Cross-validation.
+
+Demonstrate visually how overfitting and underfitting appear in training vs. validation error plots.
+
+## Bias, Variance, Overfitting
+
+Define bias–variance trade-off.
+
+Overfitting in physics context: model fits noise rather than real phenomena.
