@@ -22,7 +22,8 @@ Sigmoid, ReLU, tanh
 Compute the output from input.
 Calculate loss (MSE, cross-entropy)
 
-## Backpropagation
+## Backpropagation
+
 Use chain rule to compute gradients of loss w.r.t. weights.
 
 Intuitive derivation, no need for full algebraic proof.

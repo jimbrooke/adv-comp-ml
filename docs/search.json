@@ -184,7 +184,17 @@
     "href": "neural-networks.html#forward-pass",
     "title": "6  Neural Networks",
     "section": "6.3 Forward Pass",
-    "text": "6.3 Forward Pass\nCompute the output from input. Calculate loss (MSE, cross-entropy)\n## Backpropagation Use chain rule to compute gradients of loss w.r.t. weights.\nIntuitive derivation, no need for full algebraic proof.",
+    "text": "6.3 Forward Pass\nCompute the output from input. Calculate loss (MSE, cross-entropy)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "neural-networks.html#backpropagation",
+    "href": "neural-networks.html#backpropagation",
+    "title": "6  Neural Networks",
+    "section": "6.4 Backpropagation",
+    "text": "6.4 Backpropagation\nUse chain rule to compute gradients of loss w.r.t. weights.\nIntuitive derivation, no need for full algebraic proof.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Neural Networks</span>"
     ]
@@ -193,8 +203,8 @@
     "objectID": "neural-networks.html#gradient-descent",
     "href": "neural-networks.html#gradient-descent",
     "title": "6  Neural Networks",
-    "section": "6.4 Gradient Descent",
-    "text": "6.4 Gradient Descent\nRule for updating weights",
+    "section": "6.5 Gradient Descent",
+    "text": "6.5 Gradient Descent\nRule for updating weights",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Neural Networks</span>"
     ]
@@ -203,8 +213,8 @@
     "objectID": "neural-networks.html#training",
     "href": "neural-networks.html#training",
     "title": "6  Neural Networks",
-    "section": "6.5 Training",
-    "text": "6.5 Training\nBatch vs stochastic gradient descent Loss evolution: training loss vs. validation loss → early stopping to prevent overfitting.\nHyperparameters: learning rate, network depth, regularization, batch size.\nRegularization techniques:\nL2 weight decay\nDropout\nEarly stopping",
+    "section": "6.6 Training",
+    "text": "6.6 Training\nBatch vs stochastic gradient descent Loss evolution: training loss vs. validation loss → early stopping to prevent overfitting.\nHyperparameters: learning rate, network depth, regularization, batch size.\nRegularization techniques:\nL2 weight decay\nDropout\nEarly stopping",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Neural Networks</span>"
     ]
@@ -213,8 +223,8 @@
     "objectID": "neural-networks.html#deep-learning",
     "href": "neural-networks.html#deep-learning",
     "title": "6  Neural Networks",
-    "section": "6.6 Deep Learning",
-    "text": "6.6 Deep Learning\nMultiple hidden layers allow hierarchical feature extraction. Early layers learn simple features (edges, patterns). Deeper layers combine them into complex representations. Featurisation.",
+    "section": "6.7 Deep Learning",
+    "text": "6.7 Deep Learning\nMultiple hidden layers allow hierarchical feature extraction. Early layers learn simple features (edges, patterns). Deeper layers combine them into complex representations. Featurisation.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Neural Networks</span>"
     ]
