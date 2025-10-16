@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Advanced Computational Physics &amp; Machine Learning - 7&nbsp; Supervised Learning</title>
+<title>Advanced Computational Physics &amp; Machine Learning - 6&nbsp; Supervised Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./unsupervised-ml.html" rel="next">
-<link href="./neural-networks.html" rel="prev">
+<link href="./neural-networks.html" rel="next">
+<link href="./intro-ml.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -110,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./supervised-ml.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Supervised Learning</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./supervised-ml.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Supervised Learning</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -173,14 +173,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
+  <a href="./supervised-ml.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./supervised-ml.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+  <a href="./neural-networks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -199,11 +199,11 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#supervised-learning-framework" id="toc-supervised-learning-framework" class="nav-link active" data-scroll-target="#supervised-learning-framework"><span class="header-section-number">7.1</span> Supervised Learning Framework</a></li>
-  <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression"><span class="header-section-number">7.2</span> Regression</a></li>
-  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification"><span class="header-section-number">7.3</span> Classification</a></li>
-  <li><a href="#evaluating-model-performance" id="toc-evaluating-model-performance" class="nav-link" data-scroll-target="#evaluating-model-performance"><span class="header-section-number">7.4</span> Evaluating model performance</a></li>
-  <li><a href="#bias-variance-overfitting" id="toc-bias-variance-overfitting" class="nav-link" data-scroll-target="#bias-variance-overfitting"><span class="header-section-number">7.5</span> Bias, Variance, Overfitting</a></li>
+  <li><a href="#supervised-learning-framework" id="toc-supervised-learning-framework" class="nav-link active" data-scroll-target="#supervised-learning-framework"><span class="header-section-number">6.1</span> Supervised Learning Framework</a></li>
+  <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression"><span class="header-section-number">6.2</span> Regression</a></li>
+  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification"><span class="header-section-number">6.3</span> Classification</a></li>
+  <li><a href="#evaluating-model-performance" id="toc-evaluating-model-performance" class="nav-link" data-scroll-target="#evaluating-model-performance"><span class="header-section-number">6.4</span> Evaluating model performance</a></li>
+  <li><a href="#bias-variance-overfitting" id="toc-bias-variance-overfitting" class="nav-link" data-scroll-target="#bias-variance-overfitting"><span class="header-section-number">6.5</span> Bias, Variance, Overfitting</a></li>
   </ul>
 </nav>
     </div>
@@ -212,7 +212,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Supervised Learning</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Supervised Learning</span></h1>
 </div>
 
 
@@ -230,34 +230,34 @@ window.Quarto = {
 
 
 <p>This could come before/after the section on NNs.</p>
-<section id="supervised-learning-framework" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="supervised-learning-framework"><span class="header-section-number">7.1</span> Supervised Learning Framework</h2>
+<section id="supervised-learning-framework" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="supervised-learning-framework"><span class="header-section-number">6.1</span> Supervised Learning Framework</h2>
 <p>Training set, model, loss, optimisation, validation</p>
 </section>
-<section id="regression" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="regression"><span class="header-section-number">7.2</span> Regression</h2>
+<section id="regression" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="regression"><span class="header-section-number">6.2</span> Regression</h2>
 <p>Linear regression</p>
 <p>Minimisation of mean squared error</p>
 <p>Connection to maximum likelihood estimation under Gaussian noise</p>
 <p>Polynomial regression and basis expansion</p>
 <p>Regularisation (L2, L1)</p>
 </section>
-<section id="classification" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="classification"><span class="header-section-number">7.3</span> Classification</h2>
+<section id="classification" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="classification"><span class="header-section-number">6.3</span> Classification</h2>
 <p>Logistic regression</p>
 <p>Negative log-likelihood loss (cross-entropy)</p>
 <p>Connection to MLE under Bernoulli model</p>
 <p>Alternatives : k-Nearest Neighbours (KNN). Support Vector Machines (SVMs)</p>
 </section>
-<section id="evaluating-model-performance" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="evaluating-model-performance"><span class="header-section-number">7.4</span> Evaluating model performance</h2>
+<section id="evaluating-model-performance" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="evaluating-model-performance"><span class="header-section-number">6.4</span> Evaluating model performance</h2>
 <p>Regression metrics. MSE, RMSE, <span class="math inline">\(R^2\)</span></p>
 <p>Classification metrics. accuracy, precision, recall, F1 score, ROC curves.</p>
 <p>Train/test split. Cross-validation.</p>
 <p>Demonstrate visually how overfitting and underfitting appear in training vs.&nbsp;validation error plots.</p>
 </section>
-<section id="bias-variance-overfitting" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="bias-variance-overfitting"><span class="header-section-number">7.5</span> Bias, Variance, Overfitting</h2>
+<section id="bias-variance-overfitting" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="bias-variance-overfitting"><span class="header-section-number">6.5</span> Bias, Variance, Overfitting</h2>
 <p>Define bias–variance trade-off.</p>
 <p>Overfitting in physics context: model fits noise rather than real phenomena.</p>
 
@@ -676,13 +676,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./neural-networks.html" class="pagination-link" aria-label="Neural Networks">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neural Networks</span></span>
+      <a href="./intro-ml.html" class="pagination-link" aria-label="Introduction to Machine Learning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./unsupervised-ml.html" class="pagination-link" aria-label="Unsupervised Learning">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./neural-networks.html" class="pagination-link" aria-label="Neural Networks">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neural Networks</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

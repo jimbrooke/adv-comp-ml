@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Advanced Computational Physics &amp; Machine Learning - 6&nbsp; Neural Networks</title>
+<title>Advanced Computational Physics &amp; Machine Learning - 7&nbsp; Neural Networks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./supervised-ml.html" rel="next">
-<link href="./intro-ml.html" rel="prev">
+<link href="./unsupervised-ml.html" rel="next">
+<link href="./supervised-ml.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./neural-networks.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neural Networks</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./neural-networks.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neural Networks</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -144,14 +144,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./neural-networks.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
+  <a href="./supervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./supervised-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+  <a href="./neural-networks.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -170,13 +170,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#anatomy-of-a-neural-network" id="toc-anatomy-of-a-neural-network" class="nav-link active" data-scroll-target="#anatomy-of-a-neural-network"><span class="header-section-number">6.1</span> Anatomy of a Neural Network</a></li>
-  <li><a href="#activation-function" id="toc-activation-function" class="nav-link" data-scroll-target="#activation-function"><span class="header-section-number">6.2</span> Activation Function</a></li>
-  <li><a href="#forward-pass" id="toc-forward-pass" class="nav-link" data-scroll-target="#forward-pass"><span class="header-section-number">6.3</span> Forward Pass</a></li>
-  <li><a href="#backpropagation" id="toc-backpropagation" class="nav-link" data-scroll-target="#backpropagation"><span class="header-section-number">6.4</span> Backpropagation</a></li>
-  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent"><span class="header-section-number">6.5</span> Gradient Descent</a></li>
-  <li><a href="#training" id="toc-training" class="nav-link" data-scroll-target="#training"><span class="header-section-number">6.6</span> Training</a></li>
-  <li><a href="#deep-learning" id="toc-deep-learning" class="nav-link" data-scroll-target="#deep-learning"><span class="header-section-number">6.7</span> Deep Learning</a></li>
+  <li><a href="#anatomy-of-a-neural-network" id="toc-anatomy-of-a-neural-network" class="nav-link active" data-scroll-target="#anatomy-of-a-neural-network"><span class="header-section-number">7.1</span> Anatomy of a Neural Network</a></li>
+  <li><a href="#activation-function" id="toc-activation-function" class="nav-link" data-scroll-target="#activation-function"><span class="header-section-number">7.2</span> Activation Function</a></li>
+  <li><a href="#forward-pass" id="toc-forward-pass" class="nav-link" data-scroll-target="#forward-pass"><span class="header-section-number">7.3</span> Forward Pass</a></li>
+  <li><a href="#backpropagation" id="toc-backpropagation" class="nav-link" data-scroll-target="#backpropagation"><span class="header-section-number">7.4</span> Backpropagation</a></li>
+  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent"><span class="header-section-number">7.5</span> Gradient Descent</a></li>
+  <li><a href="#training" id="toc-training" class="nav-link" data-scroll-target="#training"><span class="header-section-number">7.6</span> Training</a></li>
+  <li><a href="#deep-learning" id="toc-deep-learning" class="nav-link" data-scroll-target="#deep-learning"><span class="header-section-number">7.7</span> Deep Learning</a></li>
   </ul>
 </nav>
     </div>
@@ -185,7 +185,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neural Networks</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neural Networks</span></h1>
 </div>
 
 
@@ -202,30 +202,30 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="anatomy-of-a-neural-network" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="anatomy-of-a-neural-network"><span class="header-section-number">6.1</span> Anatomy of a Neural Network</h2>
+<section id="anatomy-of-a-neural-network" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="anatomy-of-a-neural-network"><span class="header-section-number">7.1</span> Anatomy of a Neural Network</h2>
 <p>Layers: Input → Hidden layers → Output.</p>
 <p>Each neuron computes… Introduce weights, bias, act8ivation function</p>
 </section>
-<section id="activation-function" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="activation-function"><span class="header-section-number">6.2</span> Activation Function</h2>
+<section id="activation-function" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="activation-function"><span class="header-section-number">7.2</span> Activation Function</h2>
 <p>Sigmoid, ReLU, tanh</p>
 </section>
-<section id="forward-pass" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="forward-pass"><span class="header-section-number">6.3</span> Forward Pass</h2>
+<section id="forward-pass" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="forward-pass"><span class="header-section-number">7.3</span> Forward Pass</h2>
 <p>Compute the output from input. Calculate loss (MSE, cross-entropy)</p>
 </section>
-<section id="backpropagation" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="backpropagation"><span class="header-section-number">6.4</span> Backpropagation</h2>
+<section id="backpropagation" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="backpropagation"><span class="header-section-number">7.4</span> Backpropagation</h2>
 <p>Use chain rule to compute gradients of loss w.r.t. weights.</p>
 <p>Intuitive derivation, no need for full algebraic proof.</p>
 </section>
-<section id="gradient-descent" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">6.5</span> Gradient Descent</h2>
+<section id="gradient-descent" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">7.5</span> Gradient Descent</h2>
 <p>Rule for updating weights</p>
 </section>
-<section id="training" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="training"><span class="header-section-number">6.6</span> Training</h2>
+<section id="training" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="training"><span class="header-section-number">7.6</span> Training</h2>
 <p>Batch vs stochastic gradient descent Loss evolution: training loss vs.&nbsp;validation loss → early stopping to prevent overfitting.</p>
 <p>Hyperparameters: learning rate, network depth, regularization, batch size.</p>
 <p>Regularization techniques:</p>
@@ -233,8 +233,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Dropout</p>
 <p>Early stopping</p>
 </section>
-<section id="deep-learning" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="deep-learning"><span class="header-section-number">6.7</span> Deep Learning</h2>
+<section id="deep-learning" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="deep-learning"><span class="header-section-number">7.7</span> Deep Learning</h2>
 <p>Multiple hidden layers allow hierarchical feature extraction. Early layers learn simple features (edges, patterns). Deeper layers combine them into complex representations. Featurisation.</p>
 
 
@@ -652,13 +652,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./intro-ml.html" class="pagination-link" aria-label="Introduction to Machine Learning">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span>
+      <a href="./supervised-ml.html" class="pagination-link" aria-label="Supervised Learning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./supervised-ml.html" class="pagination-link" aria-label="Supervised Learning">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./unsupervised-ml.html" class="pagination-link" aria-label="Unsupervised Learning">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -176,7 +176,7 @@ class ForceOnPoint(Vector):
         _r.x = rx
         return
 
-    def set_ry(self), ry:
+    def set_ry(self, ry:
         _r.y = ry
         return
 
