@@ -18,6 +18,8 @@ Linear regression
 
 Minimisation of mean squared error
 
+test sudan
+
 Connection to maximum likelihood estimation under Gaussian noise
 
 Polynomial regression and basis expansion
