@@ -258,7 +258,7 @@ window.Quarto = {
 <h2 data-number="3.1" class="anchored" data-anchor-id="basic-matrix-operations"><span class="header-section-number">3.1</span> Basic Matrix Operations</h2>
 <p>Python/numpy/scipy provide a range of options for achieving basic matrix operations. You will need to take a little care to ensure that your code implements the operations you intend it to. This is largely due to the fact that some operators/functions will change their behaviour depending on the input you provide. This section includes some recommendations for simple linear algebra, which should ensure your code behaves as desired.</p>
 <p>Matrices can be implemented as a 2D <code>np.ndarray</code>. Basic matrix arithmetic can then be performed using standard operators <code>+</code>,<code>-</code> and <code>@</code>. You can also use <code>np.matmul()</code> for matrix multiplication. Numpy will also perform matrix multiplication with <code>np.dot()</code>, but this is not recommended if you can use <code>@</code> or <code>np.matmul()</code>.</p>
-<div id="33207af8" class="cell" data-execution_count="1">
+<div id="2fe46ba6" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,],[<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>]])</span>
@@ -295,7 +295,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Vectors can be implemented as 1D arrays, or as 2D arrays. A 1D array will be interpreted as row or column vector depending on the context in which it is used. Use of 2D arrays allows you to specify row or column form. This can be useful, since <code>np.matmul()</code> or <code>@</code> will throw an exception if you accidentally try to perform an illegal matrix operation.</p>
-<div id="bc14a7e5" class="cell" data-execution_count="2">
+<div id="faaa20da" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>v  <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>vr <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]])</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>vc <span class="op">=</span> np.array([[<span class="dv">1</span>],[<span class="dv">2</span>],[<span class="dv">3</span>]])</span>
@@ -326,7 +326,7 @@ window.Quarto = {
 <p>Other useful matrix operations are provided by numpy, such as : - <code>np.transpose()</code> (also available via <code>ndarray.T</code>) - <code>np.norm()</code> - <code>np.trace()</code></p>
 <p>For further information, look at the reference pages : <a href="https://numpy.org/doc/stable/reference/routines.array-manipulation.html">https://numpy.org/doc/stable/reference/routines.array-manipulation.html</a> <a href="https://numpy.org/doc/stable/reference/routines.linalg.html">https://numpy.org/doc/stable/reference/routines.linalg.html</a></p>
 <p>Finally, <code>scipy.linalg</code> provides some additional basic operations such as the determinant and the inverse.</p>
-<div id="6967f200" class="cell" data-execution_count="3">
+<div id="865a6d45" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -377,7 +377,7 @@ cx_1 + dx_2 &amp;= y_2
 \left(\begin{array}{c} x_1 \\ x_2 \\ x_3\end{array}\right) =
 \left(\begin{array}{c} 2 \\ 7 \\ 1\end{array}\right)
 \tag{3.6}\]</span></span></p>
-<div id="bd42ded2" class="cell" data-execution_count="4">
+<div id="c3301a7a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -405,7 +405,7 @@ cx_1 + dx_2 &amp;= y_2
 </div>
 </div>
 <p>Is this the solution? We can easily check by inserting the solution into the original equation.</p>
-<div id="dbeaa56f" class="cell" data-execution_count="5">
+<div id="5920d6e7" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">@</span> x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[2.]
@@ -521,7 +521,7 @@ A=LU=
 <li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu.html">scipy.linalg.lu</a></p></li>
 <li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_solve.html">scipy.linalg.lu_solve</a></p></li>
 </ul>
-<div id="c8dbb63a" class="cell" data-execution_count="6">
+<div id="0a3e2a6e" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> solve_lu(a,y):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    lu, piv <span class="op">=</span> linalg.lu_factor(a)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> linalg.lu_solve((lu, piv), y)</span>
@@ -560,7 +560,7 @@ A^Tu &amp;=\sigma v
 <p>The pseudoinverse (also known as the Moore-Penrose inverse) can always be computed, even when <span class="math inline">\(A\)</span> is singular, ie. when when <span class="math inline">\(\frac{1}{|A|}=0\)</span> and the inverse cannot be found.</p>
 <p>In the context of solving a matrix equation <span class="math inline">\(Ax=y\)</span>, the product of pseudoinverse and the RHS, (i.e.&nbsp;<span class="math inline">\(\bar{X}=A^\dagger y\)</span>) has various properties. When A is non-singular, <span class="math inline">\(\bar{x}\)</span> gives the solution to <span class="math inline">\(Ax=y\)</span>. When <span class="math inline">\(A\)</span> is singular, <span class="math inline">\(\bar{x}\)</span> is a least squares approximation to the nearest solution. When <span class="math inline">\(Ax=y\)</span> has a space of solutions (equivalent to a set of simultaneous equations with degeneracy), then <span class="math inline">\(\bar{x}\)</span> is a vector which describes this space.</p>
 <p>SVD decomposition is available in Scipy using <code>scipy.linalg.svd()</code>. For further information, see <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.svd.html">scipy.linalg.svd</a>. Note that, unlike LU decomposition, no <code>solve()</code> function is supplied, and instead we must write some code to calculate <span class="math inline">\(\bar{x}\)</span>.</p>
-<div id="bc949ef7" class="cell" data-execution_count="7">
+<div id="b2d645c2" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> solve_svd(a,y):</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    u, s, v <span class="op">=</span> linalg.svd(a)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> v.T <span class="op">@</span> np.diag(<span class="dv">1</span><span class="op">/</span>s) <span class="op">@</span> u.T <span class="op">@</span> y</span>
@@ -574,7 +574,7 @@ A^Tu &amp;=\sigma v
 </div>
 </div>
 <p>Alternatively, a function to compute the pseudoinverse directly is provided, <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.pinv.html">scipy.linalg.pinv</a>.</p>
-<div id="7fe18e71" class="cell" data-execution_count="8">
+<div id="a906c651" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( linalg.pinv(a) <span class="op">@</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[ 1. ]
@@ -621,7 +621,7 @@ V_1 \\
 \tag{3.23}\]</span></span></p>
 <p>Solving this matrix equation will provide the current at all points in the circuit. This method is known as “mesh analysis” of circuits.</p>
 <p>We can write a simple function that, given the voltage and resistor values, will return the currents :</p>
-<div id="6506a375" class="cell" data-execution_count="9">
+<div id="cca3ec26" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> meshAnalysis(v1, v2, r1, r2, r3, r4, r5):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> np.array ([[r1<span class="op">+</span>r2, <span class="op">-</span>r2, <span class="dv">0</span>],[<span class="op">-</span>r2,r2<span class="op">+</span>r3<span class="op">+</span>r4,<span class="op">-</span>r4],[<span class="dv">0</span>,<span class="op">-</span>r4,r4<span class="op">+</span>r5]])</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> np.array([[v1],[<span class="dv">0</span>],[<span class="op">-</span>v2]])</span>
@@ -629,7 +629,7 @@ V_1 \\
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Which, for the values given, will return the three currents :</p>
-<div id="4079d8d1" class="cell" data-execution_count="10">
+<div id="2b191891" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> meshAnalysis(<span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">10</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -640,7 +640,7 @@ V_1 \\
 </div>
 </div>
 <p>Or we could calculate, for example, how <span class="math inline">\(I_2\)</span> will vary as a function of <span class="math inline">\(R_4\)</span>, with all other values fixed :</p>
-<div id="9a932efc" class="cell" data-execution_count="11">
+<div id="e317e445" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>r4s <span class="op">=</span> np.linspace(<span class="fl">0.1</span>, <span class="fl">5.0</span>, <span class="dv">100</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>i2s <span class="op">=</span> np.empty(<span class="bu">len</span>(r4s))</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -699,7 +699,7 @@ V_1 \\
 0.351 \\
 0.935} \tag{3.27}\]</span></span></p>
 <p>with numerical values given to 3 decimal places on the RHS.</p>
-<div id="7bcff0ca" class="cell" data-execution_count="12">
+<div id="1db81cb8" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -743,7 +743,7 @@ Eigenvalue/vector : 6.0+0.0j [0.058 0.351 0.935]</code></pre>
 \left(\begin{array}{c} \vdots \\ x_{i-1} \\ x_i \\ x_{i+1} \\ \vdots \end{array}\right)
 \tag{3.30}\]</span></span></p>
 <p>This example is a typical eigenvalue problem, in that many of the matrix elements are zero, which can greatly simplify the computational challenge and make even large systems solvable. The matrix is symmetric, which means it is suitable for solving with our eigenproblem solving function above, or one of the solvers from <code>scipy.linalg</code>.</p>
-<div id="74dac59f" class="cell" data-execution_count="13">
+<div id="a03629fc" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>],</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>              [<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>],</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>],</span>
@@ -755,7 +755,7 @@ Eigenvalue/vector : 6.0+0.0j [0.058 0.351 0.935]</code></pre>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>mus, vs <span class="op">=</span> linalg.eig(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The eigenvalue associated with each mode gives the frequency, while the (complex) eigenvector provides the magnitude and phase of oscillation for each mass. We can plot the displacement of each mass as a function of time for each mode.</p>
-<div id="bb05670c" class="cell" data-execution_count="14">
+<div id="f57c9906" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
