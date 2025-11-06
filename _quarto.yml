@@ -13,11 +13,14 @@ book:
     - linear-algebra.qmd
     - monte-carlo.qmd
     - intro-ml.qmd
-    - supervised-ml.qmd
-    - neural-networks.qmd
-    - unsupervised-ml.qmd
+ #   - supervised-ml.qmd
+ #   - neural-networks.qmd
+ #   - unsupervised-ml.qmd
 
 bibliography: references.bib
+
+crossref:
+  chapters: true 
 
 format:
   html:

@@ -1,9 +1,10 @@
 ---
-title: "Neural Networks"
 format: html
 execute:
   error: true
 ---
+# Neural Networks {#sec-nn}
+
 
 ## Anatomy of a Neural Network
 
