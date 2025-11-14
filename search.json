@@ -234,7 +234,7 @@
     "href": "neural-networks.html#deep-learning",
     "title": "6  Neural Networks",
     "section": "6.6 Deep Learning",
-    "text": "6.6 Deep Learning\nMultiple hidden layers allow hierarchical feature extraction. Early layers learn simple features (edges, patterns). Deeper layers combine them into complex representations. Featurisation.",
+    "text": "6.6 Deep Learning\nMultiple hidden layers allow hierarchical feature extraction. Early layers learn simple features (edges, patterns). Deeper layers combine them into complex representations. Featurisation.\nblahblah CI TESTING",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Neural Networks</span>"
     ]
