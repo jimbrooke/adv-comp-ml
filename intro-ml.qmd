@@ -1,58 +1,122 @@
 ---
-title: "Introduction to Machine Learning"
 format: html
 execute:
   error: true
 ---
 
+# Introduction to Machine Learning {#sec-intro-ml}
+
 ## What is Machine Learning ?
 
-Machine learning is the study of algorithms that enable computers to learn patterns or relationships from data and make predictions or decisions without being explicitly programmed.
+Machine learning refers to algorithms that can learn patterns, or relationships, from data, and make predictions or decisions, without being explicitly programmed to do so. When applied to physics, this can mean that such algorithms infer structure (e.g. 'the laws of physics') in data without them having been encoded within the algorithm. This should be contrasted with a traditional approach to scientific computing where models are usually built from first principles.
 
-Core idea: Instead of coding physics laws explicitly, we let algorithms infer structure or relationships.
 
-Traditional physics → build models from first principles.
-Machine learning → learn models from data when physical models are incomplete, complex, or computationally expensive.
+## Models
 
-## Examples in Physics
+Machine learning can refer a wide range of techniques.  All include what we will refer to as a 'model', that is the basis for learning.  The model, $f$, transforms input data $x$ into output $\hat{y}$.  The model relies on some parameters (often referred to as 'weights'), $\theta$, which are optimised as the model 'learns' from data.
 
-| Area                                | Example Use                                           |
-| ----------------------------------- | ----------------------------------------------------- |
-| **High-energy physics**             | Event classification in particle detectors            |
-| **Condensed matter**                | Detecting phase transitions in spin models            |
-| **Astrophysics**                    | Galaxy morphology classification, transient detection |
-| **Quantum physics**                 | Neural-network quantum states (Carleo & Troyer, 2017) |
-| **Plasma physics**                  | ML-based control of magnetic confinement              |
-| **Computational materials science** | Surrogate models for interatomic potentials           |
+$$
+\hat{y}=f(\theta, x)
+$$
+
+(Here we use $\hat{y}$ to distinguish the model output from the 'truth' $y$, although this distinction is not always required, as we shall see).
+
+The model can take many forms, some of which you will have already encountered.  A few are described below.
+
+### Simple Function
+
+Linear regression is an example of supervised learning.  The model here is the functional form that is being fitted to the data.  Training is the process of determining parameters $\theta$ that minimise the mean squared error, i.e. performing the fit.
+
+### Decision Trees
+
+Decision trees are commonly used in classification problems, in particular where the data occupies a multidimensional space.  The data sample $x$ is divided into categories $\hat{y}$ following a sequence of individual divisions or splits, which are defined by the parameters $\theta$.  The precise sequence of divisions can be obtained using supervised learning, or clustering methods.
+
+### Neural Networks
+
+Neural networks will be covered in detail in @sec-nn. Briefly, they comprise a network of nodes, modelled on the human brain. Each node receives input from several other nodes, and uses a activation function to generate output. Each input to the node is associated with a weight and a bias, which control the strength of the connection between nodes. The weights and biases are the parameters $\theta$ of the model, which are optimised during training. For example, the output of a node may be expressed as :
+
+$$
+y = \sum_{i}{a_i f(x_i + c_i)}
+$$
+
+where the input data from input node $i$ is $x_i$, associated with weight $a_i$ and bias $c_i$, and the activation function is $f$. Note that the activation function is typically non-linear, which allows the neural network to express complex non-linear transformations.
 
 
 ## Types of learning
 
-| Category                   | Goal                                       | Example Task                         | Example Physics Application                                            |
-| -------------------------- | ------------------------------------------ | ------------------------------------ | ---------------------------------------------------------------------- |
-| **Supervised Learning**    | Learn mapping (x \to y) from labelled data | Regression, classification           | Predict energy levels from system parameters; classify detector events |
-| **Unsupervised Learning**  | Discover structure in unlabelled data      | Clustering, dimensionality reduction | Identify phases of matter, cluster spectral data                       |
-| **Reinforcement Learning** | Learn by interacting with environment      | Sequential decision-making           | Control plasma confinement, optimize experiments                       |
+There are three main paradigms through which a machine learning model can 'learn'.  This process is frequently referred to as _training_.  In this unit we will mainly focus on supervised learning, but we briefly describe all three paradigms here for completeness.
+
+Each method relies on some measure of the quality of the model output.  This measure is frequently termed the _loss_, and is signed such that lower values of loss indicate improved output.  During training, model parameters will be repeatedly updated, and the loss will be re-calculated, in order to find the set of parameters that minimise the loss.
+
+### Supervised learning
+
+In this case, the algorithm learns a mapping from its input data $x$, to its output data $y$, from a dedicated dataset.  This dataset must be 'labelled', ie. it contains both $x$ and corresponding true values $y$.  The algorithm is then applied to previously unseen data, which contains only $x$, such that the algorithm makes a prediction, $\hat{y}$.
+
+An example is the facial recognition technology found in many smartphones. Here the input data is an image from the phone camera, and the output data is a binary classifier with two values :
+
+  * Owner's face
+  * Not owner's face
+
+The algorithm is trained during setup of the phone, while the camera image is known to contain the user's face.  Behind the scenes, the algorithm is also trained on many other images (both of other people's faces, and not containing faces).  During training, every image is labelled with the correct binary classifier, allowing the loss to be calculated.  Later, when the phone is in use, the algorithm receives an input image from the camera, and will return a binary classifier indicating whether the image contains the owner's face, or not.
+
+Supervised learning is frequently used in classification problems such as this example.  It is also frequently used in regression problems, in which the algorithm output can be a number (or higher-dimensioned quantity - a vector or tensor).  In this case, the loss is a measure of the difference between the prediction $\hat{y}$ and the truth $y$.
+
+### Unsupervised learning
+
+In unsupervised learning, the goal is to find structures or patterns in the data $x$, in the absence of ground truth $y$. Unsupervised learning techniques include clustering and dimensionality reduction methods.
+
+In some cases, the model is intended to describe the data $x$ and may be capable of making predictions of new data $\hat{x}$.  Here the loss will be a measure of compatibility between the prediction and the real data.
 
 
-## Opportunities, Challenges, Ethics
+### Reinforcement learning
 
-Opportunities:
+In reinforcement learning, the model is used by a software agent. Such an agent is a continuously running program which can make decisions or take action, within an environment. The environment provides feedback to the agent in response to each action/decision, which can be viewed as a reward/penalty.  Training then involves updating model parameters to maximise the reward. An example is a robot navigating a maze, with the response from the environment being detection of collisions with the maze walls. When trained, the robot should then be capable of navigating the maze without hitting the walls.
 
-Handle high-dimensional, noisy data.
+### Other types of learning
 
-Speed up simulations (surrogate modeling).
+__Deep learning__ is not strictly a mode of training. It is used to describe neural networks with many hidden layers, and can be applieed in any of the training paradigms described above.
 
-Enable discovery in large datasets.
+__Semi-supervised learning__ is a mode which relies on both supervised and unsupervised learning. It is used in many advanced machine learning methods, and can reduce the computational requirements of training.
 
-Challenges:
+__Transfer learning__ is a method whereby a model trained on one dataset is subsequently trained on another. The result of the initial training (or pre-training) may be to learn some general feature identification, before the specific features of the target dataset are learnt.  This method can result in reduced training times, in particular when pre-trained models are made widely available.
 
-Interpretability — what does the ML model “understand”?
+## Challenges
 
-Overfitting — learning noise, not physics.
+Machine learning offers benefits in the physical science, in terms of identifying patterns in data and exposing structure that cannot be found with traditional methods.  However, it also raises several challenges, which are outlined briefly below. We will later explore some techniques which can be used to minimise these issues.
 
-Data bias and uncertainty quantification.
+### Interpretability
 
-Ethical use — transparency, reproducibility, sustainability.
+Machine learning is often capable of making excellent predictions in relation to complex dataset. However, as scientists we typically seek to explain nature, as well as make predictions.   With traditional methods, models are often built from fundamental laws or relations, and the mathematics of the model then provide an explanation for the phenomena being studied. But machine learning models are frequently complex non-linear systems, from which it is difficult to extract explanations about _why_ the predictions are correct.
 
-How do we ensure scientific rigor when using ML in physics?
+### Overfitting
+
+The goal of machine learning is usually to extract general patterns and structure in the data, which can be extrapolated to new situations. However, the model has no way to distinguish general features from noise in the data. Overfitting occurs when the model learns features (usually noise) that are specific to the precise dataset used during training, and is not generalisable.
+
+
+### Uncertainty
+
+As scientists we generally want to associate an uncertainty with any prediction or measurement. With traditional models we may use error propagation techniques to estimate uncertainties. However, machine learning models typically produce a single value, and due to their complex internal structure, error propagation is non-trivial.
+
+### Reproducibility
+
+Machine learning can suffer from problems with reproducibility. Training typically relies on randomisation, both when updating weights, and also frequently in the order in which training data is presented. Given the computational requirements, training also typically uses parallel programming techniques, which can introduce small variations in results. These all contribute towards non-reproducibility in training.
+
+### Sustainability
+
+Recent advances in machine learning and artificial intelligence have been made possible by huge increases in computing power. Large language models such as the GPT series have upwards of $10\times10^{11}$ parameters. Training a model such as GPT-3 (with $175\times10^9$ parameters) requires extremely large number of operations, estimated at $10^{23}$ floating point operations.  Using the Isambard AI facility, this would correspond to 25~GJ.  Given the need to repeatedly train such a model to ascertain the optimal neural network configuation (or hyperparameters - not to be confused with the model weights themselves), the energy requirements evidently present a challenge for sustainability.
+
+## Examples in Physics
+
+Machine learning has resulted in powerful applications in multiple areas of physics.  A few examples are listed in the table below.  The references given indicate key applications of deep learning within the field.  
+
+| Area                                | Example Use                                           |
+| ----------------------------------- | ----------------------------------------------------- |
+| **High-energy physics**             | Event classification in particle detectors ([Cowan et al, 2014](https://doi.org/10.1088/1742-6596/664/7/072015))            |
+| **Astrophysics**                    | Galaxy morphology classification ([Walmsley et al, 2019](https://doi.org/10.1093/mnras/stz2816)), transient detection |
+| **Condensed matter**                | Detecting phase transitions in spin models ([Carrasquilla & Melko, 2017](https://doi.org/10.1038%2Fnphys4035))           |
+| **Quantum physics**                 | Neural-network quantum states ([Carleo & Troyer, 2017](https://doi.org/10.1126/science.aag2302)) |
+| **Plasma physics**                  | ML-based control of magnetic confinement ([Tracey et al, 2022](https://doi.org/10.1038/s41586-021-04301-9))             |
+| **Computational materials science** | Surrogate models for interatomic potentials ([Anstine & Isayev, 2023](https://doi.org/10.1021/acs.jpca.2c06778))           |
+
+
+

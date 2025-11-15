@@ -1,36 +1,131 @@
 ---
-title: "Neural Networks"
 format: html
 execute:
+  echo: false
   error: true
 ---
+# Neural Networks {#sec-nn}
+
+An artifical neural network (ANN) is an interconnected collection of nodes or neurons, inspired by the human brain. Each neuron can receive input from many other neurons, performs some relatively simple processing, and then sends its output to one or many other neurons. Through careful choice of the processing performed by each neuron, the topology of the network, and advanced optimisation methods, the ANN can be trained to perform highly sophisticated processing tasks.
+
+History of ANNs
 
 ## Anatomy of a Neural Network
 
+Most ANNs are known as 'feed-forward' neural networks. This means the computation flows in one direction, from inputs to outputs. The neurons in an ANN are typically arranged in layers. The first layer receives the input data, and the final layer produces the output data. The dimensionality of the input and output layers will be determined by the shape of the input and output data. Typically there are a number of 'hidden' layers between the input and output layers, for which the dimensionality is much less constrained - for example, the number of nodes can be greater than that of the input and output layers.
 
-Layers: Input → Hidden layers → Output.
+Each neuron processes input data according to a relatively simple function.  The most simple neuron comprises a linear function of the inputs, followed by an activation function.  The output can be written :
 
-Each neuron computes... Introduce weights, bias, act8ivation function
+$$
+y = f\left(\sum_{i=0}^{n}{\alpha_i x_i + \beta_i} \right)
+$$
 
-## Activation Function
+where $\alpha_i$ are known as the weights, $\beta_i$ are the biases, $x_i$ are the inputs to the neuron, and $y$ is the neuron output. The function $f()$ is known as the activation function.
 
-Sigmoid, ReLU, tanh
+## Activation
+
+The choice of activation function is important.  If the activation function is a linear function, then the neural network is reduced to linear regression, i.e. the output of the ANN is a linear function of the ANN inputs.  To capture more sophisticated features, it is important that the activation function provides some non-linearity.
+
+Some typical activation functions include :
+
+  * Tanh function
+  * Sigmoid function
+  * Rectified linear function (ReLU)
+
+which are described in more detail below.
+
+
+### tanh function
+
+The hyperbolic tan function is defined as :
+$$
+y = {\rm tanh}(x) = \frac{e^{2x}-1}{e^{2x}+1}
+$$
+
+And plotted in the figure below.
+
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_theme()
+
+x = np.linspace(-5, 5, 200)
+y = np.tanh(x)
+
+plt.plot(x, y, label=r'$y=\frac{e^{2x}-1}{e^{2x}+1}$')
+plt.ylabel('y')
+plt.xlabel('x')
+plt.legend()
+plt.show()
+```
+
+This function maps an input range of $[-\infty, \infty]$ onto an output range of $[-1, 1]$. This ensures values do not grow unmanageably large as data propagates through the network, independent of weight magnitude.  A linear combination of such functions can approximate a wide range of functions.
+
+
+### Sigmoid function
+
+The sigmoid function is another name for the logistic function.
+
+$$
+y=\frac{1}{1+e^{-x}}
+$$
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_theme()
+
+x = np.linspace(-5, 5, 200)
+y = 1/(1+np.exp(-x))
+
+plt.plot(x, y, label=r'$y=\frac{1}{1+e^{-x}}$')
+plt.ylabel('y')
+plt.xlabel('x')
+plt.legend()
+plt.show()
+```
+
+This function maps inputs on $[-\infty, \infty]$ onto outputs on $[0, 1]$.  For this reason, the sigmoid is often chosen for classification problems, where the function value is treated as a probability of the data belonging to a given class.  (See section on logistic regression).
+
+### Rectified Linear (ReLU) function
+
+The ReLU function is :
+
+$$
+\begin{align}
+y = \, &x \quad (x \gt 0) \\\\
+&0 \quad(x \le 0)
+\end{align}
+$$
+
+Or, equivalently,
+
+$$
+y = \rm{ max}(x, 0)
+$$
+
+The ReLU function maps $[-\infty, \infty]$ onto $[0, \infty]$.  It is easily computed, and does not suffer from the "vanishing gradient problem" (see below).
 
 
 ## Forward Pass
 
-Compute the output from input.
-Calculate loss (MSE, cross-entropy)
+In a feed-forward neural network, the input data is fed into the input layer, and the output of each layer of neurons is computed in turn until the output of the final layer is obtained. This output is treated as a prediction.
+
+This allows the loss to be computed. For supervised learning, the loss is trypically the mean squared error (for regression problems) or the cross-entropy (for classification problems).
+
 
 ## Backpropagation
+
+In order to train a neural network, the gradient of the loss with respect to the weights must be computed.  This relies on back-propagation, a method by which the loss is propagated backwards through the network, such that the gradient with respect to each weight can be computed.
+
 
 Use chain rule to compute gradients of loss w.r.t. weights.
 
 Intuitive derivation, no need for full algebraic proof.
 
-
-## Gradient Descent
-Rule for updating weights
 
 ## Training
 Batch vs stochastic gradient descent
@@ -52,3 +147,6 @@ Multiple hidden layers allow hierarchical feature extraction.
 Early layers learn simple features (edges, patterns).
 Deeper layers combine them into complex representations.
 Featurisation.
+
+
+blahblah CI TESTING
