@@ -164,7 +164,87 @@
     "href": "supervised-ml.html",
     "title": "6  Supervised Learning",
     "section": "",
-    "text": "6.1 Supervised Learning Framework\nThis could come before/after the section on NNs.\nTraining set, model, loss, optimisation, validation",
+    "text": "6.1 Introduction\nIn computational physics, we often seek to build models that can learn from data. Supervised learning is one of the foundational paradigms in machine learning, in which a model learns to predict an output (label or target) given a set of inputs (features). In essence a model is trained to be able to identify patterns in datasets. If the model is trained successfully it should be able to predict outputs on unseen data.\nThis part of the course explores how supervised learning is formulated, trained, and evaluated, focusing on applications relevant to physics.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Supervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "supervised-ml.html#introduction",
+    "href": "supervised-ml.html#introduction",
+    "title": "6  Supervised Learning",
+    "section": "",
+    "text": "6.1.1 Training Sets\nIn supervised learning, the foundation is the training set, a collection of input–output pairs:\n\\[\n\\mathcal{D} = \\{(\\mathbf{x}_i, y_i)\\}_{i=1}^N\n\\]\nwhere:\n\\[\n(\\mathbf{x}_i \\in \\mathbb{R}^d)\n\\]\nare feature vectors (inputs), \\[\n(y_i \\in \\mathbb{R})\n\\] are labels (outputs), and\n\\[\n(N)\n\\] is the total number of samples.\nThe key goal of supervised learning is to learn a mapping: \\[\n(f: \\mathbf{x} \\rightarrow y)  \\text{such that}  (f(\\mathbf{x}_i) \\approx y_i).\n\\]\nThe significant action here is that one needs to have a labelled dataset to use supervised learning, each data point needs a corresponding labe - a common example of this would be vehicles and vehicle types. The dataset would need to include different types of vehicle, such as motorbikes, cars, vans, lorries - and then each vehicle in the dataset would have a label identifiying its type. The different types of dataset used in supervised learning are covered in the next section.\n\n\n6.1.2 Dataset splitting\nGenerally there are three different types of data that are used in supervised learning. They can all come from the same dataset, but need to be split up in advance as they are used for different parts of the process.\nThe dataset is usually divided into:\n\nTraining set — used to fit the model parameters.\nValidation set — used for tuning hyperparameters.\nTest set — used to evaluate final model performance.\n\nTypical split ratios: 70% / 15% / 15%, though this does depend on how large the dataset is and the type of problem you are solving. There are techniques that one can use to augment data in the case of smaller datasets - these will be discussed later in the course.\n\n\n\n6.1.3 Models\nA model defines the functional relationship between inputs and outputs. It can be linear or nonlinear, parametric or nonparametric.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Supervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "supervised-ml.html#linear-models",
+    "href": "supervised-ml.html#linear-models",
+    "title": "6  Supervised Learning",
+    "section": "6.2 2.1 Linear Models",
+    "text": "6.2 2.1 Linear Models\nA simple linear model assumes:\n[ f(; ) = ^ + b ]\nwhere () are weights and (b) is a bias term.\nLinear regression works well when the relationship between variables is approximately linear — e.g., predicting lattice constant as a linear function of atomic radius and bond energy.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Supervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "supervised-ml.html#nonlinear-models",
+    "href": "supervised-ml.html#nonlinear-models",
+    "title": "6  Supervised Learning",
+    "section": "6.3 2.2 Nonlinear Models",
+    "text": "6.3 2.2 Nonlinear Models\nWhen relationships are more complex, we turn to nonlinear models such as: - Polynomial regression - Kernel methods (e.g., Support Vector Machines) - Artificial Neural Networks\nFor example, neural networks approximate arbitrary nonlinear mappings:\n[ f(; ) = g(W^{(2)} (W^{(1)} + b^{(1)}) + b^{(2)}) ]\nwhere (= {W^{(1)}, W^{(2)}, b^{(1)}, b^{(2)}}) are parameters, and () is a nonlinear activation function.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Supervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "supervised-ml.html#regression-losses",
+    "href": "supervised-ml.html#regression-losses",
+    "title": "6  Supervised Learning",
+    "section": "7.1 3.1 Regression Losses",
+    "text": "7.1 3.1 Regression Losses\n\nMean Squared Error (MSE): [ L = _i (y_i - f(_i))^2 ]\nMean Absolute Error (MAE): [ L = _i |y_i - f(_i)| ]\n\nMSE penalises large deviations more strongly, while MAE is more robust to outliers.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Supervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "supervised-ml.html#classification-losses",
+    "href": "supervised-ml.html#classification-losses",
+    "title": "6  Supervised Learning",
+    "section": "7.2 3.2 Classification Losses",
+    "text": "7.2 3.2 Classification Losses\nFor binary or multi-class classification tasks, we often use: - Cross-Entropy Loss: [ L = - i c y{ic} p{ic} ]\nwhere (p_{ic}) is the predicted probability of class (c) for sample (i).\n\n7.2.1 Physics Example: Phase Classification\nGiven simulated data of a material at different temperatures and pressures, one might train a classifier to predict the phase (solid, liquid, gas) from thermodynamic observables. The cross-entropy loss measures how confidently and accurately the model predicts the correct phase.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Supervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "supervised-ml.html#gradient-descent",
+    "href": "supervised-ml.html#gradient-descent",
+    "title": "6  Supervised Learning",
+    "section": "8.1 4.1 Gradient Descent",
+    "text": "8.1 4.1 Gradient Descent\nThe most common optimisation strategy is gradient descent, which updates parameters iteratively:\n[ _{t+1} = t - L(_t) ]\nwhere () is the learning rate.\n\n8.1.1 Variants\n\nStochastic Gradient Descent (SGD): uses random subsets (mini-batches) of data for faster convergence.\nMomentum / Adam / RMSProp: adaptive optimisers that improve convergence speed and stability.\n\n\n\n8.1.2 Example\nIn a neural network predicting potential energy surfaces, the parameters (weights) are adjusted using backpropagation—a computationally efficient way to apply the chain rule for gradients across many layers.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Supervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "supervised-ml.html#validation",
+    "href": "supervised-ml.html#validation",
+    "title": "6  Supervised Learning",
+    "section": "9.1 5.1 Validation",
+    "text": "9.1 5.1 Validation\nThe validation set provides a means to monitor generalisation during training. We compute the validation loss:\n[ L_ = _{i } L(y_i, f(_i)) ]\nA rise in validation loss while training loss decreases indicates overfitting.\n\n9.1.1 Regularisation Techniques\nTo mitigate overfitting: - L2 regularisation (Ridge): adds (||^2) to the loss. - Dropout (for neural networks): randomly deactivates neurons during training. - Early stopping: halts training when validation loss stops improving.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Supervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "supervised-ml.html#cross-validation",
+    "href": "supervised-ml.html#cross-validation",
+    "title": "6  Supervised Learning",
+    "section": "9.2 5.2 Cross-Validation",
+    "text": "9.2 5.2 Cross-Validation\nFor smaller datasets, k-fold cross-validation provides a robust estimate of model performance. Data are split into (k) folds, each serving once as validation while the others are used for training.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Supervised Learning</span>"
     ]
@@ -173,8 +253,8 @@
     "objectID": "supervised-ml.html#regression",
     "href": "supervised-ml.html#regression",
     "title": "6  Supervised Learning",
-    "section": "6.2 Regression",
-    "text": "6.2 Regression\nLinear regression\nMinimisation of mean squared error\ntest sudan\nConnection to maximum likelihood estimation under Gaussian noise\nPolynomial regression and basis expansion\nRegularisation (L2, L1)",
+    "section": "11.1 Regression",
+    "text": "11.1 Regression\nLinear regression\nMinimisation of mean squared error\nConnection to maximum likelihood estimation under Gaussian noise\nPolynomial regression and basis expansion\nRegularisation (L2, L1)",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Supervised Learning</span>"
     ]
@@ -183,8 +263,8 @@
     "objectID": "supervised-ml.html#classification",
     "href": "supervised-ml.html#classification",
     "title": "6  Supervised Learning",
-    "section": "6.3 Classification",
-    "text": "6.3 Classification\nLogistic regression\nNegative log-likelihood loss (cross-entropy)\nConnection to MLE under Bernoulli model\nAlternatives : k-Nearest Neighbours (KNN). Support Vector Machines (SVMs)",
+    "section": "11.2 Classification",
+    "text": "11.2 Classification\nLogistic regression\nNegative log-likelihood loss (cross-entropy)\nConnection to MLE under Bernoulli model\nAlternatives : k-Nearest Neighbours (KNN). Support Vector Machines (SVMs)",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Supervised Learning</span>"
     ]
@@ -193,8 +273,8 @@
     "objectID": "supervised-ml.html#evaluating-model-performance",
     "href": "supervised-ml.html#evaluating-model-performance",
     "title": "6  Supervised Learning",
-    "section": "6.4 Evaluating model performance",
-    "text": "6.4 Evaluating model performance\nRegression metrics. MSE, RMSE, \\(R^2\\)\nClassification metrics. accuracy, precision, recall, F1 score, ROC curves.\nTrain/test split. Cross-validation.\nDemonstrate visually how overfitting and underfitting appear in training vs. validation error plots.",
+    "section": "11.3 Evaluating model performance",
+    "text": "11.3 Evaluating model performance\nRegression metrics. MSE, RMSE, \\(R^2\\)\nClassification metrics. accuracy, precision, recall, F1 score, ROC curves.\nTrain/test split. Cross-validation.\nDemonstrate visually how overfitting and underfitting appear in training vs. validation error plots.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Supervised Learning</span>"
     ]
@@ -203,8 +283,8 @@
     "objectID": "supervised-ml.html#bias-variance-overfitting",
     "href": "supervised-ml.html#bias-variance-overfitting",
     "title": "6  Supervised Learning",
-    "section": "6.5 Bias, Variance, Overfitting",
-    "text": "6.5 Bias, Variance, Overfitting\nDefine bias–variance trade-off.\nOverfitting in physics context: model fits noise rather than real phenomena.",
+    "section": "11.4 Bias, Variance, Overfitting",
+    "text": "11.4 Bias, Variance, Overfitting\nDefine bias–variance trade-off.\nOverfitting in physics context: model fits noise rather than real phenomena.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Supervised Learning</span>"
     ]

@@ -5,11 +5,188 @@ execute:
   error: true
 ---
 
-This could come before/after the section on NNs.
+## Introduction
 
-## Supervised Learning Framework
+In computational physics, we often seek to build models that can learn from data. **Supervised learning** is one of the foundational paradigms in machine learning, in which a model learns to predict an output (label or target) given a set of inputs (features). In essence a model is trained to be able to identify patterns in datasets. If the model is trained successfully it should be able to predict outputs on unseen data. 
 
-Training set, model, loss, optimisation, validation
+This part of the course explores how supervised learning is formulated, trained, and evaluated, focusing on applications relevant to physics. 
+
+---
+
+### Training Sets
+
+In supervised learning, the foundation is the **training set**, a collection of **input–output pairs**:
+
+$$
+\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^N
+$$
+
+where:
+
+$$
+ (\mathbf{x}_i \in \mathbb{R}^d)
+$$  
+are feature vectors (inputs),
+$$
+(y_i \in \mathbb{R}) 
+$$
+are labels (outputs), and  
+$$ 
+(N) 
+$$
+is the total number of samples.
+
+
+The key goal of supervised learning is to learn a mapping:
+$$
+ (f: \mathbf{x} \rightarrow y)  \text{such that}  (f(\mathbf{x}_i) \approx y_i).
+$$
+
+
+The significant point here is that one needs to have a **labelled dataset** to use supervised learning; each data point needs a corresponding label - a common example of this would be vehicles and vehicle types. The dataset would need to include different types of vehicle, such as motorbikes, cars, vans, lorries - and then each vehicle in the dataset would have a label identifiying its type. The different types of dataset used in supervised learning are covered in the next section. 
+
+### Dataset splitting
+
+Generally there are three different types of data that are used in supervised learning. They can all come from the same dataset, but need to be split up in advance as they are used for different parts of the process. 
+
+The dataset is usually divided into:
+
+* **Training set** — used to fit the model parameters and learn the underlying patterns in the data.
+* **Validation set** — used for tuning the hyperparameters of the model. 
+* **Test set** — used to evaluate final model performance - should be unbiased.
+
+Typical split ratios: 70% / 15% / 15%, though this does depend on how large the dataset is and the type of problem you are solving. There are techniques that one can use to augment data in the case of smaller datasets - these will be discussed later in the course. 
+
+---
+
+### Models
+
+A **model** defines the relationship between inputs and outputs. It can be **linear** or **non-linear**, depending on the task the network has to perform and the relationship between the features and labels.
+
+## 2.1 Linear Models
+
+A simple linear model assumes the relationship between the features and labels in a dataset can be accurately modelled by a straight line. There are several examples where we expect this to be the case; house prices based on size, exam scores based on number of hours studied...
+
+Consider the following dataset:
+
+
+
+## 2.2 Nonlinear Models
+
+
+---
+
+# 3. Loss Functions
+
+To quantify how well a model performs, we define a **loss function** \(L(y, f(\mathbf{x}))\) that measures the discrepancy between predicted and true values.
+
+## 3.1 Regression Losses
+
+- **Mean Squared Error (MSE):**
+  \[
+  L = \frac{1}{N} \sum_i (y_i - f(\mathbf{x}_i))^2
+  \]
+
+- **Mean Absolute Error (MAE):**
+  \[
+  L = \frac{1}{N} \sum_i |y_i - f(\mathbf{x}_i)|
+  \]
+
+MSE penalises large deviations more strongly, while MAE is more robust to outliers.
+
+## 3.2 Classification Losses
+
+For binary or multi-class classification tasks, we often use:
+- **Cross-Entropy Loss:**
+  \[
+  L = -\frac{1}{N} \sum_i \sum_c y_{ic} \log p_{ic}
+  \]
+
+where \(p_{ic}\) is the predicted probability of class \(c\) for sample \(i\).
+
+### Physics Example: Phase Classification
+
+Given simulated data of a material at different temperatures and pressures, one might train a classifier to predict the **phase** (solid, liquid, gas) from thermodynamic observables. The cross-entropy loss measures how confidently and accurately the model predicts the correct phase.
+
+---
+
+# 4. Optimisation
+
+Training involves **optimising** the model parameters \(\theta\) to minimise the loss function over the training set:
+
+\[
+\theta^* = \arg \min_\theta \frac{1}{N} \sum_{i=1}^{N} L(y_i, f(\mathbf{x}_i; \theta))
+\]
+
+## 4.1 Gradient Descent
+
+The most common optimisation strategy is **gradient descent**, which updates parameters iteratively:
+
+\[
+\theta_{t+1} = \theta_t - \eta \nabla_\theta L(\theta_t)
+\]
+
+where \(\eta\) is the learning rate.
+
+### Variants
+- **Stochastic Gradient Descent (SGD):** uses random subsets (mini-batches) of data for faster convergence.
+- **Momentum / Adam / RMSProp:** adaptive optimisers that improve convergence speed and stability.
+
+### Example
+
+In a neural network predicting potential energy surfaces, the parameters (weights) are adjusted using backpropagation—a computationally efficient way to apply the chain rule for gradients across many layers.
+
+---
+
+# 5. Validation and Model Selection
+
+Even if a model fits the training data well, it may not generalise to unseen data. This problem—**overfitting**—is common when models are too complex relative to available data.
+
+## 5.1 Validation
+
+The validation set provides a means to monitor generalisation during training. We compute the validation loss:
+
+\[
+L_\text{val} = \frac{1}{N_\text{val}} \sum_{i \in \text{val}} L(y_i, f(\mathbf{x}_i))
+\]
+
+A rise in validation loss while training loss decreases indicates overfitting.
+
+### Regularisation Techniques
+
+To mitigate overfitting:
+- **L2 regularisation (Ridge):** adds \(\lambda \|\mathbf{w}\|^2\) to the loss.
+- **Dropout (for neural networks):** randomly deactivates neurons during training.
+- **Early stopping:** halts training when validation loss stops improving.
+
+## 5.2 Cross-Validation
+
+For smaller datasets, **k-fold cross-validation** provides a robust estimate of model performance. Data are split into \(k\) folds, each serving once as validation while the others are used for training.
+
+---
+
+# Summary
+
+Supervised learning forms the backbone of many modern computational physics applications, from surrogate modelling of simulations to automated data analysis.  
+In this lecture, we have covered:
+
+- How **training sets** are constructed and split,  
+- The nature of **models** (linear and nonlinear),  
+- The role of **loss functions** in quantifying prediction error,  
+- **Optimisation** techniques like gradient descent, and  
+- **Validation** methods to ensure generalisation.
+
+Next, we will build on this foundation to explore **unsupervised learning** and **dimensionality reduction**, tools that help discover structure in unlabelled physical data.
+
+---
+
+# References
+
+- Bishop, C. M. (2006). *Pattern Recognition and Machine Learning*. Springer.
+- Goodfellow, I., Bengio, Y., & Courville, A. (2016). *Deep Learning*. MIT Press.
+- Mehta, P. et al. (2019). *A high-bias, low-variance introduction to Machine Learning for physicists*. *Physics Reports*, 810, 1–124.
+- Géron, A. (2022). *Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow* (3rd Ed.). O’Reilly.
+
 
 
 ## Regression
@@ -18,7 +195,6 @@ Linear regression
 
 Minimisation of mean squared error
 
-test sudan
 
 Connection to maximum likelihood estimation under Gaussian noise
 
