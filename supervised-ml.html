@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Introduction – Advanced Computational Physics &amp; Machine Learning</title>
+<title>6&nbsp; Supervised Learning – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./adv-python.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./neural-networks.html" rel="next">
+<link href="./intro-ml.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -71,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./supervised-ml.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Supervised Learning</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -116,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -146,7 +175,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./supervised-ml.html" class="sidebar-item-text sidebar-link">
+  <a href="./supervised-ml.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
@@ -172,7 +201,46 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-requisites" id="toc-pre-requisites" class="nav-link active" data-scroll-target="#pre-requisites"><span class="header-section-number">1.1</span> Pre-requisites</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">6.1</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#training-sets" id="toc-training-sets" class="nav-link" data-scroll-target="#training-sets"><span class="header-section-number">6.1.1</span> Training Sets</a></li>
+  <li><a href="#dataset-splitting" id="toc-dataset-splitting" class="nav-link" data-scroll-target="#dataset-splitting"><span class="header-section-number">6.1.2</span> Dataset splitting</a></li>
+  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">6.1.3</span> Models</a></li>
+  </ul></li>
+  <li><a href="#linear-models" id="toc-linear-models" class="nav-link" data-scroll-target="#linear-models"><span class="header-section-number">6.2</span> 2.1 Linear Models</a></li>
+  <li><a href="#nonlinear-models" id="toc-nonlinear-models" class="nav-link" data-scroll-target="#nonlinear-models"><span class="header-section-number">6.3</span> 2.2 Nonlinear Models</a></li>
+  <li><a href="#loss-functions" id="toc-loss-functions" class="nav-link" data-scroll-target="#loss-functions"><span class="header-section-number">7</span> 3. Loss Functions</a>
+  <ul class="collapse">
+  <li><a href="#regression-losses" id="toc-regression-losses" class="nav-link" data-scroll-target="#regression-losses"><span class="header-section-number">7.1</span> 3.1 Regression Losses</a></li>
+  <li><a href="#classification-losses" id="toc-classification-losses" class="nav-link" data-scroll-target="#classification-losses"><span class="header-section-number">7.2</span> 3.2 Classification Losses</a>
+  <ul class="collapse">
+  <li><a href="#physics-example-phase-classification" id="toc-physics-example-phase-classification" class="nav-link" data-scroll-target="#physics-example-phase-classification"><span class="header-section-number">7.2.1</span> Physics Example: Phase Classification</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#optimisation" id="toc-optimisation" class="nav-link" data-scroll-target="#optimisation"><span class="header-section-number">8</span> 4. Optimisation</a>
+  <ul class="collapse">
+  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent"><span class="header-section-number">8.1</span> 4.1 Gradient Descent</a>
+  <ul class="collapse">
+  <li><a href="#variants" id="toc-variants" class="nav-link" data-scroll-target="#variants"><span class="header-section-number">8.1.1</span> Variants</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">8.1.2</span> Example</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#validation-and-model-selection" id="toc-validation-and-model-selection" class="nav-link" data-scroll-target="#validation-and-model-selection"><span class="header-section-number">9</span> 5. Validation and Model Selection</a>
+  <ul class="collapse">
+  <li><a href="#validation" id="toc-validation" class="nav-link" data-scroll-target="#validation"><span class="header-section-number">9.1</span> 5.1 Validation</a>
+  <ul class="collapse">
+  <li><a href="#regularisation-techniques" id="toc-regularisation-techniques" class="nav-link" data-scroll-target="#regularisation-techniques"><span class="header-section-number">9.1.1</span> Regularisation Techniques</a></li>
+  </ul></li>
+  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">9.2</span> 5.2 Cross-Validation</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">10</span> Summary</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">11</span> References</a>
+  <ul class="collapse">
+  <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression"><span class="header-section-number">11.1</span> Regression</a></li>
+  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification"><span class="header-section-number">11.2</span> Classification</a></li>
+  <li><a href="#evaluating-model-performance" id="toc-evaluating-model-performance" class="nav-link" data-scroll-target="#evaluating-model-performance"><span class="header-section-number">11.3</span> Evaluating model performance</a></li>
+  <li><a href="#bias-variance-overfitting" id="toc-bias-variance-overfitting" class="nav-link" data-scroll-target="#bias-variance-overfitting"><span class="header-section-number">11.4</span> Bias, Variance, Overfitting</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -181,7 +249,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Supervised Learning</span></h1>
 </div>
 
 
@@ -198,29 +266,177 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome to the course notes for Advanced Computational Physics and Machine Learning.</p>
-<p>These notes will introduce the material covered in lectures and problems classes. They will be supplemented by lecture slides and example programming problems.</p>
-<p>The notes will be released in four blocks for each half teaching block. The first block will cover numerical methods, as well as some advanced programming techniques :</p>
-<ol type="1">
-<li>Introduction</li>
-<li>Advanced Python Programming</li>
-<li>Linear Algebra</li>
-<li>Monte Carlo Methods</li>
-<li>Introduction to Machine Learning</li>
-<li>Supervised Learning</li>
-<li>Neural Networks</li>
-<li>Unsupervised Learning</li>
-</ol>
-<p>Future blocks will cover further data science techniques, machine learning and high performance computing.</p>
-<section id="pre-requisites" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="pre-requisites"><span class="header-section-number">1.1</span> Pre-requisites</h2>
-<p>These notes assume you have studied computational physics up to 2nd year (Level 5), such as :</p>
+<section id="introduction" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">6.1</span> Introduction</h2>
+<p>In computational physics, we often seek to build models that can learn from data. <strong>Supervised learning</strong> is one of the foundational paradigms in machine learning, in which a model learns to predict an output (label or target) given a set of inputs (features). In essence a model is trained to be able to identify patterns in datasets. If the model is trained successfully it should be able to predict outputs on unseen data.</p>
+<p>This part of the course explores how supervised learning is formulated, trained, and evaluated, focusing on applications relevant to physics.</p>
+<hr>
+<section id="training-sets" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="training-sets"><span class="header-section-number">6.1.1</span> Training Sets</h3>
+<p>In supervised learning, the foundation is the <strong>training set</strong>, a collection of <strong>input–output pairs</strong>:</p>
+<p><span class="math display">\[
+\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^N
+\]</span></p>
+<p>where:</p>
+<p><span class="math display">\[
+(\mathbf{x}_i \in \mathbb{R}^d)
+\]</span><br>
+are feature vectors (inputs), <span class="math display">\[
+(y_i \in \mathbb{R})
+\]</span> are labels (outputs), and<br>
+<span class="math display">\[
+(N)
+\]</span> is the total number of samples.</p>
+<p>The key goal of supervised learning is to learn a mapping: <span class="math display">\[
+(f: \mathbf{x} \rightarrow y)  \text{such that}  (f(\mathbf{x}_i) \approx y_i).
+\]</span></p>
+<p>The significant point here is that one needs to have a <strong>labelled dataset</strong> to use supervised learning; each data point needs a corresponding label - a common example of this would be vehicles and vehicle types. The dataset would need to include different types of vehicle, such as motorbikes, cars, vans, lorries - and then each vehicle in the dataset would have a label identifiying its type. The different types of dataset used in supervised learning are covered in the next section.</p>
+</section>
+<section id="dataset-splitting" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="dataset-splitting"><span class="header-section-number">6.1.2</span> Dataset splitting</h3>
+<p>Generally there are three different types of data that are used in supervised learning. They can all come from the same dataset, but need to be split up in advance as they are used for different parts of the process.</p>
+<p>The dataset is usually divided into:</p>
 <ul>
-<li>PHYS20035 - Computational Physics and Data Science</li>
-<li>SCIF20002 - Programming and Data Analysis for Scientists</li>
+<li><strong>Training set</strong> — used to fit the model parameters and learn the underlying patterns in the data.</li>
+<li><strong>Validation set</strong> — used for tuning the hyperparameters of the model.</li>
+<li><strong>Test set</strong> — used to evaluate final model performance - should be unbiased.</li>
 </ul>
+<p>Typical split ratios: 70% / 15% / 15%, though this does depend on how large the dataset is and the type of problem you are solving. There are techniques that one can use to augment data in the case of smaller datasets - these will be discussed later in the course.</p>
+<hr>
+</section>
+<section id="models" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="models"><span class="header-section-number">6.1.3</span> Models</h3>
+<p>A <strong>model</strong> defines the relationship between inputs and outputs. It can be <strong>linear</strong> or <strong>non-linear</strong>, depending on the task the network has to perform and the relationship between the features and labels.</p>
+</section>
+</section>
+<section id="linear-models" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="linear-models"><span class="header-section-number">6.2</span> 2.1 Linear Models</h2>
+<p>A simple linear model assumes the relationship between the features and labels in a dataset can be accurately modelled by a straight line. There are several examples where we expect this to be the case; house prices based on size, exam scores based on number of hours studied…</p>
+<p>Consider the following dataset:</p>
+</section>
+<section id="nonlinear-models" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="nonlinear-models"><span class="header-section-number">6.3</span> 2.2 Nonlinear Models</h2>
+<hr>
+</section>
+<section id="loss-functions" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> 3. Loss Functions</h1>
+<p>To quantify how well a model performs, we define a <strong>loss function</strong> (L(y, f())) that measures the discrepancy between predicted and true values.</p>
+<section id="regression-losses" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="regression-losses"><span class="header-section-number">7.1</span> 3.1 Regression Losses</h2>
+<ul>
+<li><p><strong>Mean Squared Error (MSE):</strong> [ L = _i (y_i - f(_i))^2 ]</p></li>
+<li><p><strong>Mean Absolute Error (MAE):</strong> [ L = _i |y_i - f(_i)| ]</p></li>
+</ul>
+<p>MSE penalises large deviations more strongly, while MAE is more robust to outliers.</p>
+</section>
+<section id="classification-losses" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="classification-losses"><span class="header-section-number">7.2</span> 3.2 Classification Losses</h2>
+<p>For binary or multi-class classification tasks, we often use: - <strong>Cross-Entropy Loss:</strong> [ L = - <em>i <em>c y</em>{ic} p</em>{ic} ]</p>
+<p>where (p_{ic}) is the predicted probability of class (c) for sample (i).</p>
+<section id="physics-example-phase-classification" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="physics-example-phase-classification"><span class="header-section-number">7.2.1</span> Physics Example: Phase Classification</h3>
+<p>Given simulated data of a material at different temperatures and pressures, one might train a classifier to predict the <strong>phase</strong> (solid, liquid, gas) from thermodynamic observables. The cross-entropy loss measures how confidently and accurately the model predicts the correct phase.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="optimisation" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> 4. Optimisation</h1>
+<p>Training involves <strong>optimising</strong> the model parameters () to minimise the loss function over the training set:</p>
+<p>[ ^* = <em> </em>{i=1}^{N} L(y_i, f(_i; )) ]</p>
+<section id="gradient-descent" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">8.1</span> 4.1 Gradient Descent</h2>
+<p>The most common optimisation strategy is <strong>gradient descent</strong>, which updates parameters iteratively:</p>
+<p>[ _{t+1} = <em>t - </em>L(_t) ]</p>
+<p>where () is the learning rate.</p>
+<section id="variants" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="variants"><span class="header-section-number">8.1.1</span> Variants</h3>
+<ul>
+<li><strong>Stochastic Gradient Descent (SGD):</strong> uses random subsets (mini-batches) of data for faster convergence.</li>
+<li><strong>Momentum / Adam / RMSProp:</strong> adaptive optimisers that improve convergence speed and stability.</li>
+</ul>
+</section>
+<section id="example" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="example"><span class="header-section-number">8.1.2</span> Example</h3>
+<p>In a neural network predicting potential energy surfaces, the parameters (weights) are adjusted using backpropagation—a computationally efficient way to apply the chain rule for gradients across many layers.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="validation-and-model-selection" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> 5. Validation and Model Selection</h1>
+<p>Even if a model fits the training data well, it may not generalise to unseen data. This problem—<strong>overfitting</strong>—is common when models are too complex relative to available data.</p>
+<section id="validation" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="validation"><span class="header-section-number">9.1</span> 5.1 Validation</h2>
+<p>The validation set provides a means to monitor generalisation during training. We compute the validation loss:</p>
+<p>[ L_ = _{i } L(y_i, f(_i)) ]</p>
+<p>A rise in validation loss while training loss decreases indicates overfitting.</p>
+<section id="regularisation-techniques" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="regularisation-techniques"><span class="header-section-number">9.1.1</span> Regularisation Techniques</h3>
+<p>To mitigate overfitting: - <strong>L2 regularisation (Ridge):</strong> adds (||^2) to the loss. - <strong>Dropout (for neural networks):</strong> randomly deactivates neurons during training. - <strong>Early stopping:</strong> halts training when validation loss stops improving.</p>
+</section>
+</section>
+<section id="cross-validation" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="cross-validation"><span class="header-section-number">9.2</span> 5.2 Cross-Validation</h2>
+<p>For smaller datasets, <strong>k-fold cross-validation</strong> provides a robust estimate of model performance. Data are split into (k) folds, each serving once as validation while the others are used for training.</p>
+<hr>
+</section>
+</section>
+<section id="summary" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Summary</h1>
+<p>Supervised learning forms the backbone of many modern computational physics applications, from surrogate modelling of simulations to automated data analysis.<br>
+In this lecture, we have covered:</p>
+<ul>
+<li>How <strong>training sets</strong> are constructed and split,<br>
+</li>
+<li>The nature of <strong>models</strong> (linear and nonlinear),<br>
+</li>
+<li>The role of <strong>loss functions</strong> in quantifying prediction error,<br>
+</li>
+<li><strong>Optimisation</strong> techniques like gradient descent, and<br>
+</li>
+<li><strong>Validation</strong> methods to ensure generalisation.</li>
+</ul>
+<p>Next, we will build on this foundation to explore <strong>unsupervised learning</strong> and <strong>dimensionality reduction</strong>, tools that help discover structure in unlabelled physical data.</p>
+<hr>
+</section>
+<section id="references" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> References</h1>
+<ul>
+<li>Bishop, C. M. (2006). <em>Pattern Recognition and Machine Learning</em>. Springer.</li>
+<li>Goodfellow, I., Bengio, Y., &amp; Courville, A. (2016). <em>Deep Learning</em>. MIT Press.</li>
+<li>Mehta, P. et al.&nbsp;(2019). <em>A high-bias, low-variance introduction to Machine Learning for physicists</em>. <em>Physics Reports</em>, 810, 1–124.</li>
+<li>Géron, A. (2022). <em>Hands-On Machine Learning with Scikit-Learn, Keras &amp; TensorFlow</em> (3rd Ed.). O’Reilly.</li>
+</ul>
+<section id="regression" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="regression"><span class="header-section-number">11.1</span> Regression</h2>
+<p>Linear regression</p>
+<p>Minimisation of mean squared error</p>
+<p>Connection to maximum likelihood estimation under Gaussian noise</p>
+<p>Polynomial regression and basis expansion</p>
+<p>Regularisation (L2, L1)</p>
+</section>
+<section id="classification" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="classification"><span class="header-section-number">11.2</span> Classification</h2>
+<p>Logistic regression</p>
+<p>Negative log-likelihood loss (cross-entropy)</p>
+<p>Connection to MLE under Bernoulli model</p>
+<p>Alternatives : k-Nearest Neighbours (KNN). Support Vector Machines (SVMs)</p>
+</section>
+<section id="evaluating-model-performance" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="evaluating-model-performance"><span class="header-section-number">11.3</span> Evaluating model performance</h2>
+<p>Regression metrics. MSE, RMSE, <span class="math inline">\(R^2\)</span></p>
+<p>Classification metrics. accuracy, precision, recall, F1 score, ROC curves.</p>
+<p>Train/test split. Cross-validation.</p>
+<p>Demonstrate visually how overfitting and underfitting appear in training vs.&nbsp;validation error plots.</p>
+</section>
+<section id="bias-variance-overfitting" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="bias-variance-overfitting"><span class="header-section-number">11.4</span> Bias, Variance, Overfitting</h2>
+<p>Define bias–variance trade-off.</p>
+<p>Overfitting in physics context: model fits noise rather than real phenomena.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -626,13 +842,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./intro-ml.html" class="pagination-link" aria-label="Introduction to Machine Learning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./adv-python.html" class="pagination-link" aria-label="Advanced Python Programming">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Advanced Python Programming</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./neural-networks.html" class="pagination-link" aria-label="Neural Networks">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neural Networks</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
