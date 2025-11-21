@@ -8,7 +8,9 @@ execute:
 
 An artifical neural network (ANN) is an interconnected collection of nodes or neurons, inspired by the human brain. Each neuron can receive input from many other neurons, performs some relatively simple processing, and then sends its output to one or many other neurons. Through careful choice of the processing performed by each neuron, the topology of the network, and advanced optimisation methods, the ANN can be trained to perform highly sophisticated processing tasks.
 
-History of ANNs
+## A Brief History of ANNs
+
+
 
 ## Anatomy of a Neural Network
 
@@ -128,6 +130,7 @@ Intuitive derivation, no need for full algebraic proof.
 
 
 ## Training
+
 Batch vs stochastic gradient descent
 Loss evolution: training loss vs. validation loss → early stopping to prevent overfitting.
 
