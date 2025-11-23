@@ -4,17 +4,34 @@ execute:
   echo: false
   error: true
 ---
+
 # Neural Networks {#sec-nn}
 
 An artifical neural network (ANN) is an interconnected collection of nodes or neurons, inspired by the human brain. Each neuron can receive input from many other neurons, performs some relatively simple processing, and then sends its output to one or many other neurons. Through careful choice of the processing performed by each neuron, the topology of the network, and advanced optimisation methods, the ANN can be trained to perform highly sophisticated processing tasks.
 
-History of ANNs
+
+## A Brief History of Artificial Neural Networks
+
+
+The ANN was invented in 1943 by McCulloch & Pitts @McCulloch-Pitts-43. The first implementation of an ANN was the Perceptron, by Rosenblatt in 1957, which was soon followed by the construction of a dedicated computer, the Mark 1 Perceptron, which ran a 3 layer ANN. These ANNs dealt with binary signals between neurons, and could not be trained. However, the first learning algorithm was developed in 1960 @adaline, a single layer ANN that could be trained to minimise the mean squared error of its output. The first multi-layer perceptron followed in 1967 @shunichi-67. Backpropagation was invented in 1970 by Linnainmaa and applied to MLPs by Werbos. However, little research in this area followed until the 1990s.  
+
+Early applications of MLPs in physics.
+
+Deep learning 2010s.
+
+LLMs 2020s.
+
+
 
 ## Anatomy of a Neural Network
 
-Most ANNs are known as 'feed-forward' neural networks. This means the computation flows in one direction, from inputs to outputs. The neurons in an ANN are typically arranged in layers. The first layer receives the input data, and the final layer produces the output data. The dimensionality of the input and output layers will be determined by the shape of the input and output data. Typically there are a number of 'hidden' layers between the input and output layers, for which the dimensionality is much less constrained - for example, the number of nodes can be greater than that of the input and output layers.
+![An example of an Artifical Neural Network](nn-simple.png)
 
-Each neuron processes input data according to a relatively simple function.  The most simple neuron comprises a linear function of the inputs, followed by an activation function.  The output can be written :
+Most ANNs are known as 'feed-forward' neural networks. This means the computation flows in one direction, from inputs to outputs. The neurons in an ANN are typically arranged in layers. The first layer receives the input data, and the final layer produces the output data. The dimensionality of the input and output layers will be determined by the shape of the input and output data. Typically there are a number of hidden layers between the input and output layers, for which the dimensionality is much less constrained - for example, the number of nodes can be greater than that of the input and output layers.
+
+### Neurons
+
+Each neuron processes input data according to a relatively simple function. The most simple neuron comprises a linear function of the inputs, followed by an activation function. The output can be written :
 
 $$
 y = f\left(\sum_{i=0}^{n}{\alpha_i x_i + \beta_i} \right)
@@ -22,28 +39,32 @@ $$
 
 where $\alpha_i$ are known as the weights, $\beta_i$ are the biases, $x_i$ are the inputs to the neuron, and $y$ is the neuron output. The function $f()$ is known as the activation function.
 
+In more advanced ANNs, neurons may different functions.  For example, the sum over inputs may be replaced by another function.
+
+### Connections
+
+The connectivity between layers must be defined. Fully interconnected layers (such as the hidden layers in the diagram above) offer the most flexibility, since the weights associated with connections that are not required will tend to zero during training.  However, the computational cost of such 'dense layers' may be excessive.  Depending on the application, some layers in the ANN will not be fully connected.  In image processing, for example, the input layers typically contain connections between nodes that corresponds to adjacent, or nearby, pixels.
+
+
 ## Activation
 
-The choice of activation function is important.  If the activation function is a linear function, then the neural network is reduced to linear regression, i.e. the output of the ANN is a linear function of the ANN inputs.  To capture more sophisticated features, it is important that the activation function provides some non-linearity.
+The choice of activation function is important. If the activation function is a linear function, then the neural network is reduced to linear regression, i.e. the output of the ANN is a linear function of the ANN inputs. To capture more sophisticated features, it is important that the activation function provides some non-linearity.
 
 Some typical activation functions include :
 
-  * Tanh function
-  * Sigmoid function
-  * Rectified linear function (ReLU)
+-   Tanh function
+-   Sigmoid function
+-   Rectified linear function (ReLU)
 
 which are described in more detail below.
 
-
 ### tanh function
 
-The hyperbolic tan function is defined as :
-$$
+The hyperbolic tan function is defined as : $$
 y = {\rm tanh}(x) = \frac{e^{2x}-1}{e^{2x}+1}
 $$
 
 And plotted in the figure below.
-
 
 ```{python}
 import numpy as np
@@ -61,8 +82,7 @@ plt.legend()
 plt.show()
 ```
 
-This function maps an input range of $[-\infty, \infty]$ onto an output range of $[-1, 1]$. This ensures values do not grow unmanageably large as data propagates through the network, independent of weight magnitude.  A linear combination of such functions can approximate a wide range of functions.
-
+This function maps an input range of $[-\infty, \infty]$ onto an output range of $[-1, 1]$. This ensures values do not grow unmanageably large as data propagates through the network, independent of weight magnitude. A linear combination of such functions can approximate a wide range of functions.
 
 ### Sigmoid function
 
@@ -88,7 +108,7 @@ plt.legend()
 plt.show()
 ```
 
-This function maps inputs on $[-\infty, \infty]$ onto outputs on $[0, 1]$.  For this reason, the sigmoid is often chosen for classification problems, where the function value is treated as a probability of the data belonging to a given class.  (See section on logistic regression).
+This function maps inputs on $[-\infty, \infty]$ onto outputs on $[0, 1]$. For this reason, the sigmoid is often chosen for classification problems, where the function value is treated as a probability of the data belonging to a given class. (See section on logistic regression).
 
 ### Rectified Linear (ReLU) function
 
@@ -107,8 +127,7 @@ $$
 y = \rm{ max}(x, 0)
 $$
 
-The ReLU function maps $[-\infty, \infty]$ onto $[0, \infty]$.  It is easily computed, and does not suffer from the "vanishing gradient problem" (see below).
-
+The ReLU function maps $[-\infty, \infty]$ onto $[0, \infty]$. It is easily computed, and does not suffer from the "vanishing gradient problem" (see below).
 
 ## Forward Pass
 
@@ -116,20 +135,17 @@ In a feed-forward neural network, the input data is fed into the input layer, an
 
 This allows the loss to be computed. For supervised learning, the loss is trypically the mean squared error (for regression problems) or the cross-entropy (for classification problems).
 
-
 ## Backpropagation
 
-In order to train a neural network, the gradient of the loss with respect to the weights must be computed.  This relies on back-propagation, a method by which the loss is propagated backwards through the network, such that the gradient with respect to each weight can be computed.
-
+In order to train a neural network, the gradient of the loss with respect to the weights must be computed. This relies on back-propagation, a method by which the loss is propagated backwards through the network, such that the gradient with respect to each weight can be computed.
 
 Use chain rule to compute gradients of loss w.r.t. weights.
 
 Intuitive derivation, no need for full algebraic proof.
 
-
 ## Training
-Batch vs stochastic gradient descent
-Loss evolution: training loss vs. validation loss → early stopping to prevent overfitting.
+
+Batch vs stochastic gradient descent Loss evolution: training loss vs. validation loss → early stopping to prevent overfitting.
 
 Hyperparameters: learning rate, network depth, regularization, batch size.
 
@@ -143,10 +159,13 @@ Early stopping
 
 ## Deep Learning
 
-Multiple hidden layers allow hierarchical feature extraction.
-Early layers learn simple features (edges, patterns).
-Deeper layers combine them into complex representations.
-Featurisation.
+Multiple hidden layers allow hierarchical feature extraction. Early layers learn simple features (edges, patterns). Deeper layers combine them into complex representations. Featurisation.
 
 
-blahblah CI TESTING
+
+## Programming Neural Networks
+
+There are several libraries in common use for neural network development, including PyTorch, Tensorflow, Keras, JAX.  In this unit we will focus on PyTorch, which is an open source library originally developed at EPFL Lausanne, and subsequently by Facebook/Meta. Since 2022 it has been managed by the Linux Foundation.
+
+
+
