@@ -13,7 +13,7 @@ book:
     - linear-algebra.qmd
     - monte-carlo.qmd
     - intro-ml.qmd
- #   - supervised-ml.qmd
+    - supervised-ml.qmd
     - neural-networks.qmd
  #   - unsupervised-ml.qmd
 
