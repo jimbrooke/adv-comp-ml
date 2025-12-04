@@ -144,7 +144,7 @@
     "href": "intro-ml.html#models",
     "title": "5  Introduction to Machine Learning",
     "section": "5.2 Models",
-    "text": "5.2 Models\nMachine learning can refer a wide range of techniques. All include what we will refer to as a ‘model’, that is the basis for learning. The model, \\(f\\), transforms input data \\(x\\) into output \\(\\hat{y}\\). The model relies on some parameters (often referred to as ‘weights’), \\(\\theta\\), which are optimised as the model ‘learns’ from data.\n\\[\n\\hat{y}=f(\\theta, x)\n\\]\n(Here we use \\(\\hat{y}\\) to distinguish the model output from the ‘truth’ \\(y\\), although this distinction is not always required, as we shall see).\nThe model can take many forms, some of which you will have already encountered. A few are described below.\n\n5.2.1 Simple Function\nLinear regression is an example of supervised learning. The model here is the functional form that is being fitted to the data. Training is the process of determining parameters \\(\\theta\\) that minimise the mean squared error, i.e. performing the fit.\n\n\n5.2.2 Decision Trees\nDecision trees are commonly used in classification problems, in particular where the data occupies a multidimensional space. The data sample \\(x\\) is divided into categories \\(\\hat{y}\\) following a sequence of individual divisions or splits, which are defined by the parameters \\(\\theta\\). The precise sequence of divisions can be obtained using supervised learning, or clustering methods.\n\n\n5.2.3 Neural Networks\nNeural networks will be covered in detail in Chapter 7. Briefly, they comprise a network of nodes, modelled on the human brain. Each node receives input from several other nodes, and uses a activation function to generate output. Each input to the node is associated with a weight and a bias, which control the strength of the connection between nodes. The weights and biases are the parameters \\(\\theta\\) of the model, which are optimised during training. For example, the output of a node may be expressed as :\n\\[\ny = \\sum_{i}{a_i f(x_i + c_i)}\n\\]\nwhere the input data from input node \\(i\\) is \\(x_i\\), associated with weight \\(a_i\\) and bias \\(c_i\\), and the activation function is \\(f\\). Note that the activation function is typically non-linear, which allows the neural network to express complex non-linear transformations.",
+    "text": "5.2 Models\nMachine learning can refer a wide range of techniques. All include what we will refer to as a ‘model’, that is the basis for learning. The model, \\(f\\), transforms input data \\(x\\) into output \\(\\hat{y}\\). The model relies on some parameters (often referred to as ‘weights’), \\(\\theta\\), which are optimised as the model ‘learns’ from data.\n\\[\n\\hat{y}=f(\\theta, x)\n\\]\n(Here we use \\(\\hat{y}\\) to distinguish the model output from the ‘truth’ \\(y\\), although this distinction is not always required, as we shall see).\nThe model can take many forms, some of which you will have already encountered. A few are described below.\n\n5.2.1 Simple Function\nLinear regression is an example of supervised learning. The model here is the functional form that is being fitted to the data. Training is the process of determining parameters \\(\\theta\\) that minimise the mean squared error, i.e. performing the fit.\n\n\n5.2.2 Decision Trees\nDecision trees are commonly used in classification problems, in particular where the data occupies a multidimensional space. The data sample \\(x\\) is divided into categories \\(\\hat{y}\\) following a sequence of individual divisions or splits, which are defined by the parameters \\(\\theta\\). The precise sequence of divisions can be obtained using supervised learning, or clustering methods.\n\n\n5.2.3 Neural Networks\nNeural networks will be covered in detail in ?sec-nn. Briefly, they comprise a network of nodes, modelled on the human brain. Each node receives input from several other nodes, and uses a activation function to generate output. Each input to the node is associated with a weight and a bias, which control the strength of the connection between nodes. The weights and biases are the parameters \\(\\theta\\) of the model, which are optimised during training. For example, the output of a node may be expressed as :\n\\[\ny = \\sum_{i}{a_i f(x_i + c_i)}\n\\]\nwhere the input data from input node \\(i\\) is \\(x_i\\), associated with weight \\(a_i\\) and bias \\(c_i\\), and the activation function is \\(f\\). Note that the activation function is typically non-linear, which allows the neural network to express complex non-linear transformations.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Introduction to Machine Learning</span>"
     ]
@@ -277,96 +277,6 @@
     "text": "6.10 Regularisation\nAs models become more complex it becomes increasingly difficult to maintain their ability to generalise to unseen data, while preventing overfitting. Techniques exist to adapt loss functions to help mitigate this, and are called regularisation.\nL1 regularisation, also known as LASSO (Least Asbolute Shrinkage and Selection Opertor) adds a penalty term to the loss function which is the absolute sum of the weights. The model is therefore penalised when trying to assign large weights, in some cases down to zero. This leads to a sparser model which is simpler and has less variance. It also helps with feature selection by shrinking down to zero the least important parameters. A loss function for MSE with the added regularisation term is shown below:\n\\[\n\\frac{1}{n{}} \\sum^{n}_{i=1}(y_i-\\hat{y}_i)^2 + \\lambda \\sum^{n}_{i=1}|w_i|\n\\]\nThe \\(\\lambda\\) parameter controls the extent to which regularisation is applied by scaling the penalty term; zero would indicate no regularisation.\nL2 regularisation, also known as RIDGE regression, is another method which uses the sum of the squared weights as the penalty term. This also shrinks weights down but not to zero. The expression for this is shown below:\n\\[\n\\frac{1}{n{}} \\sum^{n}_{i=1}(y_i-\\hat{y}_i)^2 + \\lambda \\sum^{n}_{i=1}{w_i}^2\n\\]\nIn some cases you may want to shrink some weights down to zero but include the stability of L2 regularisation; elastic net regularisation combines L1 and L2 with an \\(\\alpha\\) parameter to control the balance between them:\n\\[\n\\frac{1}{n{}} \\sum^{n}_{i=1}(y_i-\\hat{y}_i)^2 + \\lambda[\\alpha \\sum^{p}_{j=1}|w_i| + (1-\\alpha)\\sum^{p}_{j=1}w_j^2]\n\\]",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Supervised Learning</span>"
-    ]
-  },
-  {
-    "objectID": "neural-networks.html",
-    "href": "neural-networks.html",
-    "title": "7  Neural Networks",
-    "section": "",
-    "text": "7.1 Anatomy of a Neural Network\nAn artifical neural network (ANN) is an interconnected collection of nodes or neurons, inspired by the human brain. Each neuron can receive input from many other neurons, performs some relatively simple processing, and then sends its output to one or many other neurons. Through careful choice of the processing performed by each neuron, the topology of the network, and advanced optimisation methods, the ANN can be trained to perform highly sophisticated processing tasks.\n## A Brief History of Artificial Neural Networks\nThe ANN was invented in 1943 by McCulloch & Pitts  [1]. The first implementation of an ANN was the Perceptron, by Rosenblatt in 1957, which was soon followed by the construction of a dedicated computer, the Mark 1 Perceptron, which ran a 3 layer ANN. These ANNs dealt with binary signals between neurons, and could not be trained. However, the first learning algorithm was developed in 1960  [adaline?], a single layer ANN that could be trained to minimise the mean squared error of its output. The first multi-layer perceptron followed in 1967  [shunichi-67?]. Backpropagation was invented in 1970 by Linnainmaa and applied to MLPs by Werbos. However, little research in this area followed until the 1990s.\nEarly applications of MLPs in physics.\nDeep learning 2010s.\nLLMs 2020s.\nMost ANNs are known as ‘feed-forward’ neural networks. This means the computation flows in one direction, from inputs to outputs. The neurons in an ANN are typically arranged in layers. The first layer receives the input data, and the final layer produces the output data. The dimensionality of the input and output layers will be determined by the shape of the input and output data. Typically there are a number of hidden layers between the input and output layers, for which the dimensionality is much less constrained - for example, the number of nodes can be greater than that of the input and output layers.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Neural Networks</span>"
-    ]
-  },
-  {
-    "objectID": "neural-networks.html#anatomy-of-a-neural-network",
-    "href": "neural-networks.html#anatomy-of-a-neural-network",
-    "title": "7  Neural Networks",
-    "section": "",
-    "text": "An example of an Artifical Neural Network\n\n\n\n\n7.1.1 Neurons\nEach neuron processes input data according to a relatively simple function. The most simple neuron comprises a linear function of the inputs, followed by an activation function. The output can be written :\n\\[\ny = f\\left(\\sum_{i=0}^{n}{\\alpha_i x_i + \\beta_i} \\right)\n\\]\nwhere \\(\\alpha_i\\) are known as the weights, \\(\\beta_i\\) are the biases, \\(x_i\\) are the inputs to the neuron, and \\(y\\) is the neuron output. The function \\(f()\\) is known as the activation function.\nIn more advanced ANNs, neurons may different functions. For example, the sum over inputs may be replaced by another function.\n\n\n7.1.2 Connections\nThe connectivity between layers must be defined. Fully interconnected layers (such as the hidden layers in the diagram above) offer the most flexibility, since the weights associated with connections that are not required will tend to zero during training. However, the computational cost of such ‘dense layers’ may be excessive. Depending on the application, some layers in the ANN will not be fully connected. In image processing, for example, the input layers typically contain connections between nodes that corresponds to adjacent, or nearby, pixels.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Neural Networks</span>"
-    ]
-  },
-  {
-    "objectID": "neural-networks.html#activation",
-    "href": "neural-networks.html#activation",
-    "title": "7  Neural Networks",
-    "section": "7.2 Activation",
-    "text": "7.2 Activation\nThe choice of activation function is important. If the activation function is a linear function, then the neural network is reduced to linear regression, i.e. the output of the ANN is a linear function of the ANN inputs. To capture more sophisticated features, it is important that the activation function provides some non-linearity.\nSome typical activation functions include :\n\nTanh function\nSigmoid function\nRectified linear function (ReLU)\n\nwhich are described in more detail below.\n\n7.2.1 tanh function\nThe hyperbolic tan function is defined as : \\[\ny = {\\rm tanh}(x) = \\frac{e^{2x}-1}{e^{2x}+1}\n\\]\nAnd plotted in the figure below.\n\n\n\n\n\n\n\n\n\nThis function maps an input range of \\([-\\infty, \\infty]\\) onto an output range of \\([-1, 1]\\). This ensures values do not grow unmanageably large as data propagates through the network, independent of weight magnitude. A linear combination of such functions can approximate a wide range of functions.\n\n\n7.2.2 Sigmoid function\nThe sigmoid function is another name for the logistic function.\n\\[\ny=\\frac{1}{1+e^{-x}}\n\\]\n\n\n\n\n\n\n\n\n\nThis function maps inputs on \\([-\\infty, \\infty]\\) onto outputs on \\([0, 1]\\). For this reason, the sigmoid is often chosen for classification problems, where the function value is treated as a probability of the data belonging to a given class. (See section on logistic regression).\n\n\n7.2.3 Rectified Linear (ReLU) function\nThe ReLU function is :\n\\[\n\\begin{align}\ny = \\, &x \\quad (x \\gt 0) \\\\\\\\\n&0 \\quad(x \\le 0)\n\\end{align}\n\\]\nOr, equivalently,\n\\[\ny = \\rm{ max}(x, 0)\n\\]\nThe ReLU function maps \\([-\\infty, \\infty]\\) onto \\([0, \\infty]\\). It is easily computed, and does not suffer from the “vanishing gradient problem” (see below).",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Neural Networks</span>"
-    ]
-  },
-  {
-    "objectID": "neural-networks.html#forward-pass",
-    "href": "neural-networks.html#forward-pass",
-    "title": "7  Neural Networks",
-    "section": "7.3 Forward Pass",
-    "text": "7.3 Forward Pass\nIn a feed-forward neural network, the input data is fed into the input layer, and the output of each layer of neurons is computed in turn until the output of the final layer is obtained. This output is treated as a prediction.\nThis allows the loss to be computed. For supervised learning, the loss is trypically the mean squared error (for regression problems) or the cross-entropy (for classification problems).",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Neural Networks</span>"
-    ]
-  },
-  {
-    "objectID": "neural-networks.html#backpropagation",
-    "href": "neural-networks.html#backpropagation",
-    "title": "7  Neural Networks",
-    "section": "7.4 Backpropagation",
-    "text": "7.4 Backpropagation\nIn order to train a neural network, the gradient of the loss with respect to the weights must be computed. This relies on back-propagation, a method by which the loss is propagated backwards through the network, such that the gradient with respect to each weight can be computed.\nUse chain rule to compute gradients of loss w.r.t. weights.\nIntuitive derivation, no need for full algebraic proof.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Neural Networks</span>"
-    ]
-  },
-  {
-    "objectID": "neural-networks.html#training",
-    "href": "neural-networks.html#training",
-    "title": "7  Neural Networks",
-    "section": "7.5 Training",
-    "text": "7.5 Training\nBatch vs stochastic gradient descent Loss evolution: training loss vs. validation loss → early stopping to prevent overfitting.\nHyperparameters: learning rate, network depth, regularization, batch size.\nRegularization techniques:\nL2 weight decay\nDropout\nEarly stopping",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Neural Networks</span>"
-    ]
-  },
-  {
-    "objectID": "neural-networks.html#deep-learning",
-    "href": "neural-networks.html#deep-learning",
-    "title": "7  Neural Networks",
-    "section": "7.6 Deep Learning",
-    "text": "7.6 Deep Learning\nMultiple hidden layers allow hierarchical feature extraction. Early layers learn simple features (edges, patterns). Deeper layers combine them into complex representations. Featurisation.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Neural Networks</span>"
-    ]
-  },
-  {
-    "objectID": "neural-networks.html#programming-neural-networks",
-    "href": "neural-networks.html#programming-neural-networks",
-    "title": "7  Neural Networks",
-    "section": "7.7 Programming Neural Networks",
-    "text": "7.7 Programming Neural Networks\nThere are several libraries in common use for neural network development, including PyTorch, Tensorflow, Keras, JAX. In this unit we will focus on PyTorch, which is an open source library originally developed at EPFL Lausanne, and subsequently by Facebook/Meta. Since 2022 it has been managed by the Linux Foundation.\n\n\n\n\n[1] P. McCulloch W. S., Bulletin of Mathematical Biophysics 5, 115 (1943).",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Neural Networks</span>"
-    ]
-  },
-  {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "[1] P. McCulloch W. S., Bulletin\nof Mathematical Biophysics 5, 115 (1943).",
-    "crumbs": [
-      "References"
     ]
   }
 ]
