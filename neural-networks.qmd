@@ -127,7 +127,31 @@ $$
 y = \rm{ max}(x, 0)
 $$
 
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_theme()
+
+x = np.linspace(-5, 5, 200)
+y = np.maximum(x,0)
+
+plt.plot(x, y, label=r'$y={\rm max}(x,0)$')
+plt.ylabel('y')
+plt.xlabel('x')
+plt.legend()
+plt.show()
+```
+
 The ReLU function maps $[-\infty, \infty]$ onto $[0, \infty]$. It is easily computed, and does not suffer from the "vanishing gradient problem" (see below).
+
+
+
+### Softmax
+
+This is a multi-variable activation function, typically used only in the final layer of an ANN.
+
+
 
 ## Forward Pass
 
@@ -137,11 +161,25 @@ This allows the loss to be computed. For supervised learning, the loss is trypic
 
 ## Backpropagation
 
-In order to train a neural network, the gradient of the loss with respect to the weights must be computed. This relies on back-propagation, a method by which the loss is propagated backwards through the network, such that the gradient with respect to each weight can be computed.
+In order to train a neural network, the gradient of the loss with respect to the weights must be computed. The standard method for achieving this is backpropagation.
 
-Use chain rule to compute gradients of loss w.r.t. weights.
+We can write the network as a combination of matrix multiplication and function composition :
 
-Intuitive derivation, no need for full algebraic proof.
+$$
+
+$$
+
+which allows the loss to be written as a function of the weights :
+
+$$
+
+$$
+
+Note that, for training purposes, we treat the input values as constants. 
+
+Provided the derivative of the activation functions $f$ can be computed, the derivative of the loss with respect to each weight can be computed using the chain rule.  However, this is computationally inefficient.  Backpropagation relies on the fact that a weight $w_l$ can only affect the loss via the next layer.  Thus, we can compute the gradient with respect to weights of the final layer, then the next-to-final layer, and so on.
+
+
 
 ## Training
 
