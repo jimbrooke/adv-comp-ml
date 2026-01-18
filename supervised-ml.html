@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./neural-networks.html" rel="next">
 <link href="./intro-ml.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -39,7 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-0dd2bd5de344125cf763a379ddc3eb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -181,6 +181,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./neural-networks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -203,7 +209,7 @@ window.Quarto = {
   <li><a href="#optimisation" id="toc-optimisation" class="nav-link" data-scroll-target="#optimisation"><span class="header-section-number">6.6</span> Optimisation</a></li>
   <li><a href="#boosted-decision-tree" id="toc-boosted-decision-tree" class="nav-link" data-scroll-target="#boosted-decision-tree"><span class="header-section-number">6.7</span> Boosted Decision Tree</a></li>
   <li><a href="#bdt-classifier-performance" id="toc-bdt-classifier-performance" class="nav-link" data-scroll-target="#bdt-classifier-performance"><span class="header-section-number">6.8</span> BDT Classifier Performance</a></li>
-  <li><a href="#overfittingunderfitting" id="toc-overfittingunderfitting" class="nav-link" data-scroll-target="#overfittingunderfitting"><span class="header-section-number">6.9</span> Overfitting/Underfitting</a></li>
+  <li><a href="#sec-overfitting" id="toc-sec-overfitting" class="nav-link" data-scroll-target="#sec-overfitting"><span class="header-section-number">6.9</span> Overfitting/Underfitting</a></li>
   <li><a href="#regularisation" id="toc-regularisation" class="nav-link" data-scroll-target="#regularisation"><span class="header-section-number">6.10</span> Regularisation</a></li>
   </ul>
 </nav>
@@ -332,8 +338,8 @@ are feature vectors (inputs), <span class="math display">\[
 </div>
 <p>The numbers shown are absolute, rather than fractions and so can easily be misinterpreted, care should be taken when drawing conclusions from this method.</p>
 </section>
-<section id="overfittingunderfitting" class="level2" data-number="6.9">
-<h2 data-number="6.9" class="anchored" data-anchor-id="overfittingunderfitting"><span class="header-section-number">6.9</span> Overfitting/Underfitting</h2>
+<section id="sec-overfitting" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="sec-overfitting"><span class="header-section-number">6.9</span> Overfitting/Underfitting</h2>
 <p>While training a model there is a balance to be struck on several factors, including training time, dataset size, dataset content etc. A common issue which needs to be tackled occurs when when during training a model too closely follows the data. When this happens a model is learning highly specific aspects of the training data and will therefore perform poorly on unseen data. The model is too complex and has typically failed to learn general patters in the data. It can be spotted when considering the loss curves from your training and validation data; the loss curve from the training data will fall smoothly and plateau, whereas the curve from the validation data will typically fall and then start to rise, as the model is not able to generalise well.</p>
 <p>Some common techniques to avoid overfitting are to:</p>
 <ul>
@@ -772,8 +778,8 @@ are feature vectors (inputs), <span class="math display">\[
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./neural-networks.html" class="pagination-link" aria-label="Neural Networks">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neural Networks</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
