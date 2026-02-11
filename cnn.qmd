@@ -1,0 +1,10 @@
+---
+format: html
+execute:
+  echo: false
+  error: true
+---
+
+# Convolutional Neural Networks {#sec-cnn}
+
+Content coming soon
