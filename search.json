@@ -348,5 +348,105 @@
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Neural Networks</span>"
     ]
+  },
+  {
+    "objectID": "cnn.html",
+    "href": "cnn.html",
+    "title": "8  Convolutional Neural Networks",
+    "section": "",
+    "text": "Content coming soon",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Convolutional Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "rnn.html",
+    "href": "rnn.html",
+    "title": "9  Recurrent Neural Networks",
+    "section": "",
+    "text": "9.1 Recurrent Unit\nSo far we have studied networks for which the input comprises an N-dimensional vector per data point. A broad category of data which does not easily conform to this representation is sequential or time-series data. Examples include text, speech, weather, financial markets. Recurrent neural networks are a broad category of neural network that are designed to handle this type of data.\nThe defining feature of recurrent networks is that they store some hidden state between data points. The most simple example is the “recurrent unit”, illustrated schematically in Figure 9.1. The hidden state, \\(h\\), is computed for each input data point \\(x\\), and depends on the previous value of \\(h\\). We can write this algebraically as :\n\\[\n\\begin{align}\nh_t &= f_1(\\alpha x_t + \\beta h_{t-1} + \\gamma) \\\\\ny_t &= f_2(\\theta h_t + \\lambda)\n\\end{align}\n\\]\nwhere \\(h_t\\) is the hidden state for time step \\(t\\), \\(f_1\\) and \\(f_2\\) are activation functions, and \\(\\alpha, \\beta, \\gamma, \\theta, \\lambda\\) are weights and biases.\nAnother useful way to illustrate the recurrent unit is shown in Figure 9.2. Note that this does not show a network, instead it illustrates the calculations performed by a single recurrent unit over several time steps.\nHere the input data sequence \\(x_0, x_1, ... x_t, ... , x_n\\) is transformed to the hidden state \\(h_0, h_1, ... h_t, ... , h_n\\) and the output \\(y_0, y_1, ... y_t, ... , y_n\\).\nThe recurrent unit described above is a many-to-many network, since \\(n\\) input data points are mapped onto \\(n\\) output data points. By controlling the length of input and output sequences, we may also construct many-to-one, one-to-many networks, and \\(m\\)-to-\\(n\\) networks. This is illustrated schematically in Figure 9.3 and can be written algebraically :\nMany to one : \\[x_0, x_1, ... x_t, ... , x_n \\rightarrow y_t\\]\nOne to many :\n\\[x_t \\rightarrow y_0, y_1, ... y_t, ... , y_n\\]\nMany to many : \\[x_0, x_1, ... x_t, ... , x_m \\rightarrow y_0, y_1, ... y_t, ... , y_n\\]\nEarly RNNs demonstrated the machines could learning sequential data, including basic language models  [1].",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Recurrent Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "rnn.html#recurrent-unit",
+    "href": "rnn.html#recurrent-unit",
+    "title": "9  Recurrent Neural Networks",
+    "section": "",
+    "text": "Figure 9.1: A recurrent unit\n\n\n\n\n\n\n\n\n\n\nFigure 9.2: Recurrent unit for several time steps\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 9.3: Different types of RNN",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Recurrent Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "rnn.html#backpropagation-for-recurrent-networks",
+    "href": "rnn.html#backpropagation-for-recurrent-networks",
+    "title": "9  Recurrent Neural Networks",
+    "section": "9.2 Backpropagation for Recurrent Networks",
+    "text": "9.2 Backpropagation for Recurrent Networks\nThe introduction of hidden state makes computation of the gradient of the loss with respect to weights a little more complicated than for standard feedforward networks. However, the procedure becomes clear when we consider the unrolled network shown in Figure 9.2. It should become clear that, much like with backpropagation through a feedforward network, we can write the gradient of the loss using the chain rule, with terms that depend on each time step. The term for the final time step can be computed first, since the gradient does not depend on previous steps. We then proceed to compute gradient terms moving backwards through time steps, hence this is frequently termed “backpropagation through time”.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Recurrent Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "rnn.html#shortcomings-of-rnns",
+    "href": "rnn.html#shortcomings-of-rnns",
+    "title": "9  Recurrent Neural Networks",
+    "section": "9.3 Shortcomings of RNNs",
+    "text": "9.3 Shortcomings of RNNs\nThe vanishing gradient problem was introduced previously. This problem occurs when backpropagation results in the product of many gradient terms \\(&lt;&lt;1\\). The gradient of the loss can become vanishingly small, resulting in slow training with high computational cost. Since recurrent networks employ backpropagation through time, the vanishing gradient problem may result in constraints on the length of sequences that can be learnt at reasonable computational cost. This was one of the main disadvantages of RNNs, and was alleviated somewhat by the introduction of gated architectures such as the LSTM and GRU, described below.\nAnother significant disadvantage of recurrent networks is that the forward pass over a sequence cannot be parallelised, since the value of each term in the sequence depends on the previous one. This results in long computation time, with limited possibilities for speeding up, even when significant computational power is available. Again this results in practical limitations on the length of the sequences that can be learnt.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Recurrent Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "rnn.html#long-short-term-memory",
+    "href": "rnn.html#long-short-term-memory",
+    "title": "9  Recurrent Neural Networks",
+    "section": "9.4 Long Short Term Memory",
+    "text": "9.4 Long Short Term Memory\nThe Long Short Term Memory (LSTM) was a highly successful (up to a point) attempt to resolve the vanishing gradient problem which all previous RNNs suffered from. The LSTM relies on the concept of “gating”, which controls the flow of information into and out of a hidden state. It also introduces two hidden states - one (the “cell” state) which captures all the input information in the sequence so far, the other (the “hidden” state), which depends only on the previous time step. The LSTM cell is shown in Figure 9.4. It comprises three gates - the “forget” gate, “input” gate, and “output” gate.\n\n\n\n\n\n\nFigure 9.4: The LSTM cell\n\n\n\nThe LSTM represented a major breakthrough in language modelling in the mid-2010s  [2], and opened up a broad range of time-series problems to machine learning. Applications included forecasting energy demand, financial markets, equipment degradation.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Recurrent Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "rnn.html#gated-recurrent-unit",
+    "href": "rnn.html#gated-recurrent-unit",
+    "title": "9  Recurrent Neural Networks",
+    "section": "9.5 Gated Recurrent Unit",
+    "text": "9.5 Gated Recurrent Unit\nThe Gated Recurrent Unit (GRU) is a simplified version of the LSTM, which dispenses with one hidden state, and uses only two gates.\n\n\n\n\n\n\nFigure 9.5: The GRU cell\n\n\n\nThe GRU greatly reduced the computational requirements of LSTMs, allowing applications such as speed recognition on mobile phones, predictive keyboards, battery life prediction.\n\n\n\n\n[1] T. Mikolov, M. Karafiát, L. Burget, J. Černocký, and S. Khudanpur, in Interspeech 2010 (2010), pp. 1045–1048.\n\n\n[2] I. Sutskever, O. Vinyals, and Q. V. Le, (2014).",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Recurrent Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "transformer.html",
+    "href": "transformer.html",
+    "title": "10  Transformers",
+    "section": "",
+    "text": "Content coming soon",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Transformers</span>"
+    ]
+  },
+  {
+    "objectID": "autoencoder.html",
+    "href": "autoencoder.html",
+    "title": "11  Autoencoders",
+    "section": "",
+    "text": "Content coming soon",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Autoencoders</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "[1] T. Mikolov, M.\nKarafiát, L. Burget, J. Černocký, and S. Khudanpur, in\nInterspeech 2010 (2010), pp. 1045–1048.\n\n\n[2] I. Sutskever, O. Vinyals, and Q.\nV. Le, (2014).",
+    "crumbs": [
+      "References"
+    ]
   }
 ]

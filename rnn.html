@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Introduction – Advanced Computational Physics &amp; Machine Learning</title>
+<title>9&nbsp; Recurrent Neural Networks – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,8 +50,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./adv-python.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./transformer.html" rel="next">
+<link href="./cnn.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -71,6 +91,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./rnn.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -116,7 +165,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -164,7 +213,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rnn.html" class="sidebar-item-text sidebar-link">
+  <a href="./rnn.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
   </div>
 </li>
@@ -196,7 +245,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-requisites" id="toc-pre-requisites" class="nav-link active" data-scroll-target="#pre-requisites"><span class="header-section-number">1.1</span> Pre-requisites</a></li>
+  <li><a href="#recurrent-unit" id="toc-recurrent-unit" class="nav-link active" data-scroll-target="#recurrent-unit"><span class="header-section-number">9.1</span> Recurrent Unit</a></li>
+  <li><a href="#backpropagation-for-recurrent-networks" id="toc-backpropagation-for-recurrent-networks" class="nav-link" data-scroll-target="#backpropagation-for-recurrent-networks"><span class="header-section-number">9.2</span> Backpropagation for Recurrent Networks</a></li>
+  <li><a href="#shortcomings-of-rnns" id="toc-shortcomings-of-rnns" class="nav-link" data-scroll-target="#shortcomings-of-rnns"><span class="header-section-number">9.3</span> Shortcomings of RNNs</a></li>
+  <li><a href="#long-short-term-memory" id="toc-long-short-term-memory" class="nav-link" data-scroll-target="#long-short-term-memory"><span class="header-section-number">9.4</span> Long Short Term Memory</a></li>
+  <li><a href="#gated-recurrent-unit" id="toc-gated-recurrent-unit" class="nav-link" data-scroll-target="#gated-recurrent-unit"><span class="header-section-number">9.5</span> Gated Recurrent Unit</a></li>
   </ul>
 </nav>
     </div>
@@ -205,7 +258,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+<h1 class="title"><span id="sec-rnn" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></h1>
 </div>
 
 
@@ -222,29 +275,104 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome to the course notes for Advanced Computational Physics and Machine Learning.</p>
-<p>These notes will introduce the material covered in lectures and problems classes. They will be supplemented by lecture slides and example programming problems.</p>
-<p>The notes will be released in four blocks for each half teaching block. The first block will cover numerical methods, as well as some advanced programming techniques :</p>
-<ol type="1">
-<li>Introduction</li>
-<li>Advanced Python Programming</li>
-<li>Linear Algebra</li>
-<li>Monte Carlo Methods</li>
-<li>Introduction to Machine Learning</li>
-<li>Supervised Learning</li>
-<li>Neural Networks</li>
-<li>Unsupervised Learning</li>
-</ol>
-<p>Future blocks will cover further data science techniques, machine learning and high performance computing.</p>
-<section id="pre-requisites" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="pre-requisites"><span class="header-section-number">1.1</span> Pre-requisites</h2>
-<p>These notes assume you have studied computational physics up to 2nd year (Level 5), such as :</p>
-<ul>
-<li>PHYS20035 - Computational Physics and Data Science</li>
-<li>SCIF20002 - Programming and Data Analysis for Scientists</li>
-</ul>
+<p>So far we have studied networks for which the input comprises an N-dimensional vector per data point. A broad category of data which does not easily conform to this representation is sequential or time-series data. Examples include text, speech, weather, financial markets. Recurrent neural networks are a broad category of neural network that are designed to handle this type of data.</p>
+<section id="recurrent-unit" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="recurrent-unit"><span class="header-section-number">9.1</span> Recurrent Unit</h2>
+<p>The defining feature of recurrent networks is that they store some hidden state between data points. The most simple example is the “recurrent unit”, illustrated schematically in <a href="#fig-recurrent-unit" class="quarto-xref">Figure&nbsp;<span>9.1</span></a>. The hidden state, <span class="math inline">\(h\)</span>, is computed for each input data point <span class="math inline">\(x\)</span>, and depends on the previous value of <span class="math inline">\(h\)</span>. We can write this algebraically as :</p>
+<p><span class="math display">\[
+\begin{align}
+h_t &amp;= f_1(\alpha x_t + \beta h_{t-1} + \gamma) \\
+y_t &amp;= f_2(\theta h_t + \lambda)
+\end{align}
+\]</span></p>
+<p>where <span class="math inline">\(h_t\)</span> is the hidden state for time step <span class="math inline">\(t\)</span>, <span class="math inline">\(f_1\)</span> and <span class="math inline">\(f_2\)</span> are activation functions, and <span class="math inline">\(\alpha, \beta, \gamma, \theta, \lambda\)</span> are weights and biases.</p>
+<div id="fig-recurrent-unit" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-recurrent-unit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="recurrent-unit.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-recurrent-unit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.1: A recurrent unit
+</figcaption>
+</figure>
+</div>
+<p>Another useful way to illustrate the recurrent unit is shown in <a href="#fig-runit-unroll" class="quarto-xref">Figure&nbsp;<span>9.2</span></a>. Note that this does not show a network, instead it illustrates the calculations performed by a single recurrent unit over several time steps.</p>
+<div id="fig-runit-unroll" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-runit-unroll-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="rnn-unrolled.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-runit-unroll-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.2: Recurrent unit for several time steps
+</figcaption>
+</figure>
+</div>
+<p>Here the input data sequence <span class="math inline">\(x_0, x_1, ... x_t, ... , x_n\)</span> is transformed to the hidden state <span class="math inline">\(h_0, h_1, ... h_t, ... , h_n\)</span> and the output <span class="math inline">\(y_0, y_1, ... y_t, ... , y_n\)</span>.</p>
+<p>The recurrent unit described above is a many-to-many network, since <span class="math inline">\(n\)</span> input data points are mapped onto <span class="math inline">\(n\)</span> output data points. By controlling the length of input and output sequences, we may also construct many-to-one, one-to-many networks, and <span class="math inline">\(m\)</span>-to-<span class="math inline">\(n\)</span> networks. This is illustrated schematically in <a href="#fig-rnn-types" class="quarto-xref">Figure&nbsp;<span>9.3</span></a> and can be written algebraically :</p>
+<p>Many to one : <span class="math display">\[x_0, x_1, ... x_t, ... , x_n \rightarrow y_t\]</span></p>
+<p>One to many :</p>
+<p><span class="math display">\[x_t \rightarrow y_0, y_1, ... y_t, ... , y_n\]</span></p>
+<p>Many to many : <span class="math display">\[x_0, x_1, ... x_t, ... , x_m \rightarrow y_0, y_1, ... y_t, ... , y_n\]</span></p>
+<div id="fig-rnn-types" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rnn-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="rnn-types.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rnn-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.3: Different types of RNN
+</figcaption>
+</figure>
+</div>
+<p>Early RNNs demonstrated the machines could learning sequential data, including basic language models <span class="citation" data-cites="mikolov10_interspeech">&nbsp;[<a href="references.html#ref-mikolov10_interspeech" role="doc-biblioref">1</a>]</span>.</p>
+</section>
+<section id="backpropagation-for-recurrent-networks" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="backpropagation-for-recurrent-networks"><span class="header-section-number">9.2</span> Backpropagation for Recurrent Networks</h2>
+<p>The introduction of hidden state makes computation of the gradient of the loss with respect to weights a little more complicated than for standard feedforward networks. However, the procedure becomes clear when we consider the unrolled network shown in <a href="#fig-runit-unroll" class="quarto-xref">Figure&nbsp;<span>9.2</span></a>. It should become clear that, much like with backpropagation through a feedforward network, we can write the gradient of the loss using the chain rule, with terms that depend on each time step. The term for the final time step can be computed first, since the gradient does not depend on previous steps. We then proceed to compute gradient terms moving backwards through time steps, hence this is frequently termed “backpropagation through time”.</p>
+</section>
+<section id="shortcomings-of-rnns" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="shortcomings-of-rnns"><span class="header-section-number">9.3</span> Shortcomings of RNNs</h2>
+<p>The vanishing gradient problem was introduced previously. This problem occurs when backpropagation results in the product of many gradient terms <span class="math inline">\(&lt;&lt;1\)</span>. The gradient of the loss can become vanishingly small, resulting in slow training with high computational cost. Since recurrent networks employ backpropagation through time, the vanishing gradient problem may result in constraints on the length of sequences that can be learnt at reasonable computational cost. This was one of the main disadvantages of RNNs, and was alleviated somewhat by the introduction of gated architectures such as the LSTM and GRU, described below.</p>
+<p>Another significant disadvantage of recurrent networks is that the forward pass over a sequence cannot be parallelised, since the value of each term in the sequence depends on the previous one. This results in long computation time, with limited possibilities for speeding up, even when significant computational power is available. Again this results in practical limitations on the length of the sequences that can be learnt.</p>
+</section>
+<section id="long-short-term-memory" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="long-short-term-memory"><span class="header-section-number">9.4</span> Long Short Term Memory</h2>
+<p>The Long Short Term Memory (LSTM) was a highly successful (up to a point) attempt to resolve the vanishing gradient problem which all previous RNNs suffered from. The LSTM relies on the concept of “gating”, which controls the flow of information into and out of a hidden state. It also introduces two hidden states - one (the “cell” state) which captures all the input information in the sequence so far, the other (the “hidden” state), which depends only on the previous time step. The LSTM cell is shown in <a href="#fig-lstm" class="quarto-xref">Figure&nbsp;<span>9.4</span></a>. It comprises three gates - the “forget” gate, “input” gate, and “output” gate.</p>
+<div id="fig-lstm" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lstm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="lstm.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lstm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.4: The LSTM cell
+</figcaption>
+</figure>
+</div>
+<p>The LSTM represented a major breakthrough in language modelling in the mid-2010s <span class="citation" data-cites="sutskever2014sseq2seq">&nbsp;[<a href="references.html#ref-sutskever2014sseq2seq" role="doc-biblioref">2</a>]</span>, and opened up a broad range of time-series problems to machine learning. Applications included forecasting energy demand, financial markets, equipment degradation.</p>
+</section>
+<section id="gated-recurrent-unit" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="gated-recurrent-unit"><span class="header-section-number">9.5</span> Gated Recurrent Unit</h2>
+<p>The Gated Recurrent Unit (GRU) is a simplified version of the LSTM, which dispenses with one hidden state, and uses only two gates.</p>
+<div id="fig-gru" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gru-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="gru.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gru-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.5: The GRU cell
+</figcaption>
+</figure>
+</div>
+<p>The GRU greatly reduced the computational requirements of LSTMs, allowing applications such as speed recognition on mobile phones, predictive keyboards, battery life prediction.</p>
 
 
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-mikolov10_interspeech" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><a href="https://doi.org/10.21437/Interspeech.2010-343">T. Mikolov, M. Karafiát, L. Burget, J. Černocký, and S. Khudanpur, in <em><span>Interspeech 2010</span></em> (2010), pp. 1045–1048</a>.</div>
+</div>
+<div id="ref-sutskever2014sseq2seq" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1409.3215">I. Sutskever, O. Vinyals, and Q. V. Le, (2014)</a>.</div>
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -650,13 +778,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./cnn.html" class="pagination-link" aria-label="Convolutional Neural Networks">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./adv-python.html" class="pagination-link" aria-label="Advanced Python Programming">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Advanced Python Programming</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./transformer.html" class="pagination-link" aria-label="Transformers">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transformers</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
