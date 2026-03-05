@@ -147,7 +147,7 @@ Another visual technique for assessing performance for a particular threshold is
 
 The numbers shown are absolute, rather than fractions and so can easily be misinterpreted, care should be taken when drawing conclusions from this method. 
 
-## Overfitting/Underfitting
+## Overfitting/Underfitting {#sec-overfitting}
 
 While training a model there is a balance to be struck on several factors, including training time, dataset size, dataset content etc. A common issue which needs to be tackled occurs when when during training a model too closely follows the data. When this happens a model is learning highly specific aspects of the training data and will therefore perform poorly on unseen data. The model is too complex and has typically failed to learn general patters in the data. It can be spotted when considering the loss curves from your training and validation data; the loss curve from the training data will fall smoothly and plateau, whereas the curve from the validation data will typically fall and then start to rise, as the model is not able to generalise well. 
 

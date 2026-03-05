@@ -1,0 +1,28 @@
+---
+format: html
+execute:
+  echo: false
+  error: true
+---
+
+# Transformers {#sec-transformer}
+
+Content coming soon
+
+<!-- The Transformer architecture has become the dominant architecture for processing sequential data, and is the underlying technology responsible for the boom in generative artificial intelligence during the early 2020s.
+
+Prior to the invention of transformers, processing of sequential data relied on recurrence based networks. The transformer architecture was introduced in the landmark paper from Google Labs, "Attention is all you need" [@vaswani2023] and replaced recurrence with the so called attention mechanism.
+
+## Attention
+
+Recurrent neural networks tend to favour information encoded later in the sequence, while information from earlier in the sequence is attenuated. This is problematic for processing sentences, for example, where the important information is context dependent and may occur anywhere in the sentence.  The general concept is that the importance of individual elements (or tokens) in a sequence is encoded in a set of "soft" weights, which are computed during the forward pass.
+
+
+## Multi-Head Attention
+
+
+## Transformer Architecture
+
+
+
+##  -->

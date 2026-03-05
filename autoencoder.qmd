@@ -1,0 +1,10 @@
+---
+format: html
+execute:
+  echo: false
+  error: true
+---
+
+# Autoencoders {#sec-autoencoder}
+
+Content coming soon

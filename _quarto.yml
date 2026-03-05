@@ -16,6 +16,10 @@ book:
     - supervised-ml.qmd
     - neural-networks.qmd
  #   - unsupervised-ml.qmd
+    - cnn.qmd
+    - rnn.qmd
+    - transformer.qmd
+    - autoencoder.qmd
     - references.qmd
 
 bibliography: references.bib
