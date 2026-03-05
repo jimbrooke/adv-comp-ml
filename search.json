@@ -354,7 +354,47 @@
     "href": "cnn.html",
     "title": "8  Convolutional Neural Networks",
     "section": "",
-    "text": "Content coming soon",
+    "text": "8.1 Introduction to CNNs\nSo far in this course the neural networks we have mostly been working with have been types of Multilayer Perceptron (MLPs). These foundational neural networks are not suited to all types of problem. One such example involves images, i.e. a set of pixels - these will be treated independently which will ignore powerful features such as locality. To tackle this issue, Convolutional Neural Networks were devised.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Convolutional Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "cnn.html#how-do-cnns-work",
+    "href": "cnn.html#how-do-cnns-work",
+    "title": "8  Convolutional Neural Networks",
+    "section": "8.2 How do CNNs work",
+    "text": "8.2 How do CNNs work\nThe building blocks of a CNN are:\n\nConvolutional Layer\nActivation Layer\nPooling Layer\nFully connected layer\n\n\n8.2.1 Convolutional Layer\nThis layer performs the core mathematical function - a sliding window is shiftd across the image looking for specific features. These sliding windows are called filters or kernels and there are several which are each looking for different patterns e.g. straight lines or curves. The filters highlight the specific pattern they are looking for and create a feature map. Activation functions are used to ensure non-linear transformations are possible in the network, e.g. by ReLu is commonly used in the convolutional layers in a CNN.\n\n\n\n\n\n\nFigure 8.1: The convolutional layer outputs a feature map\n\n\n\n\n\n8.2.2 Pooling Layer\nThis layer’s primary purpose is to identify the most significant features and reduce the size of the feature maps. A filter is used which scans over the feature map and aggregation functions are used to reduce the dimensionality of the data. Types of aggregation function include:\n\nMax Pooling: Selects the maximum value from the area of the feature map covered by the filter\nAverage Pooling: Calculates the average value within the area of the feature map and uses this to select significant features\n\n\n\n\n\n\n\nFigure 8.2: The pooling layer identifies significant features\n\n\n\n\n\n8.2.3 Fully connected Layer\nThis layer is there to assign final predictions based on the outputs of the previous convolution and pooling layers. Each node in this layer is connected to each node in the previous layer. In a classification task the activation function is typically SoftMax, which turns the flatted vector of features into a probability distribution.\n\n\n\n\n\n\nFigure 8.3: The fully connected layer assigns final predictions",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Convolutional Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "cnn.html#cnn-parameters",
+    "href": "cnn.html#cnn-parameters",
+    "title": "8  Convolutional Neural Networks",
+    "section": "8.3 CNN parameters",
+    "text": "8.3 CNN parameters\n\n8.3.1 Stride\nThe stride is the number of pixels that the convolutional filter moves each time it starts a new pass. A stride of 1 means one pixel at a time, 2 means two pixels at a time etc. This parameter has an important effect on the performance of a CNN. Larger strides reduce spatial dimensions of the output feature map, while increasing computational efficiency. However they can also miss fine-grained features while capturing the broad ones.\n\n\n8.3.2 Padding\nIn fixed size images there will be edges of the image where the convolutional filter can not be applied; this can lead to a loss of information. Padding adds extra pixels around the image, usually just zeros, which allow the filter to be applied - without adding artifical information.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Convolutional Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "cnn.html#limitations-of-cnns",
+    "href": "cnn.html#limitations-of-cnns",
+    "title": "8  Convolutional Neural Networks",
+    "section": "8.4 Limitations of CNNs",
+    "text": "8.4 Limitations of CNNs\nCNNs, although very powerful for datasets composed of images, do have their limitations. The networks are frequently complex which take significant resources to train, along with having to use large datasets to be performant. Another issue that commonly occurs is known as the vanising gradient problem which occurs with deeper networks. As the gradients become smaller between layers it becomes more difficult for earlier layers to learn. In fact it was shown that deeper networks, which were orignally thought to be more performant, were actually exhibiting signs of poorer performance than shallower ones, with higher training and test errors.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Convolutional Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "cnn.html#deep-residual-learning",
+    "href": "cnn.html#deep-residual-learning",
+    "title": "8  Convolutional Neural Networks",
+    "section": "8.5 Deep Residual Learning",
+    "text": "8.5 Deep Residual Learning\nIn 2015 a paper was published which redefined how we use CNNs (https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf). It proposed a new structure to CNNs which helped to alleviate some of the issues described above. They key shift was to use skipped connections to speed up training, which also had the benefit of preventing the vanishing gradient problem.\n\n8.5.1 ResNet basic idea\nThe idea behind this network architecture can be described simply mathematically. Instead of learning:\n\\[\n\\begin{align}\ny=f(x)\n\\end{align}\n\\]\nthe network learns\n\\[\n\\begin{align}\ny=f(x) + x.\n\\end{align}\n\\]\nThe network learns the correction needed for the mapping rather than the full mapping itself. If we consider a simple mapping of:\n\\[\n\\begin{align}\ny=x\n\\end{align}\n\\]\na standard network will try to learn:\n\\[\n\\begin{align}\nf(x)=x\n\\end{align}\n\\]\nrather than\n\\[\n\\begin{align}\nf(x)=0\n\\end{align}\n\\] .\nIt is easier for the network to learn f(x)=0 than learn how to map the identity function directly.\n\n\n8.5.2 Skipped connections\nThe identity function is a key concept in residual networks. By using shortcut connections or skipped connections - which perform identity mapping - the outputs can be added to the outputs of intermediate layers. The original x is copied forward unchanged and new features are added to this - corrections.\n\n\n\n\n\n\nFigure 8.4: The pooling layer identifies significant features\n\n\n\nTo summarise, with a standard CNN each layer is relearning lots of information again and has to re-encode this information. Using a ResNet architecture keeps previous information and only learns what has changed.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Convolutional Neural Networks</span>"
     ]

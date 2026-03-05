@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-0dd2bd5de344125cf763a379ddc3eb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-00ccf60c28c3bdf2d57f5131fbf16f11.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -191,8 +220,31 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-cnns" id="toc-introduction-to-cnns" class="nav-link active" data-scroll-target="#introduction-to-cnns"><span class="header-section-number">8.1</span> Introduction to CNNs</a></li>
+  <li><a href="#how-do-cnns-work" id="toc-how-do-cnns-work" class="nav-link" data-scroll-target="#how-do-cnns-work"><span class="header-section-number">8.2</span> How do CNNs work</a>
+  <ul class="collapse">
+  <li><a href="#convolutional-layer" id="toc-convolutional-layer" class="nav-link" data-scroll-target="#convolutional-layer"><span class="header-section-number">8.2.1</span> Convolutional Layer</a></li>
+  <li><a href="#pooling-layer" id="toc-pooling-layer" class="nav-link" data-scroll-target="#pooling-layer"><span class="header-section-number">8.2.2</span> Pooling Layer</a></li>
+  <li><a href="#fully-connected-layer" id="toc-fully-connected-layer" class="nav-link" data-scroll-target="#fully-connected-layer"><span class="header-section-number">8.2.3</span> Fully connected Layer</a></li>
+  </ul></li>
+  <li><a href="#cnn-parameters" id="toc-cnn-parameters" class="nav-link" data-scroll-target="#cnn-parameters"><span class="header-section-number">8.3</span> CNN parameters</a>
+  <ul class="collapse">
+  <li><a href="#stride" id="toc-stride" class="nav-link" data-scroll-target="#stride"><span class="header-section-number">8.3.1</span> Stride</a></li>
+  <li><a href="#padding" id="toc-padding" class="nav-link" data-scroll-target="#padding"><span class="header-section-number">8.3.2</span> Padding</a></li>
+  </ul></li>
+  <li><a href="#limitations-of-cnns" id="toc-limitations-of-cnns" class="nav-link" data-scroll-target="#limitations-of-cnns"><span class="header-section-number">8.4</span> Limitations of CNNs</a></li>
+  <li><a href="#deep-residual-learning" id="toc-deep-residual-learning" class="nav-link" data-scroll-target="#deep-residual-learning"><span class="header-section-number">8.5</span> Deep Residual Learning</a>
+  <ul class="collapse">
+  <li><a href="#resnet-basic-idea" id="toc-resnet-basic-idea" class="nav-link" data-scroll-target="#resnet-basic-idea"><span class="header-section-number">8.5.1</span> ResNet basic idea</a></li>
+  <li><a href="#skipped-connections" id="toc-skipped-connections" class="nav-link" data-scroll-target="#skipped-connections"><span class="header-section-number">8.5.2</span> Skipped connections</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -216,9 +268,136 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Content coming soon</p>
+<section id="introduction-to-cnns" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="introduction-to-cnns"><span class="header-section-number">8.1</span> Introduction to CNNs</h2>
+<p>So far in this course the neural networks we have mostly been working with have been types of Multilayer Perceptron (MLPs). These foundational neural networks are not suited to all types of problem. One such example involves images, i.e.&nbsp;a set of pixels - these will be treated independently which will ignore powerful features such as locality. To tackle this issue, Convolutional Neural Networks were devised.</p>
+</section>
+<section id="how-do-cnns-work" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="how-do-cnns-work"><span class="header-section-number">8.2</span> How do CNNs work</h2>
+<p>The building blocks of a CNN are:</p>
+<ul>
+<li>Convolutional Layer</li>
+<li>Activation Layer</li>
+<li>Pooling Layer</li>
+<li>Fully connected layer</li>
+</ul>
+<section id="convolutional-layer" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="convolutional-layer"><span class="header-section-number">8.2.1</span> Convolutional Layer</h3>
+<p>This layer performs the core mathematical function - a <em>sliding window</em> is shiftd across the image looking for specific <em>features</em>. These sliding windows are called <em>filters</em> or <em>kernels</em> and there are several which are each looking for different patterns e.g.&nbsp;straight lines or curves. The filters highlight the specific pattern they are looking for and create a <em>feature map</em>. Activation functions are used to ensure non-linear transformations are possible in the network, e.g.&nbsp;by ReLu is commonly used in the convolutional layers in a CNN.</p>
+<div id="fig-cnnlayer" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cnnlayer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="CNNlayer.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cnnlayer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.1: The convolutional layer outputs a feature map
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="pooling-layer" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="pooling-layer"><span class="header-section-number">8.2.2</span> Pooling Layer</h3>
+<p>This layer’s primary purpose is to identify the most significant features and reduce the size of the feature maps. A filter is used which scans over the feature map and aggregation functions are used to reduce the dimensionality of the data. Types of aggregation function include:</p>
+<ul>
+<li>Max Pooling: Selects the maximum value from the area of the feature map covered by the filter</li>
+<li>Average Pooling: Calculates the average value within the area of the feature map and uses this to select significant features</li>
+</ul>
+<div id="fig-cnnpooling" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cnnpooling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="CNNPooling.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cnnpooling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.2: The pooling layer identifies significant features
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="fully-connected-layer" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="fully-connected-layer"><span class="header-section-number">8.2.3</span> Fully connected Layer</h3>
+<p>This layer is there to assign final predictions based on the outputs of the previous convolution and pooling layers. Each node in this layer is connected to each node in the previous layer. In a classification task the activation function is typically SoftMax, which turns the flatted vector of features into a probability distribution.</p>
+<div id="fig-cnnconnected" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cnnconnected-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="CNNFullyConnected.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cnnconnected-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.3: The fully connected layer assigns final predictions
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="cnn-parameters" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="cnn-parameters"><span class="header-section-number">8.3</span> CNN parameters</h2>
+<section id="stride" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="stride"><span class="header-section-number">8.3.1</span> Stride</h3>
+<p>The stride is the number of pixels that the convolutional filter moves each time it starts a new pass. A stride of 1 means one pixel at a time, 2 means two pixels at a time etc. This parameter has an important effect on the performance of a CNN. Larger strides reduce spatial dimensions of the output feature map, while increasing computational efficiency. However they can also miss fine-grained features while capturing the broad ones.</p>
+</section>
+<section id="padding" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="padding"><span class="header-section-number">8.3.2</span> Padding</h3>
+<p>In fixed size images there will be edges of the image where the convolutional filter can not be applied; this can lead to a loss of information. Padding adds extra pixels around the image, usually just zeros, which allow the filter to be applied - without adding artifical information.</p>
+</section>
+</section>
+<section id="limitations-of-cnns" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="limitations-of-cnns"><span class="header-section-number">8.4</span> Limitations of CNNs</h2>
+<p>CNNs, although very powerful for datasets composed of images, do have their limitations. The networks are frequently complex which take significant resources to train, along with having to use large datasets to be performant. Another issue that commonly occurs is known as the <em>vanising gradient problem</em> which occurs with deeper networks. As the gradients become smaller between layers it becomes more difficult for earlier layers to learn. In fact it was shown that deeper networks, which were orignally thought to be more performant, were actually exhibiting signs of poorer performance than shallower ones, with higher training and test errors.</p>
+</section>
+<section id="deep-residual-learning" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="deep-residual-learning"><span class="header-section-number">8.5</span> Deep Residual Learning</h2>
+<p>In 2015 a paper was published which redefined how we use CNNs (https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf). It proposed a new structure to CNNs which helped to alleviate some of the issues described above. They key shift was to use <em>skipped connections</em> to speed up training, which also had the benefit of preventing the vanishing gradient problem.</p>
+<section id="resnet-basic-idea" class="level3" data-number="8.5.1">
+<h3 data-number="8.5.1" class="anchored" data-anchor-id="resnet-basic-idea"><span class="header-section-number">8.5.1</span> ResNet basic idea</h3>
+<p>The idea behind this network architecture can be described simply mathematically. Instead of learning:</p>
+<p><span class="math display">\[
+\begin{align}
+y=f(x)
+\end{align}
+\]</span></p>
+<p>the network learns</p>
+<p><span class="math display">\[
+\begin{align}
+y=f(x) + x.
+\end{align}
+\]</span></p>
+<p>The network learns the <em>correction</em> needed for the mapping rather than the full mapping itself. If we consider a simple mapping of:</p>
+<p><span class="math display">\[
+\begin{align}
+y=x
+\end{align}
+\]</span></p>
+<p>a standard network will try to learn:</p>
+<p><span class="math display">\[
+\begin{align}
+f(x)=x
+\end{align}
+\]</span></p>
+<p>rather than</p>
+<p><span class="math display">\[
+\begin{align}
+f(x)=0
+\end{align}
+\]</span> .</p>
+<p><strong>It is easier for the network to learn f(x)=0 than learn how to map the identity function directly.</strong></p>
+</section>
+<section id="skipped-connections" class="level3" data-number="8.5.2">
+<h3 data-number="8.5.2" class="anchored" data-anchor-id="skipped-connections"><span class="header-section-number">8.5.2</span> Skipped connections</h3>
+<p>The identity function is a key concept in residual networks. By using <em>shortcut connections</em> or <em>skipped connections</em> - which perform identity mapping - the outputs can be added to the outputs of intermediate layers. The original x is copied forward unchanged and new features are added to this - <em>corrections</em>.</p>
+<div id="fig-reslearning" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reslearning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ResidualLearning.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reslearning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.4: The pooling layer identifies significant features
+</figcaption>
+</figure>
+</div>
+<p>To summarise, with a standard CNN each layer is relearning lots of information again and has to re-encode this information. Using a ResNet architecture keeps previous information and only learns what has <em>changed</em>.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
