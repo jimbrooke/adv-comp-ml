@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -71,6 +91,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -191,8 +240,19 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-seq2seq" id="toc-sec-seq2seq" class="nav-link active" data-scroll-target="#sec-seq2seq"><span class="header-section-number">10.1</span> seq2seq</a></li>
+  <li><a href="#sec-attention" id="toc-sec-attention" class="nav-link" data-scroll-target="#sec-attention"><span class="header-section-number">10.2</span> Attention</a>
+  <ul class="collapse">
+  <li><a href="#sec-dp-attention" id="toc-sec-dp-attention" class="nav-link" data-scroll-target="#sec-dp-attention"><span class="header-section-number">10.2.1</span> Scaled Dot-product Attention</a></li>
+  </ul></li>
+  <li><a href="#sec-transformer-arch" id="toc-sec-transformer-arch" class="nav-link" data-scroll-target="#sec-transformer-arch"><span class="header-section-number">10.3</span> Transformer Architecture</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -216,26 +276,97 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Content coming soon</p>
-<!-- The Transformer architecture has become the dominant architecture for processing sequential data, and is the underlying technology responsible for the boom in generative artificial intelligence during the early 2020s.
+<p>The Transformer architecture has become the dominant architecture for processing sequential data, and is the underlying technology responsible for the boom in generative artificial intelligence during the early 2020s.</p>
+<p>Prior to the invention of transformers, processing of sequential data relied on recurrent networks. Despite notable successes, such models suffered from several problems. These included the vanishing gradient and non-parallelisability mentioned previously, but also an inability to handle long range context. A key issue in translation models is identifying the relevant context, for a given output token, within the input sequence. Recurrent models have a tendency to attenuate context from earlier in the sequence, limiting the range over which it can be identified, and hence the length of sentences that can be translated.</p>
+<p>Below we describe a successful recurrent model, followed by the key concept of “attention”, before going on to describe the Transformer itself.</p>
+<section id="sec-seq2seq" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="sec-seq2seq"><span class="header-section-number">10.1</span> seq2seq</h2>
+<p>The seq2seq model was a highly successful (for the time) recurrent model introduced in 2014 <span class="citation" data-cites="sutskever2014sseq2seq">&nbsp;[<a href="references.html#ref-sutskever2014sseq2seq" role="doc-biblioref">1</a>]</span>. It uses a pair of LSTM networks, in an encoder/decoder architecture, reflecting a view of translation compatible with information theory type models of communication. Use of an end-of-sentence token <code>&lt;eos&gt;</code> allowed the encoder LSTM to convert an arbitrary length sequence into a fixed-size hidden vector. This vector effectively encodes the information contained in the sentence, which is passed to the decoder LSTM for converstion to another arbitrary length sentence (again using the <code>&lt;eos&gt;</code> token).</p>
+<p>As for most language models of the time, the input sequence use a one-hot encoding over the input vocabulary. The network output is a softmax, ie. a probability distribution, over the output vocabulary. During training the output ground truth is encoded using a one-hot encoding, allowing a cross-entropy based loss to be calculated.</p>
+<div id="fig-seq2seq-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-seq2seq-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="seq2seq-2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-seq2seq-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.1: The seq2seq architecture
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-attention" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sec-attention"><span class="header-section-number">10.2</span> Attention</h2>
+<p>Attention is a mechanism for determining context in sequence processing. The general concept is that the importance of individual elements (or tokens) in a sequence is encoded in a set of “soft” weights, which are computed during the forward pass. Attention was originally proposed in the context of translation models <span class="citation" data-cites="bahdanau2016neuralmachinetranslationjointly">&nbsp;[<a href="references.html#ref-bahdanau2016neuralmachinetranslationjointly" role="doc-biblioref">2</a>]</span>. For a given decoder hidden state, <span class="math inline">\(h'_t\)</span>, the mechanism aims to determine the importance of each input token, using the encoder hidden state <span class="math inline">\(h_i\)</span>. The original mechanism achieved this using a small neural network, which outputs a score <span class="math inline">\(e_{t,i}\)</span> for each encoder hidden state. These scores can be converted to a probabilistic basis <span class="math inline">\(\varepsilon_{t,i}\)</span> using softmax. An example of the attention (ie. the matrix <span class="math inline">\(\varepsilon_{t,i}\)</span>) is shown in <span class="quarto-unresolved-ref">?fig-attention-matrix</span>.</p>
+<p><img src="attention-matrix.png" class="img-fluid" style="width:70.0%" alt="Example attention matrix from &nbsp;[2]"> {#fig-attention-matrix}</p>
+<p>The attention is used to compute a weighted sum over all the encoder hidden states, known as the context vector : <span class="math display">\[c_t = \sum_i \varepsilon_{t,i} h_i\]</span></p>
+<p>The context is computed for each output token and used as additional input to the decoder, as shown diagramatically in <a href="#fig-attention" class="quarto-xref">Figure&nbsp;<span>10.2</span></a>.</p>
+<div id="fig-attention" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-attention-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="attention.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-attention-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.2: Attention in a seq2seq architecture
+</figcaption>
+</figure>
+</div>
+<section id="sec-dp-attention" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="sec-dp-attention"><span class="header-section-number">10.2.1</span> Scaled Dot-product Attention</h3>
+<p>The original version of attention described above can be computationally quite expensive. Modern approaches to attention use a simplified version which is easier to compute, known as scaled dot-product attention. This approach also introduces an additional concept of storing the input sequence information as a series of <span class="math inline">\((key,value)\)</span> pairs. This allows each input token (or corresponding hidden state) to be encoded in two ways - one which is optimised for efficient lookup/search, and another which is optimised for use in the context vector. The context vector is then computed using :</p>
+<p><span class="math inline">\(c_t = {\rm softmax}(\frac{Q_tK^T_i}{\sqrt{d_k}})V_i\)</span></p>
+<p>where the query <span class="math inline">\(Q_t\)</span> corresponds to the output token for step <span class="math inline">\(t\)</span>, and the input token for step <span class="math inline">\(i\)</span> is encoded as the key <span class="math inline">\(K_i\)</span> (for search), and the value <span class="math inline">\(V_i\)</span> (for context information). The <span class="math inline">\(Q, K, V\)</span> encodings are supplied by neural networks, allowing the optimal encodings to be learnt during training. The scaling by <span class="math inline">\(\sqrt(d_k)\)</span>, where <span class="math inline">\(d_k\)</span> is the dimensionality of the input key <span class="math inline">\(K\)</span>, helps correct for reduced effectiveness of scaled dot product attention when <span class="math inline">\(d_k\)</span> is a large value. The scaled dot production attention mechanism is shown diagramatically in <a href="#fig-attention-2" class="quarto-xref">Figure&nbsp;<span>10.3</span></a>.</p>
+<div id="fig-attention-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-attention-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="attention-2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-attention-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.3: Modern scaled dot-product attention, taken from <span class="citation" data-cites="vaswani2023">&nbsp;[<a href="references.html#ref-vaswani2023" role="doc-biblioref">3</a>]</span>
+</figcaption>
+</figure>
+</div>
+<p>The Transformer architecture relies on multi-head attention, shown in <a href="#fig-multi-head-attention" class="quarto-xref">Figure&nbsp;<span>10.4</span></a>. Here, the attention mechanism is replicated several times, with unique <span class="math inline">\(Q, K, V\)</span> encodings for each copy. This allows multiple context vectors to be computed, each of which encodes the relationship between elements in input and output sequences, on a unique basis. This reflects the different reasons why words in a sentence can have a relationship with each other.</p>
+<div id="fig-multi-head-attention" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-multi-head-attention-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="multi-head-attention.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-multi-head-attention-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.4: Multi-head attention, taken from <span class="citation" data-cites="vaswani2023">&nbsp;[<a href="references.html#ref-vaswani2023" role="doc-biblioref">3</a>]</span>
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-transformer-arch" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="sec-transformer-arch"><span class="header-section-number">10.3</span> Transformer Architecture</h2>
+<p>The transformer architecture was introduced in the landmark paper from Google Labs, “Attention is all you need” <span class="citation" data-cites="vaswani2023">&nbsp;[<a href="references.html#ref-vaswani2023" role="doc-biblioref">3</a>]</span>. Essentially this approach replaced recurrence with ‘just’ attention. The absence of recurrence greatly increases the amount of computation that can be performed concurrently (ie. in parallel). This reduced the training time, and increased the complexity of network (or number of weights) that can be trained. It also means the position of tokens within the input sequence must be encoded at the input, so this information can be used by the network.</p>
+<p>The Transformer architecture, shown in <a href="#fig-transformer" class="quarto-xref">Figure&nbsp;<span>10.5</span></a> uses multi-head attention in two ways. The first is ‘self-attention’, which generates a context vector for the input sequence alone. Effectively this encodes the relationship of each element of the sequence to all the other elements. This self-attention mechanism is followed by a deep neural network, and the attention/DNN is repeated several times (6 in the original paper). The output of the stacked attention/DNN block is then sent to a second multi-head attention mechanism, which relates output tokens to input tokens in the same way as described in <a href="#sec-attention" class="quarto-xref"><span>Section 10.2</span></a>.</p>
+<p>During training, the ground truth output sequence is also sent to a self-attention mechanism in the same way as the input sequence. The input (and ground truth output, during training) is encoded using a one hot encoding. A one hot encoding effectively means each token is represented by a vector of size of the vocabulary, with a 1 in the position of the word to that token. The output of the network is a softmax - effectively a probability distribution over the vocabulary. This allows a cross entropy based loss to be computed and used during training.</p>
+<div id="fig-transformer" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-transformer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="transformer.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-transformer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.5: Transformer architecture, taken from <span class="citation" data-cites="vaswani2023">&nbsp;[<a href="references.html#ref-vaswani2023" role="doc-biblioref">3</a>]</span>
+</figcaption>
+</figure>
+</div>
 
-Prior to the invention of transformers, processing of sequential data relied on recurrence based networks. The transformer architecture was introduced in the landmark paper from Google Labs, "Attention is all you need" [@vaswani2023] and replaced recurrence with the so called attention mechanism.
 
-## Attention
-
-Recurrent neural networks tend to favour information encoded later in the sequence, while information from earlier in the sequence is attenuated. This is problematic for processing sentences, for example, where the important information is context dependent and may occur anywhere in the sentence.  The general concept is that the importance of individual elements (or tokens) in a sequence is encoded in a set of "soft" weights, which are computed during the forward pass.
-
-
-## Multi-Head Attention
-
-
-## Transformer Architecture
-
-
-
-##  -->
-
-
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-sutskever2014sseq2seq" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1409.3215">I. Sutskever, O. Vinyals, and Q. V. Le, (2014)</a>.</div>
+</div>
+<div id="ref-bahdanau2016neuralmachinetranslationjointly" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1409.0473">D. Bahdanau, K. Cho, and Y. Bengio, (2016)</a>.</div>
+</div>
+<div id="ref-vaswani2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1706.03762">A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser, and I. Polosukhin, (2023)</a>.</div>
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
