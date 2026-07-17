@@ -1,0 +1,145 @@
+---
+title: "Computers & Networks"
+format: html
+execute:
+  error: true
+---
+
+The sections of these notes on high performance and distributed computing rely on some basic concepts regarding computers and networks, that are described below.  You may be familiar with these concepts already, in which case feel free to skip this section.
+
+## Computer Hardware {#sec-hardware}
+
+A schematic of the internal organisation of a computer is shown in @fig-computer.
+
+![Schematic of a computer](computer-schematic.png){#fig-computer}
+
+### Processor {#sec-cpu}
+The computer needs some processing capability. Traditionally, this was provided by a single Central Processing Unit (CPU). The CPU executes a sequences of _instructions_ that it reads from a _program_. Modern computers can accommodate multiple CPU devices, each of which likely has multiple CPU "cores", all of which operate in parallel. There are a variety of CPU architectures in use, each with a corresponding instruction set (see @sec-instruction-set).
+
+### Additional processors 
+A range of additional processors (also known as co-processors) are often used. These are generally tailored to a specific task or class of tasks. Examples include :
+
+   - Graphics Processing Unit (GPU). These were originally designed to offload graphics processing tasks, though modern GPUs are used in a wide variety of applications. Typically these can be classified as _vector processing_ applications, where a single instruction is applied to multiple data.
+   - Neural Processing Unit (NPU). These are processors dedicated to accelerating the computationally intensive tasks involved in Artifical Intelligence/Machine Learning.
+   - FPGA Accelerator. A Field-Programmable Gate Array allows the user to implement specific operation required by an application at gate level, which potentially offers very large speed gains.
+
+### Memory
+The computer needs to store and retrieve the _program_ in order to operate, and most likely the program will require variables and other data to be stored while it is running. This is typically provided by Random Access Memory (RAM).
+
+### Storage
+RAM devices only store data while supplied with power. In order to store data while the computer is powered off, and as a backup in case the data stored in RAM becomes corrupted, permanent storage is required. Historically this has used tape drives, magnetic disc drives, optical disc drives (CDs) and more. Modern computers use Solid State Drives - persistent storage based on silicon devices.
+
+### Network Interface {#sec-network-interface}
+In order to communicate with other computers, the computer must be connected to a network. This typically uses either a physical or wireless network connection. The standard for network communication is known as Ethernet (see @sec-network-layers).
+
+### Peripherals {#sec-peripherals}
+Peripherals such as screen, keyboard and mouse, allow the user to interact with the computer.
+
+## Computer Software {#sec-software}
+
+### Instruction Set {#sec-instruction-set}
+The instruction set specifies the instructions available for a given processor. These are typically very low level (eg. retrieve some data from a specified memory location, add two numbers together, write the result into a specific memory location, ...).  Different CPU architectures have different instruction sets.  A table of common architectures is shown in @tbl-architectures.
+
+| Architecture | Manufacturer | Dates | Examples |
+|--|--|--|----|
+| x86 (32 bit) | Intel | 1978-present | PCs |
+| x86-64 | AMD | 1999-present | Recent PCs, servers |
+|ia64 | HP/Intel | 2001-2021 | Enterprise servers | 
+| PowerPC | Apple/IBM/Motorola | 1991 | IBM/Apple PCs, phones |
+| arm (32 bit) | ARM | 1981-present | BBC micro, smartphones, tablets |
+| arm64 | ARM | | Recent smartphones, tablets, Apple MacBooks |
+: Selection of commonly used CPU architectures {#tbl-architectures}
+
+Knowing the architecture of any hardware you are using is important when dealing with virtual machines (@sec-vms) and containers (@sec-containers). You should identify the architecture of the cpu in your laptop.
+
+<!-- Table of instruction sets here -->
+
+### Compiler/Interpreter {#sec-compiler}
+Writing programs using the instruction set (known as machine code) is laborious and inefficient, given the limited set of operations within the instruction set. A compiler is a software program which allows a software developer to write programs in a high level language, such as C or C++, which may have much more powerful concepts. The high level code is first converted by the compiler to machine code, which is then run by the CPU in a second step.
+
+An interpreter performs the same task as a compiler, but the conversion to machine code happens during execution of the program, ie. it is a single step process unlike two step compilation. This may result in less efficient machine code than a compliler would produce, but in practise this may not be an issue.  Python is an example of an interpreted language.
+
+### Operating System {#sec-os}
+
+
+<!-- ![Operating system](os.png){#fig-os} -->
+
+The operating system is a program (or set of programs) which run when the computer is started. It will manage access to shared components (such as memory, or storage) and provide an interface for applications to access them.  Examples are given in @tbl-os.
+
+| OS | Developer | Dates | Notes |
+|--|--|--|----|
+| UNIX | Bell labs | 1969-present | Many versions/distributors. Desktop/server. |
+| Windows | Microsoft | 1985-present | Desktop/laptop PC. Separate server editions. |
+| Linux | Linus Torvalds (open source) | 1991-present | Many versions/distributors. Desktop/laptop & server. | 
+| OSX/macOS | Apple | 2001-present | Apple desktops/laptops |
+| iOS/iPad | Apple | 2007-present | Mobile/tablet |
+| Android | Google | 2008-present | Mobile/tablet, based on Linux |
+| Windows phone | Microsoft | 2010-2020 | Mobile/tablet |
+: Selection of common operating systems {#tbl-os}
+
+### User Accounts {#sec-users}
+
+User accounts allow access to particular functionality to be controlled. This may include limited access to data, or limiting access to functions that could disrupt the functioning of the computer (such as updating the OS). Often, files and devices will have an associated set of "permissions", which control the level of access different users have to that file or device.
+
+### Filesystem {#sec-filesystem}
+
+The filesystem is a mechanism for organising use of storage. Most operating systems come with a built-in filesystem, but storage of large datasets will often use dedicated distributed filesystem software.
+
+In addition to a basic understanding of the elements of a computer, we also need a basic understanding of computer networks.
+
+## Network Hardware
+
+A network is a collection of computers that can communicate with each other. This communication requires a physical connection (eg. electrical, optical, radio) as well as a protocol for communication.
+
+A network can in principle be constructed from a set of general purpose computers. However, networks in practise rely on dedicated hardware which is designed to receive/transmit/route data between connected devices. (By implementing layers 1-4 of the OSI model shown in @tbl-osi). Frequently we refer to "switches", which connect devices to form a network, and "routers", which provide connections between networks.
+
+Real networks usually comprise networks of multiple such devices, with general purpose computers connected only at the edges.
+
+## Network Layers {#sec-network-layers}
+
+A useful network typically comprises multiple layers of protocols/specifications, where each layer serves a particular purpose, and builds on the layers below it. The Open Systems Interconnection model of network layers is shown in @tbl-osi.  Note that this is a _model_ of how a network operates, rather than a specification.
+
+| N | Layer | Purpose | Example |
+|-|--|----|---|
+| 7 | Application layer | Communication between applications | HTTP, SMTP, SSH |
+| 6 | Presentation layer | Encryption, compression |  |
+| 5 | Session layer | Establish and maintain a connection |  |
+| 4 | Transport layer | Flow control, error control, packet ordering | Transmission control protocol (TCP) |
+| 3 | Network layer | Connections between networks | IPv4, IPv6 |
+| 2 | Data-link layer | Data format and addressing | Ethernet (IEEE 802.3), Wifi (IEEE 802.11) |
+| 1 | Physical layer | Physical connection | Electrical, optical, RF |
+: OSI model of network layers {#tbl-osi}
+
+### MAC Address {#sec-mac}
+
+To ensure messages end up at the right place in the network, every device needs to have an _address_. In practise, several of the network layers include the concept of addressing. The MAC address is the address of the device on the local networ.  It is associated with Layer 2, and as such is only used to route messages (packets) within the _local_ network. It is typically set by the device hardware/firmware and may be printed on the object, so it is not usually (or easily) changed.
+
+### IP Address {#sec-ip}
+
+The IP address is the "internet address" of the device.  This address is associated with Layer 3, and allows a device to be addressed from outside the local network. The IP address is usually set in software, often dynamically when a device connects to a network - using, for example, the DHCP protocol.
+
+### Port {#sec-port}
+
+A particular device may be able to receive and respond to messages from a variety of high-level protocols.  In order to ensure each messages is received by the correct _application_ running on the device, a _port_ number may be specified. The port is a virtual endpoint for communication between applications. Some protocols/applications are associated with standardised ports.  For example, SSH usually uses port 22, HTML usually uses port 80.
+
+### DNS (Domain Name Service) {#sec-dns}
+
+The DNS is a service which converts IP addresses to _domain names_ and vice versa. The domain name is a human readable placeholder for an IP address, or set of IP addresses. For example, the domain **bris.ac.uk** is currently associated with the IP address **137.222.1.237**.  All internet connected devices must be able to access a DNS server to function.  Some web pages provide a human readable version, for example <https://www.nslookup.io/>.
+
+
+### Uniform Resource Locator (URL) {#sec-url}
+
+The uniform resource locator (URL) is a method to specify what you want to communicate with, and how.  The components of the URL are :
+
+<span style="color:green;">scheme</span>:<span style="color:red;">[//[user@]host[:port]/]</span><span style="color:blue;">path</span><span style="color:brown;">[?query]</span><span style="color:purple;">[#fragment]</span>
+
+Here are some examples :
+<span style="color:green;">http</span>:<span style="color:red;">//www.bristol.ac.uk/</span>
+
+<span style="color:green;">https</span>:<span style="color:red;">//www.bris.ac.uk</span><span style="color:blue;">/unit-programme-catalogue/UnitDetails.jsa</span><span style="color:brown;">?unitCode=SCIFM0004</span>
+
+<span style="color:green;">smtp</span>:<span style="color:blue;">james.brooke@bristol.ac.uk</span>
+
+<span style="color:green;">http</span>:<span style="color:red;">//127.0.0.1:8888</span><span style="color:brown;">/?token=2e5368b235b174386888fa6719af814a3acfa5caee2d8a1e</span>
+
+<span style="color:green;">ftp</span>:<span style="color:red;">//user:password@ftp.server.com</span>

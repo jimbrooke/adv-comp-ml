@@ -1,0 +1,117 @@
+---
+title: "Cloud Technology"
+format: html
+execute:
+  error: true
+---
+
+## Distributed Computing {#sec-distributed}
+
+Some tasks cannot be performed by a single computer.  Or they can, but they would take far too long.  Or they can, but the risk of failure associated with a single computer is too high.  Or they can, but sometimes a huge number of tasks are required at the same time.  In all these cases, methods of delegating those tasks to multiple computers are required.
+
+Distributed computing is a broad term that refers to applications which rely on a network of computers.  Such applications can provide greater resilience and reliability, as well as being able to solve "bigger" problems.
+
+
+### Distributed vs Parallel Computing{#sec-htc-vs-hpc}
+
+It is helpful to draw a distinction between "distributed computing" and "parallel computing". Parallel computing is another broad term, covering techniques which allow a computational problem to be split between several processors. There is clearly some overlap between the two terms, but parallel computing tends to apply to tighly-coupled problems, where the computation requires high-bandwith, low-latency messaging between processors, which potentially have access to shared memory.  Typical problems might include domain decomposition solvers, linear algebra, FFTs, N-body systems.
+
+Distributed computing, on the other hand, refers to loosely-coupled problems, where many processors are required, but requirements on connectivity between processors are lower. Examples include Monte Carlo simulation, image/data processing applications, or supporting a very large number of users. The latter includes essentially all the apps on your phone.
+
+Supporting a huge user base is rarely a requirement in science (although there are examples of apps which collect scientific data, eg. [the CREDO app](https://play.google.com/store/apps/details?id=science.credo.mobiledetector&hl=en_GB&pli=1), see also <https://arxiv.org/abs/1709.05230v2>). However, processing of very large datasets is increasingly a challenge for science, and distributed (or cloud) computing can provide solutions.
+
+Frequently we refer to High Performance Computing (HPC) for systems with high bandwidth/low latency interconnects between processors, and High Throughput Computing (HTC) for systems comprising processors connected by standard networks.
+
+### Challenges {#sec-htc-challenges}
+
+Distributed computing offers the potential to eg. process very large datasets using standard computer hardware, but it also brings challenges. For example :
+
+   - Management of servers, network equipment, power, cooling, noise
+   - Replacement of failed equipment
+   - Scaling applications across many devices
+   - Load balancing (or ensuring the work is spread out over the system, and there is not one piece that holds everything up)
+   - Resilience and fault tolerance. (Ensuring the system keeps working while you are replacing a failed unit)
+
+These challenges can be reduced by using cloud technology.
+
+## The Cloud {#sec-cloud}
+
+"The Cloud" is a very broad, not terribly well defined, term.  We will talk about "clouds" as collections of computers, connected via the internet, which are used to provide services to consumers, solving some of the challenges described above.
+
+Typically, these services are provided to the public.  We call this the public cloud.  Examples include AWS (Amazon Web Services), Microsoft Azure, Google Cloud.
+
+Some organisations will create their own private clouds to manage privately owned hardware and applications. Different branches of the organisation become provider and consumer.  Private clouds will rely on much of the same technology as public clouds.  We will consider public clouds only from here on.
+
+
+## Cloud Models {#sec-cloud-models}
+
+Public cloud providers use a range of models to provide cloud services to their customers.
+
+
+### Software as a Service (SaaS) {#sec-saas}
+
+In this model, the provider delivers an application over the network, and the customer uses the application.  The provider takes care of all the hardware and software required to run the application, minimising overheads for the customer. However, the customer has no significant control over the features provided by the application. Examples include Google docs, MS Office 365.
+
+### Platform as a Service (PaaS) {#sec-paas}
+
+This model gives the customer more flexibility over the application than SaaS, while at the same time reducing the system management overheads. The cloud provider delivers everything required to build and run applications - virtual servers, operating system, databases, and other "middleware" (eg. web servers, message passing software). The customer then develops and deploys their application - which they may either use themselves, or provide to their own customers as SaaS.  Examples include most use of AWS.
+
+### Infrastructure as a Service (IaaS) {#sec-iaas}
+
+This model gives the customer maximum control over their system, but alleviates the need for them to manage their own hardware. The cloud provider delivers virtualised servers, storage, network infrastructure on demand. The customer manages their virtual servers, deploying operating systems and middleware, as well as development and deployment of the application(s) they use or provide to their own customers.
+
+## Cloud Technology {#sec-cloud-tech}
+
+This is the software upon which clouds are built. Typically, the big cloud providers provide their own toolsets for building and managing applications within their environments. So most cloud development takes places within an eco-system provided by a major supplier (AWS, Azure, Google Cloud). But some pieces and concepts are common to them all. In particular, these include :
+
+   - Virtual Machines
+   - Containers
+   - Cluster Management
+
+## Virtual Machines
+
+A virtual machine (VM) is a simulation of a computer. It is a software programme which runs on a 'host' machine, but then allows a 'guest' operating system to be installed, which can then be used as if it were running on real computer hardware.
+
+There are a variety of reasons to run a VM. If you develop code that must be compatible with multiple operating systems, say, then you might run a VM for each supported OS which allows you to test your code.
+
+VMs are ubiquitous in management of large data centres, since they decouple the problems of managing hardware (eg. replacing failed components) and that of managing operating systems (eg. keeping up with updates). For example, running two identical VMs on two physical servers allows the system to continue operating even if one physical machine fails, or when an operating system update needs to be applied and tested.
+
+In cloud environment, VMs allow a provider (who owns, controls, and manages the physical hardware) to provide virtual servers to their customers.  The cloud provider might run multiple VMs, for several customers, on a single physical machine, with controls on how much cpu time each customers VM can use.  This allows the provider to maximise the number of cpu cycles that are used (or sold) and thereby maximise the return on their investment.
+
+
+### Emulation vs Virtualisation
+
+In an **emulated** VM, the CPU instruction set is simulated.  This allows the VM to run any cpu architecture and support any guest OS. However, the work of simulating every instruction adds substantial overhead to the programmes running within the guest OS, and their performance is subsequently degraded. This may render some applications unusable.
+
+The alternative is **virtualisation** of the CPU. In this case, the CPU instruction set is not simulated, and instructions are run directly on the CPU. A "hypervisor" allows the guest OS to share the CPU with the host OS. Applications are able to run with no additional overhead. However, the guest OS is constrained to those that are compatible with the host CPU.
+
+### Virtual Networks
+
+Much as a computer is simulated by a virtual machine, a virtual network is a simulation of a network.  VM software usually allows you to create a virtual network running entirely within the host.  The Layer 2 and Layer 3 functionality, that is normally provided by physical switches and routers, is simply provided by software.
+
+However, virtual networks are not limited to running within a single host, and may cross multiple physical networks.  For example, a virtual private network (VPN) is a simulated network that securely connects two endpoints via the internet, using encryption.  A virtual local area network (VLAN) is a virtual network usually used to sub-divide a larger network into smaller management pieces.
+
+## Containers
+
+Containers are an extension of the VM concept and are now a foundational technology in cloud computing. A container is a lightweight, standalone, and executable software package that includes everything needed to run a piece of software. It will include code, runtime, libraries and system tools.
+
+
+Containers share a “kernel” with the host OS.  The kernel is the part of the OS that is always running.  It has complete control over the system, controlling all hardware, managing access by applications, preventing conflicts.  By sharing the kernel with the host, containers are highly efficient.  But it also places significant limitations on the container, which must use the same kernel as the host OS.  In practise, this means containers are all Linux based. Container engines typically come with an option to create a VM.  The user sees a container, but this is running inside a VM, allowing operation on Mac, Windows (and allowing portability between Linux kernel versions).
+
+### Container Images
+
+Containers are typically distributed as "images", which are fast and easy to start up and run. Containers were originally introduced by Docker, along with an image format. This format is now standardised by the [Open Container Initiative (OCI)](https://opencontainers.org/).
+
+### Container Engines
+
+In order to run a container, the host must be running a container engine. Many engines are avilable, including the [Docker](https://www.docker.com/) engine, but alternatives such as [Podman](https://podman.io/), [Apptainer](https://apptainer.org/) are increasingly popular.
+
+### Container creation
+
+In order to create a container image, a container builder is required. Docker is a standard option, with [Buildah](https://buildah.io/) an alternative. Typically a container builder requires a specification for what to include in the container image. In the case of Docker, the Dockerfile provides simple instructions for creating the image.
+
+### Container repositories
+
+The final piece of the container ecosystem, are the container repositories. Many developers, vendors and organisations create standard containers that run well defined applications, and make them available via repositories.  These can be downloaded (often directly by the container engine) and run, simplifying the deployment process.
+
+[https://hub.docker.com/](https://hub.docker.com/) is a registry of repositories, so it contains links to a huge number of container repositories, covering a wide range of applications.

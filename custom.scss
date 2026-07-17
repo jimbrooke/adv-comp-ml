@@ -1,0 +1,25 @@
+/*-- scss:defaults --*/
+
+.sidebar-title {
+  color: #a6192e;
+}
+
+// Set your global colors (use hex values)
+$body-bg: #ffffff;
+$body-color: #000000;
+$link-color: #a6192e;
+
+// Set your typography
+$font-family-sans-serif: "Open Sans", sans-serif;
+$font-size-base: 1.05rem;
+
+// This changes only the headings to Sora
+$headings-font-family: "Sora", sans-serif;
+$headings-color: #000000;
+
+// 2. Override the navbar background colour
+$navbar-bg: #a6192e;
+
+// 3. Override the navbar text and link colours
+$navbar-color: #ffffff;
+$navbar-active-color: #ffffff;

@@ -1,0 +1,7 @@
+---
+title: "GPU Programming"
+format: html
+execute:
+  error: true
+---
+
