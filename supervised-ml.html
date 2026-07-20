@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Supervised Learning – Advanced Computational Physics &amp; Machine Learning</title>
+<title>14&nbsp; Supervised Learning – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,7 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./neural-networks.html" rel="next">
+<link href="./unsupervised-ml.html" rel="next">
 <link href="./intro-ml.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -44,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-82cb5808e81da3454e8042d903791e03.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9658866cc54b3e6ffe57adf895444048.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -114,7 +114,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./supervised-ml.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Supervised Learning</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="./supervised-ml.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Supervised Learning</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -151,66 +151,159 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./programming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Programming</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./adv-python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Advanced Python Programming</span></span></a>
+  <a href="./basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Computers &amp; Networks</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./linear-algebra.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+  <a href="./oo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object Oriented Programming</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./functional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Programming</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exceptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exceptions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parallel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parallel Programming</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cloud Technology</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./numeric.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numerical Methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matrix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Basic Matrix Operations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sim-eqn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simultaneous Equations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./eigenproblems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenproblems</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./monte-carlo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./optimisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimisation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Machine Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./supervised-ml.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./unsupervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Transfer Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./transformer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./autoencoder.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
   </div>
 </li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -227,25 +320,25 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">6.1</span> Introduction</a></li>
-  <li><a href="#training-sets" id="toc-training-sets" class="nav-link" data-scroll-target="#training-sets"><span class="header-section-number">6.2</span> Training Sets</a></li>
-  <li><a href="#dataset-splitting" id="toc-dataset-splitting" class="nav-link" data-scroll-target="#dataset-splitting"><span class="header-section-number">6.3</span> Dataset splitting</a></li>
-  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">6.4</span> Models</a></li>
-  <li><a href="#loss-functions" id="toc-loss-functions" class="nav-link" data-scroll-target="#loss-functions"><span class="header-section-number">6.5</span> Loss Functions</a></li>
-  <li><a href="#optimisation" id="toc-optimisation" class="nav-link" data-scroll-target="#optimisation"><span class="header-section-number">6.6</span> Optimisation</a></li>
-  <li><a href="#boosted-decision-tree" id="toc-boosted-decision-tree" class="nav-link" data-scroll-target="#boosted-decision-tree"><span class="header-section-number">6.7</span> Boosted Decision Tree</a></li>
-  <li><a href="#bdt-classifier-performance" id="toc-bdt-classifier-performance" class="nav-link" data-scroll-target="#bdt-classifier-performance"><span class="header-section-number">6.8</span> BDT Classifier Performance</a></li>
-  <li><a href="#sec-overfitting" id="toc-sec-overfitting" class="nav-link" data-scroll-target="#sec-overfitting"><span class="header-section-number">6.9</span> Overfitting/Underfitting</a></li>
-  <li><a href="#regularisation" id="toc-regularisation" class="nav-link" data-scroll-target="#regularisation"><span class="header-section-number">6.10</span> Regularisation</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">14.1</span> Introduction</a></li>
+  <li><a href="#training-sets" id="toc-training-sets" class="nav-link" data-scroll-target="#training-sets"><span class="header-section-number">14.2</span> Training Sets</a></li>
+  <li><a href="#dataset-splitting" id="toc-dataset-splitting" class="nav-link" data-scroll-target="#dataset-splitting"><span class="header-section-number">14.3</span> Dataset splitting</a></li>
+  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">14.4</span> Models</a></li>
+  <li><a href="#loss-functions" id="toc-loss-functions" class="nav-link" data-scroll-target="#loss-functions"><span class="header-section-number">14.5</span> Loss Functions</a></li>
+  <li><a href="#optimisation" id="toc-optimisation" class="nav-link" data-scroll-target="#optimisation"><span class="header-section-number">14.6</span> Optimisation</a></li>
+  <li><a href="#boosted-decision-tree" id="toc-boosted-decision-tree" class="nav-link" data-scroll-target="#boosted-decision-tree"><span class="header-section-number">14.7</span> Boosted Decision Tree</a></li>
+  <li><a href="#bdt-classifier-performance" id="toc-bdt-classifier-performance" class="nav-link" data-scroll-target="#bdt-classifier-performance"><span class="header-section-number">14.8</span> BDT Classifier Performance</a></li>
+  <li><a href="#sec-overfitting" id="toc-sec-overfitting" class="nav-link" data-scroll-target="#sec-overfitting"><span class="header-section-number">14.9</span> Overfitting/Underfitting</a></li>
+  <li><a href="#regularisation" id="toc-regularisation" class="nav-link" data-scroll-target="#regularisation"><span class="header-section-number">14.10</span> Regularisation</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="./supervised-ml.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Supervised Learning</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Supervised Learning</span></h1>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Supervised Learning</span></h1>
 </div>
 
 
@@ -262,14 +355,14 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">6.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">14.1</span> Introduction</h2>
 <p>In computational physics, we often seek to build models that can learn from data. <strong>Supervised learning</strong> is one of the foundational paradigms in machine learning, in which a model learns to predict an output (label or target) given a set of inputs (features). In essence a model is trained to be able to identify patterns in datasets. If the model is trained successfully it should be able to predict outputs on unseen data.</p>
 <p>This part of the course explores how supervised learning is formulated, trained, and evaluated, focusing on applications relevant to physics.</p>
 <hr>
 </section>
-<section id="training-sets" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="training-sets"><span class="header-section-number">6.2</span> Training Sets</h2>
+<section id="training-sets" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="training-sets"><span class="header-section-number">14.2</span> Training Sets</h2>
 <p>In supervised learning, the foundation is the <strong>training set</strong>, a collection of <strong>input–output pairs</strong>:</p>
 <p><span class="math display">\[
 \mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^N
@@ -289,8 +382,8 @@ are feature vectors (inputs), <span class="math display">\[
 \]</span></p>
 <p>The significant point here is that one needs to have a <strong>labelled dataset</strong> to use supervised learning; each data point needs a corresponding label - a common example of this would be vehicles and vehicle types. The dataset would need to include different types of vehicle, such as motorbikes, cars, vans, lorries - and then each vehicle in the dataset would have a label identifiying its type. The different types of dataset used in supervised learning are covered in the next section.</p>
 </section>
-<section id="dataset-splitting" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="dataset-splitting"><span class="header-section-number">6.3</span> Dataset splitting</h2>
+<section id="dataset-splitting" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="dataset-splitting"><span class="header-section-number">14.3</span> Dataset splitting</h2>
 <p>Generally there are three different types of data that are used in supervised learning. They can all come from the same dataset, but need to be split up in advance as they are used for different parts of the process.</p>
 <p>The dataset is usually divided into:</p>
 <ul>
@@ -301,16 +394,16 @@ are feature vectors (inputs), <span class="math display">\[
 <p>Typical split ratios: 70% / 15% / 15%, though this does depend on how large the dataset is and the type of problem you are solving. There are techniques that one can use to augment data in the case of smaller datasets - these will be discussed later in the course.</p>
 <hr>
 </section>
-<section id="models" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="models"><span class="header-section-number">6.4</span> Models</h2>
+<section id="models" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="models"><span class="header-section-number">14.4</span> Models</h2>
 <p>A <strong>model</strong> defines the relationship between inputs and outputs. It can be <strong>linear</strong> or <strong>non-linear</strong>, depending on the task the network has to perform and the relationship between the features and labels.</p>
 <p>The majority of the tasks we will deal with can be separated into either Regression or Classification problems.</p>
 <p>Regression is suitable where the output you desire is a number; the most simple example of this would be linear regression. This can also be generalised to N-dimenstional inputs.</p>
 <p>Classification is suitable where you desire the output to be a label. For example, if you are trying to assign the make or model of a car.</p>
 <hr>
 </section>
-<section id="loss-functions" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="loss-functions"><span class="header-section-number">6.5</span> Loss Functions</h2>
+<section id="loss-functions" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="loss-functions"><span class="header-section-number">14.5</span> Loss Functions</h2>
 <p>To quantify how well a model performs, we define a <strong>loss function</strong> <span class="math inline">\((L(y, f(\mathbf{x})))\)</span> that measures the discrepancy between predicted and true values. This is a critical concept in machine learning as it effectively quantifies how good a given prediction is. In supervised learning, the loss is based on the difference between the prediction for a given input and the known truth, also called ground truth.</p>
 <p>Within regression problems commonly used loss functions are Mean Squared Error and Mean Absolute Error.</p>
 <p>MSE: <span class="math display">\[
@@ -324,8 +417,8 @@ are feature vectors (inputs), <span class="math display">\[
 \]</span></p>
 <p>This loss function will penalise predictions which are wrong while also penalising predictions which are not confident.</p>
 </section>
-<section id="optimisation" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="optimisation"><span class="header-section-number">6.6</span> Optimisation</h2>
+<section id="optimisation" class="level2" data-number="14.6">
+<h2 data-number="14.6" class="anchored" data-anchor-id="optimisation"><span class="header-section-number">14.6</span> Optimisation</h2>
 <p>We have covered how to split datasets, train models and the definition of loss functions; the next step is understanding how to adjust model parameters such that the loss is minimised. A technique for achieving this is to compute the derivative of the loss, with respect to the model parameters, and then to iterate with this procedure until a minimum is found. The technique is called Gradient Descent, and can be described mathematically as:</p>
 <p><span class="math display">\[
 \theta_{i+1} = \theta_i - \eta \Delta L(\theta_i)
@@ -333,14 +426,14 @@ are feature vectors (inputs), <span class="math display">\[
 <p>where <span class="math inline">\(\theta_i\)</span> are the current set of parameters, <span class="math inline">\(\Delta L(\theta_i)\)</span> is the gradient of the loss and <span class="math inline">\(\eta\)</span> is a parameter which controls the size of the steps through which each iteration differs from the previous; this is also known as the Learning Rate.</p>
 <p>Standard gradient descent uses the entire dataset when calculating the loss and is therefore computationally expensive and can take a long time to converge. An alternative method, Stochastic gradient descent, uses only a small subset of the data to calculate the loss, and is therefore more efficient and scalable to large datasets. However due to randomly sampling datapoints to calculate the loss, it can be a more erratic process.</p>
 </section>
-<section id="boosted-decision-tree" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="boosted-decision-tree"><span class="header-section-number">6.7</span> Boosted Decision Tree</h2>
+<section id="boosted-decision-tree" class="level2" data-number="14.7">
+<h2 data-number="14.7" class="anchored" data-anchor-id="boosted-decision-tree"><span class="header-section-number">14.7</span> Boosted Decision Tree</h2>
 <p>Decision trees are flowchart-like structures originally invented to help with decision making processes. At each step in the tree the sample is split accordiing to some criterion and at the end of the tree, the events in the sub-sample are assigned a prediction.</p>
 <p>To create a decision tree you decide on a set of rules that will aid in your classification or regression task. At each step, or node, there should a specific rule on how to split the dataset - domain knowledge on how well the split divdes your dataset between the classes is particularly important. The final nodes are called leaves and rules need to be in place to also decide when to create these leaves. Typically this depends on the sample size, sample purity, among other factors. The prediction assigned to a leaf node is obtained from the sample it contains.</p>
 <p>The “boosting” aspect of this approach comes in when attempting to improve the performance of the tree. As single decision trees can be prone to overfitting (discussed further in these notes), they can often perform poorly on unseen data. As such, “boosting” is the technique of using multiple “weak” or “shallow” trees together sequentially as an “ensemble”. The later trees focus on the areas where the earlier trees had misclassifications or high degrees of uncertainty. The models are trained iteratively, with the gradient of the loss used to guide the new model. When training a boosted decision tree, the prediction assigned to a leaf node is the residual (averaged over the sample in the leaf node) based on the prediction of all previous trees. This is then multiplied by a factor, which is the learning rate. The BDTs produce a score for each input data point and, in the case of classifciation, we can assign a probability that an event is a particular class.</p>
 </section>
-<section id="bdt-classifier-performance" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="bdt-classifier-performance"><span class="header-section-number">6.8</span> BDT Classifier Performance</h2>
+<section id="bdt-classifier-performance" class="level2" data-number="14.8">
+<h2 data-number="14.8" class="anchored" data-anchor-id="bdt-classifier-performance"><span class="header-section-number">14.8</span> BDT Classifier Performance</h2>
 <p>Individual events can be classified by considering the distributions of scores and then assigning a threshold to a particular class. Above this threshold defines one class, and below another class. Given a threshold we can then compute specific metrics to assess the performance of our classifier, assuming we have two classes to select between, class A and B:</p>
 <p><span class="math display">\[
 \textnormal{True positive rate (TPR):} = \frac{N_{identified_A}}{N_{true_A}}
@@ -364,8 +457,8 @@ are feature vectors (inputs), <span class="math display">\[
 </div>
 <p>The numbers shown are absolute, rather than fractions and so can easily be misinterpreted, care should be taken when drawing conclusions from this method.</p>
 </section>
-<section id="sec-overfitting" class="level2" data-number="6.9">
-<h2 data-number="6.9" class="anchored" data-anchor-id="sec-overfitting"><span class="header-section-number">6.9</span> Overfitting/Underfitting</h2>
+<section id="sec-overfitting" class="level2" data-number="14.9">
+<h2 data-number="14.9" class="anchored" data-anchor-id="sec-overfitting"><span class="header-section-number">14.9</span> Overfitting/Underfitting</h2>
 <p>While training a model there is a balance to be struck on several factors, including training time, dataset size, dataset content etc. A common issue which needs to be tackled occurs when when during training a model too closely follows the data. When this happens a model is learning highly specific aspects of the training data and will therefore perform poorly on unseen data. The model is too complex and has typically failed to learn general patters in the data. It can be spotted when considering the loss curves from your training and validation data; the loss curve from the training data will fall smoothly and plateau, whereas the curve from the validation data will typically fall and then start to rise, as the model is not able to generalise well.</p>
 <p>Some common techniques to avoid overfitting are to:</p>
 <ul>
@@ -376,8 +469,8 @@ are feature vectors (inputs), <span class="math display">\[
 </ul>
 <p>Importantly, the reverse of overfitting can also cause problems; if you have a model which has not learned the patterns well enough or is not complex enough to model the data then this will also lead to poor predictions on unseen data. When evaluating the loss curves the training curve will look smoothly falling but the validation curve will remain far from the plateau of the training curve. This can be mitigated by increasing the training duration or decreasing the amount of regularisation applied.</p>
 </section>
-<section id="regularisation" class="level2" data-number="6.10">
-<h2 data-number="6.10" class="anchored" data-anchor-id="regularisation"><span class="header-section-number">6.10</span> Regularisation</h2>
+<section id="regularisation" class="level2" data-number="14.10">
+<h2 data-number="14.10" class="anchored" data-anchor-id="regularisation"><span class="header-section-number">14.10</span> Regularisation</h2>
 <p>As models become more complex it becomes increasingly difficult to maintain their ability to generalise to unseen data, while preventing overfitting. Techniques exist to adapt loss functions to help mitigate this, and are called regularisation.</p>
 <p>L1 regularisation, also known as LASSO (Least Asbolute Shrinkage and Selection Opertor) adds a penalty term to the loss function which is the absolute sum of the weights. The model is therefore penalised when trying to assign large weights, in some cases down to zero. This leads to a sparser model which is simpler and has less variance. It also helps with feature selection by shrinking down to zero the least important parameters. A loss function for MSE with the added regularisation term is shown below:</p>
 <p><span class="math display">\[
@@ -800,12 +893,12 @@ are feature vectors (inputs), <span class="math display">\[
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./intro-ml.html" class="pagination-link" aria-label="Introduction to Machine Learning">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./neural-networks.html" class="pagination-link" aria-label="Neural Networks">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neural Networks</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./unsupervised-ml.html" class="pagination-link" aria-label="Unsupervised Learning">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

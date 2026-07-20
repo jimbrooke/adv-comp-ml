@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – Advanced Computational Physics &amp; Machine Learning</title>
+<title>2&nbsp; Computers &amp; Networks – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,26 +23,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -52,7 +33,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./autoencoder.html" rel="prev">
+<link href="./oo.html" rel="next">
+<link href="./programming.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -103,7 +85,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./programming.html">Programming</a></li><li class="breadcrumb-item"><a href="./basics.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Computers &amp; Networks</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -151,7 +133,7 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./basics.html" class="sidebar-item-text sidebar-link">
+  <a href="./basics.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Computers &amp; Networks</span></span></a>
   </div>
 </li>
@@ -295,7 +277,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -304,15 +286,46 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-hardware" id="toc-sec-hardware" class="nav-link active" data-scroll-target="#sec-hardware"><span class="header-section-number">2.1</span> Computer Hardware</a>
+  <ul class="collapse">
+  <li><a href="#sec-cpu" id="toc-sec-cpu" class="nav-link" data-scroll-target="#sec-cpu"><span class="header-section-number">2.1.1</span> Processor</a></li>
+  <li><a href="#additional-processors" id="toc-additional-processors" class="nav-link" data-scroll-target="#additional-processors"><span class="header-section-number">2.1.2</span> Additional processors</a></li>
+  <li><a href="#memory" id="toc-memory" class="nav-link" data-scroll-target="#memory"><span class="header-section-number">2.1.3</span> Memory</a></li>
+  <li><a href="#storage" id="toc-storage" class="nav-link" data-scroll-target="#storage"><span class="header-section-number">2.1.4</span> Storage</a></li>
+  <li><a href="#sec-network-interface" id="toc-sec-network-interface" class="nav-link" data-scroll-target="#sec-network-interface"><span class="header-section-number">2.1.5</span> Network Interface</a></li>
+  <li><a href="#sec-peripherals" id="toc-sec-peripherals" class="nav-link" data-scroll-target="#sec-peripherals"><span class="header-section-number">2.1.6</span> Peripherals</a></li>
+  </ul></li>
+  <li><a href="#sec-software" id="toc-sec-software" class="nav-link" data-scroll-target="#sec-software"><span class="header-section-number">2.2</span> Computer Software</a>
+  <ul class="collapse">
+  <li><a href="#sec-instruction-set" id="toc-sec-instruction-set" class="nav-link" data-scroll-target="#sec-instruction-set"><span class="header-section-number">2.2.1</span> Instruction Set</a></li>
+  <li><a href="#sec-compiler" id="toc-sec-compiler" class="nav-link" data-scroll-target="#sec-compiler"><span class="header-section-number">2.2.2</span> Compiler/Interpreter</a></li>
+  <li><a href="#sec-os" id="toc-sec-os" class="nav-link" data-scroll-target="#sec-os"><span class="header-section-number">2.2.3</span> Operating System</a></li>
+  <li><a href="#sec-users" id="toc-sec-users" class="nav-link" data-scroll-target="#sec-users"><span class="header-section-number">2.2.4</span> User Accounts</a></li>
+  <li><a href="#sec-filesystem" id="toc-sec-filesystem" class="nav-link" data-scroll-target="#sec-filesystem"><span class="header-section-number">2.2.5</span> Filesystem</a></li>
+  </ul></li>
+  <li><a href="#network-hardware" id="toc-network-hardware" class="nav-link" data-scroll-target="#network-hardware"><span class="header-section-number">2.3</span> Network Hardware</a></li>
+  <li><a href="#sec-network-layers" id="toc-sec-network-layers" class="nav-link" data-scroll-target="#sec-network-layers"><span class="header-section-number">2.4</span> Network Layers</a>
+  <ul class="collapse">
+  <li><a href="#sec-mac" id="toc-sec-mac" class="nav-link" data-scroll-target="#sec-mac"><span class="header-section-number">2.4.1</span> MAC Address</a></li>
+  <li><a href="#sec-ip" id="toc-sec-ip" class="nav-link" data-scroll-target="#sec-ip"><span class="header-section-number">2.4.2</span> IP Address</a></li>
+  <li><a href="#sec-port" id="toc-sec-port" class="nav-link" data-scroll-target="#sec-port"><span class="header-section-number">2.4.3</span> Port</a></li>
+  <li><a href="#sec-dns" id="toc-sec-dns" class="nav-link" data-scroll-target="#sec-dns"><span class="header-section-number">2.4.4</span> DNS (Domain Name Service)</a></li>
+  <li><a href="#sec-url" id="toc-sec-url" class="nav-link" data-scroll-target="#sec-url"><span class="header-section-number">2.4.5</span> Uniform Resource Locator (URL)</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./programming.html">Programming</a></li><li class="breadcrumb-item"><a href="./basics.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Computers &amp; Networks</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Computers &amp; Networks</span></h1>
 </div>
 
 
@@ -329,28 +342,311 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
-<div id="ref-vaswani2023" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1706.03762">A. Vaswani, N. Shazeer, N.
-Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser, and I.
-Polosukhin, (2023)</a>.</div>
+<p>The sections of these notes on high performance and distributed computing rely on some basic concepts regarding computers and networks, that are described below. You may be familiar with these concepts already, in which case feel free to skip this section.</p>
+<section id="sec-hardware" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="sec-hardware"><span class="header-section-number">2.1</span> Computer Hardware</h2>
+<p>A schematic of the internal organisation of a computer is shown in <a href="#fig-computer" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>.</p>
+<div id="fig-computer" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-computer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="computer-schematic.png" class="img-fluid figure-img">
 </div>
-<div id="ref-mikolov10_interspeech" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline"><a href="https://doi.org/10.21437/Interspeech.2010-343">T. Mikolov, M.
-Karafiát, L. Burget, J. Černocký, and S. Khudanpur, in
-<em><span>Interspeech 2010</span></em> (2010), pp. 1045–1048</a>.</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-computer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: Schematic of a computer
+</figcaption>
+</figure>
 </div>
-<div id="ref-sutskever2014sseq2seq" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1409.3215">I. Sutskever, O. Vinyals, and Q.
-V. Le, (2014)</a>.</div>
+<section id="sec-cpu" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="sec-cpu"><span class="header-section-number">2.1.1</span> Processor</h3>
+<p>The computer needs some processing capability. Traditionally, this was provided by a single Central Processing Unit (CPU). The CPU executes a sequences of <em>instructions</em> that it reads from a <em>program</em>. Modern computers can accommodate multiple CPU devices, each of which likely has multiple CPU “cores”, all of which operate in parallel. There are a variety of CPU architectures in use, each with a corresponding instruction set (see <a href="#sec-instruction-set" class="quarto-xref"><span>Section 2.2.1</span></a>).</p>
+</section>
+<section id="additional-processors" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="additional-processors"><span class="header-section-number">2.1.2</span> Additional processors</h3>
+<p>A range of additional processors (also known as co-processors) are often used. These are generally tailored to a specific task or class of tasks. Examples include :</p>
+<ul>
+<li>Graphics Processing Unit (GPU). These were originally designed to offload graphics processing tasks, though modern GPUs are used in a wide variety of applications. Typically these can be classified as <em>vector processing</em> applications, where a single instruction is applied to multiple data.</li>
+<li>Neural Processing Unit (NPU). These are processors dedicated to accelerating the computationally intensive tasks involved in Artifical Intelligence/Machine Learning.</li>
+<li>FPGA Accelerator. A Field-Programmable Gate Array allows the user to implement specific operation required by an application at gate level, which potentially offers very large speed gains.</li>
+</ul>
+</section>
+<section id="memory" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="memory"><span class="header-section-number">2.1.3</span> Memory</h3>
+<p>The computer needs to store and retrieve the <em>program</em> in order to operate, and most likely the program will require variables and other data to be stored while it is running. This is typically provided by Random Access Memory (RAM).</p>
+</section>
+<section id="storage" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="storage"><span class="header-section-number">2.1.4</span> Storage</h3>
+<p>RAM devices only store data while supplied with power. In order to store data while the computer is powered off, and as a backup in case the data stored in RAM becomes corrupted, permanent storage is required. Historically this has used tape drives, magnetic disc drives, optical disc drives (CDs) and more. Modern computers use Solid State Drives - persistent storage based on silicon devices.</p>
+</section>
+<section id="sec-network-interface" class="level3" data-number="2.1.5">
+<h3 data-number="2.1.5" class="anchored" data-anchor-id="sec-network-interface"><span class="header-section-number">2.1.5</span> Network Interface</h3>
+<p>In order to communicate with other computers, the computer must be connected to a network. This typically uses either a physical or wireless network connection. The standard for network communication is known as Ethernet (see <a href="#sec-network-layers" class="quarto-xref"><span>Section 2.4</span></a>).</p>
+</section>
+<section id="sec-peripherals" class="level3" data-number="2.1.6">
+<h3 data-number="2.1.6" class="anchored" data-anchor-id="sec-peripherals"><span class="header-section-number">2.1.6</span> Peripherals</h3>
+<p>Peripherals such as screen, keyboard and mouse, allow the user to interact with the computer.</p>
+</section>
+</section>
+<section id="sec-software" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-software"><span class="header-section-number">2.2</span> Computer Software</h2>
+<section id="sec-instruction-set" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="sec-instruction-set"><span class="header-section-number">2.2.1</span> Instruction Set</h3>
+<p>The instruction set specifies the instructions available for a given processor. These are typically very low level (eg. retrieve some data from a specified memory location, add two numbers together, write the result into a specific memory location, …). Different CPU architectures have different instruction sets. A table of common architectures is shown in <a href="#tbl-architectures" class="quarto-xref">Table&nbsp;<span>2.1</span></a>.</p>
+<div id="tbl-architectures" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-architectures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.1: Selection of commonly used CPU architectures
+</figcaption>
+<div aria-describedby="tbl-architectures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Architecture</th>
+<th>Manufacturer</th>
+<th>Dates</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x86 (32 bit)</td>
+<td>Intel</td>
+<td>1978-present</td>
+<td>PCs</td>
+</tr>
+<tr class="even">
+<td>x86-64</td>
+<td>AMD</td>
+<td>1999-present</td>
+<td>Recent PCs, servers</td>
+</tr>
+<tr class="odd">
+<td>ia64</td>
+<td>HP/Intel</td>
+<td>2001-2021</td>
+<td>Enterprise servers</td>
+</tr>
+<tr class="even">
+<td>PowerPC</td>
+<td>Apple/IBM/Motorola</td>
+<td>1991</td>
+<td>IBM/Apple PCs, phones</td>
+</tr>
+<tr class="odd">
+<td>arm (32 bit)</td>
+<td>ARM</td>
+<td>1981-present</td>
+<td>BBC micro, smartphones, tablets</td>
+</tr>
+<tr class="even">
+<td>arm64</td>
+<td>ARM</td>
+<td></td>
+<td>Recent smartphones, tablets, Apple MacBooks</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="ref-bahdanau2016neuralmachinetranslationjointly" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1409.0473">D. Bahdanau, K. Cho, and Y.
-Bengio, (2016)</a>.</div>
+</figure>
 </div>
+<p>Knowing the architecture of any hardware you are using is important when dealing with virtual machines (<span class="quarto-unresolved-ref">?sec-vms</span>) and containers (<span class="quarto-unresolved-ref">?sec-containers</span>). You should identify the architecture of the cpu in your laptop.</p>
+<!-- Table of instruction sets here -->
+</section>
+<section id="sec-compiler" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="sec-compiler"><span class="header-section-number">2.2.2</span> Compiler/Interpreter</h3>
+<p>Writing programs using the instruction set (known as machine code) is laborious and inefficient, given the limited set of operations within the instruction set. A compiler is a software program which allows a software developer to write programs in a high level language, such as C or C++, which may have much more powerful concepts. The high level code is first converted by the compiler to machine code, which is then run by the CPU in a second step.</p>
+<p>An interpreter performs the same task as a compiler, but the conversion to machine code happens during execution of the program, ie. it is a single step process unlike two step compilation. This may result in less efficient machine code than a compliler would produce, but in practise this may not be an issue. Python is an example of an interpreted language.</p>
+</section>
+<section id="sec-os" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="sec-os"><span class="header-section-number">2.2.3</span> Operating System</h3>
+<!-- ![Operating system](os.png){#fig-os} -->
+<p>The operating system is a program (or set of programs) which run when the computer is started. It will manage access to shared components (such as memory, or storage) and provide an interface for applications to access them. Examples are given in <a href="#tbl-os" class="quarto-xref">Table&nbsp;<span>2.2</span></a>.</p>
+<div id="tbl-os" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-os-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.2: Selection of common operating systems
+</figcaption>
+<div aria-describedby="tbl-os-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>OS</th>
+<th>Developer</th>
+<th>Dates</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>UNIX</td>
+<td>Bell labs</td>
+<td>1969-present</td>
+<td>Many versions/distributors. Desktop/server.</td>
+</tr>
+<tr class="even">
+<td>Windows</td>
+<td>Microsoft</td>
+<td>1985-present</td>
+<td>Desktop/laptop PC. Separate server editions.</td>
+</tr>
+<tr class="odd">
+<td>Linux</td>
+<td>Linus Torvalds (open source)</td>
+<td>1991-present</td>
+<td>Many versions/distributors. Desktop/laptop &amp; server.</td>
+</tr>
+<tr class="even">
+<td>OSX/macOS</td>
+<td>Apple</td>
+<td>2001-present</td>
+<td>Apple desktops/laptops</td>
+</tr>
+<tr class="odd">
+<td>iOS/iPad</td>
+<td>Apple</td>
+<td>2007-present</td>
+<td>Mobile/tablet</td>
+</tr>
+<tr class="even">
+<td>Android</td>
+<td>Google</td>
+<td>2008-present</td>
+<td>Mobile/tablet, based on Linux</td>
+</tr>
+<tr class="odd">
+<td>Windows phone</td>
+<td>Microsoft</td>
+<td>2010-2020</td>
+<td>Mobile/tablet</td>
+</tr>
+</tbody>
+</table>
 </div>
+</figure>
+</div>
+</section>
+<section id="sec-users" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="sec-users"><span class="header-section-number">2.2.4</span> User Accounts</h3>
+<p>User accounts allow access to particular functionality to be controlled. This may include limited access to data, or limiting access to functions that could disrupt the functioning of the computer (such as updating the OS). Often, files and devices will have an associated set of “permissions”, which control the level of access different users have to that file or device.</p>
+</section>
+<section id="sec-filesystem" class="level3" data-number="2.2.5">
+<h3 data-number="2.2.5" class="anchored" data-anchor-id="sec-filesystem"><span class="header-section-number">2.2.5</span> Filesystem</h3>
+<p>The filesystem is a mechanism for organising use of storage. Most operating systems come with a built-in filesystem, but storage of large datasets will often use dedicated distributed filesystem software.</p>
+<p>In addition to a basic understanding of the elements of a computer, we also need a basic understanding of computer networks.</p>
+</section>
+</section>
+<section id="network-hardware" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="network-hardware"><span class="header-section-number">2.3</span> Network Hardware</h2>
+<p>A network is a collection of computers that can communicate with each other. This communication requires a physical connection (eg. electrical, optical, radio) as well as a protocol for communication.</p>
+<p>A network can in principle be constructed from a set of general purpose computers. However, networks in practise rely on dedicated hardware which is designed to receive/transmit/route data between connected devices. (By implementing layers 1-4 of the OSI model shown in <a href="#tbl-osi" class="quarto-xref">Table&nbsp;<span>2.3</span></a>). Frequently we refer to “switches”, which connect devices to form a network, and “routers”, which provide connections between networks.</p>
+<p>Real networks usually comprise networks of multiple such devices, with general purpose computers connected only at the edges.</p>
+</section>
+<section id="sec-network-layers" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="sec-network-layers"><span class="header-section-number">2.4</span> Network Layers</h2>
+<p>A useful network typically comprises multiple layers of protocols/specifications, where each layer serves a particular purpose, and builds on the layers below it. The Open Systems Interconnection model of network layers is shown in <a href="#tbl-osi" class="quarto-xref">Table&nbsp;<span>2.3</span></a>. Note that this is a <em>model</em> of how a network operates, rather than a specification.</p>
+<div id="tbl-osi" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-osi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.3: OSI model of network layers
+</figcaption>
+<div aria-describedby="tbl-osi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>N</th>
+<th>Layer</th>
+<th>Purpose</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>7</td>
+<td>Application layer</td>
+<td>Communication between applications</td>
+<td>HTTP, SMTP, SSH</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Presentation layer</td>
+<td>Encryption, compression</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Session layer</td>
+<td>Establish and maintain a connection</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Transport layer</td>
+<td>Flow control, error control, packet ordering</td>
+<td>Transmission control protocol (TCP)</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Network layer</td>
+<td>Connections between networks</td>
+<td>IPv4, IPv6</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Data-link layer</td>
+<td>Data format and addressing</td>
+<td>Ethernet (IEEE 802.3), Wifi (IEEE 802.11)</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>Physical layer</td>
+<td>Physical connection</td>
+<td>Electrical, optical, RF</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<section id="sec-mac" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="sec-mac"><span class="header-section-number">2.4.1</span> MAC Address</h3>
+<p>To ensure messages end up at the right place in the network, every device needs to have an <em>address</em>. In practise, several of the network layers include the concept of addressing. The MAC address is the address of the device on the local networ. It is associated with Layer 2, and as such is only used to route messages (packets) within the <em>local</em> network. It is typically set by the device hardware/firmware and may be printed on the object, so it is not usually (or easily) changed.</p>
+</section>
+<section id="sec-ip" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="sec-ip"><span class="header-section-number">2.4.2</span> IP Address</h3>
+<p>The IP address is the “internet address” of the device. This address is associated with Layer 3, and allows a device to be addressed from outside the local network. The IP address is usually set in software, often dynamically when a device connects to a network - using, for example, the DHCP protocol.</p>
+</section>
+<section id="sec-port" class="level3" data-number="2.4.3">
+<h3 data-number="2.4.3" class="anchored" data-anchor-id="sec-port"><span class="header-section-number">2.4.3</span> Port</h3>
+<p>A particular device may be able to receive and respond to messages from a variety of high-level protocols. In order to ensure each messages is received by the correct <em>application</em> running on the device, a <em>port</em> number may be specified. The port is a virtual endpoint for communication between applications. Some protocols/applications are associated with standardised ports. For example, SSH usually uses port 22, HTML usually uses port 80.</p>
+</section>
+<section id="sec-dns" class="level3" data-number="2.4.4">
+<h3 data-number="2.4.4" class="anchored" data-anchor-id="sec-dns"><span class="header-section-number">2.4.4</span> DNS (Domain Name Service)</h3>
+<p>The DNS is a service which converts IP addresses to <em>domain names</em> and vice versa. The domain name is a human readable placeholder for an IP address, or set of IP addresses. For example, the domain <strong>bris.ac.uk</strong> is currently associated with the IP address <strong>137.222.1.237</strong>. All internet connected devices must be able to access a DNS server to function. Some web pages provide a human readable version, for example <a href="https://www.nslookup.io/" class="uri">https://www.nslookup.io/</a>.</p>
+</section>
+<section id="sec-url" class="level3" data-number="2.4.5">
+<h3 data-number="2.4.5" class="anchored" data-anchor-id="sec-url"><span class="header-section-number">2.4.5</span> Uniform Resource Locator (URL)</h3>
+<p>The uniform resource locator (URL) is a method to specify what you want to communicate with, and how. The components of the URL are :</p>
+<p><span style="color:green;">scheme</span>:<span style="color:red;">[//[user@]host[:port]/]</span><span style="color:blue;">path</span><span style="color:brown;">[?query]</span><span style="color:purple;">[#fragment]</span></p>
+<p>Here are some examples : <span style="color:green;">http</span>:<span style="color:red;">//www.bristol.ac.uk/</span></p>
+<p><span style="color:green;">https</span>:<span style="color:red;">//www.bris.ac.uk</span><span style="color:blue;">/unit-programme-catalogue/UnitDetails.jsa</span><span style="color:brown;">?unitCode=SCIFM0004</span></p>
+<p><span style="color:green;">smtp</span>:<span style="color:blue;">james.brooke@bristol.ac.uk</span></p>
+<p><span style="color:green;">http</span>:<span style="color:red;">//127.0.0.1:8888</span><span style="color:brown;">/?token=2e5368b235b174386888fa6719af814a3acfa5caee2d8a1e</span></p>
+<p><span style="color:green;">ftp</span>:<span style="color:red;">//user:password@ftp.server.com</span></p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -755,11 +1051,14 @@ Bengio, (2016)</a>.</div>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./autoencoder.html" class="pagination-link" aria-label="Autoencoders">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Autoencoders</span></span>
+      <a href="./programming.html" class="pagination-link" aria-label="Programming">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Programming</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./oo.html" class="pagination-link" aria-label="Object Oriented Programming">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object Oriented Programming</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

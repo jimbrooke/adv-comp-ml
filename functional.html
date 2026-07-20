@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – Advanced Computational Physics &amp; Machine Learning</title>
+<title>4&nbsp; Functional Programming – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,26 +23,42 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -52,7 +68,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./autoencoder.html" rel="prev">
+<link href="./exceptions.html" rel="next">
+<link href="./oo.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -91,6 +108,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -103,7 +149,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./programming.html">Programming</a></li><li class="breadcrumb-item"><a href="./functional.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Programming</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -163,7 +209,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./functional.html" class="sidebar-item-text sidebar-link">
+  <a href="./functional.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Programming</span></span></a>
   </div>
 </li>
@@ -295,7 +341,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -304,15 +350,23 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#lambda-functions" id="toc-lambda-functions" class="nav-link active" data-scroll-target="#lambda-functions"><span class="header-section-number">4.1</span> Lambda Functions</a></li>
+  <li><a href="#anonymous-functions" id="toc-anonymous-functions" class="nav-link" data-scroll-target="#anonymous-functions"><span class="header-section-number">4.2</span> Anonymous functions</a></li>
+  <li><a href="#map-reduce-with-lists" id="toc-map-reduce-with-lists" class="nav-link" data-scroll-target="#map-reduce-with-lists"><span class="header-section-number">4.3</span> Map-Reduce with Lists</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./programming.html">Programming</a></li><li class="breadcrumb-item"><a href="./functional.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Programming</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Programming</span></h1>
 </div>
 
 
@@ -329,28 +383,70 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
-<div id="ref-vaswani2023" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1706.03762">A. Vaswani, N. Shazeer, N.
-Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser, and I.
-Polosukhin, (2023)</a>.</div>
+<p>Functional programming is another programming paradigm. In some respects it is quite the opposite of OO programming. Objects intrinsically have some ‘state’ associated with them, due to their attributes (internal data). So the result of a function call in OO programming (ie. a method) will depend on both the arguments passed to the function, and the state of the object upon which the method is called.</p>
+<p>Conversely, in functional programming, computation is expressed in terms of functions which have no state. This paradigm is based on a formal system called λ-calculus, which has been shown to be Turing-complete, ie. it can simulate any Turing machine, or it can implement any computer algorithm. There are several languages (eg. Haskell, Erlang) which are designed to enforce functional programming. It is possible to write fully functional programs in Python, using lambda functions.</p>
+<p>Developing full functional programs is beyond the scope of this unit, but it should be noted that functional programming can be extremely useful in distributed computing. Because functions have no state, all the data they need to operate is passed as an argument. This means it doesn’t really matter <em>where</em> the function runs. Provided there is a network connection to the computer which is running the function, the arguments to the function call and the returned value can be communicated. Conversely, in OO programming, methods need to be run in the same location as the obect attributes they are associated with. This means OO programs can be harder to run in a distributed fashion than functional ones.</p>
+<p>A full introduction to functional programming is beyond the scope of the unit, but below we introduce the syntax for lambda functions, and some particular cases where they can be useful.</p>
+<section id="lambda-functions" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="lambda-functions"><span class="header-section-number">4.1</span> Lambda Functions</h2>
+<dl>
+<dt>In Python, lambda functions are created using the lambda keyword, eg.: lambda: x, x**2 returns an “anonymous” function that takes one argument, and returns a value that depends only on the argument (in this case, the square). Compare this to regular functions, which are declared with def and are named</dt>
+<dd>
+
+</dd>
+</dl>
+<div id="1e9cb929" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> function(x):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.5</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>function(<span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>13.0</code></pre>
 </div>
-<div id="ref-mikolov10_interspeech" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline"><a href="https://doi.org/10.21437/Interspeech.2010-343">T. Mikolov, M.
-Karafiát, L. Burget, J. Černocký, and S. Khudanpur, in
-<em><span>Interspeech 2010</span></em> (2010), pp. 1045–1048</a>.</div>
 </div>
-<div id="ref-sutskever2014sseq2seq" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1409.3215">I. Sutskever, O. Vinyals, and Q.
-V. Le, (2014)</a>.</div>
-</div>
-<div id="ref-bahdanau2016neuralmachinetranslationjointly" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1409.0473">D. Bahdanau, K. Cho, and Y.
-Bengio, (2016)</a>.</div>
+<p>The equivalent using a lambda function would be :</p>
+<div id="ee3c4232" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">lambda</span> x: <span class="fl">0.5</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> x <span class="op">+</span> <span class="dv">1</span>)(<span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>13.0</code></pre>
 </div>
 </div>
+</section>
+<section id="anonymous-functions" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="anonymous-functions"><span class="header-section-number">4.2</span> Anonymous functions</h2>
+<p>Lambdas can be useful when implementing mathematical expressions, and when working with functions that expect other functions as arguments. Eg. suppose I want to calculate <span class="math inline">\(\int_1^4 e^{−x}\)</span>. I can do this in one line with a lambda function :</p>
+<div id="7cc4f329" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.integrate</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>scipy.integrate.quad(<span class="kw">lambda</span> x: math.exp(<span class="op">-</span><span class="dv">1</span><span class="op">*</span>x), <span class="fl">1.</span>, <span class="fl">4.</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>(0.34956380228270817, 3.880937818697785e-15)</code></pre>
+</div>
+</div>
+</section>
+<section id="map-reduce-with-lists" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="map-reduce-with-lists"><span class="header-section-number">4.3</span> Map-Reduce with Lists</h2>
+<p>Another area where lambda functions are useful is in the “map-reduce” paradigm. The idea here is that when processing large amounts of data, you want to do as much processing in parallel as possible. A given algorithm is divided into a parallel part (map), and a non-parallel part (reduce). When processing huge datasets, the map will be running in parallel on multiple machines. In Python, the map() function takes a function and a list as arguments. The function is applied to each element in the list, and then a list of the results is returned. Eg. to calculate the expression below for for n = 1000 : <span class="math display">\[
+\sum_{i=1}^n i^2
+\]</span></p>
+<div id="ac608133" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">0</span>,<span class="dv">1000</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>squares <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>((<span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span>), x))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="bu">reduce</span>((<span class="kw">lambda</span> x, y: x<span class="op">+</span>y), squares)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sum</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>332833500</code></pre>
+</div>
+</div>
+<p>Another useful function when working with lists is filter(). This takes a function and a list, applies the function to each element, and retains that element if the function returns True. For example, you can try writing a function that accepts the odd values in a list of integers.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -755,11 +851,14 @@ Bengio, (2016)</a>.</div>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./autoencoder.html" class="pagination-link" aria-label="Autoencoders">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Autoencoders</span></span>
+      <a href="./oo.html" class="pagination-link" aria-label="Object Oriented Programming">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object Oriented Programming</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./exceptions.html" class="pagination-link" aria-label="Exceptions">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exceptions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

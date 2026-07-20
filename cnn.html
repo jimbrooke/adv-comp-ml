@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Convolutional Neural Networks – Advanced Computational Physics &amp; Machine Learning</title>
+<title>18&nbsp; Convolutional Neural Networks – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -44,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-82cb5808e81da3454e8042d903791e03.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9658866cc54b3e6ffe57adf895444048.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -114,7 +114,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cnn.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="./cnn.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -151,66 +151,159 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./programming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Programming</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./adv-python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Advanced Python Programming</span></span></a>
+  <a href="./basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Computers &amp; Networks</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./linear-algebra.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+  <a href="./oo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object Oriented Programming</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./functional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Programming</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exceptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exceptions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parallel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parallel Programming</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cloud Technology</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./numeric.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numerical Methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matrix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Basic Matrix Operations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sim-eqn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simultaneous Equations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./eigenproblems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenproblems</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./monte-carlo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./optimisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimisation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Machine Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./supervised-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./unsupervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Transfer Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cnn.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./transformer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./autoencoder.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
   </div>
 </li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -227,23 +320,23 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction-to-cnns" id="toc-introduction-to-cnns" class="nav-link active" data-scroll-target="#introduction-to-cnns"><span class="header-section-number">8.1</span> Introduction to CNNs</a></li>
-  <li><a href="#how-do-cnns-work" id="toc-how-do-cnns-work" class="nav-link" data-scroll-target="#how-do-cnns-work"><span class="header-section-number">8.2</span> How do CNNs work</a>
+  <li><a href="#introduction-to-cnns" id="toc-introduction-to-cnns" class="nav-link active" data-scroll-target="#introduction-to-cnns"><span class="header-section-number">18.1</span> Introduction to CNNs</a></li>
+  <li><a href="#how-do-cnns-work" id="toc-how-do-cnns-work" class="nav-link" data-scroll-target="#how-do-cnns-work"><span class="header-section-number">18.2</span> How do CNNs work</a>
   <ul class="collapse">
-  <li><a href="#convolutional-layer" id="toc-convolutional-layer" class="nav-link" data-scroll-target="#convolutional-layer"><span class="header-section-number">8.2.1</span> Convolutional Layer</a></li>
-  <li><a href="#pooling-layer" id="toc-pooling-layer" class="nav-link" data-scroll-target="#pooling-layer"><span class="header-section-number">8.2.2</span> Pooling Layer</a></li>
-  <li><a href="#fully-connected-layer" id="toc-fully-connected-layer" class="nav-link" data-scroll-target="#fully-connected-layer"><span class="header-section-number">8.2.3</span> Fully connected Layer</a></li>
+  <li><a href="#convolutional-layer" id="toc-convolutional-layer" class="nav-link" data-scroll-target="#convolutional-layer"><span class="header-section-number">18.2.1</span> Convolutional Layer</a></li>
+  <li><a href="#pooling-layer" id="toc-pooling-layer" class="nav-link" data-scroll-target="#pooling-layer"><span class="header-section-number">18.2.2</span> Pooling Layer</a></li>
+  <li><a href="#fully-connected-layer" id="toc-fully-connected-layer" class="nav-link" data-scroll-target="#fully-connected-layer"><span class="header-section-number">18.2.3</span> Fully connected Layer</a></li>
   </ul></li>
-  <li><a href="#cnn-parameters" id="toc-cnn-parameters" class="nav-link" data-scroll-target="#cnn-parameters"><span class="header-section-number">8.3</span> CNN parameters</a>
+  <li><a href="#cnn-parameters" id="toc-cnn-parameters" class="nav-link" data-scroll-target="#cnn-parameters"><span class="header-section-number">18.3</span> CNN parameters</a>
   <ul class="collapse">
-  <li><a href="#stride" id="toc-stride" class="nav-link" data-scroll-target="#stride"><span class="header-section-number">8.3.1</span> Stride</a></li>
-  <li><a href="#padding" id="toc-padding" class="nav-link" data-scroll-target="#padding"><span class="header-section-number">8.3.2</span> Padding</a></li>
+  <li><a href="#stride" id="toc-stride" class="nav-link" data-scroll-target="#stride"><span class="header-section-number">18.3.1</span> Stride</a></li>
+  <li><a href="#padding" id="toc-padding" class="nav-link" data-scroll-target="#padding"><span class="header-section-number">18.3.2</span> Padding</a></li>
   </ul></li>
-  <li><a href="#limitations-of-cnns" id="toc-limitations-of-cnns" class="nav-link" data-scroll-target="#limitations-of-cnns"><span class="header-section-number">8.4</span> Limitations of CNNs</a></li>
-  <li><a href="#deep-residual-learning" id="toc-deep-residual-learning" class="nav-link" data-scroll-target="#deep-residual-learning"><span class="header-section-number">8.5</span> Deep Residual Learning</a>
+  <li><a href="#limitations-of-cnns" id="toc-limitations-of-cnns" class="nav-link" data-scroll-target="#limitations-of-cnns"><span class="header-section-number">18.4</span> Limitations of CNNs</a></li>
+  <li><a href="#deep-residual-learning" id="toc-deep-residual-learning" class="nav-link" data-scroll-target="#deep-residual-learning"><span class="header-section-number">18.5</span> Deep Residual Learning</a>
   <ul class="collapse">
-  <li><a href="#resnet-basic-idea" id="toc-resnet-basic-idea" class="nav-link" data-scroll-target="#resnet-basic-idea"><span class="header-section-number">8.5.1</span> ResNet basic idea</a></li>
-  <li><a href="#skipped-connections" id="toc-skipped-connections" class="nav-link" data-scroll-target="#skipped-connections"><span class="header-section-number">8.5.2</span> Skipped connections</a></li>
+  <li><a href="#resnet-basic-idea" id="toc-resnet-basic-idea" class="nav-link" data-scroll-target="#resnet-basic-idea"><span class="header-section-number">18.5.1</span> ResNet basic idea</a></li>
+  <li><a href="#skipped-connections" id="toc-skipped-connections" class="nav-link" data-scroll-target="#skipped-connections"><span class="header-section-number">18.5.2</span> Skipped connections</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -251,9 +344,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="./cnn.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-cnn" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></h1>
+<h1 class="title"><span id="sec-cnn" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></h1>
 </div>
 
 
@@ -270,12 +363,12 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction-to-cnns" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="introduction-to-cnns"><span class="header-section-number">8.1</span> Introduction to CNNs</h2>
+<section id="introduction-to-cnns" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="introduction-to-cnns"><span class="header-section-number">18.1</span> Introduction to CNNs</h2>
 <p>So far in this course the neural networks we have mostly been working with have been types of Multilayer Perceptron (MLPs). These foundational neural networks are not suited to all types of problem. One such example involves images, i.e.&nbsp;a set of pixels - these will be treated independently which will ignore powerful features such as locality. To tackle this issue, Convolutional Neural Networks were devised.</p>
 </section>
-<section id="how-do-cnns-work" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="how-do-cnns-work"><span class="header-section-number">8.2</span> How do CNNs work</h2>
+<section id="how-do-cnns-work" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="how-do-cnns-work"><span class="header-section-number">18.2</span> How do CNNs work</h2>
 <p>The building blocks of a CNN are:</p>
 <ul>
 <li>Convolutional Layer</li>
@@ -283,8 +376,8 @@ window.Quarto = {
 <li>Pooling Layer</li>
 <li>Fully connected layer</li>
 </ul>
-<section id="convolutional-layer" class="level3" data-number="8.2.1">
-<h3 data-number="8.2.1" class="anchored" data-anchor-id="convolutional-layer"><span class="header-section-number">8.2.1</span> Convolutional Layer</h3>
+<section id="convolutional-layer" class="level3" data-number="18.2.1">
+<h3 data-number="18.2.1" class="anchored" data-anchor-id="convolutional-layer"><span class="header-section-number">18.2.1</span> Convolutional Layer</h3>
 <p>This layer performs the core mathematical function - a <em>sliding window</em> is shiftd across the image looking for specific <em>features</em>. These sliding windows are called <em>filters</em> or <em>kernels</em> and there are several which are each looking for different patterns e.g.&nbsp;straight lines or curves. The filters highlight the specific pattern they are looking for and create a <em>feature map</em>. Activation functions are used to ensure non-linear transformations are possible in the network, e.g.&nbsp;by ReLu is commonly used in the convolutional layers in a CNN.</p>
 <div id="fig-cnnlayer" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -292,13 +385,13 @@ window.Quarto = {
 <img src="CNNlayer.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cnnlayer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.1: The convolutional layer outputs a feature map
+Figure&nbsp;18.1: The convolutional layer outputs a feature map
 </figcaption>
 </figure>
 </div>
 </section>
-<section id="pooling-layer" class="level3" data-number="8.2.2">
-<h3 data-number="8.2.2" class="anchored" data-anchor-id="pooling-layer"><span class="header-section-number">8.2.2</span> Pooling Layer</h3>
+<section id="pooling-layer" class="level3" data-number="18.2.2">
+<h3 data-number="18.2.2" class="anchored" data-anchor-id="pooling-layer"><span class="header-section-number">18.2.2</span> Pooling Layer</h3>
 <p>This layer’s primary purpose is to identify the most significant features and reduce the size of the feature maps. A filter is used which scans over the feature map and aggregation functions are used to reduce the dimensionality of the data. Types of aggregation function include:</p>
 <ul>
 <li>Max Pooling: Selects the maximum value from the area of the feature map covered by the filter</li>
@@ -310,13 +403,13 @@ Figure&nbsp;8.1: The convolutional layer outputs a feature map
 <img src="CNNPooling.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cnnpooling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.2: The pooling layer identifies significant features
+Figure&nbsp;18.2: The pooling layer identifies significant features
 </figcaption>
 </figure>
 </div>
 </section>
-<section id="fully-connected-layer" class="level3" data-number="8.2.3">
-<h3 data-number="8.2.3" class="anchored" data-anchor-id="fully-connected-layer"><span class="header-section-number">8.2.3</span> Fully connected Layer</h3>
+<section id="fully-connected-layer" class="level3" data-number="18.2.3">
+<h3 data-number="18.2.3" class="anchored" data-anchor-id="fully-connected-layer"><span class="header-section-number">18.2.3</span> Fully connected Layer</h3>
 <p>This layer is there to assign final predictions based on the outputs of the previous convolution and pooling layers. Each node in this layer is connected to each node in the previous layer. In a classification task the activation function is typically SoftMax, which turns the flatted vector of features into a probability distribution.</p>
 <div id="fig-cnnconnected" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -324,32 +417,32 @@ Figure&nbsp;8.2: The pooling layer identifies significant features
 <img src="CNNFullyConnected.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cnnconnected-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.3: The fully connected layer assigns final predictions
+Figure&nbsp;18.3: The fully connected layer assigns final predictions
 </figcaption>
 </figure>
 </div>
 </section>
 </section>
-<section id="cnn-parameters" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="cnn-parameters"><span class="header-section-number">8.3</span> CNN parameters</h2>
-<section id="stride" class="level3" data-number="8.3.1">
-<h3 data-number="8.3.1" class="anchored" data-anchor-id="stride"><span class="header-section-number">8.3.1</span> Stride</h3>
+<section id="cnn-parameters" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="cnn-parameters"><span class="header-section-number">18.3</span> CNN parameters</h2>
+<section id="stride" class="level3" data-number="18.3.1">
+<h3 data-number="18.3.1" class="anchored" data-anchor-id="stride"><span class="header-section-number">18.3.1</span> Stride</h3>
 <p>The stride is the number of pixels that the convolutional filter moves each time it starts a new pass. A stride of 1 means one pixel at a time, 2 means two pixels at a time etc. This parameter has an important effect on the performance of a CNN. Larger strides reduce spatial dimensions of the output feature map, while increasing computational efficiency. However they can also miss fine-grained features while capturing the broad ones.</p>
 </section>
-<section id="padding" class="level3" data-number="8.3.2">
-<h3 data-number="8.3.2" class="anchored" data-anchor-id="padding"><span class="header-section-number">8.3.2</span> Padding</h3>
+<section id="padding" class="level3" data-number="18.3.2">
+<h3 data-number="18.3.2" class="anchored" data-anchor-id="padding"><span class="header-section-number">18.3.2</span> Padding</h3>
 <p>In fixed size images there will be edges of the image where the convolutional filter can not be applied; this can lead to a loss of information. Padding adds extra pixels around the image, usually just zeros, which allow the filter to be applied - without adding artifical information.</p>
 </section>
 </section>
-<section id="limitations-of-cnns" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="limitations-of-cnns"><span class="header-section-number">8.4</span> Limitations of CNNs</h2>
+<section id="limitations-of-cnns" class="level2" data-number="18.4">
+<h2 data-number="18.4" class="anchored" data-anchor-id="limitations-of-cnns"><span class="header-section-number">18.4</span> Limitations of CNNs</h2>
 <p>CNNs, although very powerful for datasets composed of images, do have their limitations. The networks are frequently complex which take significant resources to train, along with having to use large datasets to be performant. Another issue that commonly occurs is known as the <em>vanising gradient problem</em> which occurs with deeper networks. As the gradients become smaller between layers it becomes more difficult for earlier layers to learn. In fact it was shown that deeper networks, which were orignally thought to be more performant, were actually exhibiting signs of poorer performance than shallower ones, with higher training and test errors.</p>
 </section>
-<section id="deep-residual-learning" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="deep-residual-learning"><span class="header-section-number">8.5</span> Deep Residual Learning</h2>
+<section id="deep-residual-learning" class="level2" data-number="18.5">
+<h2 data-number="18.5" class="anchored" data-anchor-id="deep-residual-learning"><span class="header-section-number">18.5</span> Deep Residual Learning</h2>
 <p>In 2015 a paper was published which redefined how we use CNNs (https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf). It proposed a new structure to CNNs which helped to alleviate some of the issues described above. They key shift was to use <em>skipped connections</em> to speed up training, which also had the benefit of preventing the vanishing gradient problem.</p>
-<section id="resnet-basic-idea" class="level3" data-number="8.5.1">
-<h3 data-number="8.5.1" class="anchored" data-anchor-id="resnet-basic-idea"><span class="header-section-number">8.5.1</span> ResNet basic idea</h3>
+<section id="resnet-basic-idea" class="level3" data-number="18.5.1">
+<h3 data-number="18.5.1" class="anchored" data-anchor-id="resnet-basic-idea"><span class="header-section-number">18.5.1</span> ResNet basic idea</h3>
 <p>The idea behind this network architecture can be described simply mathematically. Instead of learning:</p>
 <p><span class="math display">\[
 \begin{align}
@@ -382,8 +475,8 @@ f(x)=0
 \]</span> .</p>
 <p><strong>It is easier for the network to learn f(x)=0 than learn how to map the identity function directly.</strong></p>
 </section>
-<section id="skipped-connections" class="level3" data-number="8.5.2">
-<h3 data-number="8.5.2" class="anchored" data-anchor-id="skipped-connections"><span class="header-section-number">8.5.2</span> Skipped connections</h3>
+<section id="skipped-connections" class="level3" data-number="18.5.2">
+<h3 data-number="18.5.2" class="anchored" data-anchor-id="skipped-connections"><span class="header-section-number">18.5.2</span> Skipped connections</h3>
 <p>The identity function is a key concept in residual networks. By using <em>shortcut connections</em> or <em>skipped connections</em> - which perform identity mapping - the outputs can be added to the outputs of intermediate layers. The original x is copied forward unchanged and new features are added to this - <em>corrections</em>.</p>
 <div id="fig-reslearning" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -391,7 +484,7 @@ f(x)=0
 <img src="ResidualLearning.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reslearning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.4: The pooling layer identifies significant features
+Figure&nbsp;18.4: The pooling layer identifies significant features
 </figcaption>
 </figure>
 </div>
@@ -805,12 +898,12 @@ Figure&nbsp;8.4: The pooling layer identifies significant features
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./neural-networks.html" class="pagination-link" aria-label="Neural Networks">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neural Networks</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Neural Networks</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./rnn.html" class="pagination-link" aria-label="Recurrent Neural Networks">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

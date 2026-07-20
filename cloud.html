@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – Advanced Computational Physics &amp; Machine Learning</title>
+<title>7&nbsp; Cloud Technology – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,26 +23,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -52,7 +33,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./autoencoder.html" rel="prev">
+<link href="./numeric.html" rel="next">
+<link href="./parallel.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -103,7 +85,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./programming.html">Programming</a></li><li class="breadcrumb-item"><a href="./cloud.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cloud Technology</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -181,7 +163,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cloud.html" class="sidebar-item-text sidebar-link">
+  <a href="./cloud.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cloud Technology</span></span></a>
   </div>
 </li>
@@ -295,7 +277,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -304,15 +286,43 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#distributed-computing" id="toc-distributed-computing" class="nav-link active" data-scroll-target="#distributed-computing"><span class="header-section-number">7.1</span> Distributed Computing</a>
+  <ul class="collapse">
+  <li><a href="#sec-htc-vs-hpc" id="toc-sec-htc-vs-hpc" class="nav-link" data-scroll-target="#sec-htc-vs-hpc"><span class="header-section-number">7.1.1</span> Distributed vs Parallel Computing</a></li>
+  <li><a href="#sec-htc-challenges" id="toc-sec-htc-challenges" class="nav-link" data-scroll-target="#sec-htc-challenges"><span class="header-section-number">7.1.2</span> Challenges</a></li>
+  </ul></li>
+  <li><a href="#sec-cloud" id="toc-sec-cloud" class="nav-link" data-scroll-target="#sec-cloud"><span class="header-section-number">7.2</span> The Cloud</a>
+  <ul class="collapse">
+  <li><a href="#sec-saas" id="toc-sec-saas" class="nav-link" data-scroll-target="#sec-saas"><span class="header-section-number">7.2.1</span> Software as a Service (SaaS)</a></li>
+  <li><a href="#sec-iaas" id="toc-sec-iaas" class="nav-link" data-scroll-target="#sec-iaas"><span class="header-section-number">7.2.2</span> Infrastructure as a Service (IaaS)</a></li>
+  </ul></li>
+  <li><a href="#sec-cloud-tech" id="toc-sec-cloud-tech" class="nav-link" data-scroll-target="#sec-cloud-tech"><span class="header-section-number">7.3</span> Cloud Technology</a></li>
+  <li><a href="#virtual-machines" id="toc-virtual-machines" class="nav-link" data-scroll-target="#virtual-machines"><span class="header-section-number">7.4</span> Virtual Machines</a>
+  <ul class="collapse">
+  <li><a href="#emulation-vs-virtualisation" id="toc-emulation-vs-virtualisation" class="nav-link" data-scroll-target="#emulation-vs-virtualisation"><span class="header-section-number">7.4.1</span> Emulation vs Virtualisation</a></li>
+  <li><a href="#virtual-networks" id="toc-virtual-networks" class="nav-link" data-scroll-target="#virtual-networks"><span class="header-section-number">7.4.2</span> Virtual Networks</a></li>
+  </ul></li>
+  <li><a href="#containers" id="toc-containers" class="nav-link" data-scroll-target="#containers"><span class="header-section-number">7.5</span> Containers</a>
+  <ul class="collapse">
+  <li><a href="#container-images" id="toc-container-images" class="nav-link" data-scroll-target="#container-images"><span class="header-section-number">7.5.1</span> Container Images</a></li>
+  <li><a href="#container-engines" id="toc-container-engines" class="nav-link" data-scroll-target="#container-engines"><span class="header-section-number">7.5.2</span> Container Engines</a></li>
+  <li><a href="#container-creation" id="toc-container-creation" class="nav-link" data-scroll-target="#container-creation"><span class="header-section-number">7.5.3</span> Container creation</a></li>
+  <li><a href="#container-repositories" id="toc-container-repositories" class="nav-link" data-scroll-target="#container-repositories"><span class="header-section-number">7.5.4</span> Container repositories</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./programming.html">Programming</a></li><li class="breadcrumb-item"><a href="./cloud.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cloud Technology</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cloud Technology</span></h1>
 </div>
 
 
@@ -329,28 +339,97 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
-<div id="ref-vaswani2023" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1706.03762">A. Vaswani, N. Shazeer, N.
-Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser, and I.
-Polosukhin, (2023)</a>.</div>
-</div>
-<div id="ref-mikolov10_interspeech" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline"><a href="https://doi.org/10.21437/Interspeech.2010-343">T. Mikolov, M.
-Karafiát, L. Burget, J. Černocký, and S. Khudanpur, in
-<em><span>Interspeech 2010</span></em> (2010), pp. 1045–1048</a>.</div>
-</div>
-<div id="ref-sutskever2014sseq2seq" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1409.3215">I. Sutskever, O. Vinyals, and Q.
-V. Le, (2014)</a>.</div>
-</div>
-<div id="ref-bahdanau2016neuralmachinetranslationjointly" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1409.0473">D. Bahdanau, K. Cho, and Y.
-Bengio, (2016)</a>.</div>
-</div>
-</div>
+<p>Some tasks cannot be performed by a single computer. Or they can, but they would take far too long. Or they can, but the risk of failure associated with a single computer is too high. Or they can, but sometimes a huge number of tasks are required at the same time. In all these cases, methods of delegating those tasks to multiple computers are required.</p>
+<section id="distributed-computing" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="distributed-computing"><span class="header-section-number">7.1</span> Distributed Computing</h2>
+<p>Distributed computing is a broad term that refers to applications which rely on a network of computers. Such applications can provide greater resilience and reliability, as well as being able to solve “bigger” problems.</p>
+<section id="sec-htc-vs-hpc" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="sec-htc-vs-hpc"><span class="header-section-number">7.1.1</span> Distributed vs Parallel Computing</h3>
+<p>It is helpful to draw a distinction between “distributed computing” and “parallel computing”. Parallel computing is another broad term, covering techniques which allow a computational problem to be split between several processors. There is clearly some overlap between the two terms, but parallel computing tends to apply to tighly-coupled problems, where the computation requires high-bandwith, low-latency messaging between processors, which potentially have access to shared memory. Typical problems might include domain decomposition solvers, linear algebra, FFTs, N-body systems.</p>
+<p>Distributed computing, on the other hand, refers to loosely-coupled problems, where many processors are required, but requirements on connectivity between processors are lower. Examples include Monte Carlo simulation, image/data processing applications, or supporting a very large number of users. The latter includes essentially all the apps on your phone.</p>
+<p>Supporting a huge user base is rarely a requirement in science (although there are examples of apps which collect scientific data, eg. <a href="https://play.google.com/store/apps/details?id=science.credo.mobiledetector&amp;hl=en_GB&amp;pli=1">the CREDO app</a>, see also <a href="https://arxiv.org/abs/1709.05230v2" class="uri">https://arxiv.org/abs/1709.05230v2</a>). However, processing of very large datasets is increasingly a challenge for science, and distributed (or cloud) computing can provide solutions.</p>
+<p>Frequently we refer to High Performance Computing (HPC) for systems with high bandwidth/low latency interconnects between processors, and High Throughput Computing (HTC) for systems comprising processors connected by standard networks.</p>
+</section>
+<section id="sec-htc-challenges" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="sec-htc-challenges"><span class="header-section-number">7.1.2</span> Challenges</h3>
+<p>Distributed computing offers the potential to eg. process very large datasets using standard computer hardware, but it also brings challenges. For example :</p>
+<ul>
+<li>Management of servers, network equipment, power, cooling, noise</li>
+<li>Replacement of failed equipment</li>
+<li>Scaling applications across many devices</li>
+<li>Load balancing (or ensuring the work is spread out over the system, and there is not one piece that holds everything up)</li>
+<li>Resilience and fault tolerance. (Ensuring the system keeps working while you are replacing a failed unit)</li>
+</ul>
+<p>These challenges can be reduced by using cloud technology.</p>
+</section>
+</section>
+<section id="sec-cloud" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="sec-cloud"><span class="header-section-number">7.2</span> The Cloud</h2>
+<p>“The Cloud” is a very broad, not terribly well defined, term. We will talk about “clouds” as collections of computers, connected via the internet, which are used to provide services to consumers, solving some of the challenges described above.</p>
+<p>Typically, these services are provided to the public. We call this the public cloud. Examples include AWS (Amazon Web Services), Microsoft Azure, Google Cloud.</p>
+<p>Some organisations will create their own private clouds to manage privately owned hardware and applications. Different branches of the organisation become provider and consumer. Private clouds will rely on much of the same technology as public clouds. We will consider public clouds only from here on.</p>
+<p>Public cloud providers use a range of models to provide cloud services to their customers.</p>
+<section id="sec-saas" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="sec-saas"><span class="header-section-number">7.2.1</span> Software as a Service (SaaS)</h3>
+<p>In this model, the provider delivers an application over the network, and the customer uses the application. The provider takes care of all the hardware and software required to run the application, minimising overheads for the customer. However, the customer has no significant control over the features provided by the application. Examples include Google docs, MS Office 365.</p>
+<p>###&nbsp;Platform as a Service (PaaS) {#sec-paas}</p>
+<p>This model gives the customer more flexibility over the application than SaaS, while at the same time reducing the system management overheads. The cloud provider delivers everything required to build and run applications - virtual servers, operating system, databases, and other “middleware” (eg. web servers, message passing software). The customer then develops and deploys their application - which they may either use themselves, or provide to their own customers as SaaS. Examples include most use of AWS.</p>
+</section>
+<section id="sec-iaas" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="sec-iaas"><span class="header-section-number">7.2.2</span> Infrastructure as a Service (IaaS)</h3>
+<p>This model gives the customer maximum control over their system, but alleviates the need for them to manage their own hardware. The cloud provider delivers virtualised servers, storage, network infrastructure on demand. The customer manages their virtual servers, deploying operating systems and middleware, as well as development and deployment of the application(s) they use or provide to their own customers.</p>
+</section>
+</section>
+<section id="sec-cloud-tech" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="sec-cloud-tech"><span class="header-section-number">7.3</span> Cloud Technology</h2>
+<p>This is the software upon which clouds are built. Typically, the big cloud providers provide their own toolsets for building and managing applications within their environments. So most cloud development takes places within an eco-system provided by a major supplier (AWS, Azure, Google Cloud). But some pieces and concepts are common to them all. In particular, these include :</p>
+<ul>
+<li>Virtual Machines</li>
+<li>Containers</li>
+<li>Cluster Management</li>
+</ul>
+</section>
+<section id="virtual-machines" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="virtual-machines"><span class="header-section-number">7.4</span> Virtual Machines</h2>
+<p>A virtual machine (VM) is a simulation of a computer. It is a software programme which runs on a ‘host’ machine, but then allows a ‘guest’ operating system to be installed, which can then be used as if it were running on real computer hardware.</p>
+<p>There are a variety of reasons to run a VM. If you develop code that must be compatible with multiple operating systems, say, then you might run a VM for each supported OS which allows you to test your code.</p>
+<p>VMs are ubiquitous in management of large data centres, since they decouple the problems of managing hardware (eg. replacing failed components) and that of managing operating systems (eg. keeping up with updates). For example, running two identical VMs on two physical servers allows the system to continue operating even if one physical machine fails, or when an operating system update needs to be applied and tested.</p>
+<p>In cloud environment, VMs allow a provider (who owns, controls, and manages the physical hardware) to provide virtual servers to their customers. The cloud provider might run multiple VMs, for several customers, on a single physical machine, with controls on how much cpu time each customers VM can use. This allows the provider to maximise the number of cpu cycles that are used (or sold) and thereby maximise the return on their investment.</p>
+<section id="emulation-vs-virtualisation" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="emulation-vs-virtualisation"><span class="header-section-number">7.4.1</span> Emulation vs Virtualisation</h3>
+<p>In an <strong>emulated</strong> VM, the CPU instruction set is simulated. This allows the VM to run any cpu architecture and support any guest OS. However, the work of simulating every instruction adds substantial overhead to the programmes running within the guest OS, and their performance is subsequently degraded. This may render some applications unusable.</p>
+<p>The alternative is <strong>virtualisation</strong> of the CPU. In this case, the CPU instruction set is not simulated, and instructions are run directly on the CPU. A “hypervisor” allows the guest OS to share the CPU with the host OS. Applications are able to run with no additional overhead. However, the guest OS is constrained to those that are compatible with the host CPU.</p>
+</section>
+<section id="virtual-networks" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="virtual-networks"><span class="header-section-number">7.4.2</span> Virtual Networks</h3>
+<p>Much as a computer is simulated by a virtual machine, a virtual network is a simulation of a network. VM software usually allows you to create a virtual network running entirely within the host. The Layer 2 and Layer 3 functionality, that is normally provided by physical switches and routers, is simply provided by software.</p>
+<p>However, virtual networks are not limited to running within a single host, and may cross multiple physical networks. For example, a virtual private network (VPN) is a simulated network that securely connects two endpoints via the internet, using encryption. A virtual local area network (VLAN) is a virtual network usually used to sub-divide a larger network into smaller management pieces.</p>
+</section>
+</section>
+<section id="containers" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="containers"><span class="header-section-number">7.5</span> Containers</h2>
+<p>Containers are an extension of the VM concept and are now a foundational technology in cloud computing. A container is a lightweight, standalone, and executable software package that includes everything needed to run a piece of software. It will include code, runtime, libraries and system tools.</p>
+<p>Containers share a “kernel” with the host OS. The kernel is the part of the OS that is always running. It has complete control over the system, controlling all hardware, managing access by applications, preventing conflicts. By sharing the kernel with the host, containers are highly efficient. But it also places significant limitations on the container, which must use the same kernel as the host OS. In practise, this means containers are all Linux based. Container engines typically come with an option to create a VM. The user sees a container, but this is running inside a VM, allowing operation on Mac, Windows (and allowing portability between Linux kernel versions).</p>
+<section id="container-images" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="container-images"><span class="header-section-number">7.5.1</span> Container Images</h3>
+<p>Containers are typically distributed as “images”, which are fast and easy to start up and run. Containers were originally introduced by Docker, along with an image format. This format is now standardised by the <a href="https://opencontainers.org/">Open Container Initiative (OCI)</a>.</p>
+</section>
+<section id="container-engines" class="level3" data-number="7.5.2">
+<h3 data-number="7.5.2" class="anchored" data-anchor-id="container-engines"><span class="header-section-number">7.5.2</span> Container Engines</h3>
+<p>In order to run a container, the host must be running a container engine. Many engines are avilable, including the <a href="https://www.docker.com/">Docker</a> engine, but alternatives such as <a href="https://podman.io/">Podman</a>, <a href="https://apptainer.org/">Apptainer</a> are increasingly popular.</p>
+</section>
+<section id="container-creation" class="level3" data-number="7.5.3">
+<h3 data-number="7.5.3" class="anchored" data-anchor-id="container-creation"><span class="header-section-number">7.5.3</span> Container creation</h3>
+<p>In order to create a container image, a container builder is required. Docker is a standard option, with <a href="https://buildah.io/">Buildah</a> an alternative. Typically a container builder requires a specification for what to include in the container image. In the case of Docker, the Dockerfile provides simple instructions for creating the image.</p>
+</section>
+<section id="container-repositories" class="level3" data-number="7.5.4">
+<h3 data-number="7.5.4" class="anchored" data-anchor-id="container-repositories"><span class="header-section-number">7.5.4</span> Container repositories</h3>
+<p>The final piece of the container ecosystem, are the container repositories. Many developers, vendors and organisations create standard containers that run well defined applications, and make them available via repositories. These can be downloaded (often directly by the container engine) and run, simplifying the deployment process.</p>
+<p><a href="https://hub.docker.com/">https://hub.docker.com/</a> is a registry of repositories, so it contains links to a huge number of container repositories, covering a wide range of applications.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -755,11 +834,14 @@ Bengio, (2016)</a>.</div>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./autoencoder.html" class="pagination-link" aria-label="Autoencoders">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Autoencoders</span></span>
+      <a href="./parallel.html" class="pagination-link" aria-label="Parallel Programming">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parallel Programming</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./numeric.html" class="pagination-link" aria-label="Numerical Methods">
+        <span class="nav-page-text">Numerical Methods</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

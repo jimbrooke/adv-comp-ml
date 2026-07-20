@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – Advanced Computational Physics &amp; Machine Learning</title>
+<title>10&nbsp; Eigenproblems – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,26 +23,42 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -52,7 +68,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./autoencoder.html" rel="prev">
+<link href="./monte-carlo.html" rel="next">
+<link href="./sim-eqn.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -91,6 +108,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -103,7 +149,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numeric.html">Numerical Methods</a></li><li class="breadcrumb-item"><a href="./eigenproblems.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenproblems</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -210,7 +256,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./eigenproblems.html" class="sidebar-item-text sidebar-link">
+  <a href="./eigenproblems.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenproblems</span></span></a>
   </div>
 </li>
@@ -295,7 +341,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -304,15 +350,22 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#simple-example" id="toc-simple-example" class="nav-link active" data-scroll-target="#simple-example"><span class="header-section-number">10.1</span> Simple example</a></li>
+  <li><a href="#physics-example" id="toc-physics-example" class="nav-link" data-scroll-target="#physics-example"><span class="header-section-number">10.2</span> Physics Example</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numeric.html">Numerical Methods</a></li><li class="breadcrumb-item"><a href="./eigenproblems.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenproblems</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenproblems</span></h1>
 </div>
 
 
@@ -329,28 +382,219 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
-<div id="ref-vaswani2023" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1706.03762">A. Vaswani, N. Shazeer, N.
-Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser, and I.
-Polosukhin, (2023)</a>.</div>
+<p>A square NxN matrix <span class="math inline">\(A\)</span>, has eigenvector <span class="math inline">\(u\)</span> and eigenvalue <span class="math inline">\(\lambda\)</span> that satisfy :</p>
+<p><span id="eq-a"><span class="math display">\[(A - \lambda I)u = 0 \tag{10.1}\]</span></span></p>
+<p>Solving eigenproblems is closely related to finding the roots of polynomials. You may be familiar with one method for finding eigenvalues, which is to find the roots of the N-th degree polynomial found by expanding :</p>
+<p><span id="eq-b"><span class="math display">\[p(t) = \det{|A - t I|} = 0 \tag{10.2}\]</span></span></p>
+<p>Many eigenproblem solving routines are provided by SciPy. In particular, <code>scipy.linalg.eig(A)</code> will return a tuple containing the eigenvalues and eigenvectors of A. If only the eigenvalues are required, <code>scipy.linalg.eigenvals(A)</code> can be used.</p>
+<p>Care should be taken when using <code>scipy.linalg.eig</code>, since it will find “left” and “right” eigenvectors, as specified, which are the solutions to <span class="math inline">\(v A = \lambda v\)</span> and <span class="math inline">\(A v = \lambda v\)</span> respectively.</p>
+<p>For further details see <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.eig.html">scipy.linalg.eig</a></p>
+<p>Additional routines include :</p>
+<ul>
+<li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.eigh.html">scipy.linalg.eigh</a> (for Hermitian matrices)</p></li>
+<li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.eig_banded.html">scipy.linalg.eig_banded</a> (for banded matrices)</p></li>
+<li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.eigs.html">scipy.sparse.linalg.eigs</a> (for sparse, square symmetric matrices)</p></li>
+</ul>
+<section id="simple-example" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="simple-example"><span class="header-section-number">10.1</span> Simple example</h2>
+<p>We can test these sovlers using the matrix :</p>
+<p><span id="eq-c"><span class="math display">\[A =
+\pmatrix{
+-2 &amp; -4 &amp; 2 \\
+-2 &amp;  1 &amp; 2 \\
+4  &amp;  2 &amp; 5}
+\tag{10.3}\]</span></span></p>
+<p>for which the eigenvalues are <span class="math inline">\(\lambda^{(0)}=6\)</span>, <span class="math inline">\(\lambda^{(1)}=-5\)</span>, <span class="math inline">\(\lambda^{(2)}=3\)</span>.</p>
+<p>Note that the algorithms discussed here will all find <em>unit</em> eigenvectors. The eigenvector corresponding to <span class="math inline">\(\lambda^{(0)}\)</span> is then :</p>
+<p><span id="eq-d"><span class="math display">\[\hat{u}^{(0)}=\pmatrix{\frac{1}{\sqrt{293}} \\
+\frac{6}{\sqrt{293}} \\
+\frac{16}{\sqrt{293}}
+}
+=
+\pmatrix{0.058 \\
+0.351 \\
+0.935} \tag{10.4}\]</span></span></p>
+<p>with numerical values given to 3 decimal places on the RHS.</p>
+<div id="6ff7270a" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">4</span>,<span class="dv">2</span>],[<span class="op">-</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>],[<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">5</span>]])</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed for repeatability</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">2</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># run the algorithm</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>mus, vs <span class="op">=</span> linalg.eig(m)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># print results</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(precision<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Eigenvalue/vector : </span><span class="sc">{:.1f}</span><span class="st"> </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(mus[i], vs.T[i]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Eigenvalue/vector : -5.0+0.0j [ 0.816  0.408 -0.408]
+Eigenvalue/vector : 3.0+0.0j [ 0.535 -0.802 -0.267]
+Eigenvalue/vector : 6.0+0.0j [0.058 0.351 0.935]</code></pre>
 </div>
-<div id="ref-mikolov10_interspeech" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline"><a href="https://doi.org/10.21437/Interspeech.2010-343">T. Mikolov, M.
-Karafiát, L. Burget, J. Černocký, and S. Khudanpur, in
-<em><span>Interspeech 2010</span></em> (2010), pp. 1045–1048</a>.</div>
 </div>
-<div id="ref-sutskever2014sseq2seq" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1409.3215">I. Sutskever, O. Vinyals, and Q.
-V. Le, (2014)</a>.</div>
+<p>Which includes the solution expected.</p>
+<p>Note that we have transposed the array of eigenvectors returned by <code>linalg.eig()</code>. This is a feature of the function, as described in the reference manual : <em>“The normalized left eigenvector corresponding to the eigenvalue <code>w[i]</code> is the column <code>vl[:,i]</code>”</em>.</p>
+</section>
+<section id="physics-example" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="physics-example"><span class="header-section-number">10.2</span> Physics Example</h2>
+<p>In this section, we illustrate the use of eigenvalue solvers in finding stable solutions of the coupled system of oscillators shown below.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="masses.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 2 - Coupled oscillators, masses on springs.</figcaption>
+</figure>
 </div>
-<div id="ref-bahdanau2016neuralmachinetranslationjointly" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1409.0473">D. Bahdanau, K. Cho, and Y.
-Bengio, (2016)</a>.</div>
+<p>If the displacement of the <span class="math inline">\(i\)</span>th mass from its equilibrium position is denoted as <span class="math inline">\(x_i\)</span>, the force on the mass is given by the tension in the two springs as :</p>
+<p><span id="eq-e"><span class="math display">\[F_i = −k(x_i − x_{i−1}) + k(x_{i+1} − x_i) = −k(2x_i − x_{i−1} − x_{i+1}) \tag{10.5}\]</span></span></p>
+<p>We can assume that there are normal mode solutions, i.e.&nbsp;solutions of the form <span class="math inline">\(x_i = z_i e^{i\omega t}\)</span> in which all masses oscillate with the same frequency <span class="math inline">\(\omega\)</span> but with unknown phasors <span class="math inline">\(z_i\)</span>. Then the above equation becomes :</p>
+<p><span id="eq-f"><span class="math display">\[F_i = m\ddot{x}_i = −m\omega^2x_i = −k(2x_i − x_{i−1} − x_{i+1}) \tag{10.6}\]</span></span></p>
+<p>This is one row of a matrix equation describing the entire system :</p>
+<p><span id="eq-g"><span class="math display">\[m\omega^2x_i \left(\begin{array}{c} \vdots \\ \\ x_i \\ \\ \vdots \end{array}\right) =
+\left(\begin{array}{ccccccc} &amp; &amp; &amp; \vdots &amp; &amp; &amp; \\ \cdots &amp; 0 &amp; -1 &amp; 2 &amp; -1 &amp; 0 &amp; \cdots \\ &amp; &amp; &amp; \vdots &amp; &amp; &amp; \end{array}\right)
+\left(\begin{array}{c} \vdots \\ x_{i-1} \\ x_i \\ x_{i+1} \\ \vdots \end{array}\right)
+\tag{10.7}\]</span></span></p>
+<p>This example is a typical eigenvalue problem, in that many of the matrix elements are zero, which can greatly simplify the computational challenge and make even large systems solvable. The matrix is symmetric, which means it is suitable for solving with our eigenproblem solving function above, or one of the solvers from <code>scipy.linalg</code>.</p>
+<div id="8547c781" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>],</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>              [<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>],</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>],</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">0</span>,  <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">0</span>,  <span class="dv">0</span>],</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">0</span>],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>],</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>,  <span class="dv">2</span>]])</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>mus, vs <span class="op">=</span> linalg.eig(m)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The eigenvalue associated with each mode gives the frequency, while the (complex) eigenvector provides the magnitude and phase of oscillation for each mass. We can plot the displacement of each mass as a function of time for each mode.</p>
+<div id="6f88d970" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># a function to calculate the (real) displacement from complex phase</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> disp(zi, omega, t):</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.real(zi <span class="op">*</span> np.exp(<span class="ot">1j</span> <span class="op">*</span> omega <span class="op">*</span> t))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># set up some pretty colours for plotting</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>cm  <span class="op">=</span> plt.cm.viridis</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>col <span class="op">=</span> [cm(<span class="bu">int</span>(x<span class="op">*</span>cm.N<span class="op">/</span><span class="dv">7</span>)) <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">7</span>)]</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># time period</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> np.arange(<span class="dv">0</span>,<span class="dv">40</span>, <span class="fl">0.001</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over eigenmodes</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">7</span>):</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Mode       : "</span>,i)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Eigenvalue : "</span>, mus[i])</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    fig<span class="op">=</span>plt.figure(figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">4</span>))</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    xs <span class="op">=</span> []</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># loop over masses</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">7</span>):</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># get the displacement, and add an offset to separate out each line</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        offset <span class="op">=</span> (<span class="dv">2</span><span class="op">*</span>j)<span class="op">-</span><span class="dv">6</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># create displacement values from function using eigenvectors and eigenvalues</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        xs     <span class="op">=</span> disp(vs.T[i][j], mus[i], ts) <span class="op">+</span> offset</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        <span class="co"># plot displacement</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        plt.plot(ts, xs, color<span class="op">=</span>col[j])</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>        <span class="co"># plot central position to guide the eye</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>        plt.plot([<span class="dv">0</span>, <span class="dv">40</span>], [offset, offset], color<span class="op">=</span>col[j], linestyle<span class="op">=</span><span class="st">'dotted'</span>) </span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"t"</span>)</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mode       :  0
+Eigenvalue :  (3.847759065022569+0j)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eigenproblems_files/figure-html/cell-4-output-2.png" width="1239" height="356" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mode       :  1
+Eigenvalue :  (3.4142135623730927+0j)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eigenproblems_files/figure-html/cell-4-output-4.png" width="1239" height="356" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mode       :  2
+Eigenvalue :  (2.765366864730179+0j)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eigenproblems_files/figure-html/cell-4-output-6.png" width="1239" height="356" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mode       :  3
+Eigenvalue :  (1.9999999999999984+0j)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eigenproblems_files/figure-html/cell-4-output-8.png" width="1239" height="356" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mode       :  4
+Eigenvalue :  (0.15224093497742724+0j)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eigenproblems_files/figure-html/cell-4-output-10.png" width="1239" height="356" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mode       :  5
+Eigenvalue :  (0.585786437626905+0j)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eigenproblems_files/figure-html/cell-4-output-12.png" width="1239" height="356" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mode       :  6
+Eigenvalue :  (1.2346331352698205+0j)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eigenproblems_files/figure-html/cell-4-output-14.png" width="1239" height="356" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -755,11 +999,14 @@ Bengio, (2016)</a>.</div>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./autoencoder.html" class="pagination-link" aria-label="Autoencoders">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Autoencoders</span></span>
+      <a href="./sim-eqn.html" class="pagination-link" aria-label="Simultaneous Equations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simultaneous Equations</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./monte-carlo.html" class="pagination-link" aria-label="Monte Carlo Methods">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

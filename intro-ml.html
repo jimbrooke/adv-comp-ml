@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Introduction to Machine Learning – Advanced Computational Physics &amp; Machine Learning</title>
+<title>13&nbsp; Introduction to Machine Learning – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -34,7 +34,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./supervised-ml.html" rel="next">
-<link href="./monte-carlo.html" rel="prev">
+<link href="./ml.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -44,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-82cb5808e81da3454e8042d903791e03.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9658866cc54b3e6ffe57adf895444048.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -114,7 +114,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro-ml.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="./intro-ml.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -151,66 +151,159 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./programming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Programming</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./adv-python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Advanced Python Programming</span></span></a>
+  <a href="./basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Computers &amp; Networks</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./linear-algebra.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+  <a href="./oo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object Oriented Programming</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./functional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Programming</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exceptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exceptions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parallel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parallel Programming</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cloud Technology</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./numeric.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numerical Methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matrix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Basic Matrix Operations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sim-eqn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simultaneous Equations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./eigenproblems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eigenproblems</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./monte-carlo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./optimisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Optimisation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Machine Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro-ml.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./supervised-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./unsupervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Transfer Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./neural-networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Neural Networks</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./transformer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./autoencoder.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
   </div>
 </li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -227,38 +320,38 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-is-machine-learning" id="toc-what-is-machine-learning" class="nav-link active" data-scroll-target="#what-is-machine-learning"><span class="header-section-number">5.1</span> What is Machine Learning ?</a></li>
-  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">5.2</span> Models</a>
+  <li><a href="#what-is-machine-learning" id="toc-what-is-machine-learning" class="nav-link active" data-scroll-target="#what-is-machine-learning"><span class="header-section-number">13.1</span> What is Machine Learning ?</a></li>
+  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">13.2</span> Models</a>
   <ul class="collapse">
-  <li><a href="#simple-function" id="toc-simple-function" class="nav-link" data-scroll-target="#simple-function"><span class="header-section-number">5.2.1</span> Simple Function</a></li>
-  <li><a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees"><span class="header-section-number">5.2.2</span> Decision Trees</a></li>
-  <li><a href="#neural-networks" id="toc-neural-networks" class="nav-link" data-scroll-target="#neural-networks"><span class="header-section-number">5.2.3</span> Neural Networks</a></li>
+  <li><a href="#simple-function" id="toc-simple-function" class="nav-link" data-scroll-target="#simple-function"><span class="header-section-number">13.2.1</span> Simple Function</a></li>
+  <li><a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees"><span class="header-section-number">13.2.2</span> Decision Trees</a></li>
+  <li><a href="#neural-networks" id="toc-neural-networks" class="nav-link" data-scroll-target="#neural-networks"><span class="header-section-number">13.2.3</span> Neural Networks</a></li>
   </ul></li>
-  <li><a href="#types-of-learning" id="toc-types-of-learning" class="nav-link" data-scroll-target="#types-of-learning"><span class="header-section-number">5.3</span> Types of learning</a>
+  <li><a href="#types-of-learning" id="toc-types-of-learning" class="nav-link" data-scroll-target="#types-of-learning"><span class="header-section-number">13.3</span> Types of learning</a>
   <ul class="collapse">
-  <li><a href="#supervised-learning" id="toc-supervised-learning" class="nav-link" data-scroll-target="#supervised-learning"><span class="header-section-number">5.3.1</span> Supervised learning</a></li>
-  <li><a href="#unsupervised-learning" id="toc-unsupervised-learning" class="nav-link" data-scroll-target="#unsupervised-learning"><span class="header-section-number">5.3.2</span> Unsupervised learning</a></li>
-  <li><a href="#reinforcement-learning" id="toc-reinforcement-learning" class="nav-link" data-scroll-target="#reinforcement-learning"><span class="header-section-number">5.3.3</span> Reinforcement learning</a></li>
-  <li><a href="#other-types-of-learning" id="toc-other-types-of-learning" class="nav-link" data-scroll-target="#other-types-of-learning"><span class="header-section-number">5.3.4</span> Other types of learning</a></li>
+  <li><a href="#supervised-learning" id="toc-supervised-learning" class="nav-link" data-scroll-target="#supervised-learning"><span class="header-section-number">13.3.1</span> Supervised learning</a></li>
+  <li><a href="#unsupervised-learning" id="toc-unsupervised-learning" class="nav-link" data-scroll-target="#unsupervised-learning"><span class="header-section-number">13.3.2</span> Unsupervised learning</a></li>
+  <li><a href="#reinforcement-learning" id="toc-reinforcement-learning" class="nav-link" data-scroll-target="#reinforcement-learning"><span class="header-section-number">13.3.3</span> Reinforcement learning</a></li>
+  <li><a href="#other-types-of-learning" id="toc-other-types-of-learning" class="nav-link" data-scroll-target="#other-types-of-learning"><span class="header-section-number">13.3.4</span> Other types of learning</a></li>
   </ul></li>
-  <li><a href="#challenges" id="toc-challenges" class="nav-link" data-scroll-target="#challenges"><span class="header-section-number">5.4</span> Challenges</a>
+  <li><a href="#challenges" id="toc-challenges" class="nav-link" data-scroll-target="#challenges"><span class="header-section-number">13.4</span> Challenges</a>
   <ul class="collapse">
-  <li><a href="#interpretability" id="toc-interpretability" class="nav-link" data-scroll-target="#interpretability"><span class="header-section-number">5.4.1</span> Interpretability</a></li>
-  <li><a href="#overfitting" id="toc-overfitting" class="nav-link" data-scroll-target="#overfitting"><span class="header-section-number">5.4.2</span> Overfitting</a></li>
-  <li><a href="#uncertainty" id="toc-uncertainty" class="nav-link" data-scroll-target="#uncertainty"><span class="header-section-number">5.4.3</span> Uncertainty</a></li>
-  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">5.4.4</span> Reproducibility</a></li>
-  <li><a href="#sustainability" id="toc-sustainability" class="nav-link" data-scroll-target="#sustainability"><span class="header-section-number">5.4.5</span> Sustainability</a></li>
+  <li><a href="#interpretability" id="toc-interpretability" class="nav-link" data-scroll-target="#interpretability"><span class="header-section-number">13.4.1</span> Interpretability</a></li>
+  <li><a href="#overfitting" id="toc-overfitting" class="nav-link" data-scroll-target="#overfitting"><span class="header-section-number">13.4.2</span> Overfitting</a></li>
+  <li><a href="#uncertainty" id="toc-uncertainty" class="nav-link" data-scroll-target="#uncertainty"><span class="header-section-number">13.4.3</span> Uncertainty</a></li>
+  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">13.4.4</span> Reproducibility</a></li>
+  <li><a href="#sustainability" id="toc-sustainability" class="nav-link" data-scroll-target="#sustainability"><span class="header-section-number">13.4.5</span> Sustainability</a></li>
   </ul></li>
-  <li><a href="#examples-in-physics" id="toc-examples-in-physics" class="nav-link" data-scroll-target="#examples-in-physics"><span class="header-section-number">5.5</span> Examples in Physics</a></li>
+  <li><a href="#examples-in-physics" id="toc-examples-in-physics" class="nav-link" data-scroll-target="#examples-in-physics"><span class="header-section-number">13.5</span> Examples in Physics</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="./intro-ml.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-intro-ml" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></h1>
+<h1 class="title"><span id="sec-intro-ml" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></h1>
 </div>
 
 
@@ -275,41 +368,41 @@ window.Quarto = {
 </header>
 
 
-<section id="what-is-machine-learning" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="what-is-machine-learning"><span class="header-section-number">5.1</span> What is Machine Learning ?</h2>
+<section id="what-is-machine-learning" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="what-is-machine-learning"><span class="header-section-number">13.1</span> What is Machine Learning ?</h2>
 <p>Machine learning refers to algorithms that can learn patterns, or relationships, from data, and make predictions or decisions, without being explicitly programmed to do so. When applied to physics, this can mean that such algorithms infer structure (e.g.&nbsp;‘the laws of physics’) in data without them having been encoded within the algorithm. This should be contrasted with a traditional approach to scientific computing where models are usually built from first principles.</p>
 </section>
-<section id="models" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="models"><span class="header-section-number">5.2</span> Models</h2>
+<section id="models" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="models"><span class="header-section-number">13.2</span> Models</h2>
 <p>Machine learning can refer a wide range of techniques. All include what we will refer to as a ‘model’, that is the basis for learning. The model, <span class="math inline">\(f\)</span>, transforms input data <span class="math inline">\(x\)</span> into output <span class="math inline">\(\hat{y}\)</span>. The model relies on some parameters (often referred to as ‘weights’), <span class="math inline">\(\theta\)</span>, which are optimised as the model ‘learns’ from data.</p>
 <p><span class="math display">\[
 \hat{y}=f(\theta, x)
 \]</span></p>
 <p>(Here we use <span class="math inline">\(\hat{y}\)</span> to distinguish the model output from the ‘truth’ <span class="math inline">\(y\)</span>, although this distinction is not always required, as we shall see).</p>
 <p>The model can take many forms, some of which you will have already encountered. A few are described below.</p>
-<section id="simple-function" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="simple-function"><span class="header-section-number">5.2.1</span> Simple Function</h3>
+<section id="simple-function" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="simple-function"><span class="header-section-number">13.2.1</span> Simple Function</h3>
 <p>Linear regression is an example of supervised learning. The model here is the functional form that is being fitted to the data. Training is the process of determining parameters <span class="math inline">\(\theta\)</span> that minimise the mean squared error, i.e.&nbsp;performing the fit.</p>
 </section>
-<section id="decision-trees" class="level3" data-number="5.2.2">
-<h3 data-number="5.2.2" class="anchored" data-anchor-id="decision-trees"><span class="header-section-number">5.2.2</span> Decision Trees</h3>
+<section id="decision-trees" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2" class="anchored" data-anchor-id="decision-trees"><span class="header-section-number">13.2.2</span> Decision Trees</h3>
 <p>Decision trees are commonly used in classification problems, in particular where the data occupies a multidimensional space. The data sample <span class="math inline">\(x\)</span> is divided into categories <span class="math inline">\(\hat{y}\)</span> following a sequence of individual divisions or splits, which are defined by the parameters <span class="math inline">\(\theta\)</span>. The precise sequence of divisions can be obtained using supervised learning, or clustering methods.</p>
 </section>
-<section id="neural-networks" class="level3" data-number="5.2.3">
-<h3 data-number="5.2.3" class="anchored" data-anchor-id="neural-networks"><span class="header-section-number">5.2.3</span> Neural Networks</h3>
-<p>Neural networks will be covered in detail in <a href="neural-networks.html" class="quarto-xref"><span>Chapter 7</span></a>. Briefly, they comprise a network of nodes, modelled on the human brain. Each node receives input from several other nodes, and uses a activation function to generate output. Each input to the node is associated with a weight and a bias, which control the strength of the connection between nodes. The weights and biases are the parameters <span class="math inline">\(\theta\)</span> of the model, which are optimised during training. For example, the output of a node may be expressed as :</p>
+<section id="neural-networks" class="level3" data-number="13.2.3">
+<h3 data-number="13.2.3" class="anchored" data-anchor-id="neural-networks"><span class="header-section-number">13.2.3</span> Neural Networks</h3>
+<p>Neural networks will be covered in detail in <a href="neural-networks.html" class="quarto-xref"><span>Chapter 17</span></a>. Briefly, they comprise a network of nodes, modelled on the human brain. Each node receives input from several other nodes, and uses a activation function to generate output. Each input to the node is associated with a weight and a bias, which control the strength of the connection between nodes. The weights and biases are the parameters <span class="math inline">\(\theta\)</span> of the model, which are optimised during training. For example, the output of a node may be expressed as :</p>
 <p><span class="math display">\[
 y = \sum_{i}{a_i f(x_i + c_i)}
 \]</span></p>
 <p>where the input data from input node <span class="math inline">\(i\)</span> is <span class="math inline">\(x_i\)</span>, associated with weight <span class="math inline">\(a_i\)</span> and bias <span class="math inline">\(c_i\)</span>, and the activation function is <span class="math inline">\(f\)</span>. Note that the activation function is typically non-linear, which allows the neural network to express complex non-linear transformations.</p>
 </section>
 </section>
-<section id="types-of-learning" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="types-of-learning"><span class="header-section-number">5.3</span> Types of learning</h2>
+<section id="types-of-learning" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="types-of-learning"><span class="header-section-number">13.3</span> Types of learning</h2>
 <p>There are three main paradigms through which a machine learning model can ‘learn’. This process is frequently referred to as <em>training</em>. In this unit we will mainly focus on supervised learning, but we briefly describe all three paradigms here for completeness.</p>
 <p>Each method relies on some measure of the quality of the model output. This measure is frequently termed the <em>loss</em>, and is signed such that lower values of loss indicate improved output. During training, model parameters will be repeatedly updated, and the loss will be re-calculated, in order to find the set of parameters that minimise the loss.</p>
-<section id="supervised-learning" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="supervised-learning"><span class="header-section-number">5.3.1</span> Supervised learning</h3>
+<section id="supervised-learning" class="level3" data-number="13.3.1">
+<h3 data-number="13.3.1" class="anchored" data-anchor-id="supervised-learning"><span class="header-section-number">13.3.1</span> Supervised learning</h3>
 <p>In this case, the algorithm learns a mapping from its input data <span class="math inline">\(x\)</span>, to its output data <span class="math inline">\(y\)</span>, from a dedicated dataset. This dataset must be ‘labelled’, ie. it contains both <span class="math inline">\(x\)</span> and corresponding true values <span class="math inline">\(y\)</span>. The algorithm is then applied to previously unseen data, which contains only <span class="math inline">\(x\)</span>, such that the algorithm makes a prediction, <span class="math inline">\(\hat{y}\)</span>.</p>
 <p>An example is the facial recognition technology found in many smartphones. Here the input data is an image from the phone camera, and the output data is a binary classifier with two values :</p>
 <ul>
@@ -319,48 +412,48 @@ y = \sum_{i}{a_i f(x_i + c_i)}
 <p>The algorithm is trained during setup of the phone, while the camera image is known to contain the user’s face. Behind the scenes, the algorithm is also trained on many other images (both of other people’s faces, and not containing faces). During training, every image is labelled with the correct binary classifier, allowing the loss to be calculated. Later, when the phone is in use, the algorithm receives an input image from the camera, and will return a binary classifier indicating whether the image contains the owner’s face, or not.</p>
 <p>Supervised learning is frequently used in classification problems such as this example. It is also frequently used in regression problems, in which the algorithm output can be a number (or higher-dimensioned quantity - a vector or tensor). In this case, the loss is a measure of the difference between the prediction <span class="math inline">\(\hat{y}\)</span> and the truth <span class="math inline">\(y\)</span>.</p>
 </section>
-<section id="unsupervised-learning" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="unsupervised-learning"><span class="header-section-number">5.3.2</span> Unsupervised learning</h3>
+<section id="unsupervised-learning" class="level3" data-number="13.3.2">
+<h3 data-number="13.3.2" class="anchored" data-anchor-id="unsupervised-learning"><span class="header-section-number">13.3.2</span> Unsupervised learning</h3>
 <p>In unsupervised learning, the goal is to find structures or patterns in the data <span class="math inline">\(x\)</span>, in the absence of ground truth <span class="math inline">\(y\)</span>. Unsupervised learning techniques include clustering and dimensionality reduction methods.</p>
 <p>In some cases, the model is intended to describe the data <span class="math inline">\(x\)</span> and may be capable of making predictions of new data <span class="math inline">\(\hat{x}\)</span>. Here the loss will be a measure of compatibility between the prediction and the real data.</p>
 </section>
-<section id="reinforcement-learning" class="level3" data-number="5.3.3">
-<h3 data-number="5.3.3" class="anchored" data-anchor-id="reinforcement-learning"><span class="header-section-number">5.3.3</span> Reinforcement learning</h3>
+<section id="reinforcement-learning" class="level3" data-number="13.3.3">
+<h3 data-number="13.3.3" class="anchored" data-anchor-id="reinforcement-learning"><span class="header-section-number">13.3.3</span> Reinforcement learning</h3>
 <p>In reinforcement learning, the model is used by a software agent. Such an agent is a continuously running program which can make decisions or take action, within an environment. The environment provides feedback to the agent in response to each action/decision, which can be viewed as a reward/penalty. Training then involves updating model parameters to maximise the reward. An example is a robot navigating a maze, with the response from the environment being detection of collisions with the maze walls. When trained, the robot should then be capable of navigating the maze without hitting the walls.</p>
 </section>
-<section id="other-types-of-learning" class="level3" data-number="5.3.4">
-<h3 data-number="5.3.4" class="anchored" data-anchor-id="other-types-of-learning"><span class="header-section-number">5.3.4</span> Other types of learning</h3>
+<section id="other-types-of-learning" class="level3" data-number="13.3.4">
+<h3 data-number="13.3.4" class="anchored" data-anchor-id="other-types-of-learning"><span class="header-section-number">13.3.4</span> Other types of learning</h3>
 <p><strong>Deep learning</strong> is not strictly a mode of training. It is used to describe neural networks with many hidden layers, and can be applieed in any of the training paradigms described above.</p>
 <p><strong>Semi-supervised learning</strong> is a mode which relies on both supervised and unsupervised learning. It is used in many advanced machine learning methods, and can reduce the computational requirements of training.</p>
 <p><strong>Transfer learning</strong> is a method whereby a model trained on one dataset is subsequently trained on another. The result of the initial training (or pre-training) may be to learn some general feature identification, before the specific features of the target dataset are learnt. This method can result in reduced training times, in particular when pre-trained models are made widely available.</p>
 </section>
 </section>
-<section id="challenges" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="challenges"><span class="header-section-number">5.4</span> Challenges</h2>
+<section id="challenges" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="challenges"><span class="header-section-number">13.4</span> Challenges</h2>
 <p>Machine learning offers benefits in the physical science, in terms of identifying patterns in data and exposing structure that cannot be found with traditional methods. However, it also raises several challenges, which are outlined briefly below. We will later explore some techniques which can be used to minimise these issues.</p>
-<section id="interpretability" class="level3" data-number="5.4.1">
-<h3 data-number="5.4.1" class="anchored" data-anchor-id="interpretability"><span class="header-section-number">5.4.1</span> Interpretability</h3>
+<section id="interpretability" class="level3" data-number="13.4.1">
+<h3 data-number="13.4.1" class="anchored" data-anchor-id="interpretability"><span class="header-section-number">13.4.1</span> Interpretability</h3>
 <p>Machine learning is often capable of making excellent predictions in relation to complex dataset. However, as scientists we typically seek to explain nature, as well as make predictions. With traditional methods, models are often built from fundamental laws or relations, and the mathematics of the model then provide an explanation for the phenomena being studied. But machine learning models are frequently complex non-linear systems, from which it is difficult to extract explanations about <em>why</em> the predictions are correct.</p>
 </section>
-<section id="overfitting" class="level3" data-number="5.4.2">
-<h3 data-number="5.4.2" class="anchored" data-anchor-id="overfitting"><span class="header-section-number">5.4.2</span> Overfitting</h3>
+<section id="overfitting" class="level3" data-number="13.4.2">
+<h3 data-number="13.4.2" class="anchored" data-anchor-id="overfitting"><span class="header-section-number">13.4.2</span> Overfitting</h3>
 <p>The goal of machine learning is usually to extract general patterns and structure in the data, which can be extrapolated to new situations. However, the model has no way to distinguish general features from noise in the data. Overfitting occurs when the model learns features (usually noise) that are specific to the precise dataset used during training, and is not generalisable.</p>
 </section>
-<section id="uncertainty" class="level3" data-number="5.4.3">
-<h3 data-number="5.4.3" class="anchored" data-anchor-id="uncertainty"><span class="header-section-number">5.4.3</span> Uncertainty</h3>
+<section id="uncertainty" class="level3" data-number="13.4.3">
+<h3 data-number="13.4.3" class="anchored" data-anchor-id="uncertainty"><span class="header-section-number">13.4.3</span> Uncertainty</h3>
 <p>As scientists we generally want to associate an uncertainty with any prediction or measurement. With traditional models we may use error propagation techniques to estimate uncertainties. However, machine learning models typically produce a single value, and due to their complex internal structure, error propagation is non-trivial.</p>
 </section>
-<section id="reproducibility" class="level3" data-number="5.4.4">
-<h3 data-number="5.4.4" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">5.4.4</span> Reproducibility</h3>
+<section id="reproducibility" class="level3" data-number="13.4.4">
+<h3 data-number="13.4.4" class="anchored" data-anchor-id="reproducibility"><span class="header-section-number">13.4.4</span> Reproducibility</h3>
 <p>Machine learning can suffer from problems with reproducibility. Training typically relies on randomisation, both when updating weights, and also frequently in the order in which training data is presented. Given the computational requirements, training also typically uses parallel programming techniques, which can introduce small variations in results. These all contribute towards non-reproducibility in training.</p>
 </section>
-<section id="sustainability" class="level3" data-number="5.4.5">
-<h3 data-number="5.4.5" class="anchored" data-anchor-id="sustainability"><span class="header-section-number">5.4.5</span> Sustainability</h3>
+<section id="sustainability" class="level3" data-number="13.4.5">
+<h3 data-number="13.4.5" class="anchored" data-anchor-id="sustainability"><span class="header-section-number">13.4.5</span> Sustainability</h3>
 <p>Recent advances in machine learning and artificial intelligence have been made possible by huge increases in computing power. Large language models such as the GPT series have upwards of <span class="math inline">\(10\times10^{11}\)</span> parameters. Training a model such as GPT-3 (with <span class="math inline">\(175\times10^9\)</span> parameters) requires extremely large number of operations, estimated at <span class="math inline">\(10^{23}\)</span> floating point operations. Using the Isambard AI facility, this would correspond to 25~GJ. Given the need to repeatedly train such a model to ascertain the optimal neural network configuation (or hyperparameters - not to be confused with the model weights themselves), the energy requirements evidently present a challenge for sustainability.</p>
 </section>
 </section>
-<section id="examples-in-physics" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="examples-in-physics"><span class="header-section-number">5.5</span> Examples in Physics</h2>
+<section id="examples-in-physics" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="examples-in-physics"><span class="header-section-number">13.5</span> Examples in Physics</h2>
 <p>Machine learning has resulted in powerful applications in multiple areas of physics. A few examples are listed in the table below. The references given indicate key applications of deep learning within the field.</p>
 <table class="caption-top table">
 <thead>
@@ -803,13 +896,13 @@ y = \sum_{i}{a_i f(x_i + c_i)}
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./monte-carlo.html" class="pagination-link" aria-label="Monte Carlo Methods">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span>
+      <a href="./ml.html" class="pagination-link" aria-label="Machine Learning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Machine Learning</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./supervised-ml.html" class="pagination-link" aria-label="Supervised Learning">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – Advanced Computational Physics &amp; Machine Learning</title>
+<title>5&nbsp; Exceptions – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,26 +23,42 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -52,7 +68,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./autoencoder.html" rel="prev">
+<link href="./parallel.html" rel="next">
+<link href="./functional.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -103,7 +120,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./programming.html">Programming</a></li><li class="breadcrumb-item"><a href="./exceptions.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exceptions</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -169,7 +186,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exceptions.html" class="sidebar-item-text sidebar-link">
+  <a href="./exceptions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exceptions</span></span></a>
   </div>
 </li>
@@ -295,7 +312,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -304,15 +321,24 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#simple-error-handling" id="toc-simple-error-handling" class="nav-link active" data-scroll-target="#simple-error-handling"><span class="header-section-number">5.1</span> Simple Error Handling</a></li>
+  <li><a href="#error-handling-with-exceptions" id="toc-error-handling-with-exceptions" class="nav-link" data-scroll-target="#error-handling-with-exceptions"><span class="header-section-number">5.2</span> Error Handling with Exceptions</a></li>
+  <li><a href="#catching-exceptions" id="toc-catching-exceptions" class="nav-link" data-scroll-target="#catching-exceptions"><span class="header-section-number">5.3</span> Catching Exceptions</a></li>
+  <li><a href="#handling-other-exceptions" id="toc-handling-other-exceptions" class="nav-link" data-scroll-target="#handling-other-exceptions"><span class="header-section-number">5.4</span> Handling Other Exceptions</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./programming.html">Programming</a></li><li class="breadcrumb-item"><a href="./exceptions.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exceptions</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exceptions</span></h1>
 </div>
 
 
@@ -329,28 +355,125 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
-<div id="ref-vaswani2023" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1706.03762">A. Vaswani, N. Shazeer, N.
-Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser, and I.
-Polosukhin, (2023)</a>.</div>
+<p>This chapter is a short introduction to “Exceptions”, an error handling technique commonly used in modern programming languages. It is the standard way to deal with errors in Python and both numpy and scipy use them. Raising exceptions in your own functions, and knowing how to deal with exceptions raised by other code, will help you write more robust code. It’s worth noting that exceptions are not the only way of handling errors. Code using the simple method below will be entirely adequate in many cases. You will need to decide what is appropriate for your particular case. However, understanding exceptions is important when using libbraries (such as SciPy) which raise exceptions when they encounter errors. First we’ll look at error handling in a simple case, without using exceptions.</p>
+<section id="simple-error-handling" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="simple-error-handling"><span class="header-section-number">5.1</span> Simple Error Handling</h2>
+<p>Suppose I have a function that works for positive number, but I know it will fail if given a negative input. Rather than let the code crash, or (worse) return incorrect results, we can detect this problem and do something sensible. One option might be to test the argument given to the function, print an error message, and return a default value (NaN, in this case) :</p>
+<div id="eba4dbac" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mySqrt(x):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x<span class="op">&lt;</span><span class="dv">0</span>:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Input must be positive."</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.nan</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> math.sqrt(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="ref-mikolov10_interspeech" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline"><a href="https://doi.org/10.21437/Interspeech.2010-343">T. Mikolov, M.
-Karafiát, L. Burget, J. Černocký, and S. Khudanpur, in
-<em><span>Interspeech 2010</span></em> (2010), pp. 1045–1048</a>.</div>
+<p>Let’s test this with a couple of examples :</p>
+<div id="9a9977bd" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mySqrt(<span class="dv">4</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mySqrt(<span class="op">-</span><span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2.0
+Input must be positive.
+nan</code></pre>
 </div>
-<div id="ref-sutskever2014sseq2seq" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1409.3215">I. Sutskever, O. Vinyals, and Q.
-V. Le, (2014)</a>.</div>
 </div>
-<div id="ref-bahdanau2016neuralmachinetranslationjointly" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline"><a href="https://arxiv.org/abs/1409.0473">D. Bahdanau, K. Cho, and Y.
-Bengio, (2016)</a>.</div>
+<p>This method for dealing with errors is better than nothing, but it has limitations. In particular : 1. Returning a default value when the input is invalid may cause further knock-on problems 2. We have no way of knowing what caused our function to be called with an invalid argument</p>
+<p>We can avoid 1. by eg. halting execution of the program after printing the error message, eg. by calling sys.exit(). However, this is quite extreme and maybe not appropriate for all cases. And even if halting execution is the only option - we still have no way of dealing with point 2.</p>
+</section>
+<section id="error-handling-with-exceptions" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="error-handling-with-exceptions"><span class="header-section-number">5.2</span> Error Handling with Exceptions</h2>
+<p>Exceptions are the standard way to deal with errors in Python, and both numpy and scipy use them. Raising exceptions in your own functions, and knowing how to deal with exceptions raised by other code, can help you write more robust code. However, exceptions are just an error han- dling technique - you will still need to analyse where errors can occur in your code and make suitable provisions for handling them. The key feature of exceptions is that they allow the programmer to decide where in the code is the appropriate place to take action. In the example here, this might be in the function that calls mySqrt(). But in other circumstances, it might be in the function that calls that function. When an exception is generated, it is communciated back through all function calls until a block of code ‘catches’ the exception(and takes some action. Ultimately, if nothing handles the exception, the program will stop. Here is how we would handle this error using an exception :</p>
+<div id="6db795a6" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mySqrt(x):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x<span class="op">&lt;</span><span class="dv">0</span>:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">"Negative input"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> math.sqrt(x)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mySqrt(<span class="dv">4</span>))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mySqrt(<span class="op">-</span><span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2.0</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">Exception</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[3], line 7</span>
+<span class="ansi-green-fg ansi-bold">      4</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> math<span style="color:rgb(98,98,98)">.</span>sqrt(x)
+<span class="ansi-green-fg ansi-bold">      6</span> <span style="color:rgb(0,135,0)">print</span>(mySqrt(<span style="color:rgb(98,98,98)">4</span>))
+<span class="ansi-green-fg">----&gt; 7</span> <span style="color:rgb(0,135,0)">print</span>(<span class="ansi-yellow-bg">mySqrt</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">-</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">4</span><span class="ansi-yellow-bg">)</span>)
+
+Cell <span class="ansi-green-fg">In[3], line 3</span>, in <span class="ansi-cyan-fg">mySqrt</span><span class="ansi-blue-fg">(x)</span>
+<span class="ansi-green-fg ansi-bold">      1</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span><span style="color:rgb(188,188,188)"> </span><span style="color:rgb(0,0,255)">mySqrt</span>(x):
+<span class="ansi-green-fg ansi-bold">      2</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> x<span style="color:rgb(98,98,98)">&lt;</span><span style="color:rgb(98,98,98)">0</span>:
+<span class="ansi-green-fg">----&gt; 3</span>         <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">Exception</span>(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Negative input</span><span style="color:rgb(175,0,0)">"</span>)
+<span class="ansi-green-fg ansi-bold">      4</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> math<span style="color:rgb(98,98,98)">.</span>sqrt(x)
+
+<span class="ansi-red-fg">Exception</span>: Negative input</pre>
+</div>
+</div>
+</div>
+<p>You might have seen this kind of print out when debugging code. The “Traceback” lists the function calls that led to the exception being raised.</p>
+</section>
+<section id="catching-exceptions" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="catching-exceptions"><span class="header-section-number">5.3</span> Catching Exceptions</h2>
+<p>Raising an exception is only half of the process. The other half is “catching” them. Let’s say we have a function that calls mySqrt() but it knows what to do if the exception is raised. We can use a “try-except” (also known as “try-catch”, from the corresponding C++ keywords) block to catch that exception and take the correct course of action.</p>
+<div id="f8633b60" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> mySqrt(x)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span>:</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> <span class="ot">1j</span> <span class="op">*</span> mySqrt(<span class="bu">abs</span>(x))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> y</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mySqrtComplex(<span class="dv">16</span>))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mySqrtComplex(<span class="op">-</span><span class="dv">16</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[4], line 2</span>
+<span class="ansi-green-fg ansi-bold">      1</span> <span style="font-weight:bold;color:rgb(0,135,0)">try</span>:
+<span class="ansi-green-fg">----&gt; 2</span>     y <span style="color:rgb(98,98,98)">=</span> mySqrt(<span class="ansi-yellow-bg">x</span>)
+<span class="ansi-green-fg ansi-bold">      3</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">Exception</span>:
+
+<span class="ansi-red-fg">NameError</span>: name 'x' is not defined
+
+During handling of the above exception, another exception occurred:
+
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[4], line 4</span>
+<span class="ansi-green-fg ansi-bold">      2</span>     y <span style="color:rgb(98,98,98)">=</span> mySqrt(x)
+<span class="ansi-green-fg ansi-bold">      3</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">Exception</span>:
+<span class="ansi-green-fg">----&gt; 4</span>     y <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(98,98,98)">1</span>j <span style="color:rgb(98,98,98)">*</span> mySqrt(<span style="color:rgb(0,135,0)">abs</span>(<span class="ansi-yellow-bg">x</span>))
+<span class="ansi-green-fg ansi-bold">      5</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> y
+<span class="ansi-green-fg ansi-bold">      7</span> <span style="color:rgb(0,135,0)">print</span>(mySqrtComplex(<span style="color:rgb(98,98,98)">16</span>))
+
+<span class="ansi-red-fg">NameError</span>: name 'x' is not defined</pre>
+</div>
+</div>
+</div>
+</section>
+<section id="handling-other-exceptions" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="handling-other-exceptions"><span class="header-section-number">5.4</span> Handling Other Exceptions</h2>
+<p>You might find you can get away without raising any exceptions in your code. However, scipy and numpy will raise exceptions, and knowing how to handle them can be useful. For example, a number of linear algebra routines in scipy.linalg cannot proceed if given a singular matrix. In this case, they will raise a <code>numpy.linalg.LinAlgError</code> exception : https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.LinAlgError.html#numpy.linalg.LinAlg As well as the built-in Exception, Python allows us to define dedicated exception types, like this one. This allows exception handling code to distinguish different classes of error condition, which is useful when deciding what to do. An example of how to catch this kind of exception is below.</p>
+<div id="350f0833" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> np.zeros((<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(m)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    scipy.linalg.inv(m)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> scipy.linalg.LinAlgError <span class="im">as</span> err:</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Caught an exception :"</span>, err)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[0. 0.]
+ [0. 0.]]
+Caught an exception : singular matrix</code></pre>
 </div>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -755,11 +878,14 @@ Bengio, (2016)</a>.</div>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./autoencoder.html" class="pagination-link" aria-label="Autoencoders">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Autoencoders</span></span>
+      <a href="./functional.html" class="pagination-link" aria-label="Functional Programming">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Programming</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./parallel.html" class="pagination-link" aria-label="Parallel Programming">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parallel Programming</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
