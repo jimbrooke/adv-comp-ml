@@ -5,13 +5,13 @@ execute:
   error: true
 ---
 
-## Pseudo Random Number Sampling
+# Pseudo Random Number Sampling
 
 We will frequently want to generate random numbers according to a particular probability distribution, or in the jargon 'sampling' from the given distribution. There are two basic methods for achieving this; an analytical method, and the accept/reject method.
 
 In the below, we assume we are provided with a random number generator that returns pseudo-random numbers with a uniform probability distribution in the interval $[0,1)$.  In Python, `numpy.random` provides the `random()` function, which does exactly this.  A variety of other probability distributions are provided by `numpy.random`, and in general these should be used when possible.  However, the techniques described here allow any desired PDF to be sampled.
 
-### Uniform Probability Distributions
+## Uniform Probability Distributions
 
 We will often need uniform probability distributions over an interval other than $[0,1)$. It is straightforward to map this interval to the desired one, as shown in the example below.
 
@@ -26,7 +26,7 @@ plt.show()
 ```
 
 
-### Analytical Method
+## Analytical Method
 
 The above transformation is a special case of the method described in this section.  We can consider a random number generator that produces values x over the interval $(x_1, x_2)$ with probability $P(x)$, which we wish to convert to values y on the interval $(y_1, y_2)$, with probability $P'(y)$.  To construct a transformation from a generated value $x_{in}$ to an output value with the required distribution, $y_{out}$, we require that the cumulative distributions are equal :
 
@@ -48,7 +48,7 @@ $$y_{out} = Q^{-1}(x_{in})$$ {#eq-d}
 
 {{< pagebreak >}}
 
-### Analytical Method Example
+## Analytical Method Example
 
 In this example, we will write a function to produce values $y$ in the interval $[0, \pi)$ with probability distribution proportional to $\sin(y)$.
 
@@ -105,7 +105,7 @@ It might be worth highlighing the method used here (and in examples below) to ge
 
 {{< pagebreak >}}
 
-### Accept/Reject Method
+## Accept/Reject Method
 
 For some PDFs, the integral required by the previous method cannot be determined analytically.  In such cases, the accept/reject method provides a simple alternative.  This method involves three steps :
 1. a random number, $y$, is generated in the desired interval $(y_1, y_2)$
@@ -116,7 +116,7 @@ This method is clearly less efficient than the analytical method, since two rand
 
 {{< pagebreak >}}
 
-### Accept/Reject Example
+## Accept/Reject Example
 
 Here we demonstrate the accept/reject method for the same example as above, to produce values $y$ in the interval $[0, \pi)$, with probability distribution proportional to $\sin(y)$.
 
@@ -151,14 +151,14 @@ plt.legend()
 plt.show()
 ```
 
-## Multivariate Sampling
+# Multivariate Sampling
 
 Both analytic and accept/reject methods can be used to generate distributions of more than one variable. This often requires a bit of thought - the two methods may be more or less suitable to particular problems.
 
 Here we illustrate the two approaches to generating uniformly distributed random numbers on the unit disc.
 
 
-### Analytic Example
+## Analytic Example
 
 An analytic method for the unit disc problem needs to ensure that the density of points is constant over the disc, ie that $P(x,y) \propto dA$ for area element $dA$. In polar coordinates, we can write this as :
 
@@ -207,7 +207,7 @@ plt.show()
 ```
 
 
-### Accept/Reject Example
+## Accept/Reject Example
 
 Suppose we want to randomly generate points $(x,y)$ within a unit disc.  A simple approach is to generate uniform distributions of $x$ and $y$ separately, and then use an accept/reject method to remove any points not in the disc (ie. where $\sqrt{x^2 + y^2} \gt 1$).  This is illustrated in the example below.
 

@@ -1,0 +1,10 @@
+---
+title: "Programming"
+format: html
+execute:
+  error: true
+---
+
+In this section, we introduce some more advanced programming concepts.  These include two important programming paradigms : object oriented programming and functional programming.  These are both fairly advanced concepts, and are the subject of entire units in Computer Science degrees.  Note that you are NOT expected to use these techniques in your work.  Instead, they are introduced here by way of example, since you are likely to encounter and/or use them in your future programming journey.
+
+This chapter will addresses exception handling - the main modern technique for managing errors - as well as the use of generative AI for programming.

@@ -7,4 +7,3 @@ execute:
 
 
 
-## Parallel Programming with MPI

@@ -1,0 +1,92 @@
+---
+title: "Exceptions"
+format: html
+execute:
+  error: true
+---
+
+
+This chapter is a short introduction to “Exceptions”, an error handling technique commonly used in modern programming languages. It is the standard way to deal with errors in Python and both numpy and scipy use them. Raising exceptions in your own functions, and knowing how to deal with exceptions raised by other code, will help you write more robust code.
+It’s worth noting that exceptions are not the only way of handling errors. Code using the simple method below will be entirely adequate in many cases. You will need to decide what is appropriate for your particular case. However, understanding exceptions is important when using libbraries (such as SciPy) which raise exceptions when they encounter errors.
+First we’ll look at error handling in a simple case, without using exceptions.
+
+## Simple Error Handling
+
+Suppose I have a function that works for positive number, but I know it will fail if given a negative input. Rather than let the code crash, or (worse) return incorrect results, we can detect this problem and do something sensible.
+One option might be to test the argument given to the function, print an error message, and return a default value (NaN, in this case) :
+
+```{python}
+import math
+import numpy as np
+def mySqrt(x):
+    if x<0:
+        print("Input must be positive.")
+        return np.nan
+    return math.sqrt(x)
+```
+
+Let’s test this with a couple of examples :
+
+```{python}
+print(mySqrt(4))
+print(mySqrt(-3))
+```
+
+This method for dealing with errors is better than nothing, but it has limitations. In particular : 
+1. Returning a default value when the input is invalid may cause further knock-on problems
+2. We have no way of knowing what caused our function to be called with an invalid argument
+
+We can avoid 1. by eg. halting execution of the program after printing the error message, eg. by calling sys.exit(). However, this is quite extreme and maybe not appropriate for all cases. And even if halting execution is the only option - we still have no way of dealing with point 2.
+
+## Error Handling with Exceptions
+
+Exceptions are the standard way to deal with errors in Python, and both numpy and scipy use them. Raising exceptions in your own functions, and knowing how to deal with exceptions raised by other code, can help you write more robust code. However, exceptions are just an error han- dling technique - you will still need to analyse where errors can occur in your code and make suitable provisions for handling them.
+The key feature of exceptions is that they allow the programmer to decide where in the code is the appropriate place to take action. In the example here, this might be in the function that calls mySqrt(). But in other circumstances, it might be in the function that calls that function. When an exception is generated, it is communciated back through all function calls until a block of code ‘catches’ the exception(and takes some action. Ultimately, if nothing handles the exception, the program will stop.
+Here is how we would handle this error using an exception :
+```{python}
+def mySqrt(x):
+    if x<0:
+        raise Exception("Negative input")
+    return math.sqrt(x)
+
+print(mySqrt(4))
+print(mySqrt(-4))
+```
+
+You might have seen this kind of print out when debugging code. The “Traceback” lists the function calls that led to the exception being raised.
+
+## Catching Exceptions
+
+Raising an exception is only half of the process. The other half is “catching” them.
+Let’s say we have a function that calls mySqrt() but it knows what to do if the exception is raised. We can use a “try-except” (also known as "try-catch", from the corresponding C++ keywords) block to catch that exception and take the correct course of action.
+
+```{python}
+
+    try:
+        y = mySqrt(x)
+    except Exception:
+        y = 1j * mySqrt(abs(x))
+return y
+
+print(mySqrtComplex(16))
+print(mySqrtComplex(-16))
+```
+
+## Handling Other Exceptions
+
+You might find you can get away without raising any exceptions in your code. However, scipy and numpy will raise exceptions, and knowing how to handle them can be useful.
+For example, a number of linear algebra routines in scipy.linalg cannot proceed if given a singular matrix. In this case, they will raise a `numpy.linalg.LinAlgError` exception :
+https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.LinAlgError.html#numpy.linalg.LinAlg
+As well as the built-in Exception, Python allows us to define dedicated exception types, like this one. This allows exception handling code to distinguish different classes of error condition, which is useful when deciding what to do.
+An example of how to catch this kind of exception is below.
+
+```{python}
+import scipy.linalg
+m = np.zeros((2,2))
+print(m)
+try:
+    scipy.linalg.inv(m)
+except scipy.linalg.LinAlgError as err:
+    print("Caught an exception :", err)
+```
+

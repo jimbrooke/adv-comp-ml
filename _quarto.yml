@@ -5,21 +5,36 @@ project:
 book:
   title: "Advanced Computational Physics & Machine Learning"
   author: "Jim Brooke & Sudan Paramesvaran"
-  date: "15 Sept 2025"
+  #date: "15 Sept 2025"
   chapters:
     - index.qmd
     - intro.qmd
-    - adv-python.qmd
-    - linear-algebra.qmd
-    - monte-carlo.qmd
-    - intro-ml.qmd
-    - supervised-ml.qmd
-    - neural-networks.qmd
- #   - unsupervised-ml.qmd
-    - cnn.qmd
-    - rnn.qmd
-    - transformer.qmd
-    - autoencoder.qmd
+    - part: programming.qmd
+      chapters:
+        - basics.qmd
+        - oo.qmd
+        - functional.qmd
+        - exceptions.qmd
+        - parallel.qmd
+        - cloud.qmd
+    - part: numeric.qmd
+      chapters:
+        - matrix.qmd
+        - sim-eqn.qmd
+        - eigenproblems.qmd
+        - monte-carlo.qmd
+        - optimisation.qmd
+    - part: ml.qmd
+      chapters:
+        - intro-ml.qmd
+        - supervised-ml.qmd
+        - unsupervised-ml.qmd
+        - tl.qmd
+        - neural-networks.qmd
+        - cnn.qmd
+        - rnn.qmd
+        - transformer.qmd
+        - autoencoder.qmd
     - references.qmd
 
 bibliography: references.bib
@@ -30,7 +45,7 @@ crossref:
 
 format:
   html:
-    theme: cosmo
+    theme: [cosmo, custom.scss]
 
 
 

@@ -1,0 +1,74 @@
+---
+title: "Basic Matrix Operations"
+format: html
+execute:
+  error: true
+---
+
+Python/numpy/scipy provide a range of options for achieving basic matrix operations. You will need to take a little care to ensure that your code implements the operations you intend it to. This is largely due to the fact that some operators/functions will change their behaviour depending on the input you provide. This section includes some recommendations for simple linear algebra, which should ensure your code behaves as desired.
+
+Matrices can be implemented as a 2D `np.ndarray`. Basic matrix arithmetic can then be performed using standard operators `+`,`-` and `@`. You can also use `np.matmul()` for matrix multiplication. Numpy will also perform matrix multiplication with `np.dot()`, but this is not recommended if you can use `@` or `np.matmul()`.
+
+```{python}
+import numpy as np
+
+A = np.array([[1, 2, 3,],[4, 5, 6],[1, 0, 0]])
+B = np.array([[1, 0, 0,],[0, 1, 0],[0, 0, 1]])
+
+# addition
+print(A + B)
+
+# subtraction
+print(A - B)
+
+# scalar multiplication
+print(3*B)
+
+# matrix multiplication
+print(np.matmul(A, B))
+print(A @ B)
+```
+
+Vectors can be implemented as 1D arrays, or as 2D arrays. A 1D array will be interpreted as row or column vector depending on the context in which it is used. Use of 2D arrays allows you to specify row or column form. This can be useful, since `np.matmul()` or `@` will throw an exception if you accidentally try to perform an illegal matrix operation.
+
+```{python}
+v  = np.array([1,2,3])
+vr = np.array([[1,2,3]])
+vc = np.array([[1],[2],[3]])
+
+# two options for matrix * vector
+print(A@v)
+print(A@vc)
+
+# two options for vector * matrix
+print(v@A)
+print(vr@A)
+
+# this is not a valid matrix multiplication !
+print(A@vr)
+```
+
+Numpy will also provide the usual forms of vector product via `np.vdot()`, `np.cross()`, `np.inner()` and `np.outer()`. Again, `np.dot()` will provide a vector dot product, but is not recommended if you can use `vdot()`.
+
+Other useful matrix operations are provided by numpy, such as : 
+- `np.transpose()` (also available via `ndarray.T`) 
+- `np.norm()` 
+- `np.trace()`
+
+For further information, look at the reference pages : 
+[https://numpy.org/doc/stable/reference/routines.array-manipulation.html](https://numpy.org/doc/stable/reference/routines.array-manipulation.html)
+[https://numpy.org/doc/stable/reference/routines.linalg.html](https://numpy.org/doc/stable/reference/routines.linalg.html)
+
+Finally, `scipy.linalg` provides some additional basic operations such as the determinant and the inverse.
+
+```{python}
+import numpy as np
+import scipy.linalg as linalg
+
+A = np.array([[1, 2, 3,],[4, 5, 6],[1, 0, 0]])
+detA = linalg.det(A)
+print(detA)
+
+invA = linalg.inv(A)
+print(invA)
+```

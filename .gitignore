@@ -1,3 +1,15 @@
 /.quarto/
-
 /docs
+
+.DS_Store
+
+# Jupyter notebook checkpoints
+*-checkpoint.ipynb
+*/.ipynb_checkpoint/*
+*/checkpoints/*
+*.ckpt
+
+# datasets
+examples/week15-rnn/cleaned_dataset/data/*.csv
+
+**/*.quarto_ipynb

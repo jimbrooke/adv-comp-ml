@@ -5,12 +5,12 @@ execute:
   error: true
 ---
 
-## Distributed Computing {#sec-distributed}
 
 Some tasks cannot be performed by a single computer.  Or they can, but they would take far too long.  Or they can, but the risk of failure associated with a single computer is too high.  Or they can, but sometimes a huge number of tasks are required at the same time.  In all these cases, methods of delegating those tasks to multiple computers are required.
 
-Distributed computing is a broad term that refers to applications which rely on a network of computers.  Such applications can provide greater resilience and reliability, as well as being able to solve "bigger" problems.
+## Distributed Computing
 
+Distributed computing is a broad term that refers to applications which rely on a network of computers.  Such applications can provide greater resilience and reliability, as well as being able to solve "bigger" problems.
 
 ### Distributed vs Parallel Computing{#sec-htc-vs-hpc}
 
@@ -41,9 +41,6 @@ These challenges can be reduced by using cloud technology.
 Typically, these services are provided to the public.  We call this the public cloud.  Examples include AWS (Amazon Web Services), Microsoft Azure, Google Cloud.
 
 Some organisations will create their own private clouds to manage privately owned hardware and applications. Different branches of the organisation become provider and consumer.  Private clouds will rely on much of the same technology as public clouds.  We will consider public clouds only from here on.
-
-
-## Cloud Models {#sec-cloud-models}
 
 Public cloud providers use a range of models to provide cloud services to their customers.
 

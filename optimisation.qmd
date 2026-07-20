@@ -1,0 +1,8 @@
+---
+title: "Optimisation"
+format: html
+execute:
+  error: true
+---
+
+Or minimisation.  This is about techniques for finding the minima of a multi-dimensional function.
