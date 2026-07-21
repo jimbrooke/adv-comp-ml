@@ -9,32 +9,32 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - part: programming.qmd
+    - part: prog/programming.qmd
       chapters:
-        - basics.qmd
-        - oo.qmd
-        - functional.qmd
-        - exceptions.qmd
-        - parallel.qmd
-        - cloud.qmd
-    - part: numeric.qmd
+        - prog/basics.qmd
+        - prog/oo.qmd
+        - prog/functional.qmd
+        - prog/exceptions.qmd
+        - prog/parallel.qmd
+        - prog/cloud.qmd
+    - part: num/numeric.qmd
       chapters:
-        - matrix.qmd
-        - sim-eqn.qmd
-        - eigenproblems.qmd
-        - monte-carlo.qmd
-        - optimisation.qmd
-    - part: ml.qmd
+        - num/matrix.qmd
+        - num/sim-eqn.qmd
+        - num/eigenproblems.qmd
+        - num/monte-carlo.qmd
+        - num/optimisation.qmd
+    - part: ml/ml.qmd
       chapters:
-        - intro-ml.qmd
-        - supervised-ml.qmd
-        - unsupervised-ml.qmd
-        - tl.qmd
-        - neural-networks.qmd
-        - cnn.qmd
-        - rnn.qmd
-        - transformer.qmd
-        - autoencoder.qmd
+        - ml/intro-ml.qmd
+        - ml/supervised-ml.qmd
+        - ml/unsupervised-ml.qmd
+        - ml/tl.qmd
+        - ml/neural-networks.qmd
+        - ml/cnn.qmd
+        - ml/rnn.qmd
+        - ml/transformer.qmd
+        - ml/autoencoder.qmd
     - references.qmd
 
 bibliography: references.bib
@@ -46,6 +46,10 @@ crossref:
 format:
   html:
     theme: [cosmo, custom.scss]
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
 
 
 
