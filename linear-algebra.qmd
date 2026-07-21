@@ -1,7 +1,0 @@
----
-title: "Linear Algebra"
-format: html
-execute:
-  error: true
----
-
