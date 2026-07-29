@@ -11,7 +11,7 @@ The sections of these notes on high performance and distributed computing rely o
 
 A schematic of the internal organisation of a computer is shown in @fig-computer.
 
-![Schematic of a computer](computer-schematic.png){#fig-computer}
+![Schematic of a computer](figures/computer-schematic.png){#fig-computer}
 
 ### Processor {#sec-cpu}
 The computer needs some processing capability. Traditionally, this was provided by a single Central Processing Unit (CPU). The CPU executes a sequences of _instructions_ that it reads from a _program_. Modern computers can accommodate multiple CPU devices, each of which likely has multiple CPU "cores", all of which operate in parallel. There are a variety of CPU architectures in use, each with a corresponding instruction set (see @sec-instruction-set).
@@ -62,7 +62,7 @@ An interpreter performs the same task as a compiler, but the conversion to machi
 ### Operating System {#sec-os}
 
 
-<!-- ![Operating system](os.png){#fig-os} -->
+[Operating system](figures/os.png){#fig-os}
 
 The operating system is a program (or set of programs) which run when the computer is started. It will manage access to shared components (such as memory, or storage) and provide an interface for applications to access them.  Examples are given in @tbl-os.
 

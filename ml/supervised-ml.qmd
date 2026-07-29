@@ -143,7 +143,7 @@ Although these metrics are useful in assessing the various performance character
 
 Another visual technique for assessing performance for a particular threshold is to build a confusion matrix. This can be especially useful in multi-classifier problems. 
 
-![Confusion Matrix](ConfusionMatrix.png)
+![Confusion Matrix](figures/ConfusionMatrix.png)
 
 The numbers shown are absolute, rather than fractions and so can easily be misinterpreted, care should be taken when drawing conclusions from this method. 
 

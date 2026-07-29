@@ -1,9 +1,22 @@
 ---
-title: "Parallel Programming"
+title: "Parallel Computing"
 format: html
 execute:
   error: true
 ---
+
+Many problems in computational physics can be solved more efficiently by using parallel computing.  In this chapter we discuss the basic concepts of parallel computing, and how to implement parallel algorithms in Python.  We also discuss some of the issues that arise when implementing parallel algorithms, and how to avoid them.
+
+## Basic Concepts
+
+## Parallel Algorithms
+
+## Parallel Python
+
+## GPUs
+
+### GPU use in PyTorch
+
 
 
 

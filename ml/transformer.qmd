@@ -20,14 +20,14 @@ The seq2seq model was a highly successful (for the time) recurrent model introdu
 
 As for most language models of the time, the input sequence use a one-hot encoding over the input vocabulary. The network output is a softmax, ie. a probability distribution, over the output vocabulary. During training the output ground truth is encoded using a one-hot encoding, allowing a cross-entropy based loss to be calculated.
 
-![The seq2seq architecture](seq2seq-2.png ){#fig-seq2seq-2}
+![The seq2seq architecture](figures/seq2seq-2.png ){#fig-seq2seq-2}
 
 
 ## Attention {#sec-attention}
 
 Attention is a mechanism for determining context in sequence processing.  The general concept is that the importance of individual elements (or tokens) in a sequence is encoded in a set of "soft" weights, which are computed during the forward pass.  Attention was originally proposed in the context of translation models [@bahdanau2016neuralmachinetranslationjointly].  For a given decoder hidden state, $h'_t$, the mechanism aims to determine the importance of each input token, using the encoder hidden state $h_i$.  The original mechanism achieved this using a small neural network, which outputs a score $e_{t,i}$ for each encoder hidden state.  These scores can be converted to a probabilistic basis $\varepsilon_{t,i}$ using softmax. An example of the attention (ie. the matrix $\varepsilon_{t,i}$) is shown in @fig-attention-matrix.
 
-![Example attention matrix from [@bahdanau2016neuralmachinetranslationjointly]](attention-matrix.png){width=70%}
+![Example attention matrix from [@bahdanau2016neuralmachinetranslationjointly]](figures/attention-matrix.png){width=70%}
 {#fig-attention-matrix}
 
 The attention is used to compute a weighted sum over all the encoder hidden states, known as the context vector :
@@ -35,7 +35,7 @@ $$c_t = \sum_i \varepsilon_{t,i} h_i$$
 
 The context is computed for each output token and used as additional input to the decoder, as shown diagramatically in @fig-attention.
 
-![Attention in a seq2seq architecture](attention.png){#fig-attention}
+![Attention in a seq2seq architecture](figures/attention.png){#fig-attention}
 
 ### Scaled Dot-product Attention  {#sec-dp-attention}
 
@@ -45,11 +45,11 @@ $c_t = {\rm softmax}(\frac{Q_tK^T_i}{\sqrt{d_k}})V_i$
 
 where the query $Q_t$ corresponds to the output token for step $t$, and the input token for step $i$ is encoded as the key $K_i$ (for search), and the value $V_i$ (for context information).  The $Q, K, V$ encodings are supplied by neural networks, allowing the optimal encodings to be learnt during training. The scaling by $\sqrt(d_k)$, where $d_k$ is the dimensionality of the input key $K$, helps correct for reduced effectiveness of scaled dot product attention when $d_k$ is a large value.  The scaled dot production attention mechanism is shown diagramatically in @fig-attention-2.
 
-![Modern scaled dot-product attention, taken from [@vaswani2023]](attention-2.png){#fig-attention-2}
+![Modern scaled dot-product attention, taken from [@vaswani2023]](figures/attention-2.png){#fig-attention-2}
 
 The Transformer architecture relies on multi-head attention, shown in @fig-multi-head-attention.  Here, the attention mechanism is replicated several times, with unique $Q, K, V$ encodings for each copy.  This allows multiple context vectors to be computed, each of which encodes the relationship between elements in input and output sequences, on a unique basis. This reflects the different reasons why words in a sentence can have a relationship with each other.
 
-![Multi-head attention, taken from [@vaswani2023]](multi-head-attention.png){#fig-multi-head-attention}
+![Multi-head attention, taken from [@vaswani2023]](figures/multi-head-attention.png){#fig-multi-head-attention}
 
 
 ## Transformer Architecture {#sec-transformer-arch}
@@ -60,4 +60,4 @@ The Transformer architecture, shown in @fig-transformer uses multi-head attentio
 
 During training, the ground truth output sequence is also sent to a self-attention mechanism in the same way as the input sequence.  The input (and ground truth output, during training) is encoded using a one hot encoding. A one hot encoding effectively means each token is represented by a vector of size of the vocabulary, with a 1 in the position of the word to that token. The output of the network is a softmax - effectively a probability distribution over the vocabulary.  This allows a cross entropy based loss to be computed and used during training.
 
-![Transformer architecture, taken from [@vaswani2023]](transformer.png){#fig-transformer}
+![Transformer architecture, taken from [@vaswani2023]](figures/transformer.png){#fig-transformer}

@@ -80,7 +80,7 @@ Note that we have transposed the array of eigenvectors returned by `linalg.eig()
 
 In this section, we illustrate the use of eigenvalue solvers in finding stable solutions of the coupled system of oscillators shown below.
 
-![Figure 2 - Coupled oscillators, masses on springs.](masses.png)
+![Figure 2 - Coupled oscillators, masses on springs.](figures/masses.png)
 
 If the displacement of the $i$th mass from its equilibrium position is denoted as $x_i$, the force on the mass is given by the tension in the two springs as :
 

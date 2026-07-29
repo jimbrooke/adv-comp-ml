@@ -15,6 +15,7 @@ book:
         - prog/oo.qmd
         - prog/functional.qmd
         - prog/exceptions.qmd
+        - prog/profiling.qmd
         - prog/parallel.qmd
         - prog/cloud.qmd
     - part: num/numeric.qmd
@@ -23,13 +24,13 @@ book:
         - num/sim-eqn.qmd
         - num/eigenproblems.qmd
         - num/monte-carlo.qmd
+        - num/mle.qmd
         - num/optimisation.qmd
     - part: ml/ml.qmd
       chapters:
         - ml/intro-ml.qmd
         - ml/supervised-ml.qmd
         - ml/unsupervised-ml.qmd
-        - ml/tl.qmd
         - ml/neural-networks.qmd
         - ml/cnn.qmd
         - ml/rnn.qmd
@@ -38,7 +39,8 @@ book:
     - references.qmd
 
 bibliography: references.bib
-csl: american-physics-society-without-titles.csl
+#csl: american-physics-society-without-titles.csl
+csl: apa-6th-edition.csl
 
 crossref:
   chapters: true 
@@ -46,10 +48,10 @@ crossref:
 format:
   html:
     theme: [cosmo, custom.scss]
-  pdf:
     toc: true
-    number-sections: true
-    colorlinks: true
+#  pdf:
+#    number-sections: true
+ #   colorlinks: true
 
 
 

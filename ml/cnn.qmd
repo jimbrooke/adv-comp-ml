@@ -26,7 +26,7 @@ This layer performs the core mathematical function - a *sliding window* is shift
 The filters highlight the specific pattern they are looking for and create a *feature map*. 
 Activation functions are used to ensure non-linear transformations are possible in the network, e.g. by ReLu is commonly used in the convolutional layers in a CNN.
 
-![The convolutional layer outputs a feature map](CNNlayer.png){#fig-cnnlayer}
+![The convolutional layer outputs a feature map](figures/CNNlayer.png){#fig-cnnlayer}
 
 ### Pooling Layer
 
@@ -36,13 +36,13 @@ Types of aggregation function include:
 * Max Pooling: Selects the maximum value from the area of the feature map covered by the filter
 * Average Pooling: Calculates the average value within the area of the feature map and uses this to select significant features
 
-![The pooling layer identifies significant features](CNNPooling.png){#fig-cnnpooling}
+![The pooling layer identifies significant features](figures/CNNPooling.png){#fig-cnnpooling}
 
 ### Fully connected Layer
 
 This layer is there to assign final predictions based on the outputs of the previous convolution and pooling layers. Each node in this layer is connected to each node in the previous layer. In a classification task the activation function is typically SoftMax, which turns the flatted vector of features into a probability distribution. 
 
-![The fully connected layer assigns final predictions](CNNFullyConnected.png){#fig-cnnconnected}
+![The fully connected layer assigns final predictions](figures/CNNFullyConnected.png){#fig-cnnconnected}
 
 ## CNN parameters
 
@@ -115,6 +115,6 @@ $$
 
 The identity function is a key concept in residual networks. By using *shortcut connections* or *skipped connections* - which perform identity mapping - the outputs can be added to the outputs of intermediate layers. The original x is copied forward unchanged and new features are added to this - *corrections*. 
 
-![The pooling layer identifies significant features](ResidualLearning.png){#fig-reslearning}
+![The pooling layer identifies significant features](figures/ResidualLearning.png){#fig-reslearning}
 
 To summarise, with a standard CNN each layer is relearning lots of information again and has to re-encode this information. Using a ResNet architecture keeps previous information and only learns what has *changed*. 

@@ -22,11 +22,11 @@ $$
 
 where $h_t$ is the hidden state for time step $t$, $f_1$ and $f_2$ are activation functions, and $\alpha, \beta, \gamma, \theta, \lambda$ are weights and biases. 
 
-![A recurrent unit](recurrent-unit.png){#fig-recurrent-unit}
+![A recurrent unit](figures/recurrent-unit.png){#fig-recurrent-unit}
 
 Another useful way to illustrate the recurrent unit is shown in @fig-runit-unroll.  Note that this does not show a network, instead it illustrates the calculations performed by a single recurrent unit over several time steps.
 
-![Recurrent unit for several time steps](rnn-unrolled.png){#fig-runit-unroll}
+![Recurrent unit for several time steps](figures/rnn-unrolled.png){#fig-runit-unroll}
 
 Here the input data sequence $x_0, x_1, ... x_t, ... , x_n$ is transformed to the hidden state $h_0, h_1, ... h_t, ... , h_n$ and the output $y_0, y_1, ... y_t, ... , y_n$.
 
@@ -42,9 +42,9 @@ $$x_t \rightarrow y_0, y_1, ... y_t, ... , y_n$$
 Many to many :
 $$x_0, x_1, ... x_t, ... , x_m \rightarrow y_0, y_1, ... y_t, ... , y_n$$
 
-![Different types of RNN](rnn-types.png){#fig-rnn-types}
+![Different types of RNN](figures/rnn-types.png){#fig-rnn-types}
 
-Early RNNs demonstrated the machines could learning sequential data, including basic language models @mikolov10_interspeech.
+Early RNNs demonstrated the machines could learn sequential data, including basic language models @mikolov10_interspeech.
 
 
 ## Backpropagation for Recurrent Networks
@@ -63,7 +63,7 @@ Another significant disadvantage of recurrent networks is that the forward pass 
 
 The Long Short Term Memory (LSTM) was a highly successful (up to a point) attempt to resolve the vanishing gradient problem which all previous RNNs suffered from.  The LSTM relies on the concept of "gating", which controls the flow of information into and out of a hidden state.  It also introduces two hidden states - one (the "cell" state) which captures all the input information in the sequence so far, the other (the "hidden" state), which depends only on the previous time step.  The LSTM cell is shown in @fig-lstm. It comprises three gates - the "forget" gate, "input" gate, and "output" gate. 
 
-![The LSTM cell](lstm.png){#fig-lstm}
+![The LSTM cell](figures/lstm.png){#fig-lstm}
 
 The LSTM represented a major breakthrough in language modelling in the mid-2010s @sutskever2014sseq2seq, and opened up a broad range of time-series problems to machine learning.  Applications included forecasting energy demand, financial markets, equipment degradation.
 
@@ -71,6 +71,6 @@ The LSTM represented a major breakthrough in language modelling in the mid-2010s
 
 The Gated Recurrent Unit (GRU) is a simplified version of the LSTM, which dispenses with one hidden state, and uses only two gates.
 
-![The GRU cell](gru.png){#fig-gru}
+![The GRU cell](figures/gru.png){#fig-gru}
 
 The GRU greatly reduced the computational requirements of LSTMs, allowing applications such as speed recognition on mobile phones, predictive keyboards, battery life prediction.

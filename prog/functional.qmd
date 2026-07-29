@@ -16,8 +16,7 @@ A full introduction to functional programming is beyond the scope of the unit, b
 
 ## Lambda Functions
 
-In Python, lambda functions are created using the lambda keyword, eg.: lambda: x, x**2 returns an “anonymous” function that takes one argument, and returns a value that depends only on the argument (in this case, the square). Compare this to regular functions, which are declared with def and are named
- :
+In Python, lambda functions are created using the lambda keyword, eg.: lambda: x, x**2 returns an “anonymous” function that takes one argument, and returns a value that depends only on the argument (in this case, the square). Compare this to regular functions, which are declared with def and are named. For example, the following function takes one argument and returns a value that depends only on the argument :
 
 ```{python}
 def function(x):

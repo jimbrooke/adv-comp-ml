@@ -1,5 +1,17 @@
 # Preface {.unnumbered}
 
+Welcome to the course notes for Advanced Computational Physics and Machine Learning.
+
+These notes cover all the material required to complete the course.  They are supplemented by video lectures and practical workshops, which will be released weekly.  You can work through the notes at your own pace, but we will recommend weekly reading alongside video lectures, as preparation for each workshop.
+
+
+## Pre-requisites
+
+These notes assume you have studied computational physics up to 2nd year (Level 5), such as :
+
+   * PHYS20035 - Computational Physics and Data Science
+   * SCIF20002 - Programming and Data Analysis for Scientists
+   
 This is a Quarto book.
 
 To learn more about Quarto books visit <https://quarto.org/docs/books>.

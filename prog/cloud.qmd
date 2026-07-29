@@ -1,5 +1,5 @@
 ---
-title: "Cloud Technology"
+title: "Distributed Computing"
 format: html
 execute:
   error: true

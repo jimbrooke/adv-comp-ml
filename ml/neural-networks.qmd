@@ -25,7 +25,7 @@ LLMs 2020s.
 
 ## Anatomy of a Neural Network {#sec-anatomy-nn}
 
-![An example of an Artifical Neural Network](nn-simple.png){#fig-nn-anatomy}
+![An example of an Artifical Neural Network](figures/nn-simple.png){#fig-nn-anatomy}
 
 Most ANNs are known as 'feed-forward' neural networks. This means the computation flows in one direction, from inputs to outputs. The neurons in an ANN are typically arranged in layers. The first layer receives the input data, and the final layer produces the output data. The dimensionality of the input and output layers will be determined by the shape of the input and output data. Typically there are a number of hidden layers between the input and output layers, for which the dimensionality is much less constrained - for example, the number of nodes can be greater than that of the input and output layers.
 

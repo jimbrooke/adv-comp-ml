@@ -1,0 +1,25 @@
+---
+title: "Profiling"
+format: html
+execute:
+  error: true
+---
+
+  In this chapter, we discuss methods for measuring code performance, also known as profiling.  In general, we are interested in the amount of computing 'resources' used by a program, which can be measured in terms of execution time, memory usage, or other metrics.  Profiling is the process of measuring these resources.  By identifying the code that is responsible for greatest resource use, we can refine the code and improve the performance.  Here we discuss methods for measuring the execution time and the memory usage of a program.
+  
+  ## Execution time
+
+
+### The `time` module
+
+
+
+### The `timeit` module
+
+
+## Memory usage
+
+### The `sys` module
+
+
+### The `memory_profiler` module

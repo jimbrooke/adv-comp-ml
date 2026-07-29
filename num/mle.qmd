@@ -1,0 +1,7 @@
+---
+title: "Maximum Likelihood Estimation"
+format: html
+execute:
+  error: true
+---
+

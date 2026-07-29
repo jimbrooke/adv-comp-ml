@@ -131,7 +131,11 @@ print(u*v)
 ```
 
 
-## Encapsulation {#sec-encapsulation}
+## Core principles of OO programming
+
+The four core principles of OO programming are encapsulation, inheritance, abstraction and polymorphism.  These are often referred to as the "pillars" of OO programming.
+
+### Encapsulation {#sec-encapsulation}
 
 Encapsulation regards the bundling of data and methods into a class.  Typically, good encapsulation will also involve restricting access to some of the data/methods in the class.  This 'data hiding' prevents the outside world from directly operating on, or modifying, the class data.  The only way to interact with an object of the class will be via its methods.   This has several benefits :
 
@@ -144,7 +148,7 @@ These benefits are only realised when classes are well designed.  The role of th
 
 In our example, encapsulation is provided by accessing the internal data of the Vector class (ie. the `_x`, `_y`, `_z`) members via the methods (ie. `x()`, `y()`, `z()`). Note that Python does not provide a way to make data private. The leading underscore convention is an indication to the user that these data should not be directly accessed.  But there is no way to enforce it.  Other languages, such as C++, do provide mechanisms enforce privacy and will produce errors if access of private data is attempted.
 
-## Inheritance
+### Inheritance
 
 Inheritance is a mechanism of OO programming whereby a class can be derived from another class, "inheriting" its properties.  Here we'll talk about a child class inheriting attributes and methods from a parent class. Usually, the child class will have some additional attributes or methods that do not belong to the parent class.
 
@@ -237,7 +241,7 @@ Note the use of the `pass` keyword in the abstract base class to complete the me
 
 (Note that Python does not support 'true' abstract base classes natively. There are several reasons the Vehicle class in the example above is not truly abstract, which are beyond the scope of this unit.  A simple reason is that you can create an instance of the Vehicle class without errors. For the purists, true abstraction is supported via the `abc` module).
 
-## Polymorphism
+### Polymorphism
 
 Polymorphism means "many forms", and refers to an ability to treat objects of many different types as if they are of a single common type.  In OO programming, this is usually  achieved through inheritance and abstraction.  For example, in the previous example, we can treat objects of type `Car` and `Bicycle` as if they are both just of type `Vehicle`.  If we're only interested in computing the mass of the `Vehicle`s in the list, it doesn't matter that some are `Car`s and some are `Bicycle`s - we just call the `mass()` method on each one.
 

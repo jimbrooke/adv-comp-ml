@@ -78,7 +78,7 @@ Which is indeed equal to our `y` above. This kind of test is known as a 'closure
 
 Before using this method for solving simultaneous equations, though, we should understand how `scipy.linalg.inv` finds the matrix inverse.  Unfortunately, this is tricky to understand from the reference page, ([scipy.linalg.inv](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.inv.html)). But, if you examine the source code for this function you'll see that it uses a function called DGETRI. This is defined in the LAPACK library, and its reference page is [here](https://www.netlib.org/lapack/explore-html-3.6.1/dd/d9a/group__double_g_ecomputational_ga56d9c860ce4ce42ded7f914fdb0683ff.html).  As you can see this routine uses LU decomposition to find the inverse! It doesn't make sense, therefore, to find a matrix inverse simply to solve a simultaneous equation, and using LU decomposition directly will involve fewer operations.  However, there are exceptions when dealing with many simultaneous equations. For example, suppose you have a sequence of problems which all feature the same matrix $A$, but have different RHS $y$. In this case it would be efficient to invert $A$ once, then multiply by $y$ to solve each problem, since multiplication involves fewer operations than LU decomposition.
 
-As an aside, LAPACK is a linear algebra library written in FORTRAN - which remains one of the most efficient languages for writing numerical methods - and most routines in `scipy.linalg` basically provide a Python interface to this library.
+As an aside, LAPACK is a linear algebra library written in FORTRAN - which remains one of the most efficient languages for writing numerical methods - and most routines in `scipy.linalg` basically provide a Python interface to this library. Further information on these algorithms can be found in @golub1996 and @press2007.
 
 
 ## Gaussian Elimination
@@ -174,9 +174,11 @@ x_3 &= \frac{7}{10}
 \end{aligned}
 $$  {#eq-o}
 
+@press2007 provides a detailed discussion of Gaussian elimination, and the Scipy routine `scipy.linalg.solve()` uses this technique to solve simultaneous equations.
+
 ## LU Decomposition
 
-Matrix decomposition techniques involve factorising a general matrix into a product of several matrices. LU decomposition involves writing the general matrix, $A$, as the product of two triangular matrices, $L$ and $U$.
+Matrix decomposition techniques involve factorising a general matrix into a product of several matrices. LU decomposition involves writing the general matrix, $A$, as the product of two triangular matrices, $L$ and $U$. A brief discussion of LU decomposition is given here, for more information see @golub1996.
 
 $$
 A=
@@ -228,7 +230,7 @@ Note that the general purpose solvers provided by both numpy and scipy both util
 
 ## SVD Decomposition
 
-LU decomposition will find an exact solution to the matrix equation in a wide variety of cases.  However, a solution may not exist, or there may be infinite solutions. In such cases, the Singular Value Decomposition may be of use.
+LU decomposition will find an exact solution to the matrix equation in a wide variety of cases.  However, a solution may not exist, or there may be infinite solutions. In such cases, the Singular Value Decomposition may be of use.  @trefethen1997 provides a detailed discussion of SVD decomposition, and @golub1996 provides a more general discussion of matrix decomposition techniques.
 
 For an $m \times n$ matrix $A$, the singular values, $\sigma$ are given by the solutions to
 
@@ -278,7 +280,7 @@ print( linalg.pinv(a) @ y)
 
 Here we illustrate the use of simultaneous equation solvers in a familiar context - the use of Kirchoff's laws and Ohm's law to understand resistor networks. Typically, analysis of a resistor network will involve solving simultaneous equations, to calculate voltage and current at the desired points in the network. Consider the electronic circuit shown in the diagram.
 
-![Figure 1 - Example resistor network.](circuit.png)
+![Figure 1 - Example resistor network.](figures/circuit.png)
 
 Where : $V_1 = 12V$, $V_2 = 12V$, $R_1 = 3 \Omega$, $R_2 = 3 \Omega$, $R_3 = 10 \Omega$, $R_4 = 2 \Omega$, $R_5 = 2 \Omega$.
 

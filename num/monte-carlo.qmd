@@ -5,9 +5,11 @@ execute:
   error: true
 ---
 
-# Pseudo Random Number Sampling
+Monte Carlo methods are a class of computational algorithms, originally introduced in @metropolis1949, that rely on repeated random sampling to obtain numerical results.  The underlying concept is to use randomness to solve problems that might be deterministic in principle.  Monte Carlo methods are often used in physical and mathematical problems and are most useful when it is difficult or impossible to use other approaches.
 
-We will frequently want to generate random numbers according to a particular probability distribution, or in the jargon 'sampling' from the given distribution. There are two basic methods for achieving this; an analytical method, and the accept/reject method.
+## Pseudo Random Number Sampling
+
+Monte Carlo techniques rely on generating random numbers according to a particular probability distribution, or in the jargon 'sampling' from the given distribution. There are two basic methods for achieving this; an analytical method, and the accept/reject method. A good introducytion to both algorithms can be found   in @devroye1986.
 
 In the below, we assume we are provided with a random number generator that returns pseudo-random numbers with a uniform probability distribution in the interval $[0,1)$.  In Python, `numpy.random` provides the `random()` function, which does exactly this.  A variety of other probability distributions are provided by `numpy.random`, and in general these should be used when possible.  However, the techniques described here allow any desired PDF to be sampled.
 
