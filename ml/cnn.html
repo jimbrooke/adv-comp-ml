@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>19&nbsp; Convolutional Neural Networks – Advanced Computational Physics &amp; Machine Learning</title>
+<title>20&nbsp; Convolutional Neural Networks – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,7 +26,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -37,7 +57,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../ml/rnn.html" rel="next">
-<link href="../ml/neural-networks.html" rel="prev">
+<link href="../ml/gradients.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -47,7 +67,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c0a149fb89f594c50928677855dd0036.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9ae487f9dc81c977a28b7be194272750.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -117,7 +137,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/cnn.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/cnn.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -157,7 +177,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../prog/programming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Programming</span></a>
+ <span class="menu-text">Programming</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -172,7 +192,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../prog/oo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object Oriented Programming</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object-Oriented Programming</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -242,14 +262,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../num/mle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../num/optimisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Optimisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></span></a>
   </div>
 </li>
       </ul>
@@ -266,7 +280,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/intro-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ml/mle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -289,26 +309,32 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../ml/gradients.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../ml/cnn.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/rnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ml/transformer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/autoencoder.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ml/transformer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
   </div>
 </li>
       </ul>
@@ -329,23 +355,23 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction-to-cnns" id="toc-introduction-to-cnns" class="nav-link active" data-scroll-target="#introduction-to-cnns"><span class="header-section-number">19.1</span> Introduction to CNNs</a></li>
-  <li><a href="#how-do-cnns-work" id="toc-how-do-cnns-work" class="nav-link" data-scroll-target="#how-do-cnns-work"><span class="header-section-number">19.2</span> How do CNNs work</a>
+  <li><a href="#introduction-to-cnns" id="toc-introduction-to-cnns" class="nav-link active" data-scroll-target="#introduction-to-cnns"><span class="header-section-number">20.1</span> Introduction to CNNs</a></li>
+  <li><a href="#how-do-cnns-work" id="toc-how-do-cnns-work" class="nav-link" data-scroll-target="#how-do-cnns-work"><span class="header-section-number">20.2</span> How do CNNs work</a>
   <ul class="collapse">
-  <li><a href="#convolutional-layer" id="toc-convolutional-layer" class="nav-link" data-scroll-target="#convolutional-layer"><span class="header-section-number">19.2.1</span> Convolutional Layer</a></li>
-  <li><a href="#pooling-layer" id="toc-pooling-layer" class="nav-link" data-scroll-target="#pooling-layer"><span class="header-section-number">19.2.2</span> Pooling Layer</a></li>
-  <li><a href="#fully-connected-layer" id="toc-fully-connected-layer" class="nav-link" data-scroll-target="#fully-connected-layer"><span class="header-section-number">19.2.3</span> Fully connected Layer</a></li>
+  <li><a href="#convolutional-layer" id="toc-convolutional-layer" class="nav-link" data-scroll-target="#convolutional-layer"><span class="header-section-number">20.2.1</span> Convolutional Layer</a></li>
+  <li><a href="#pooling-layer" id="toc-pooling-layer" class="nav-link" data-scroll-target="#pooling-layer"><span class="header-section-number">20.2.2</span> Pooling Layer</a></li>
+  <li><a href="#fully-connected-layer" id="toc-fully-connected-layer" class="nav-link" data-scroll-target="#fully-connected-layer"><span class="header-section-number">20.2.3</span> Fully connected Layer</a></li>
   </ul></li>
-  <li><a href="#cnn-parameters" id="toc-cnn-parameters" class="nav-link" data-scroll-target="#cnn-parameters"><span class="header-section-number">19.3</span> CNN parameters</a>
+  <li><a href="#cnn-parameters" id="toc-cnn-parameters" class="nav-link" data-scroll-target="#cnn-parameters"><span class="header-section-number">20.3</span> CNN parameters</a>
   <ul class="collapse">
-  <li><a href="#stride" id="toc-stride" class="nav-link" data-scroll-target="#stride"><span class="header-section-number">19.3.1</span> Stride</a></li>
-  <li><a href="#padding" id="toc-padding" class="nav-link" data-scroll-target="#padding"><span class="header-section-number">19.3.2</span> Padding</a></li>
+  <li><a href="#stride" id="toc-stride" class="nav-link" data-scroll-target="#stride"><span class="header-section-number">20.3.1</span> Stride</a></li>
+  <li><a href="#padding" id="toc-padding" class="nav-link" data-scroll-target="#padding"><span class="header-section-number">20.3.2</span> Padding</a></li>
   </ul></li>
-  <li><a href="#limitations-of-cnns" id="toc-limitations-of-cnns" class="nav-link" data-scroll-target="#limitations-of-cnns"><span class="header-section-number">19.4</span> Limitations of CNNs</a></li>
-  <li><a href="#deep-residual-learning" id="toc-deep-residual-learning" class="nav-link" data-scroll-target="#deep-residual-learning"><span class="header-section-number">19.5</span> Deep Residual Learning</a>
+  <li><a href="#limitations-of-cnns" id="toc-limitations-of-cnns" class="nav-link" data-scroll-target="#limitations-of-cnns"><span class="header-section-number">20.4</span> Limitations of CNNs</a></li>
+  <li><a href="#deep-residual-learning" id="toc-deep-residual-learning" class="nav-link" data-scroll-target="#deep-residual-learning"><span class="header-section-number">20.5</span> Deep Residual Learning</a>
   <ul class="collapse">
-  <li><a href="#resnet-basic-idea" id="toc-resnet-basic-idea" class="nav-link" data-scroll-target="#resnet-basic-idea"><span class="header-section-number">19.5.1</span> ResNet basic idea</a></li>
-  <li><a href="#skipped-connections" id="toc-skipped-connections" class="nav-link" data-scroll-target="#skipped-connections"><span class="header-section-number">19.5.2</span> Skipped connections</a></li>
+  <li><a href="#resnet-basic-idea" id="toc-resnet-basic-idea" class="nav-link" data-scroll-target="#resnet-basic-idea"><span class="header-section-number">20.5.1</span> ResNet basic idea</a></li>
+  <li><a href="#skipped-connections" id="toc-skipped-connections" class="nav-link" data-scroll-target="#skipped-connections"><span class="header-section-number">20.5.2</span> Skipped connections</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -353,9 +379,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/cnn.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/cnn.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-cnn" class="quarto-section-identifier"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></h1>
+<h1 class="title"><span id="sec-cnn" class="quarto-section-identifier"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></h1>
 </div>
 
 
@@ -372,12 +398,12 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction-to-cnns" class="level2" data-number="19.1">
-<h2 data-number="19.1" class="anchored" data-anchor-id="introduction-to-cnns"><span class="header-section-number">19.1</span> Introduction to CNNs</h2>
-<p>So far in this course the neural networks we have mostly been working with have been types of Multilayer Perceptron (MLPs). These foundational neural networks are not suited to all types of problem. One such example involves images, i.e.&nbsp;a set of pixels - these will be treated independently which will ignore powerful features such as locality. To tackle this issue, Convolutional Neural Networks were devised.</p>
+<section id="introduction-to-cnns" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="introduction-to-cnns"><span class="header-section-number">20.1</span> Introduction to CNNs</h2>
+<p>So far in this course the neural networks we have mostly been working with have been types of Multilayer Perceptron (MLPs). These foundational neural networks are not suited to all types of problem. One such example involves images, i.e.&nbsp;a set of pixels - these will be treated independently, ignoring the spatial structure of the data. Convolutional Neural Networks (CNNs) were developed to address this issue <span class="citation" data-cites="lecun1998">Lecun, Bottou, Bengio, &amp; Haffner (<a href="../references.html#ref-lecun1998" role="doc-biblioref">1998</a>)</span>.</p>
 </section>
-<section id="how-do-cnns-work" class="level2" data-number="19.2">
-<h2 data-number="19.2" class="anchored" data-anchor-id="how-do-cnns-work"><span class="header-section-number">19.2</span> How do CNNs work</h2>
+<section id="how-do-cnns-work" class="level2" data-number="20.2">
+<h2 data-number="20.2" class="anchored" data-anchor-id="how-do-cnns-work"><span class="header-section-number">20.2</span> How do CNNs work</h2>
 <p>The building blocks of a CNN are:</p>
 <ul>
 <li>Convolutional Layer</li>
@@ -385,8 +411,8 @@ window.Quarto = {
 <li>Pooling Layer</li>
 <li>Fully connected layer</li>
 </ul>
-<section id="convolutional-layer" class="level3" data-number="19.2.1">
-<h3 data-number="19.2.1" class="anchored" data-anchor-id="convolutional-layer"><span class="header-section-number">19.2.1</span> Convolutional Layer</h3>
+<section id="convolutional-layer" class="level3" data-number="20.2.1">
+<h3 data-number="20.2.1" class="anchored" data-anchor-id="convolutional-layer"><span class="header-section-number">20.2.1</span> Convolutional Layer</h3>
 <p>This layer performs the core mathematical function - a <em>sliding window</em> is shiftd across the image looking for specific <em>features</em>. These sliding windows are called <em>filters</em> or <em>kernels</em> and there are several which are each looking for different patterns e.g.&nbsp;straight lines or curves. The filters highlight the specific pattern they are looking for and create a <em>feature map</em>. Activation functions are used to ensure non-linear transformations are possible in the network, e.g.&nbsp;by ReLu is commonly used in the convolutional layers in a CNN.</p>
 <div id="fig-cnnlayer" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -394,13 +420,13 @@ window.Quarto = {
 <img src="figures/CNNlayer.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cnnlayer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;19.1: The convolutional layer outputs a feature map
+Figure&nbsp;20.1: The convolutional layer outputs a feature map
 </figcaption>
 </figure>
 </div>
 </section>
-<section id="pooling-layer" class="level3" data-number="19.2.2">
-<h3 data-number="19.2.2" class="anchored" data-anchor-id="pooling-layer"><span class="header-section-number">19.2.2</span> Pooling Layer</h3>
+<section id="pooling-layer" class="level3" data-number="20.2.2">
+<h3 data-number="20.2.2" class="anchored" data-anchor-id="pooling-layer"><span class="header-section-number">20.2.2</span> Pooling Layer</h3>
 <p>This layer’s primary purpose is to identify the most significant features and reduce the size of the feature maps. A filter is used which scans over the feature map and aggregation functions are used to reduce the dimensionality of the data. Types of aggregation function include:</p>
 <ul>
 <li>Max Pooling: Selects the maximum value from the area of the feature map covered by the filter</li>
@@ -412,13 +438,13 @@ Figure&nbsp;19.1: The convolutional layer outputs a feature map
 <img src="figures/CNNPooling.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cnnpooling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;19.2: The pooling layer identifies significant features
+Figure&nbsp;20.2: The pooling layer identifies significant features
 </figcaption>
 </figure>
 </div>
 </section>
-<section id="fully-connected-layer" class="level3" data-number="19.2.3">
-<h3 data-number="19.2.3" class="anchored" data-anchor-id="fully-connected-layer"><span class="header-section-number">19.2.3</span> Fully connected Layer</h3>
+<section id="fully-connected-layer" class="level3" data-number="20.2.3">
+<h3 data-number="20.2.3" class="anchored" data-anchor-id="fully-connected-layer"><span class="header-section-number">20.2.3</span> Fully connected Layer</h3>
 <p>This layer is there to assign final predictions based on the outputs of the previous convolution and pooling layers. Each node in this layer is connected to each node in the previous layer. In a classification task the activation function is typically SoftMax, which turns the flatted vector of features into a probability distribution.</p>
 <div id="fig-cnnconnected" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -426,32 +452,76 @@ Figure&nbsp;19.2: The pooling layer identifies significant features
 <img src="figures/CNNFullyConnected.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cnnconnected-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;19.3: The fully connected layer assigns final predictions
+Figure&nbsp;20.3: The fully connected layer assigns final predictions
 </figcaption>
 </figure>
 </div>
 </section>
 </section>
-<section id="cnn-parameters" class="level2" data-number="19.3">
-<h2 data-number="19.3" class="anchored" data-anchor-id="cnn-parameters"><span class="header-section-number">19.3</span> CNN parameters</h2>
-<section id="stride" class="level3" data-number="19.3.1">
-<h3 data-number="19.3.1" class="anchored" data-anchor-id="stride"><span class="header-section-number">19.3.1</span> Stride</h3>
+<section id="cnn-parameters" class="level2" data-number="20.3">
+<h2 data-number="20.3" class="anchored" data-anchor-id="cnn-parameters"><span class="header-section-number">20.3</span> CNN parameters</h2>
+<section id="stride" class="level3" data-number="20.3.1">
+<h3 data-number="20.3.1" class="anchored" data-anchor-id="stride"><span class="header-section-number">20.3.1</span> Stride</h3>
 <p>The stride is the number of pixels that the convolutional filter moves each time it starts a new pass. A stride of 1 means one pixel at a time, 2 means two pixels at a time etc. This parameter has an important effect on the performance of a CNN. Larger strides reduce spatial dimensions of the output feature map, while increasing computational efficiency. However they can also miss fine-grained features while capturing the broad ones.</p>
 </section>
-<section id="padding" class="level3" data-number="19.3.2">
-<h3 data-number="19.3.2" class="anchored" data-anchor-id="padding"><span class="header-section-number">19.3.2</span> Padding</h3>
+<section id="padding" class="level3" data-number="20.3.2">
+<h3 data-number="20.3.2" class="anchored" data-anchor-id="padding"><span class="header-section-number">20.3.2</span> Padding</h3>
 <p>In fixed size images there will be edges of the image where the convolutional filter can not be applied; this can lead to a loss of information. Padding adds extra pixels around the image, usually just zeros, which allow the filter to be applied - without adding artifical information.</p>
 </section>
 </section>
-<section id="limitations-of-cnns" class="level2" data-number="19.4">
-<h2 data-number="19.4" class="anchored" data-anchor-id="limitations-of-cnns"><span class="header-section-number">19.4</span> Limitations of CNNs</h2>
+<section id="limitations-of-cnns" class="level2" data-number="20.4">
+<h2 data-number="20.4" class="anchored" data-anchor-id="limitations-of-cnns"><span class="header-section-number">20.4</span> Limitations of CNNs</h2>
 <p>CNNs, although very powerful for datasets composed of images, do have their limitations. The networks are frequently complex which take significant resources to train, along with having to use large datasets to be performant. Another issue that commonly occurs is known as the <em>vanising gradient problem</em> which occurs with deeper networks. As the gradients become smaller between layers it becomes more difficult for earlier layers to learn. In fact it was shown that deeper networks, which were orignally thought to be more performant, were actually exhibiting signs of poorer performance than shallower ones, with higher training and test errors.</p>
+<!-- 
+## Landmark Architectures
+
+DECIDE IF WE WANT THIS STUFF
+
+The building blocks above were not all introduced at once — they were developed and refined across a sequence of influential architectures, each addressing a specific limitation of the last. It's useful to know this history both because these named architectures are constantly referenced in the literature, and because the sequence itself illustrates the practical trade-offs (depth vs. computational cost vs. trainability) that motivate the design choices discussed throughout this chapter.
+
+**LeNet-5** [@lecun1998gradient], introduced in 1998, is the founding CNN architecture, and is essentially a direct implementation of the building blocks described above: alternating convolutional and pooling layers, followed by fully connected layers, originally applied to handwritten digit recognition. It is small by modern standards (a handful of layers, tens of thousands of parameters), but it established the basic template that every architecture below still follows.
+
+**AlexNet** [@krizhevsky2012imagenet], which won the ImageNet Large Scale Visual Recognition Challenge (ILSVRC) in 2012, is widely regarded as the paper that started the deep learning boom. Architecturally it is a deeper version of LeNet (8 layers rather than 5), but its real significance was in three practical choices that made training a network of that size feasible: the use of ReLU activations (@sec-relu) instead of sigmoid/tanh, which avoids the vanishing gradient problem discussed above; dropout (@sec-dropout) for regularisation; and training across multiple GPUs in parallel, which made the scale of training practically possible for the first time.
+
+**VGGNet** [@simonyan2015vgg] (2014) explored the effect of depth directly, using up to 19 layers, but with a key structural insight: it replaced the larger filters used in LeNet/AlexNet (e.g. $11\times11$, $5\times5$) with a *stack* of small $3\times3$ filters. Two stacked $3\times3$ filters have the same effective receptive field as one $5\times5$ filter, but use fewer parameters and add an extra non-linear activation in between — a direct illustration of the stride/receptive-field trade-off discussed above.
+
+::: {#10a9fe94 .cell execution_count=1}
+``` {.python .cell-code}
+# illustrating VGG's parameter-efficiency argument: one 5x5 filter vs two stacked 3x3 filters,
+# for a single input/output channel
+params_5x5 = 5*5
+params_two_3x3 = 2 * (3*3)
+print(f"One 5x5 filter    : {params_5x5} parameters")
+print(f"Two stacked 3x3   : {params_two_3x3} parameters, same receptive field")
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+One 5x5 filter    : 25 parameters
+Two stacked 3x3   : 18 parameters, same receptive field
+```
+:::
+:::
+
+
+**GoogLeNet / Inception** [@szegedy2015going] (2014) took a different approach to depth: rather than simply stacking more layers, it introduced the **Inception module**, which applies several filter sizes ($1\times1$, $3\times3$, $5\times5$) in parallel within the same layer and concatenates the results, allowing the network to capture features at multiple scales simultaneously. This let GoogLeNet outperform VGG on ILSVRC 2014 while using substantially fewer parameters — an efficiency-focused counterpoint to VGG's depth-focused approach.
+
+**ResNet** [@he2016deep] (2015), described in detail in the next section, resolved the degradation problem described above (deeper networks performing *worse*, not just more expensively) using residual/skip connections, and enabled reliable training of networks over 100 layers deep.
+
+| Architecture | Year | Key contribution |
+|---|---|---|
+| LeNet-5 | 1998 | Established the conv/pool/fully-connected template |
+| AlexNet | 2012 | ReLU + dropout + GPU training at scale |
+| VGGNet | 2014 | Stacked small filters for parameter-efficient depth |
+| GoogLeNet | 2014 | Inception module: multi-scale features, parameter efficiency |
+| ResNet | 2015 | Skip connections: solved the degradation problem, enabled extreme depth |
+-->
 </section>
-<section id="deep-residual-learning" class="level2" data-number="19.5">
-<h2 data-number="19.5" class="anchored" data-anchor-id="deep-residual-learning"><span class="header-section-number">19.5</span> Deep Residual Learning</h2>
-<p>In 2015 a paper was published which redefined how we use CNNs (https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf). It proposed a new structure to CNNs which helped to alleviate some of the issues described above. They key shift was to use <em>skipped connections</em> to speed up training, which also had the benefit of preventing the vanishing gradient problem.</p>
-<section id="resnet-basic-idea" class="level3" data-number="19.5.1">
-<h3 data-number="19.5.1" class="anchored" data-anchor-id="resnet-basic-idea"><span class="header-section-number">19.5.1</span> ResNet basic idea</h3>
+<section id="deep-residual-learning" class="level2" data-number="20.5">
+<h2 data-number="20.5" class="anchored" data-anchor-id="deep-residual-learning"><span class="header-section-number">20.5</span> Deep Residual Learning</h2>
+<p><span class="citation" data-cites="kaiming2015">He, Zhang, Ren, &amp; Sun (<a href="../references.html#ref-kaiming2015" role="doc-biblioref">2015</a>)</span> proposed a new structure for CNNs which helped to alleviate some of the issues described above. They key shift was to use <em>skipped connections</em> to speed up training, which also had the benefit of preventing the vanishing gradient problem.</p>
+<section id="resnet-basic-idea" class="level3" data-number="20.5.1">
+<h3 data-number="20.5.1" class="anchored" data-anchor-id="resnet-basic-idea"><span class="header-section-number">20.5.1</span> ResNet basic idea</h3>
 <p>The idea behind this network architecture can be described simply mathematically. Instead of learning:</p>
 <p><span class="math display">\[
 \begin{align}
@@ -484,8 +554,8 @@ f(x)=0
 \]</span> .</p>
 <p><strong>It is easier for the network to learn f(x)=0 than learn how to map the identity function directly.</strong></p>
 </section>
-<section id="skipped-connections" class="level3" data-number="19.5.2">
-<h3 data-number="19.5.2" class="anchored" data-anchor-id="skipped-connections"><span class="header-section-number">19.5.2</span> Skipped connections</h3>
+<section id="skipped-connections" class="level3" data-number="20.5.2">
+<h3 data-number="20.5.2" class="anchored" data-anchor-id="skipped-connections"><span class="header-section-number">20.5.2</span> Skipped connections</h3>
 <p>The identity function is a key concept in residual networks. By using <em>shortcut connections</em> or <em>skipped connections</em> - which perform identity mapping - the outputs can be added to the outputs of intermediate layers. The original x is copied forward unchanged and new features are added to this - <em>corrections</em>.</p>
 <div id="fig-reslearning" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -493,13 +563,21 @@ f(x)=0
 <img src="figures/ResidualLearning.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reslearning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;19.4: The pooling layer identifies significant features
+Figure&nbsp;20.4: The pooling layer identifies significant features
 </figcaption>
 </figure>
 </div>
 <p>To summarise, with a standard CNN each layer is relearning lots of information again and has to re-encode this information. Using a ResNet architecture keeps previous information and only learns what has <em>changed</em>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-kaiming2015" class="csl-entry" role="listitem">
+He, K., Zhang, X., Ren, S., &amp; Sun, J. (2015). <em>Deep residual learning for image recognition</em>. Retrieved from <a href="https://arxiv.org/abs/1512.03385">https://arxiv.org/abs/1512.03385</a>
+</div>
+<div id="ref-lecun1998" class="csl-entry" role="listitem">
+Lecun, Y., Bottou, L., Bengio, Y., &amp; Haffner, P. (1998). Gradient-based learning applied to document recognition. <a href="https://doi.org/10.1109/5.726791">https://doi.org/10.1109/5.726791</a>
+</div>
+</div>
 </section>
 </section>
 
@@ -906,13 +984,13 @@ Figure&nbsp;19.4: The pooling layer identifies significant features
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../ml/neural-networks.html" class="pagination-link" aria-label="Neural Networks">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Neural Networks</span></span>
+      <a href="../ml/gradients.html" class="pagination-link" aria-label="Gradients &amp; Multivariate Calculus">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../ml/rnn.html" class="pagination-link" aria-label="Recurrent Neural Networks">
-        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

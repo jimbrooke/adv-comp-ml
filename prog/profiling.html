@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -47,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c0a149fb89f594c50928677855dd0036.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9ae487f9dc81c977a28b7be194272750.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -88,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../prog/programming.html">Advanced Programming</a></li><li class="breadcrumb-item"><a href="../prog/profiling.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Profiling</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../prog/programming.html">Programming</a></li><li class="breadcrumb-item"><a href="../prog/profiling.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Profiling</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -128,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../prog/programming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Programming</span></a>
+ <span class="menu-text">Programming</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -143,7 +178,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../prog/oo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object Oriented Programming</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object-Oriented Programming</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -213,14 +248,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../num/mle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../num/optimisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Optimisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></span></a>
   </div>
 </li>
       </ul>
@@ -237,7 +266,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/intro-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ml/mle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -260,26 +295,32 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../ml/gradients.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../ml/cnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/rnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ml/transformer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/autoencoder.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ml/transformer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
   </div>
 </li>
       </ul>
@@ -300,12 +341,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-time-module" id="toc-the-time-module" class="nav-link active" data-scroll-target="#the-time-module"><span class="header-section-number">6.0.1</span> The <code>time</code> module</a></li>
-  <li><a href="#the-timeit-module" id="toc-the-timeit-module" class="nav-link" data-scroll-target="#the-timeit-module"><span class="header-section-number">6.0.2</span> The <code>timeit</code> module</a></li>
-  <li><a href="#memory-usage" id="toc-memory-usage" class="nav-link" data-scroll-target="#memory-usage"><span class="header-section-number">6.1</span> Memory usage</a>
+  <li><a href="#execution-time" id="toc-execution-time" class="nav-link active" data-scroll-target="#execution-time"><span class="header-section-number">6.1</span> Execution time</a>
   <ul class="collapse">
-  <li><a href="#the-sys-module" id="toc-the-sys-module" class="nav-link" data-scroll-target="#the-sys-module"><span class="header-section-number">6.1.1</span> The <code>sys</code> module</a></li>
-  <li><a href="#the-memory_profiler-module" id="toc-the-memory_profiler-module" class="nav-link" data-scroll-target="#the-memory_profiler-module"><span class="header-section-number">6.1.2</span> The <code>memory_profiler</code> module</a></li>
+  <li><a href="#the-time-module" id="toc-the-time-module" class="nav-link" data-scroll-target="#the-time-module"><span class="header-section-number">6.1.1</span> The <code>time</code> module</a></li>
+  <li><a href="#the-timeit-module" id="toc-the-timeit-module" class="nav-link" data-scroll-target="#the-timeit-module"><span class="header-section-number">6.1.2</span> The <code>timeit</code> module</a></li>
+  </ul></li>
+  <li><a href="#memory-usage" id="toc-memory-usage" class="nav-link" data-scroll-target="#memory-usage"><span class="header-section-number">6.2</span> Memory usage</a>
+  <ul class="collapse">
+  <li><a href="#individual-python-objects" id="toc-individual-python-objects" class="nav-link" data-scroll-target="#individual-python-objects"><span class="header-section-number">6.2.1</span> Individual Python objects</a></li>
+  <li><a href="#the-memory_profiler-module" id="toc-the-memory_profiler-module" class="nav-link" data-scroll-target="#the-memory_profiler-module"><span class="header-section-number">6.2.2</span> The <code>memory_profiler</code> module</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -313,9 +357,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../prog/programming.html">Advanced Programming</a></li><li class="breadcrumb-item"><a href="../prog/profiling.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Profiling</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../prog/programming.html">Programming</a></li><li class="breadcrumb-item"><a href="../prog/profiling.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Profiling</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Profiling</span></h1>
+<h1 class="title"><span id="sec-profiling" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Profiling</span></span></h1>
 </div>
 
 
@@ -332,21 +376,139 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In this chapter, we discuss methods for measuring code performance, also known as profiling. In general, we are interested in the amount of computing ‘resources’ used by a program, which can be measured in terms of execution time, memory usage, or other metrics. Profiling is the process of measuring these resources. By identifying the code that is responsible for greatest resource use, we can refine the code and improve the performance. Here we discuss methods for measuring the execution time and the memory usage of a program.</p>
-<p>## Execution time</p>
-<section id="the-time-module" class="level3" data-number="6.0.1">
-<h3 data-number="6.0.1" class="anchored" data-anchor-id="the-time-module"><span class="header-section-number">6.0.1</span> The <code>time</code> module</h3>
+<p>In this chapter, we discuss methods for measuring code performance, also known as profiling. In general, we are interested in the amount of computing ‘resources’ used by a program, which can be measured in terms of execution time, memory usage, or other metrics. Profiling is the process of measuring these resources. By identifying the code that is responsible for greatest resource use, we can refine the code and improve the performance. Here we discuss methods for measuring the execution time and the memory usage of a program. These are the natural first steps before reaching for the more heavyweight solutions discussed in the coming sections, <a href="parallel.html" class="quarto-xref"><span>Chapter 7</span></a> and <a href="cloud.html" class="quarto-xref"><span>Chapter 8</span></a>. In particular, we want to establish, that a single-threaded version is genuinely too slow, and knowing <em>which part</em> of it is slow is essential in deciding what steps are needed to improve it.</p>
+<p>This section covers four standard tools, of increasing specificity: the <code>time</code> module (general purpose wall-clock timing), <code>timeit</code> (reliable timing of small code snippets), <code>sys</code> (basic memory inspection), and <code>memory_profiler</code> (detailed, line-by-line memory usage).</p>
+<section id="execution-time" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="execution-time"><span class="header-section-number">6.1</span> Execution time</h2>
+<section id="the-time-module" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="the-time-module"><span class="header-section-number">6.1.1</span> The <code>time</code> module</h3>
+<p>The simplest way to measure how long a piece of code takes is to record a timestamp before and after it runs, and subtract. Python’s built-in <code>time</code> module provides <code>time.perf_counter()</code> for exactly this purpose. Note that this is preferred over <code>time.time()</code> since it uses the most precise available clock and is guaranteed to be monotonic.</p>
+<p>In the example below, we use <code>time.perf_counter()</code> to measure the execution time of a simple Python loop, and compare it to the equivalent vectorised numpy operation.</p>
+<div id="b2eeb4b8" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">2_000_000</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># a plain Python loop</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    total <span class="op">+=</span> i<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>end <span class="op">=</span> time.perf_counter()</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Python loop   : </span><span class="sc">{</span>end <span class="op">-</span> start<span class="sc">:.4f}</span><span class="ss"> s"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># the vectorised numpy equivalent</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>total_np <span class="op">=</span> np.<span class="bu">sum</span>(np.arange(n)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>end <span class="op">=</span> time.perf_counter()</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Vectorised numpy : </span><span class="sc">{</span>end <span class="op">-</span> start<span class="sc">:.4f}</span><span class="ss"> s"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Python loop   : 0.5230 s
+Vectorised numpy : 0.0078 s</code></pre>
+</div>
+</div>
+<p><code>time.perf_counter()</code> is fine for timing something that takes at least fraction of a second, but it has two weaknesses for profiling short pieces of code. First, a single measurement is subject to noise (due to other processes running on your machine, CPU frequency scaling, etc.). Second, the overhead of the measurement itself will distort the result for code that runs in less than a few milliseconds. For this purpose, the <code>timeit</code> module is more appropriate.</p>
 </section>
-<section id="the-timeit-module" class="level3" data-number="6.0.2">
-<h3 data-number="6.0.2" class="anchored" data-anchor-id="the-timeit-module"><span class="header-section-number">6.0.2</span> The <code>timeit</code> module</h3>
+<section id="the-timeit-module" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="the-timeit-module"><span class="header-section-number">6.1.2</span> The <code>timeit</code> module</h3>
+<p><code>timeit</code> is purpose-built for benchmarking small code snippets reliably. Rather than a single measurement, it runs the code many times and reports statistics, and it takes care of some common pitfalls automatically — notably, it temporarily disables the garbage collector during timing, so that an unlucky garbage-collection pause doesn’t distort one particular run. (Garbage collection is the process by which Python automatically frees memory that is no longer in use, and can be triggered at any time.)</p>
+<p>You may wonder why we need to time evry short pieces of code in the first place. Frequently, a function or code fragment may be called many times in a program (eg. within a loop), in which case the total time spent in that function may be significant. In these case, optimisation of the function may be worthwhile, and <code>timeit</code> can be used to compare different approaches or options.</p>
+<div id="51120832" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> timeit</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> python_sum_squares(n):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        total <span class="op">+=</span> i<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> numpy_sum_squares(n):</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">sum</span>(np.arange(n)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100_000</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>t_python <span class="op">=</span> timeit.timeit(<span class="kw">lambda</span>: python_sum_squares(n), number<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>t_numpy  <span class="op">=</span> timeit.timeit(<span class="kw">lambda</span>: numpy_sum_squares(n), number<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Python loop, mean of 5 runs   : </span><span class="sc">{</span>t_python<span class="op">/</span><span class="dv">5</span><span class="op">*</span><span class="dv">1000</span><span class="sc">:.2f}</span><span class="ss"> ms"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Vectorised numpy, mean of 5 runs : </span><span class="sc">{</span>t_numpy<span class="op">/</span><span class="dv">5</span><span class="op">*</span><span class="dv">1000</span><span class="sc">:.2f}</span><span class="ss"> ms"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Python loop, mean of 5 runs   : 23.57 ms
+Vectorised numpy, mean of 5 runs : 0.17 ms</code></pre>
+</div>
+</div>
+<p>The <code>number</code> argument controls how many times the snippet is executed; <code>timeit</code> returns the <em>total</em> time for all runs, so dividing by <code>number</code> gives the mean time per run, as above. For very short snippets it’s often better to let <code>timeit</code> choose a suitable repeat count automatically, using <code>timeit.repeat()</code>, which returns several such totals so you can also see the spread between them:</p>
+<div id="35943b5b" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> timeit.repeat(<span class="kw">lambda</span>: numpy_sum_squares(n), number<span class="op">=</span><span class="dv">5</span>, repeat<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total time for each of 3 repeats of 5 runs :"</span>, [<span class="ss">f"</span><span class="sc">{</span>r<span class="op">*</span><span class="dv">1000</span><span class="sc">:.2f}</span><span class="ss"> ms"</span> <span class="cf">for</span> r <span class="kw">in</span> results])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total time for each of 3 repeats of 5 runs : ['0.92 ms', '0.42 ms', '0.40 ms']</code></pre>
+</div>
+</div>
+<p>It is worth knowing that, when working interactively in a Jupyter notebook with an active Python kernel, the <code>%timeit</code> magic command wraps all of this for you automatically (choosing sensible values of <code>number</code> and <code>repeat</code>, and printing a clean summary).</p>
 </section>
-<section id="memory-usage" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="memory-usage"><span class="header-section-number">6.1</span> Memory usage</h2>
-<section id="the-sys-module" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="the-sys-module"><span class="header-section-number">6.1.1</span> The <code>sys</code> module</h3>
 </section>
-<section id="the-memory_profiler-module" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="the-memory_profiler-module"><span class="header-section-number">6.1.2</span> The <code>memory_profiler</code> module</h3>
+<section id="memory-usage" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="memory-usage"><span class="header-section-number">6.2</span> Memory usage</h2>
+<section id="individual-python-objects" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="individual-python-objects"><span class="header-section-number">6.2.1</span> Individual Python objects</h3>
+<p>The memory footprint of a Python object can be measured using <code>sys.getsizeof()</code>. This is a simple, general-purpose tool that reports the size of a single object in bytes. It does not report the size of any objects that the object refers to, so it will under-report the total memory usage for complex objects (eg. a list of lists). For numpy arrays, the <code>.nbytes</code> attribute is more useful, since it reports the total number of bytes used by the array’s data buffer.</p>
+<p>The example below illustrates these methods. It also demonstrates the advantage of numpy’s compact, fixed-type storage over a general-purpose Python list, which stores each element as a full Python object with its own overhead.</p>
+<div id="b694e026" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>a_list <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1000</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>a_numpy_array <span class="op">=</span> np.arange(<span class="dv">1000</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>a_numpy_array_float64 <span class="op">=</span> np.arange(<span class="dv">1000</span>, dtype<span class="op">=</span>np.float64)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Python list of 1000 ints        : </span><span class="sc">{</span>sys<span class="sc">.</span>getsizeof(a_list)<span class="sc">:,}</span><span class="ss"> bytes"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"numpy array of 1000 ints        : </span><span class="sc">{</span>a_numpy_array<span class="sc">.</span>nbytes<span class="sc">:,}</span><span class="ss"> bytes (via .nbytes)"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"numpy float64 array of 1000     : </span><span class="sc">{</span>a_numpy_array_float64<span class="sc">.</span>nbytes<span class="sc">:,}</span><span class="ss"> bytes"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Python list of 1000 ints        : 8,056 bytes
+numpy array of 1000 ints        : 8,000 bytes (via .nbytes)
+numpy float64 array of 1000     : 8,000 bytes</code></pre>
+</div>
+</div>
+</section>
+<section id="the-memory_profiler-module" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="the-memory_profiler-module"><span class="header-section-number">6.2.2</span> The <code>memory_profiler</code> module</h3>
+<p><code>memory_profiler</code> is a third-party package (install with <code>pip install memory_profiler --break-system-packages</code>) that measures memory usage <em>line by line</em> as a function executes, rather than just reporting the size of one object at a time. This makes it much better suited to answering the practical question “which line of my function is actually responsible for the memory usage?”</p>
+<p>Its most common interface is the <code>@profile</code> decorator, combined with running your script via <code>python -m memory_profiler your_script.py</code>. Because this requires a real, standalone script rather than an inline code cell, we show the pattern here rather than executing it directly:</p>
+<div id="517b4363" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> memory_profiler <span class="im">import</span> profile</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">@profile</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_arrays():</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> np.zeros((<span class="dv">1000</span>, <span class="dv">1000</span>))       <span class="co"># ~8 MB</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> np.ones((<span class="dv">2000</span>, <span class="dv">2000</span>))        <span class="co"># ~32 MB</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> a.<span class="bu">sum</span>() <span class="op">+</span> b.<span class="bu">sum</span>()</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">del</span> b                            <span class="co"># explicitly free b</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>build_arrays()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Running this via <code>python -m memory_profiler your_script.py</code> produces a report showing the memory usage <em>after</em> each line executes, and the incremental change caused by that line — making it immediately clear, for example, that allocating <code>b</code> is responsible for the largest single jump in memory usage, and that the <code>del b</code> line frees it again. This line-by-line resolution is exactly what <code>sys.getsizeof()</code> cannot provide, since it only ever measures one object at a fixed point in time, not the evolving memory footprint of a running function.</p>
+<p>If you only need a quick, lower-effort memory check (rather than full line-by-line detail), <code>memory_profiler</code> also provides <code>memory_usage()</code>, which can be called directly within a script or notebook without the <code>-m</code> invocation:</p>
+<div id="91221012" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> memory_profiler <span class="im">import</span> memory_usage</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>mem_before <span class="op">=</span> memory_usage()[<span class="dv">0</span>]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>big_array <span class="op">=</span> np.zeros((<span class="dv">5000</span>, <span class="dv">5000</span>))   <span class="co"># ~200 MB</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>mem_after <span class="op">=</span> memory_usage()[<span class="dv">0</span>]</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Memory increase : </span><span class="sc">{</span>mem_after <span class="op">-</span> mem_before<span class="sc">:.1f}</span><span class="ss"> MiB"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<!-- ## Summary
+
+| Tool | Measures | Best for |
+|---|---|---|
+| `time` | Wall-clock time | Quick, one-off timing of larger blocks of code |
+| `timeit` | Wall-clock time, averaged over many runs | Reliable benchmarking of small snippets, especially when comparing alternatives |
+| `sys.getsizeof()` | Memory of a single object | Quick sanity checks on the size of one variable |
+| `memory_profiler` | Memory usage over time / line-by-line | Diagnosing which part of a function is responsible for high memory usage |
+
+As a general workflow: use `time` or `timeit` first to establish *whether* a piece of code is actually slow, and `memory_profiler` to establish *whether* it's using more memory than expected — only once you know which resource (time or memory) is the actual constraint, and roughly where in the code it arises, does it make sense to reach for the heavier tools of vectorisation (@sec-matrix), parallel programming (@sec-parallel), or distributed/cloud computing (@sec-cloud) covered elsewhere in this unit.
+-->
 
 
 </section>

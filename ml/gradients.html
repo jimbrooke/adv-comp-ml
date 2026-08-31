@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>16&nbsp; Supervised Learning – Advanced Computational Physics &amp; Machine Learning</title>
+<title>19&nbsp; Gradients &amp; Multivariate Calculus – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -36,8 +71,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../ml/unsupervised-ml.html" rel="next">
-<link href="../ml/mle.html" rel="prev">
+<link href="../ml/cnn.html" rel="next">
+<link href="../ml/neural-networks.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -117,7 +152,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/supervised-ml.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Supervised Learning</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/gradients.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -271,7 +306,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link active">
+  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
@@ -289,7 +324,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/gradients.html" class="sidebar-item-text sidebar-link">
+  <a href="../ml/gradients.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span></a>
   </div>
 </li>
@@ -335,25 +370,24 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">16.1</span> Introduction</a></li>
-  <li><a href="#training-sets" id="toc-training-sets" class="nav-link" data-scroll-target="#training-sets"><span class="header-section-number">16.2</span> Training Sets</a></li>
-  <li><a href="#dataset-splitting" id="toc-dataset-splitting" class="nav-link" data-scroll-target="#dataset-splitting"><span class="header-section-number">16.3</span> Dataset splitting</a></li>
-  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">16.4</span> Models</a></li>
-  <li><a href="#loss-functions" id="toc-loss-functions" class="nav-link" data-scroll-target="#loss-functions"><span class="header-section-number">16.5</span> Loss Functions</a></li>
-  <li><a href="#optimisation" id="toc-optimisation" class="nav-link" data-scroll-target="#optimisation"><span class="header-section-number">16.6</span> Optimisation</a></li>
-  <li><a href="#boosted-decision-tree" id="toc-boosted-decision-tree" class="nav-link" data-scroll-target="#boosted-decision-tree"><span class="header-section-number">16.7</span> Boosted Decision Tree</a></li>
-  <li><a href="#bdt-classifier-performance" id="toc-bdt-classifier-performance" class="nav-link" data-scroll-target="#bdt-classifier-performance"><span class="header-section-number">16.8</span> BDT Classifier Performance</a></li>
-  <li><a href="#sec-overfitting" id="toc-sec-overfitting" class="nav-link" data-scroll-target="#sec-overfitting"><span class="header-section-number">16.9</span> Overfitting/Underfitting</a></li>
-  <li><a href="#regularisation" id="toc-regularisation" class="nav-link" data-scroll-target="#regularisation"><span class="header-section-number">16.10</span> Regularisation</a></li>
+  <li><a href="#partial-derivatives-and-the-gradient" id="toc-partial-derivatives-and-the-gradient" class="nav-link active" data-scroll-target="#partial-derivatives-and-the-gradient"><span class="header-section-number">19.1</span> Partial Derivatives and the Gradient</a>
+  <ul class="collapse">
+  <li><a href="#directional-derivatives" id="toc-directional-derivatives" class="nav-link" data-scroll-target="#directional-derivatives"><span class="header-section-number">19.1.1</span> Directional Derivatives</a></li>
+  </ul></li>
+  <li><a href="#the-multivariate-chain-rule" id="toc-the-multivariate-chain-rule" class="nav-link" data-scroll-target="#the-multivariate-chain-rule"><span class="header-section-number">19.2</span> The Multivariate Chain Rule</a>
+  <ul class="collapse">
+  <li><a href="#automatic-differentiation" id="toc-automatic-differentiation" class="nav-link" data-scroll-target="#automatic-differentiation"><span class="header-section-number">19.2.1</span> Automatic Differentiation</a></li>
+  </ul></li>
+  <li><a href="#checking-gradients-numerically" id="toc-checking-gradients-numerically" class="nav-link" data-scroll-target="#checking-gradients-numerically"><span class="header-section-number">19.3</span> Checking Gradients Numerically</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/supervised-ml.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Supervised Learning</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/gradients.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-supervised-ml" class="quarto-section-identifier"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></h1>
+<h1 class="title"><span id="sec-gradients" class="quarto-section-identifier"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span></h1>
 </div>
 
 
@@ -370,136 +404,99 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level2" data-number="16.1">
-<h2 data-number="16.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">16.1</span> Introduction</h2>
-<p>In computational physics, we often seek to build models that can learn from data. <strong>Supervised learning</strong> is one of the foundational paradigms in machine learning, in which a model learns to predict an output (label or target) given a set of inputs (features). In essence a model is trained to be able to identify patterns in datasets. If the model is trained successfully it should be able to predict outputs on unseen data.</p>
-<p>This part of the course explores how supervised learning is formulated, trained, and evaluated, focusing on applications relevant to physics.</p>
-<hr>
-</section>
-<section id="training-sets" class="level2" data-number="16.2">
-<h2 data-number="16.2" class="anchored" data-anchor-id="training-sets"><span class="header-section-number">16.2</span> Training Sets</h2>
-<p>In supervised learning, the foundation is the <strong>training set</strong>, a collection of <strong>input–output pairs</strong>:</p>
+<p>EDIT THIS SECTION - IS IT REALLY NEEDED ?</p>
+<p>Every training algorithm used later in this unit — gradient descent (<span class="quarto-unresolved-ref">?sec-optimisation</span>), backpropagation (<a href="neural-networks.html#sec-backpropagation" class="quarto-xref"><span>Section 18.3.2</span></a>), the Adam optimiser (<a href="neural-networks.html#sec-adaptive-learning-rate" class="quarto-xref"><span>Section 18.4.3</span></a>) — relies on the ability to compute the derivative of a function with respect to <em>many</em> variables at once. This section introduces the vocabulary and the key result (the multivariate chain rule) needed to make that precise, before we return to see it in action in <span class="quarto-unresolved-ref">?sec-optimisation</span> and <a href="neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>.</p>
+<section id="partial-derivatives-and-the-gradient" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="partial-derivatives-and-the-gradient"><span class="header-section-number">19.1</span> Partial Derivatives and the Gradient</h2>
+<p>For a scalar function of several variables, <span class="math inline">\(f(x_1, x_2, \ldots, x_n)\)</span>, the <strong>partial derivative</strong> <span class="math inline">\(\partial f / \partial x_i\)</span> measures the rate of change of <span class="math inline">\(f\)</span> as <span class="math inline">\(x_i\)</span> varies, holding all other variables fixed. Collecting all partial derivatives into a vector gives the <strong>gradient</strong>:</p>
 <p><span class="math display">\[
-\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^N
+\nabla f = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \ldots, \frac{\partial f}{\partial x_n} \right)
 \]</span></p>
-<p>where:</p>
-<p><span class="math display">\[
-(\mathbf{x}_i \in \mathbb{R}^d)
-\]</span><br>
-are feature vectors (inputs), <span class="math display">\[
-(y_i \in \mathbb{R})
-\]</span> are labels (outputs), and<br>
-<span class="math display">\[
-(N)
-\]</span> is the total number of samples.</p>
-<p>The key goal of supervised learning is to learn a mapping: <span class="math display">\[
-(f: \mathbf{x} \rightarrow y)  \text{such that}  (f(\mathbf{x}_i) \approx y_i).
-\]</span></p>
-<p>The significant point here is that one needs to have a <strong>labelled dataset</strong> to use supervised learning; each data point needs a corresponding label - a common example of this would be vehicles and vehicle types. The dataset would need to include different types of vehicle, such as motorbikes, cars, vans, lorries - and then each vehicle in the dataset would have a label identifiying its type. The different types of dataset used in supervised learning are covered in the next section.</p>
-</section>
-<section id="dataset-splitting" class="level2" data-number="16.3">
-<h2 data-number="16.3" class="anchored" data-anchor-id="dataset-splitting"><span class="header-section-number">16.3</span> Dataset splitting</h2>
-<p>Generally there are three different types of data that are used in supervised learning. They can all come from the same dataset, but need to be split up in advance as they are used for different parts of the process.</p>
-<p>The dataset is usually divided into:</p>
-<ul>
-<li><strong>Training set</strong> — used to fit the model parameters and learn the underlying patterns in the data.</li>
-<li><strong>Validation set</strong> — used for tuning the hyperparameters of the model.</li>
-<li><strong>Test set</strong> — used to evaluate final model performance - should be unbiased.</li>
-</ul>
-<p>Typical split ratios: 70% / 15% / 15%, though this does depend on how large the dataset is and the type of problem you are solving. There are techniques that one can use to augment data in the case of smaller datasets - these will be discussed later in the course.</p>
-<hr>
-</section>
-<section id="models" class="level2" data-number="16.4">
-<h2 data-number="16.4" class="anchored" data-anchor-id="models"><span class="header-section-number">16.4</span> Models</h2>
-<p>A <strong>model</strong> defines the relationship between inputs and outputs. It can be <strong>linear</strong> or <strong>non-linear</strong>, depending on the task the network has to perform and the relationship between the features and labels.</p>
-<p>The majority of the tasks we will deal with can be separated into either Regression or Classification problems.</p>
-<p>Regression is suitable where the output you desire is a number; the most simple example of this would be linear regression. This can also be generalised to N-dimenstional inputs.</p>
-<p>Classification is suitable where you desire the output to be a label. For example, if you are trying to assign the make or model of a car.</p>
-<hr>
-</section>
-<section id="loss-functions" class="level2" data-number="16.5">
-<h2 data-number="16.5" class="anchored" data-anchor-id="loss-functions"><span class="header-section-number">16.5</span> Loss Functions</h2>
-<p>To quantify how well a model performs, we define a <strong>loss function</strong> <span class="math inline">\((L(y, f(\mathbf{x})))\)</span> that measures the discrepancy between predicted and true values. This is a critical concept in machine learning as it effectively quantifies how good a given prediction is. In supervised learning, the loss is based on the difference between the prediction for a given input and the known truth, also called ground truth.</p>
-<p>Within regression problems commonly used loss functions are Mean Squared Error and Mean Absolute Error.</p>
-<p>MSE: <span class="math display">\[
-\frac{1}{n{}} \sum^{n}_{i=1}(y_i-\hat{y}_i)^2.
-\]</span> MAE: <span class="math display">\[
-\frac{1}{n{}} \sum^{n}_{i=1}|y_i-\hat{y}_i|.
-\]</span></p>
-<p>For classification problems we predict a probability of obtaining the classification. In essence a value between 0 and 1 is obtained, with 0.5 implying there is the maximum uncertainty associated with the classification. This uncertainty can also be thought of as entropy within the model. A commonly used loss function in classification is the Binary Cross-Entropy, which measures the distance between the prediction and the true label.</p>
-<p><span class="math display">\[
--\frac{1}{n{}} \sum^{n}_{i=0}y_i \ln \hat{P}_i + (1-y_i) \ln(1-\hat P_i).
-\]</span></p>
-<p>This loss function will penalise predictions which are wrong while also penalising predictions which are not confident.</p>
-</section>
-<section id="optimisation" class="level2" data-number="16.6">
-<h2 data-number="16.6" class="anchored" data-anchor-id="optimisation"><span class="header-section-number">16.6</span> Optimisation</h2>
-<p>We have covered how to split datasets, train models and the definition of loss functions; the next step is understanding how to adjust model parameters such that the loss is minimised. A technique for achieving this is to compute the derivative of the loss, with respect to the model parameters, and then to iterate with this procedure until a minimum is found. The technique is called Gradient Descent, and can be described mathematically as:</p>
-<p><span class="math display">\[
-\theta_{i+1} = \theta_i - \eta \Delta L(\theta_i)
-\]</span></p>
-<p>where <span class="math inline">\(\theta_i\)</span> are the current set of parameters, <span class="math inline">\(\Delta L(\theta_i)\)</span> is the gradient of the loss and <span class="math inline">\(\eta\)</span> is a parameter which controls the size of the steps through which each iteration differs from the previous; this is also known as the Learning Rate.</p>
-<p>Standard gradient descent uses the entire dataset when calculating the loss and is therefore computationally expensive and can take a long time to converge. An alternative method, Stochastic gradient descent, uses only a small subset of the data to calculate the loss, and is therefore more efficient and scalable to large datasets. However due to randomly sampling datapoints to calculate the loss, it can be a more erratic process.</p>
-</section>
-<section id="boosted-decision-tree" class="level2" data-number="16.7">
-<h2 data-number="16.7" class="anchored" data-anchor-id="boosted-decision-tree"><span class="header-section-number">16.7</span> Boosted Decision Tree</h2>
-<p>Decision trees are flowchart-like structures originally invented to help with decision making processes. At each step in the tree the sample is split accordiing to some criterion and at the end of the tree, the events in the sub-sample are assigned a prediction.</p>
-<p>To create a decision tree you decide on a set of rules that will aid in your classification or regression task. At each step, or node, there should a specific rule on how to split the dataset - domain knowledge on how well the split divdes your dataset between the classes is particularly important. The final nodes are called leaves and rules need to be in place to also decide when to create these leaves. Typically this depends on the sample size, sample purity, among other factors. The prediction assigned to a leaf node is obtained from the sample it contains.</p>
-<p>The “boosting” aspect of this approach comes in when attempting to improve the performance of the tree. As single decision trees can be prone to overfitting (discussed further in these notes), they can often perform poorly on unseen data. As such, “boosting” is the technique of using multiple “weak” or “shallow” trees together sequentially as an “ensemble”. The later trees focus on the areas where the earlier trees had misclassifications or high degrees of uncertainty. The models are trained iteratively, with the gradient of the loss used to guide the new model. When training a boosted decision tree, the prediction assigned to a leaf node is the residual (averaged over the sample in the leaf node) based on the prediction of all previous trees. This is then multiplied by a factor, which is the learning rate. The BDTs produce a score for each input data point and, in the case of classifciation, we can assign a probability that an event is a particular class.</p>
-</section>
-<section id="bdt-classifier-performance" class="level2" data-number="16.8">
-<h2 data-number="16.8" class="anchored" data-anchor-id="bdt-classifier-performance"><span class="header-section-number">16.8</span> BDT Classifier Performance</h2>
-<p>Individual events can be classified by considering the distributions of scores and then assigning a threshold to a particular class. Above this threshold defines one class, and below another class. Given a threshold we can then compute specific metrics to assess the performance of our classifier, assuming we have two classes to select between, class A and B:</p>
-<p><span class="math display">\[
-\textnormal{True positive rate (TPR):} = \frac{N_{identified_A}}{N_{true_A}}
-\]</span></p>
-<p><span class="math display">\[
-\textnormal{True negative rate (TNR):} = \frac{N_{identified_B}}{N_{true_B}}
-\]</span></p>
-<p><span class="math display">\[
-\textnormal{False positive rate (FPR):} = \frac{N_{identified_A}}{N_{true_B}}
-\]</span></p>
-<p><span class="math display">\[
-\textnormal{False negative rate (TNR):} = \frac{N_{identified_B}}{N_{true_A}}
-\]</span></p>
-<p>Although these metrics are useful in assessing the various performance characteristics of a model, they are expressed as functions of the BDT output which makes it difficult to compare different models and trainings quickly. Within ML this has been solved by using Receiver Operating Characteristic (ROC) curves; these plot TPR against FPR for a range of different thresholds. One can then intuitively see the trade-off between these characteristics. A random classifier model would exhbit a diagonal straight line from (0,0) to (1,1). The better a model is at classifying, the nearer to the top left of the plot it will be. A perfect classifier will be a vertical line straight up the y-axis to (0,1) and then across to (1,1). This method also has the advantage of directly leading to a single numerical value to measure the performance, the Area Under the Curve (AUC), with a value closer to 1 exhbiting superior classification ability.</p>
-<p>Another visual technique for assessing performance for a particular threshold is to build a confusion matrix. This can be especially useful in multi-classifier problems.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/ConfusionMatrix.png" class="img-fluid figure-img"></p>
-<figcaption>Confusion Matrix</figcaption>
-</figure>
+<p>The gradient has an important geometric meaning: it points in the direction of steepest <em>increase</em> of <span class="math inline">\(f\)</span>, and its magnitude gives the rate of increase in that direction. This is precisely why gradient <em>descent</em> (<span class="quarto-unresolved-ref">?sec-optimisation</span>) moves in the direction of <span class="math inline">\(-\nabla f\)</span>.</p>
+<div id="93a86871" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">'x y'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> y <span class="op">+</span> sp.sin(y)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>grad <span class="op">=</span> [sp.diff(f, var) <span class="cf">for</span> var <span class="kw">in</span> (x, y)]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"f(x,y)      ="</span>, f)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"gradient    ="</span>, grad)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"at (1, 0)   ="</span>, [g.subs({x: <span class="dv">1</span>, y: <span class="dv">0</span>}) <span class="cf">for</span> g <span class="kw">in</span> grad])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[1], line 2</span>
+<span class="ansi-green-fg ansi-bold">      1</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">numpy</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">as</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">np</span>
+<span class="ansi-green-fg">----&gt; 2</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">sympy</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">as</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">sp</span>
+<span class="ansi-green-fg ansi-bold">      4</span> x, y <span style="color:rgb(98,98,98)">=</span> sp<span style="color:rgb(98,98,98)">.</span>symbols(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">x y</span><span style="color:rgb(175,0,0)">'</span>)
+<span class="ansi-green-fg ansi-bold">      5</span> f <span style="color:rgb(98,98,98)">=</span> x<span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">2</span> <span style="color:rgb(98,98,98)">*</span> y <span style="color:rgb(98,98,98)">+</span> sp<span style="color:rgb(98,98,98)">.</span>sin(y)
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named 'sympy'</pre>
 </div>
-<p>The numbers shown are absolute, rather than fractions and so can easily be misinterpreted, care should be taken when drawing conclusions from this method.</p>
+</div>
+</div>
+<section id="directional-derivatives" class="level3" data-number="19.1.1">
+<h3 data-number="19.1.1" class="anchored" data-anchor-id="directional-derivatives"><span class="header-section-number">19.1.1</span> Directional Derivatives</h3>
+<p>More generally, the rate of change of <span class="math inline">\(f\)</span> in an arbitrary direction <span class="math inline">\(\hat{\mathbf{u}}\)</span> (a unit vector) is given by the <strong>directional derivative</strong>:</p>
+<p><span class="math display">\[
+D_{\hat{\mathbf{u}}} f = \nabla f \cdot \hat{\mathbf{u}}
+\]</span></p>
+<p>This is maximised when <span class="math inline">\(\hat{\mathbf{u}}\)</span> points in the same direction as <span class="math inline">\(\nabla f\)</span> — confirming the claim above that the gradient points in the direction of steepest ascent.</p>
 </section>
-<section id="sec-overfitting" class="level2" data-number="16.9">
-<h2 data-number="16.9" class="anchored" data-anchor-id="sec-overfitting"><span class="header-section-number">16.9</span> Overfitting/Underfitting</h2>
-<p>While training a model there is a balance to be struck on several factors, including training time, dataset size, dataset content etc. A common issue which needs to be tackled occurs when when during training a model too closely follows the data. When this happens a model is learning highly specific aspects of the training data and will therefore perform poorly on unseen data. The model is too complex and has typically failed to learn general patters in the data. It can be spotted when considering the loss curves from your training and validation data; the loss curve from the training data will fall smoothly and plateau, whereas the curve from the validation data will typically fall and then start to rise, as the model is not able to generalise well.</p>
-<p>Some common techniques to avoid overfitting are to:</p>
-<ul>
-<li>Increase dataset size: gives the model a better change of learning general patterns</li>
-<li>Early stopping: prevent the model learning the data (and noise) too well by stopping the training at an appropriate point as the loss curve plateaus</li>
-<li>Data augmentation: manipulate the dataset with simple transformations to increase dataset size and variation, without changing the core data characteristics</li>
-<li>Regularisation: Adapting loss functions to stay within some defined boundaries (convered in the next section)</li>
-</ul>
-<p>Importantly, the reverse of overfitting can also cause problems; if you have a model which has not learned the patterns well enough or is not complex enough to model the data then this will also lead to poor predictions on unseen data. When evaluating the loss curves the training curve will look smoothly falling but the validation curve will remain far from the plateau of the training curve. This can be mitigated by increasing the training duration or decreasing the amount of regularisation applied.</p>
 </section>
-<section id="regularisation" class="level2" data-number="16.10">
-<h2 data-number="16.10" class="anchored" data-anchor-id="regularisation"><span class="header-section-number">16.10</span> Regularisation</h2>
-<p>As models become more complex it becomes increasingly difficult to maintain their ability to generalise to unseen data, while preventing overfitting. Techniques exist to adapt loss functions to help mitigate this, and are called regularisation.</p>
-<p>L1 regularisation, also known as LASSO (Least Asbolute Shrinkage and Selection Opertor) adds a penalty term to the loss function which is the absolute sum of the weights. The model is therefore penalised when trying to assign large weights, in some cases down to zero. This leads to a sparser model which is simpler and has less variance. It also helps with feature selection by shrinking down to zero the least important parameters. A loss function for MSE with the added regularisation term is shown below:</p>
+<section id="the-multivariate-chain-rule" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="the-multivariate-chain-rule"><span class="header-section-number">19.2</span> The Multivariate Chain Rule</h2>
+<p>This is the single most important result in this section, because it is the entire mathematical content of <strong>backpropagation</strong> (<a href="neural-networks.html#sec-backpropagation" class="quarto-xref"><span>Section 18.3.2</span></a>). For a composite function — one built by feeding the output of one function into another, exactly as happens layer-by-layer in a neural network — the chain rule states that the Jacobian of the composition is the <em>matrix product</em> of the individual Jacobians:</p>
 <p><span class="math display">\[
-\frac{1}{n{}} \sum^{n}_{i=1}(y_i-\hat{y}_i)^2 + \lambda \sum^{n}_{i=1}|w_i|
+\frac{\partial \mathbf{z}}{\partial \mathbf{x}} = \frac{\partial \mathbf{z}}{\partial \mathbf{y}} \cdot \frac{\partial \mathbf{y}}{\partial \mathbf{x}}
 \]</span></p>
-<p>The <span class="math inline">\(\lambda\)</span> parameter controls the extent to which regularisation is applied by scaling the penalty term; zero would indicate no regularisation.</p>
-<p>L2 regularisation, also known as RIDGE regression, is another method which uses the sum of the squared weights as the penalty term. This also shrinks weights down but not to zero. The expression for this is shown below:</p>
+<p>where <span class="math inline">\(\mathbf{x} \to \mathbf{y} \to \mathbf{z}\)</span> is a chain of function compositions.</p>
+<p>Compare this directly with the single-node backpropagation example already worked through in <a href="neural-networks.html#sec-backpropagation" class="quarto-xref"><span>Section 18.3.2</span></a>:</p>
 <p><span class="math display">\[
-\frac{1}{n{}} \sum^{n}_{i=1}(y_i-\hat{y}_i)^2 + \lambda \sum^{n}_{i=1}{w_i}^2
+\frac{\partial L}{\partial \alpha} = \frac{\partial L}{\partial \hat{y}} \frac{\partial \hat{y}}{\partial z} \frac{\partial z}{\partial \alpha}
 \]</span></p>
-<p>In some cases you may want to shrink some weights down to zero but include the stability of L2 regularisation; elastic net regularisation combines L1 and L2 with an <span class="math inline">\(\alpha\)</span> parameter to control the balance between them:</p>
+<p>This is exactly the multivariate chain rule above, specialised to the case where every quantity happens to be a scalar. In a full network with vector-valued activations at each layer, the <em>same</em> rule applies, but each factor becomes a Jacobian matrix rather than a scalar derivative, and the “multiplication” becomes genuine matrix multiplication. This is precisely why efficient matrix multiplication (<a href="../num/matrix.html" class="quarto-xref"><span>Chapter 9</span></a>) is not just a computational convenience for neural networks, but the literal mathematical mechanism by which gradients are propagated backwards through the network.</p>
+<section id="automatic-differentiation" class="level3" data-number="19.2.1">
+<h3 data-number="19.2.1" class="anchored" data-anchor-id="automatic-differentiation"><span class="header-section-number">19.2.1</span> Automatic Differentiation</h3>
+<p>Modern deep learning frameworks (PyTorch, TensorFlow, JAX — see <a href="neural-networks.html#sec-programming-nn" class="quarto-xref"><span>Section 18.6</span></a>) don’t compute derivatives symbolically (as <code>sympy</code> does above) or numerically (see below); instead they use <strong>automatic differentiation</strong>, which applies the chain rule mechanically to the sequence of elementary operations (add, multiply, exponentiate, …) that make up a computation, accumulating Jacobians as it goes. Applying the chain rule <em>backwards</em> through the computation graph, from output to input, is what “reverse-mode” automatic differentiation means — and reverse-mode automatic differentiation applied to a neural network’s loss function is, precisely, backpropagation. This is why backpropagation, once understood as an instance of the chain rule, generalises immediately to arbitrarily complex network architectures (CNNs, RNNs, Transformers) without needing a new derivation for each one — the chain rule doesn’t care what the individual layers compute.</p>
+</section>
+</section>
+<section id="checking-gradients-numerically" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="checking-gradients-numerically"><span class="header-section-number">19.3</span> Checking Gradients Numerically</h2>
+<p>A gradient computed by hand (or by an automatic differentiation library) can always be sanity-checked against a direct numerical approximation, using the definition of the derivative as a limit:</p>
 <p><span class="math display">\[
-\frac{1}{n{}} \sum^{n}_{i=1}(y_i-\hat{y}_i)^2 + \lambda[\alpha \sum^{p}_{j=1}|w_i| + (1-\alpha)\sum^{p}_{j=1}w_j^2]
+\frac{\partial f}{\partial x_i} \approx \frac{f(\ldots, x_i + \epsilon, \ldots) - f(\ldots, x_i - \epsilon, \ldots)}{2\epsilon}
 \]</span></p>
+<p>for some small <span class="math inline">\(\epsilon\)</span>. This “finite difference” check is slow (it requires re-evaluating <span class="math inline">\(f\)</span> once per parameter) and not used for actual training, but it is an extremely useful debugging tool — if your analytic gradient and your numerical gradient disagree, you have a bug.</p>
+<div id="d331ff0f" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f_np(v):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> v</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> y <span class="op">+</span> np.sin(y)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_analytic(v):</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> v</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([<span class="dv">2</span><span class="op">*</span>x<span class="op">*</span>y, x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> np.cos(y)])</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_numerical(func, v, eps<span class="op">=</span><span class="fl">1e-6</span>):</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    grad <span class="op">=</span> np.zeros_like(v)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(v)):</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        v_plus, v_minus <span class="op">=</span> v.copy(), v.copy()</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        v_plus[i] <span class="op">+=</span> eps</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        v_minus[i] <span class="op">-=</span> eps</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        grad[i] <span class="op">=</span> (func(v_plus) <span class="op">-</span> func(v_minus)) <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>eps)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> grad</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>v0 <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">0.5</span>])</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Analytic gradient  :"</span>, grad_analytic(v0))</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Numerical gradient :"</span>, grad_numerical(f_np, v0))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analytic gradient  : [1.         1.87758256]
+Numerical gradient : [1.         1.87758256]</code></pre>
+</div>
+</div>
 
 
 </section>
@@ -907,13 +904,13 @@ are feature vectors (inputs), <span class="math display">\[
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../ml/mle.html" class="pagination-link" aria-label="Maximum Likelihood Estimation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span>
+      <a href="../ml/neural-networks.html" class="pagination-link" aria-label="Neural Networks">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Neural Networks</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../ml/unsupervised-ml.html" class="pagination-link" aria-label="Unsupervised Learning">
-        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../ml/cnn.html" class="pagination-link" aria-label="Convolutional Neural Networks">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

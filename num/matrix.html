@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c0a149fb89f594c50928677855dd0036.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9ae487f9dc81c977a28b7be194272750.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -111,6 +111,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -163,7 +192,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../prog/programming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Programming</span></a>
+ <span class="menu-text">Programming</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -178,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../prog/oo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object Oriented Programming</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object-Oriented Programming</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -248,14 +277,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../num/mle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../num/optimisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Optimisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></span></a>
   </div>
 </li>
       </ul>
@@ -272,7 +295,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/intro-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ml/mle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -295,26 +324,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../ml/gradients.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../ml/cnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/rnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ml/transformer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/autoencoder.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ml/transformer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
   </div>
 </li>
       </ul>
@@ -330,15 +365,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#matrix-representation" id="toc-matrix-representation" class="nav-link active" data-scroll-target="#matrix-representation"><span class="header-section-number">9.1</span> Matrix representation</a></li>
+  <li><a href="#vector-representation" id="toc-vector-representation" class="nav-link" data-scroll-target="#vector-representation"><span class="header-section-number">9.2</span> Vector representation</a></li>
+  <li><a href="#vector-and-matrix-products" id="toc-vector-and-matrix-products" class="nav-link" data-scroll-target="#vector-and-matrix-products"><span class="header-section-number">9.3</span> Vector and Matrix Products</a></li>
+  <li><a href="#broadcasting-rules" id="toc-broadcasting-rules" class="nav-link" data-scroll-target="#broadcasting-rules"><span class="header-section-number">9.4</span> Broadcasting rules</a></li>
+  <li><a href="#sec-norms" id="toc-sec-norms" class="nav-link" data-scroll-target="#sec-norms"><span class="header-section-number">9.5</span> Norms</a></li>
+  <li><a href="#sec-rank" id="toc-sec-rank" class="nav-link" data-scroll-target="#sec-rank"><span class="header-section-number">9.6</span> Rank</a></li>
+  <li><a href="#other-matrix-operations" id="toc-other-matrix-operations" class="nav-link" data-scroll-target="#other-matrix-operations"><span class="header-section-number">9.7</span> Other matrix operations</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../num/numeric.html">Numerical Methods</a></li><li class="breadcrumb-item"><a href="../num/matrix.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Basic Matrix Operations</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Basic Matrix Operations</span></h1>
+<h1 class="title"><span id="sec-matrix" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Basic Matrix Operations</span></span></h1>
 </div>
 
 
@@ -356,8 +403,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Python/numpy/scipy provide a range of options for achieving basic matrix operations. You will need to take a little care to ensure that your code implements the operations you intend it to. This is largely due to the fact that some operators/functions will change their behaviour depending on the input you provide. This section includes some recommendations for simple linear algebra, which should ensure your code behaves as desired.</p>
-<p>Matrices can be implemented as a 2D <code>np.ndarray</code>. Basic matrix arithmetic can then be performed using standard operators <code>+</code>,<code>-</code> and <code>@</code>. You can also use <code>np.matmul()</code> for matrix multiplication. Numpy will also perform matrix multiplication with <code>np.dot()</code>, but this is not recommended if you can use <code>@</code> or <code>np.matmul()</code>.</p>
-<div id="b836b60f" class="cell" data-execution_count="1">
+<p>For further information, look at the reference pages : <a href="https://numpy.org/doc/stable/reference/routines.array-manipulation.html">https://numpy.org/doc/stable/reference/routines.array-manipulation.html</a> <a href="https://numpy.org/doc/stable/reference/routines.linalg.html">https://numpy.org/doc/stable/reference/routines.linalg.html</a> and</p>
+<section id="matrix-representation" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="matrix-representation"><span class="header-section-number">9.1</span> Matrix representation</h2>
+<p>Matrices can be implemented as a 2D <code>np.ndarray</code>. Basic matrix arithmetic can then be performed using standard operators <code>+</code>,<code>-</code> and <code>@</code>.</p>
+<div id="d9b0b619" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,],[<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>]])</span>
@@ -393,8 +443,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  [1 0 0]]</code></pre>
 </div>
 </div>
+<p>The transpose of a matrix is given by <code>np.transpose()</code> or <code>ndarray.T</code>.</p>
+</section>
+<section id="vector-representation" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="vector-representation"><span class="header-section-number">9.2</span> Vector representation</h2>
 <p>Vectors can be implemented as 1D arrays, or as 2D arrays. A 1D array will be interpreted as row or column vector depending on the context in which it is used. Use of 2D arrays allows you to specify row or column form. This can be useful, since <code>np.matmul()</code> or <code>@</code> will throw an exception if you accidentally try to perform an illegal matrix operation.</p>
-<div id="92e4ff1d" class="cell" data-execution_count="2">
+<div id="35650981" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>v  <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>vr <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]])</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>vc <span class="op">=</span> np.array([[<span class="dv">1</span>],[<span class="dv">2</span>],[<span class="dv">3</span>]])</span>
@@ -430,20 +484,80 @@ Cell <span class="ansi-green-fg">In[2], line 14</span>
 </div>
 </div>
 </div>
-<p>Numpy will also provide the usual forms of vector product via <code>np.vdot()</code>, <code>np.cross()</code>, <code>np.inner()</code> and <code>np.outer()</code>. Again, <code>np.dot()</code> will provide a vector dot product, but is not recommended if you can use <code>vdot()</code>.</p>
-<p>Other useful matrix operations are provided by numpy, such as : - <code>np.transpose()</code> (also available via <code>ndarray.T</code>) - <code>np.norm()</code> - <code>np.trace()</code></p>
-<p>For further information, look at the reference pages : <a href="https://numpy.org/doc/stable/reference/routines.array-manipulation.html">https://numpy.org/doc/stable/reference/routines.array-manipulation.html</a> <a href="https://numpy.org/doc/stable/reference/routines.linalg.html">https://numpy.org/doc/stable/reference/routines.linalg.html</a></p>
-<p>Finally, <code>scipy.linalg</code> provides some additional basic operations such as the determinant and the inverse.</p>
-<div id="7e369b64" class="cell" data-execution_count="3">
+</section>
+<section id="vector-and-matrix-products" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="vector-and-matrix-products"><span class="header-section-number">9.3</span> Vector and Matrix Products</h2>
+<p>The usual vector dot and cross products are provided by <code>np.vdot()</code>, <code>np.cross()</code>. The inner and outer products are provided by <code>np.inner()</code> and <code>np.outer()</code>.</p>
+<p>The matrix product is provided by <code>np.matmul()</code> or the <code>@</code> operator. Numpy will also perform matrix multiplication with <code>np.dot()</code>, but it is not recommended if you can use <code>@</code> or <code>np.matmul()</code>.</p>
+</section>
+<section id="broadcasting-rules" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="broadcasting-rules"><span class="header-section-number">9.4</span> Broadcasting rules</h2>
+<p>ADD THIS SECTION</p>
+</section>
+<section id="sec-norms" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="sec-norms"><span class="header-section-number">9.5</span> Norms</h2>
+<p>A norm is a function that assigns a single non-negative number to a vector (or matrix), intended to represent its “size” or “length”. This is a generalisation of the vector magnitude, defined as the square root of the sum of the squares of its components. This is known as the Euclidean norm or L2 norm. We can define other norms, which have different properties and uses. For a vector <span class="math inline">\(\mathbf{x} = (x_1, x_2, \ldots, x_n)\)</span>, the most commonly used norms are:</p>
+<!-- Norms come up throughout machine learning: they measure how large a set of model weights is (used in regularisation, @sec-supervised-ml), how large a gradient is (used in gradient clipping, @sec-optimisation), and how far apart two vectors are (used in nearest-neighbour methods and clustering, @sec-unsupervised-ml). -->
+<p><span class="math display">\[
+\|\mathbf{x}\|_1 = \sum_{i=1}^n |x_i| \qquad \text{(L1 / "Manhattan" norm)}
+\]</span></p>
+<p><span class="math display">\[
+\|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^n x_i^2} \qquad \text{(L2 / Euclidean norm)}
+\]</span></p>
+<p><span class="math display">\[
+\|\mathbf{x}\|_\infty = \max_i |x_i| \qquad \text{(max / Chebyshev norm)}
+\]</span></p>
+<p>Matrices also have norms. The most commonly used is the Frobenius norm, which simply treats the matrix as a long vector of all its entries:</p>
+<p><span class="math display">\[
+\|A\|_F = \sqrt{\sum_{i,j} a_{ij}^2}
+\]</span></p>
+<div id="24fd6926" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,],[<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>]])</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>detA <span class="op">=</span> linalg.det(A)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(detA)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="fl">3.</span>, <span class="op">-</span><span class="fl">4.</span>, <span class="fl">1.</span>])</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"L1 norm  :"</span>, np.linalg.norm(x, <span class="bu">ord</span><span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"L2 norm  :"</span>, np.linalg.norm(x, <span class="bu">ord</span><span class="op">=</span><span class="dv">2</span>))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Max norm :"</span>, np.linalg.norm(x, <span class="bu">ord</span><span class="op">=</span>np.inf))</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>invA <span class="op">=</span> linalg.inv(A)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(invA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="fl">1.</span>, <span class="fl">2.</span>], [<span class="fl">3.</span>, <span class="fl">4.</span>]])</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Frobenius norm :"</span>, np.linalg.norm(A, <span class="bu">ord</span><span class="op">=</span><span class="st">'fro'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>L1 norm  : 8.0
+L2 norm  : 5.0990195135927845
+Max norm : 4.0
+Frobenius norm : 5.477225575051661</code></pre>
+</div>
+</div>
+</section>
+<section id="sec-rank" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="sec-rank"><span class="header-section-number">9.6</span> Rank</h2>
+<p>The rank of a matrix <span class="math inline">\(A\)</span> is the number of linearly independent rows (equivalently, columns) it contains. For an <span class="math inline">\(m \times n\)</span> matrix, the rank can be at most <span class="math inline">\(\min(m,n)\)</span>; if it achieves this maximum it is called full rank, otherwise it is rank-deficient.</p>
+<div id="6f64f753" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>A_full <span class="op">=</span> np.array([[<span class="fl">1.</span>, <span class="fl">2.</span>], [<span class="fl">3.</span>, <span class="fl">5.</span>]])</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>A_deficient <span class="op">=</span> np.array([[<span class="fl">1.</span>, <span class="fl">2.</span>], [<span class="fl">2.</span>, <span class="fl">4.</span>]])   <span class="co"># second row is 2x the first</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Rank of full-rank matrix      :"</span>, np.linalg.matrix_rank(A_full))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Rank of rank-deficient matrix :"</span>, np.linalg.matrix_rank(A_deficient))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rank of full-rank matrix      : 2
+Rank of rank-deficient matrix : 1</code></pre>
+</div>
+</div>
+<p>The rank of a matrix is related to the solvability of <span class="math inline">\(Ax=y\)</span>. If <span class="math inline">\(A\)</span> is full rank, the equation has a unique solution. When <span class="math inline">\(A\)</span> is rank-deficient, an exact solution may not exist and other approaches must be used, as discussed in <a href="sim-eqn.html" class="quarto-xref"><span>Chapter 10</span></a>. A rank deficient matrix must also have at least one zero eigenvalue, which is why <span class="math inline">\(\det(A)=0\)</span> when <span class="math inline">\(A\)</span> is not invertible.</p>
+</section>
+<section id="other-matrix-operations" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="other-matrix-operations"><span class="header-section-number">9.7</span> Other matrix operations</h2>
+<p>Finally, <code>scipy.linalg</code> provides some additional basic operations such as the determinant and the inverse.</p>
+<div id="85bc1fac" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,],[<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>]])</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>detA <span class="op">=</span> linalg.det(A)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(detA)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>invA <span class="op">=</span> linalg.inv(A)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(invA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>-3.0
 [[-0.          0.          1.        ]
@@ -451,8 +565,63 @@ Cell <span class="ansi-green-fg">In[2], line 14</span>
  [ 1.66666667 -0.66666667  1.        ]]</code></pre>
 </div>
 </div>
+<!-- ### Why this matters for training
+
+When training a neural network (@sec-nn), the gradient of the loss with respect to all the weights can occasionally become very large — for example early in training, or with recurrent networks over long sequences (@sec-rnn). If left unchecked, a single large gradient step can destabilise training. A standard mitigation, **gradient clipping**, simply rescales the gradient vector if its norm exceeds some threshold $\tau$:
+
+$$
+\mathbf{g} \leftarrow \mathbf{g} \times \min\left(1, \frac{\tau}{\|\mathbf{g}\|_2}\right)
+$$
+
+This is a direct, practical use of the L2 norm defined above, and is worth keeping in mind when we return to gradient descent in @sec-optimisation. -->
+<!--
+### Low-rank approximation
+
+A remarkable and practically important fact is that any matrix can be approximated by a matrix of lower rank, and the *best* possible rank-$k$ approximation (in the sense of minimising the Frobenius norm of the difference) is obtained by truncating its Singular Value Decomposition (@sec-simeqn) to keep only the $k$ largest singular values:
+
+$$
+A \approx A_k = U_k \Sigma_k V_k^T
+$$
+-->
+<!-- This single idea underpins:
+
+- **PCA** (@sec-unsupervised-ml): keeping only the top few principal components *is* a low-rank approximation of the data's covariance structure.
+- **LoRA (Low-Rank Adaptation):** a widely used technique for efficiently fine-tuning large pre-trained neural networks, in which a large weight matrix update is constrained to be low-rank, drastically reducing the number of parameters that need to be trained. -->
+<!--
+
+::: {#2bed979c .cell execution_count=6}
+``` {.python .cell-code}
+import scipy.linalg as linalg
+
+# a matrix with some redundant structure
+rng = np.random.default_rng(0)
+u = rng.normal(size=(20, 2))
+v = rng.normal(size=(2, 20))
+M = u @ v + 0.01 * rng.normal(size=(20, 20))   # approximately rank-2, plus small noise
+
+U, s, Vt = linalg.svd(M)
+print("Singular values :", np.round(s[:6], 3))
+
+# best rank-2 approximation
+k = 2
+M_approx = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]
+print("Approximation error (Frobenius norm) :", np.linalg.norm(M - M_approx, ord='fro'))
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+Singular values : [21.021 12.955  0.084  0.07   0.064  0.058]
+Approximation error (Frobenius norm) : 0.18415923209120422
+```
+:::
+:::
 
 
+Note how the singular values drop off sharply after the first two — this is the numerical signature of the approximately rank-2 structure we built into `M`.
+-->
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

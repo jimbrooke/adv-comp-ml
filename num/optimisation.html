@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>14&nbsp; Optimisation – Advanced Computational Physics &amp; Machine Learning</title>
+<title>13&nbsp; Minimisation – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -37,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../ml/ml.html" rel="next">
-<link href="../num/mle.html" rel="prev">
+<link href="../num/monte-carlo.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -47,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c0a149fb89f594c50928677855dd0036.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9ae487f9dc81c977a28b7be194272750.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -76,6 +111,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -88,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../num/numeric.html">Numerical Methods</a></li><li class="breadcrumb-item"><a href="../num/optimisation.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Optimisation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../num/numeric.html">Numerical Methods</a></li><li class="breadcrumb-item"><a href="../num/optimisation.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -128,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../prog/programming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Programming</span></a>
+ <span class="menu-text">Programming</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -143,7 +207,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../prog/oo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object Oriented Programming</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object-Oriented Programming</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -213,14 +277,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../num/mle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../num/optimisation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Optimisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></span></a>
   </div>
 </li>
       </ul>
@@ -237,7 +295,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/intro-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ml/mle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -260,26 +324,32 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../ml/gradients.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../ml/cnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/rnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ml/transformer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/autoencoder.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ml/transformer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
   </div>
 </li>
       </ul>
@@ -295,15 +365,36 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#multivariate-calculus" id="toc-multivariate-calculus" class="nav-link active" data-scroll-target="#multivariate-calculus"><span class="header-section-number">13.1</span> Multivariate calculus</a>
+  <ul class="collapse">
+  <li><a href="#directional-derivative" id="toc-directional-derivative" class="nav-link" data-scroll-target="#directional-derivative"><span class="header-section-number">13.1.1</span> Directional Derivative</a></li>
+  <li><a href="#the-jacobian" id="toc-the-jacobian" class="nav-link" data-scroll-target="#the-jacobian"><span class="header-section-number">13.1.2</span> The Jacobian</a></li>
+  <li><a href="#the-hessian" id="toc-the-hessian" class="nav-link" data-scroll-target="#the-hessian"><span class="header-section-number">13.1.3</span> The Hessian</a></li>
+  </ul></li>
+  <li><a href="#the-shape-of-the-problem" id="toc-the-shape-of-the-problem" class="nav-link" data-scroll-target="#the-shape-of-the-problem"><span class="header-section-number">13.2</span> The Shape of the Problem</a>
+  <ul class="collapse">
+  <li><a href="#convexity" id="toc-convexity" class="nav-link" data-scroll-target="#convexity"><span class="header-section-number">13.2.1</span> Convexity</a></li>
+  </ul></li>
+  <li><a href="#gradient-descent-formally" id="toc-gradient-descent-formally" class="nav-link" data-scroll-target="#gradient-descent-formally"><span class="header-section-number">13.3</span> Gradient Descent, Formally</a>
+  <ul class="collapse">
+  <li><a href="#choosing-the-learning-rate" id="toc-choosing-the-learning-rate" class="nav-link" data-scroll-target="#choosing-the-learning-rate"><span class="header-section-number">13.3.1</span> Choosing the Learning Rate</a></li>
+  </ul></li>
+  <li><a href="#second-order-methods" id="toc-second-order-methods" class="nav-link" data-scroll-target="#second-order-methods"><span class="header-section-number">13.4</span> Second-Order Methods</a></li>
+  <li><a href="#constrained-optimisation" id="toc-constrained-optimisation" class="nav-link" data-scroll-target="#constrained-optimisation"><span class="header-section-number">13.5</span> Constrained Optimisation</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../num/numeric.html">Numerical Methods</a></li><li class="breadcrumb-item"><a href="../num/optimisation.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Optimisation</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../num/numeric.html">Numerical Methods</a></li><li class="breadcrumb-item"><a href="../num/optimisation.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Optimisation</span></h1>
+<h1 class="title"><span id="sec-minimisation" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></span></h1>
 </div>
 
 
@@ -320,9 +411,193 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Or minimisation. This is about techniques for finding the minima of a multi-dimensional function.</p>
+<p>Minimisation is the general problem of locating the minimum of a function. We may equally be interested in the maximum of a function, but this can be converted to a minimisation problem by negating the function, so typically the problem is always framed as minimisation.</p>
+<p>More formally, we are interested in finding the value of <span class="math inline">\(\theta\)</span> that minimises <span class="math inline">\(f(\theta)\)</span>: <span class="math display">\[
+\theta^* = \arg\min_{\theta} f(\theta)
+\]</span></p>
+<p>We are primarily interested in the case where <span class="math inline">\(f\)</span> is the loss function of a machine learning model, as discussed in <a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>. More generally, minimisation is a fundamental problem in mathematics and physics. We will also encounter it in fitting functions to data, and in the maximum likelihood methods (where we minimise the negative log likelihood) discussed in <a href="../ml/mle.html" class="quarto-xref"><span>Chapter 15</span></a>.</p>
+<section id="multivariate-calculus" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="multivariate-calculus"><span class="header-section-number">13.1</span> Multivariate calculus</h2>
+<p>In this section, we will describe gradient descent, a simple and widely used method for minimisation. In general, and especially in the case of minimising loss functions for machine learning, the function we need to minimise is a function of many variables. In order to understand gradient descent for multivariate functions, we will first need to introdue (or review) some underlying concepts in multivariate calculus.</p>
+<section id="directional-derivative" class="level3" data-number="13.1.1">
+<h3 data-number="13.1.1" class="anchored" data-anchor-id="directional-derivative"><span class="header-section-number">13.1.1</span> Directional Derivative</h3>
+<p>The rate of change of <span class="math inline">\(f\)</span> in an arbitrary direction <span class="math inline">\(\hat{\mathbf{u}}\)</span> (a unit vector) is given by the directional derivative :</p>
+<p><span class="math display">\[
+D_{\hat{\mathbf{u}}} f = \nabla f \cdot \hat{\mathbf{u}}
+\]</span></p>
+<p>This is maximised when <span class="math inline">\(\hat{\mathbf{u}}\)</span> points in the same direction as <span class="math inline">\(\nabla f\)</span>.</p>
+</section>
+<section id="the-jacobian" class="level3" data-number="13.1.2">
+<h3 data-number="13.1.2" class="anchored" data-anchor-id="the-jacobian"><span class="header-section-number">13.1.2</span> The Jacobian</h3>
+<p>The Jacobian is the generalisation of the derivative to functions of multiple variables. It is a matrix containing the partial derivative of every output variable with respect to every input variable:</p>
+<p><span class="math display">\[
+J = \begin{pmatrix}
+\dfrac{\partial f_1}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial f_1}{\partial x_n} \\
+\vdots &amp; \ddots &amp; \vdots \\
+\dfrac{\partial f_m}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial f_m}{\partial x_n}
+\end{pmatrix}
+\]</span></p>
+</section>
+<section id="the-hessian" class="level3" data-number="13.1.3">
+<h3 data-number="13.1.3" class="anchored" data-anchor-id="the-hessian"><span class="header-section-number">13.1.3</span> The Hessian</h3>
+<p>In a similar way, the Hessian is defined as the matrix of all second partial derivatives:</p>
+<p><span class="math display">\[
+H_{ij} = \frac{\partial^2 f}{\partial x_i \, \partial x_j}
+\]</span></p>
+<p>The Hessian encodes the local <em>curvature</em> of <span class="math inline">\(f\)</span>, and is important in minimisation since it will classify stationary points of the function (minima, maxima, saddle points).</p>
+<!--
+
+::: {#4ae827df .cell execution_count=1}
+``` {.python .cell-code}
+hess = sp.hessian(f, (x, y))
+print("Hessian :")
+sp.pprint(hess)
+```
+
+::: {.cell-output .cell-output-error}
+
+::: {.ansi-escaped-output}
+```{=html}
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[1], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> hess <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">sp</span><span style="color:rgb(98,98,98)">.</span>hessian(f, (x, y))
+<span class="ansi-green-fg ansi-bold">      2</span> <span style="color:rgb(0,135,0)">print</span>(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Hessian :</span><span style="color:rgb(175,0,0)">"</span>)
+<span class="ansi-green-fg ansi-bold">      3</span> sp<span style="color:rgb(98,98,98)">.</span>pprint(hess)
+
+<span class="ansi-red-fg">NameError</span>: name 'sp' is not defined</pre>
+```
+:::
+
+:::
+:::
 
 
+-->
+</section>
+</section>
+<section id="the-shape-of-the-problem" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="the-shape-of-the-problem"><span class="header-section-number">13.2</span> The Shape of the Problem</h2>
+<p>For a function of a single variable, minimisation is something you likely already associate with setting <span class="math inline">\(f'(\theta)=0\)</span> and checking the sign of <span class="math inline">\(f''(\theta)\)</span>. This generalises directly using the gradient and Hessian (<a href="../ml/gradients.html" class="quarto-xref"><span>Chapter 19</span></a>): a point <span class="math inline">\(\theta^*\)</span> is a <strong>stationary point</strong> if <span class="math inline">\(\nabla f(\theta^*) = 0\)</span>, and it is a local minimum if, additionally, the Hessian <span class="math inline">\(H(\theta^*)\)</span> is positive definite (loosely: the function curves upward in every direction).</p>
+<p>Not all stationary points are minima:</p>
+<ul>
+<li>If <span class="math inline">\(H\)</span> is negative definite, the point is a local <strong>maximum</strong>.</li>
+<li>If <span class="math inline">\(H\)</span> has both positive and negative eigenvalues, the point is a <strong>saddle point</strong> — a minimum along some directions and a maximum along others.</li>
+</ul>
+<div id="5521e2e5" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># a simple non-convex function with a saddle point at the origin: f(x,y) = x^2 - y^2</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">50</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">50</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> X<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> Y<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">5</span>))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>ax.plot_surface(X, Y, Z, cmap<span class="op">=</span><span class="st">'viridis'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'x'</span>)<span class="op">;</span> ax.set_ylabel(<span class="st">'y'</span>)<span class="op">;</span> ax.set_zlabel(<span class="st">'f(x,y)'</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="optimisation_files/figure-html/cell-3-output-1.png" width="402" height="396" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Saddle points matter for neural network training in particular: loss landscapes for networks with many parameters (<a href="../ml/neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>) are high-dimensional and non-convex, and turn out to contain vastly more saddle points than actual local minima. Much of the practical difficulty of training large models is really about <em>escaping saddle points and flat regions</em> rather than avoiding local minima as such.</p>
+<section id="convexity" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="convexity"><span class="header-section-number">13.2.1</span> Convexity</h3>
+<p>A function is <strong>convex</strong> if the line segment joining any two points on its graph lies on or above the graph. Convex functions are extremely well-behaved for optimisation: any local minimum is automatically the global minimum, and reliable convergence guarantees exist for gradient-based methods.</p>
+<p>The mean squared error loss for <em>linear</em> regression (<a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>) is convex in its parameters — this is why linear regression can be solved directly (indeed, in closed form, using the linear algebra of <a href="sim-eqn.html" class="quarto-xref"><span>Chapter 10</span></a>). Neural network loss surfaces, by contrast, are generally non-convex, which is precisely why training is iterative, sensitive to initialisation, and not guaranteed to find a global minimum.</p>
+</section>
+</section>
+<section id="gradient-descent-formally" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="gradient-descent-formally"><span class="header-section-number">13.3</span> Gradient Descent, Formally</h2>
+<p>Gradient descent updates parameters by taking a step in the direction of steepest descent — the negative gradient (<a href="../ml/gradients.html" class="quarto-xref"><span>Chapter 19</span></a>):</p>
+<p><span class="math display">\[
+\theta_{i+1} = \theta_i - \eta \, \nabla f(\theta_i)
+\]</span></p>
+<p>where <span class="math inline">\(\eta\)</span> is the <strong>learning rate</strong> (or step size). This is exactly the update rule already used, without derivation, in <a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a> and <a href="../ml/neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>. The justification is a direct consequence of the definition of the gradient: <span class="math inline">\(-\nabla f(\theta)\)</span> is, locally, the direction of steepest decrease of <span class="math inline">\(f\)</span>, so a small enough step in that direction is guaranteed to decrease <span class="math inline">\(f\)</span> (provided <span class="math inline">\(f\)</span> is smooth enough, and the step isn’t too large).</p>
+<div id="09208468" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(theta):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> theta</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span><span class="op">*</span>(y<span class="op">+</span><span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_f(theta):</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> theta</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([<span class="dv">2</span><span class="op">*</span>(x<span class="op">-</span><span class="dv">1</span>), <span class="dv">10</span><span class="op">*</span>(y<span class="op">+</span><span class="dv">2</span>)])</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> np.array([<span class="op">-</span><span class="fl">3.</span>, <span class="fl">3.</span>])</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>eta <span class="op">=</span> <span class="fl">0.08</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> [theta.copy()]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">60</span>):</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    theta <span class="op">=</span> theta <span class="op">-</span> eta <span class="op">*</span> grad_f(theta)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    history.append(theta.copy())</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> np.array(history)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Converged to :"</span>, theta, <span class="st">" (true minimum is [1, -2])"</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>plt.plot(history[:,<span class="dv">0</span>], history[:,<span class="dv">1</span>], marker<span class="op">=</span><span class="st">'.'</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>plt.scatter([<span class="dv">1</span>], [<span class="op">-</span><span class="dv">2</span>], color<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'x'</span>, s<span class="op">=</span><span class="dv">100</span>, label<span class="op">=</span><span class="st">'true minimum'</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)<span class="op">;</span> plt.ylabel(<span class="st">'y'</span>)<span class="op">;</span> plt.legend()</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Converged to : [ 0.9998855 -2.       ]  (true minimum is [1, -2])</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="optimisation_files/figure-html/cell-4-output-2.png" width="587" height="429" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="choosing-the-learning-rate" class="level3" data-number="13.3.1">
+<h3 data-number="13.3.1" class="anchored" data-anchor-id="choosing-the-learning-rate"><span class="header-section-number">13.3.1</span> Choosing the Learning Rate</h3>
+<p>The learning rate controls a fundamental trade-off:</p>
+<ul>
+<li>Too <strong>small</strong>, and convergence is reliable but painfully slow.</li>
+<li>Too <strong>large</strong>, and the algorithm can overshoot the minimum, oscillate, or diverge entirely.</li>
+</ul>
+<div id="d5ae8b80" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> eta_test <span class="kw">in</span> [<span class="fl">0.01</span>, <span class="fl">0.08</span>, <span class="fl">0.21</span>]:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    theta <span class="op">=</span> np.array([<span class="op">-</span><span class="fl">3.</span>, <span class="fl">3.</span>])</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">30</span>):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        theta <span class="op">=</span> theta <span class="op">-</span> eta_test <span class="op">*</span> grad_f(theta)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"eta=</span><span class="sc">{</span>eta_test<span class="sc">:&lt;5}</span><span class="ss"> -&gt; theta after 30 steps = </span><span class="sc">{</span>theta<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>eta=0.01  -&gt; theta after 30 steps = [-1.18193728 -1.78804421]
+eta=0.08  -&gt; theta after 30 steps = [ 0.97859878 -2.        ]
+eta=0.21  -&gt; theta after 30 steps = [ 0.99999968 85.24701134]</code></pre>
+</div>
+</div>
+<p>Notice how a learning rate that is too large causes the iterate to move <em>away</em> from the minimum rather than towards it. This single issue is the motivation for essentially all of the “adaptive learning rate” methods described in <a href="../ml/neural-networks.html#sec-adaptive-learning-rate" class="quarto-xref"><span>Section 18.4.3</span></a> (AdaGrad, Adam) — rather than fixing <span class="math inline">\(\eta\)</span> once and for all, they adjust it automatically, per-parameter, during training.</p>
+<p>A more classical alternative, not covered elsewhere in these notes, is <strong>line search</strong>: at each step, instead of committing to a fixed <span class="math inline">\(\eta\)</span>, a 1D search is performed along the gradient direction to find a good step size before moving on. This is more expensive per step, but requires far less manual tuning — a trade-off worth being aware of, even though stochastic and mini-batch methods (<a href="../ml/neural-networks.html#sec-sgd" class="quarto-xref"><span>Section 18.4.1</span></a>, <a href="../ml/neural-networks.html#sec-batch-gd" class="quarto-xref"><span>Section 18.4.2</span></a>) make full line search impractical for most modern ML training.</p>
+</section>
+</section>
+<section id="second-order-methods" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="second-order-methods"><span class="header-section-number">13.4</span> Second-Order Methods</h2>
+<p>Gradient descent uses only <em>first</em>-order information (the gradient). <strong>Newton’s method</strong> additionally uses the Hessian, and updates parameters using:</p>
+<p><span class="math display">\[
+\theta_{i+1} = \theta_i - H(\theta_i)^{-1} \nabla f(\theta_i)
+\]</span></p>
+<p>This can converge dramatically faster than gradient descent near a minimum, since it accounts for the local curvature of <span class="math inline">\(f\)</span> rather than just its slope. However, it has a fatal practical flaw for machine learning: computing and inverting the Hessian costs <span class="math inline">\(O(n^3)\)</span> operations for <span class="math inline">\(n\)</span> parameters (using the same LU/inversion machinery as <a href="sim-eqn.html" class="quarto-xref"><span>Chapter 10</span></a>). For a neural network with millions or billions of parameters, this is completely infeasible. This is the fundamental reason why gradient descent and its first-order variants (SGD, momentum, AdaGrad, Adam — <a href="../ml/neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>) dominate in deep learning, despite their slower convergence: they only ever require <span class="math inline">\(O(n)\)</span> storage and computation per step.</p>
+</section>
+<section id="constrained-optimisation" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="constrained-optimisation"><span class="header-section-number">13.5</span> Constrained Optimisation</h2>
+<p>So far we’ve assumed <span class="math inline">\(\theta\)</span> is free to take any value. Sometimes, however, we want to minimise <span class="math inline">\(f(\theta)\)</span> subject to a constraint, <span class="math inline">\(g(\theta) = 0\)</span>. The standard approach is the method of <strong>Lagrange multipliers</strong>: introduce an auxiliary variable <span class="math inline">\(\lambda\)</span> and form the Lagrangian</p>
+<p><span class="math display">\[
+\mathcal{L}(\theta, \lambda) = f(\theta) + \lambda \, g(\theta)
+\]</span></p>
+<p>At a constrained optimum, the gradient of <span class="math inline">\(\mathcal{L}\)</span> with respect to <em>both</em> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\lambda\)</span> must vanish. Geometrically, this condition says that at the constrained optimum, the gradient of <span class="math inline">\(f\)</span> is parallel to the gradient of the constraint <span class="math inline">\(g\)</span> — there is no direction you could move along the constraint surface that would still decrease <span class="math inline">\(f\)</span>.</p>
+<p>This is more than a mathematical curiosity for this course: regularisation (<a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>) can be understood exactly as constrained optimisation. Minimising <span class="math inline">\(\text{MSE} + \lambda \sum |w_i|\)</span> (LASSO) or <span class="math inline">\(\text{MSE} + \lambda \sum w_i^2\)</span> (Ridge) is the Lagrangian form of the constrained problem “minimise MSE subject to the weights lying within some norm-ball” — the regularisation strength <span class="math inline">\(\lambda\)</span> plays exactly the role of the Lagrange multiplier above.</p>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -727,8 +1002,8 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../num/mle.html" class="pagination-link" aria-label="Maximum Likelihood Estimation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span>
+      <a href="../num/monte-carlo.html" class="pagination-link" aria-label="Monte Carlo Methods">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

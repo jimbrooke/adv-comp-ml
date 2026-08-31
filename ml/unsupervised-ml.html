@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -47,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c0a149fb89f594c50928677855dd0036.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9ae487f9dc81c977a28b7be194272750.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -76,6 +111,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -128,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../prog/programming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Programming</span></a>
+ <span class="menu-text">Programming</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -143,7 +207,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../prog/oo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object Oriented Programming</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object-Oriented Programming</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -213,14 +277,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../num/mle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../num/optimisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Optimisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></span></a>
   </div>
 </li>
       </ul>
@@ -237,7 +295,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/intro-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ml/mle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -260,26 +324,32 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../ml/gradients.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../ml/cnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/rnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ml/transformer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/autoencoder.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ml/transformer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
   </div>
 </li>
       </ul>
@@ -300,9 +370,25 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#clustering" id="toc-clustering" class="nav-link active" data-scroll-target="#clustering"><span class="header-section-number">17.1</span> Clustering</a></li>
-  <li><a href="#dimensionality-reduction" id="toc-dimensionality-reduction" class="nav-link" data-scroll-target="#dimensionality-reduction"><span class="header-section-number">17.2</span> Dimensionality Reduction</a></li>
-  <li><a href="#evaluation-interpretation" id="toc-evaluation-interpretation" class="nav-link" data-scroll-target="#evaluation-interpretation"><span class="header-section-number">17.3</span> Evaluation &amp; Interpretation</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">17.1</span> Introduction</a></li>
+  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering"><span class="header-section-number">17.2</span> Clustering</a>
+  <ul class="collapse">
+  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering"><span class="header-section-number">17.2.1</span> K-means Clustering</a></li>
+  <li><a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering"><span class="header-section-number">17.2.2</span> Hierarchical Clustering</a></li>
+  <li><a href="#dbscan" id="toc-dbscan" class="nav-link" data-scroll-target="#dbscan"><span class="header-section-number">17.2.3</span> DBSCAN</a></li>
+  </ul></li>
+  <li><a href="#dimensionality-reduction" id="toc-dimensionality-reduction" class="nav-link" data-scroll-target="#dimensionality-reduction"><span class="header-section-number">17.3</span> Dimensionality Reduction</a>
+  <ul class="collapse">
+  <li><a href="#principal-component-analysis-pca" id="toc-principal-component-analysis-pca" class="nav-link" data-scroll-target="#principal-component-analysis-pca"><span class="header-section-number">17.3.1</span> Principal Component Analysis (PCA)</a></li>
+  <li><a href="#t-sne" id="toc-t-sne" class="nav-link" data-scroll-target="#t-sne"><span class="header-section-number">17.3.2</span> t-SNE</a></li>
+  <li><a href="#umap" id="toc-umap" class="nav-link" data-scroll-target="#umap"><span class="header-section-number">17.3.3</span> UMAP</a></li>
+  </ul></li>
+  <li><a href="#sec-evaluation-unsupervised" id="toc-sec-evaluation-unsupervised" class="nav-link" data-scroll-target="#sec-evaluation-unsupervised"><span class="header-section-number">17.4</span> Evaluation &amp; Interpretation</a>
+  <ul class="collapse">
+  <li><a href="#internal-validation" id="toc-internal-validation" class="nav-link" data-scroll-target="#internal-validation"><span class="header-section-number">17.4.1</span> Internal Validation</a></li>
+  <li><a href="#comparison-to-known-physics" id="toc-comparison-to-known-physics" class="nav-link" data-scroll-target="#comparison-to-known-physics"><span class="header-section-number">17.4.2</span> Comparison to Known Physics</a></li>
+  <li><a href="#sec-interpretability" id="toc-sec-interpretability" class="nav-link" data-scroll-target="#sec-interpretability"><span class="header-section-number">17.4.3</span> Interpretability</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -311,7 +397,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/unsupervised-ml.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></h1>
+<h1 class="title"><span id="sec-unsupervised-ml" class="quarto-section-identifier"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></span></h1>
 </div>
 
 
@@ -328,27 +414,251 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="clustering" class="level2" data-number="17.1">
-<h2 data-number="17.1" class="anchored" data-anchor-id="clustering"><span class="header-section-number">17.1</span> Clustering</h2>
-<p>K-means clustering Hierarchical clustering. DBSCAN.</p>
+<p>EDIT THIS SECTION</p>
+<section id="introduction" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">17.1</span> Introduction</h2>
+<p>In supervised learning (<a href="supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>) every training example comes with a known label <span class="math inline">\(y_i\)</span>, and the model learns a mapping from inputs to those labels. In <strong>unsupervised learning</strong>, no labels are available at all — we are given only a set of feature vectors <span class="math inline">\(\{\mathbf{x}_i\}_{i=1}^N\)</span>, and the goal is to discover structure, patterns, or a more compact representation of the data on its own terms.</p>
+<p>This is a genuinely different kind of problem to supervised learning: there is no ground truth to compare against, and so (as discussed in <a href="#sec-evaluation-unsupervised" class="quarto-xref"><span>Section 17.4</span></a> below) evaluating whether an unsupervised method has “succeeded” is far less clear-cut than computing an accuracy or an MSE.</p>
+<p>Unsupervised learning techniques fall broadly into two families, covered in turn below:</p>
+<ul>
+<li><strong>Clustering</strong> — grouping data points into subsets (“clusters”) such that points within a cluster are more similar to each other than to points in other clusters.</li>
+<li><strong>Dimensionality reduction</strong> — finding a lower-dimensional representation of the data that preserves as much of its structure as possible.</li>
+</ul>
 </section>
-<section id="dimensionality-reduction" class="level2" data-number="17.2">
-<h2 data-number="17.2" class="anchored" data-anchor-id="dimensionality-reduction"><span class="header-section-number">17.2</span> Dimensionality Reduction</h2>
-<p>PCA t-SNE UMAP</p>
+<section id="clustering" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="clustering"><span class="header-section-number">17.2</span> Clustering</h2>
+<section id="k-means-clustering" class="level3" data-number="17.2.1">
+<h3 data-number="17.2.1" class="anchored" data-anchor-id="k-means-clustering"><span class="header-section-number">17.2.1</span> K-means Clustering</h3>
+<p>K-means is the simplest and most widely used clustering algorithm. Given a desired number of clusters <span class="math inline">\(k\)</span>, it aims to partition the data into <span class="math inline">\(k\)</span> clusters so as to minimise the total within-cluster variance:</p>
+<p><span class="math display">\[
+J = \sum_{j=1}^{k} \sum_{\mathbf{x}_i \in C_j} \| \mathbf{x}_i - \boldsymbol{\mu}_j \|_2^2
+\]</span></p>
+<p>where <span class="math inline">\(C_j\)</span> is the set of points assigned to cluster <span class="math inline">\(j\)</span>, and <span class="math inline">\(\boldsymbol{\mu}_j\)</span> is that cluster’s centroid (mean). Note this uses exactly the L2 norm introduced in <a href="../num/matrix.html#sec-norms" class="quarto-xref"><span>Section 9.5</span></a>.</p>
+<p>K-means minimises <span class="math inline">\(J\)</span> using a simple iterative scheme (closely related in spirit to the iterative refinement seen elsewhere in this unit, e.g.&nbsp;gradient descent, <span class="quarto-unresolved-ref">?sec-optimisation</span>):</p>
+<ol type="1">
+<li>Initialise <span class="math inline">\(k\)</span> centroids (commonly, at <span class="math inline">\(k\)</span> randomly chosen data points).</li>
+<li><strong>Assign</strong>: assign every point to its nearest centroid.</li>
+<li><strong>Update</strong>: recompute each centroid as the mean of the points currently assigned to it.</li>
+<li>Repeat steps 2–3 until assignments stop changing.</li>
+</ol>
+<div id="866be7a4" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>X, true_labels <span class="op">=</span> make_blobs(n_samples<span class="op">=</span><span class="dv">300</span>, centers<span class="op">=</span><span class="dv">4</span>, cluster_std<span class="op">=</span><span class="fl">0.8</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>km <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">4</span>, n_init<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>km.fit(X)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c<span class="op">=</span>true_labels, cmap<span class="op">=</span><span class="st">'viridis'</span>, s<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">"True groups"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c<span class="op">=</span>km.labels_, cmap<span class="op">=</span><span class="st">'viridis'</span>, s<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].scatter(km.cluster_centers_[:,<span class="dv">0</span>], km.cluster_centers_[:,<span class="dv">1</span>], c<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'x'</span>, s<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">"K-means clusters (x = centroids)"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[1], line 2</span>
+<span class="ansi-green-fg ansi-bold">      1</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">numpy</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">as</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">np</span>
+<span class="ansi-green-fg">----&gt; 2</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">sklearn</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">datasets</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">import</span> make_blobs
+<span class="ansi-green-fg ansi-bold">      3</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">sklearn</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">cluster</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">import</span> KMeans
+<span class="ansi-green-fg ansi-bold">      4</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">matplotlib</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">pyplot</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">as</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">plt</span>
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named 'sklearn'</pre>
+</div>
+</div>
+</div>
+<p>K-means has two important limitations worth being aware of:</p>
+<ul>
+<li><strong><span class="math inline">\(k\)</span> must be chosen in advance.</strong> A common heuristic is the “elbow method” — plotting <span class="math inline">\(J\)</span> against <span class="math inline">\(k\)</span> and looking for the point where adding further clusters gives diminishing returns.</li>
+<li><strong>It assumes roughly spherical, similarly-sized clusters</strong>, since it minimises variance around a single centroid per cluster. It performs poorly on elongated, irregularly shaped, or unevenly sized clusters.</li>
+</ul>
 </section>
-<section id="evaluation-interpretation" class="level2" data-number="17.3">
-<h2 data-number="17.3" class="anchored" data-anchor-id="evaluation-interpretation"><span class="header-section-number">17.3</span> Evaluation &amp; Interpretation</h2>
-<p>No ground truth: how do we know if unsupervised learning succeeded?</p>
-<p>Use internal validation (e.g., silhouette score for clustering).</p>
-<p>Compare discovered patterns to known physics features.</p>
-<p>Interpretability:</p>
-<p>PCA axes may correspond to physical modes or may not.</p>
-<p>Clusters may or may not align with real physical classes.</p>
-<p>Visualization:</p>
-<p>2D projections, cluster coloring, dendrograms.</p>
-<p>Demonstrate how PCA + k-means can reveal structure in physical datasets.</p>
+<section id="hierarchical-clustering" class="level3" data-number="17.2.2">
+<h3 data-number="17.2.2" class="anchored" data-anchor-id="hierarchical-clustering"><span class="header-section-number">17.2.2</span> Hierarchical Clustering</h3>
+<p>Rather than committing to a fixed number of clusters upfront, <strong>agglomerative hierarchical clustering</strong> starts with every point as its own cluster, and repeatedly merges the two closest clusters, according to some <strong>linkage criterion</strong> (e.g.&nbsp;the distance between the nearest pair of points in each cluster, “single linkage”; or the distance between cluster centroids, “average linkage”), until only one cluster remains.</p>
+<p>The result is naturally represented as a <strong>dendrogram</strong> — a tree showing the order in which clusters were merged, and at what distance. Cutting the dendrogram at a chosen height yields a clustering with a corresponding number of clusters, without having to have fixed <span class="math inline">\(k\)</span> in advance.</p>
+<div id="66dd14ed" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram, linkage</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> linkage(X[:<span class="dv">60</span>], method<span class="op">=</span><span class="st">'average'</span>)  <span class="co"># subset, for a readable dendrogram</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>dendrogram(Z)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Sample index"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Distance"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[2], line 3</span>
+<span class="ansi-green-fg ansi-bold">      1</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">scipy</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">cluster</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">hierarchy</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">import</span> dendrogram, linkage
+<span class="ansi-green-fg">----&gt; 3</span> Z <span style="color:rgb(98,98,98)">=</span> linkage(<span class="ansi-yellow-bg">X</span>[:<span style="color:rgb(98,98,98)">60</span>], method<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">average</span><span style="color:rgb(175,0,0)">'</span>)  <span style="font-style:italic;color:rgb(95,135,135)"># subset, for a readable dendrogram</span>
+<span class="ansi-green-fg ansi-bold">      4</span> plt<span style="color:rgb(98,98,98)">.</span>figure(figsize<span style="color:rgb(98,98,98)">=</span>(<span style="color:rgb(98,98,98)">8</span>,<span style="color:rgb(98,98,98)">4</span>))
+<span class="ansi-green-fg ansi-bold">      5</span> dendrogram(Z)
+
+<span class="ansi-red-fg">NameError</span>: name 'X' is not defined</pre>
+</div>
+</div>
+</div>
+</section>
+<section id="dbscan" class="level3" data-number="17.2.3">
+<h3 data-number="17.2.3" class="anchored" data-anchor-id="dbscan"><span class="header-section-number">17.2.3</span> DBSCAN</h3>
+<p>DBSCAN (Density-Based Spatial Clustering of Applications with Noise) takes a different approach again: rather than grouping points around centroids, it groups together points that are closely packed (many nearby neighbours within a distance <span class="math inline">\(\varepsilon\)</span>), and marks points in low-density regions as <strong>noise/outliers</strong> rather than forcing them into a cluster.</p>
+<p>This gives DBSCAN two properties K-means lacks: it can find clusters of arbitrary shape, and it does not require the number of clusters to be specified in advance. Its main drawback is sensitivity to the choice of the density parameters (<span class="math inline">\(\varepsilon\)</span> and the minimum number of neighbours).</p>
+<div id="80e93cbc" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> DBSCAN</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_moons</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>X_moons, _ <span class="op">=</span> make_moons(n_samples<span class="op">=</span><span class="dv">300</span>, noise<span class="op">=</span><span class="fl">0.06</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">4</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>km_moons <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">2</span>, n_init<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">0</span>).fit(X_moons)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>db_moons <span class="op">=</span> DBSCAN(eps<span class="op">=</span><span class="fl">0.2</span>, min_samples<span class="op">=</span><span class="dv">5</span>).fit(X_moons)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].scatter(X_moons[:,<span class="dv">0</span>], X_moons[:,<span class="dv">1</span>], c<span class="op">=</span>km_moons.labels_, cmap<span class="op">=</span><span class="st">'viridis'</span>, s<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">"K-means (fails on non-convex shape)"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].scatter(X_moons[:,<span class="dv">0</span>], X_moons[:,<span class="dv">1</span>], c<span class="op">=</span>db_moons.labels_, cmap<span class="op">=</span><span class="st">'viridis'</span>, s<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">"DBSCAN"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[3], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">sklearn</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">cluster</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">import</span> DBSCAN
+<span class="ansi-green-fg ansi-bold">      2</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">sklearn</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">datasets</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">import</span> make_moons
+<span class="ansi-green-fg ansi-bold">      4</span> X_moons, _ <span style="color:rgb(98,98,98)">=</span> make_moons(n_samples<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">300</span>, noise<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">0.06</span>, random_state<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">0</span>)
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named 'sklearn'</pre>
+</div>
+</div>
+</div>
+<p>This makes explicit a point only implicit above: <strong>no single clustering algorithm is universally best</strong> — the right choice depends on the expected shape and density structure of the clusters in your particular dataset.</p>
+</section>
+</section>
+<section id="dimensionality-reduction" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="dimensionality-reduction"><span class="header-section-number">17.3</span> Dimensionality Reduction</h2>
+<section id="principal-component-analysis-pca" class="level3" data-number="17.3.1">
+<h3 data-number="17.3.1" class="anchored" data-anchor-id="principal-component-analysis-pca"><span class="header-section-number">17.3.1</span> Principal Component Analysis (PCA)</h3>
+<p>PCA finds a new set of axes for the data — the <strong>principal components</strong> — chosen so that the first axis captures the greatest possible variance in the data, the second axis captures the greatest remaining variance subject to being orthogonal to the first, and so on.</p>
+<p>This is not a new numerical technique: it is a direct application of the eigendecomposition already covered in <a href="../num/eigenproblems.html" class="quarto-xref"><span>Chapter 11</span></a>. Specifically, the principal components are the eigenvectors of the data’s covariance matrix <span class="math inline">\(\Sigma\)</span>, ordered by the size of their corresponding eigenvalues:</p>
+<p><span class="math display">\[
+\Sigma \mathbf{v}_j = \lambda_j \mathbf{v}_j
+\]</span></p>
+<p>The eigenvalue <span class="math inline">\(\lambda_j\)</span> gives the variance of the data along principal component <span class="math inline">\(\mathbf{v}_j\)</span> — so ranking eigenvalues by size, exactly as done in <a href="../num/eigenproblems.html" class="quarto-xref"><span>Chapter 11</span></a>, directly ranks the principal components by how much of the data’s structure they capture. Equivalently (and often more numerically stable in practice), PCA can be computed directly via the Singular Value Decomposition of the (mean-centred) data matrix, using precisely the low-rank approximation idea introduced in <a href="../num/matrix.html#sec-rank" class="quarto-xref"><span>Section 9.6</span></a>: keeping only the top <span class="math inline">\(k\)</span> singular vectors is exactly a rank-<span class="math inline">\(k\)</span> approximation of the data.</p>
+<div id="99273dfd" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># reuse the coupled-oscillator eigenvalue problem from sec-eigen as a data source:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate noisy displacement measurements of the 7-mass system dominated by its lowest mode</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">3</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> np.array([[<span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],[<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],[<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">0</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>],[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>],[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>],[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>]])</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>mus, vs <span class="op">=</span> linalg.eig(m)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>lowest_mode <span class="op">=</span> np.real(vs.T[np.argmin(mus)])</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># generate synthetic "measurements": mostly along the lowest mode, plus noise</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.outer(rng.normal(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">500</span>), lowest_mode) <span class="op">+</span> rng.normal(<span class="dv">0</span>, <span class="fl">0.1</span>, (<span class="dv">500</span>, <span class="dv">7</span>))</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>data <span class="op">-=</span> data.mean(axis<span class="op">=</span><span class="dv">0</span>)  <span class="co"># PCA requires mean-centred data</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>U, s, Vt <span class="op">=</span> linalg.svd(data, full_matrices<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Variance explained by each component :"</span>, np.<span class="bu">round</span>((s<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> np.<span class="bu">sum</span>(s<span class="op">**</span><span class="dv">2</span>))[:<span class="dv">3</span>], <span class="dv">3</span>))</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"First principal component             :"</span>, np.<span class="bu">round</span>(Vt[<span class="dv">0</span>], <span class="dv">3</span>))</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Lowest vibrational mode (from sec-eig) :"</span>, np.<span class="bu">round</span>(lowest_mode, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Variance explained by each component : [0.985 0.003 0.003]
+First principal component             : [0.194 0.354 0.458 0.501 0.465 0.351 0.191]
+Lowest vibrational mode (from sec-eig) : [-0.191 -0.354 -0.462 -0.5   -0.462 -0.354 -0.191]</code></pre>
+</div>
+</div>
+<p>The first principal component recovers the lowest vibrational mode almost exactly — a nice illustration of <a href="#sec-interpretability" class="quarto-xref"><span>Section 17.4.3</span></a> below: here, a principal component axis genuinely does correspond to a physically meaningful quantity (a normal mode of oscillation), which is not guaranteed in general.</p>
+</section>
+<section id="t-sne" class="level3" data-number="17.3.2">
+<h3 data-number="17.3.2" class="anchored" data-anchor-id="t-sne"><span class="header-section-number">17.3.2</span> t-SNE</h3>
+<p>t-distributed Stochastic Neighbour Embedding (t-SNE) is a <em>non-linear</em> dimensionality reduction technique, typically used to compress high-dimensional data down to 2 or 3 dimensions purely for visualisation. Unlike PCA, t-SNE does not preserve global distances or produce axes with any particular meaning; instead it tries to preserve <strong>local neighbourhood structure</strong> — points that were close together in the original high-dimensional space should remain close together in the low-dimensional embedding. A key parameter, the <strong>perplexity</strong>, roughly controls the effective number of neighbours considered when deciding what counts as “local.”</p>
+<p>Because t-SNE does not preserve global structure, distances <em>between</em> well-separated clusters in a t-SNE plot, or the relative sizes of clusters, should not be over-interpreted — only the local neighbourhood groupings are meaningful.</p>
+</section>
+<section id="umap" class="level3" data-number="17.3.3">
+<h3 data-number="17.3.3" class="anchored" data-anchor-id="umap"><span class="header-section-number">17.3.3</span> UMAP</h3>
+<p>Uniform Manifold Approximation and Projection (UMAP) serves a similar purpose to t-SNE — non-linear reduction to 2–3 dimensions for visualisation — but is built on different mathematical foundations (from topological data analysis), and in practice tends to be substantially faster and to preserve more of the global structure of the data than t-SNE, while still capturing local neighbourhood relationships well. It has become the more commonly used default of the two in recent years.</p>
+<div id="c2147c8d" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># compare PCA vs t-SNE on a slightly higher-dimensional synthetic dataset</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>X_hd, y_hd <span class="op">=</span> make_blobs(n_samples<span class="op">=</span><span class="dv">400</span>, centers<span class="op">=</span><span class="dv">5</span>, n_features<span class="op">=</span><span class="dv">10</span>, cluster_std<span class="op">=</span><span class="fl">2.0</span>, random_state<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>pca_2d <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>).fit_transform(X_hd)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>tsne_2d <span class="op">=</span> TSNE(n_components<span class="op">=</span><span class="dv">2</span>, perplexity<span class="op">=</span><span class="dv">30</span>, random_state<span class="op">=</span><span class="dv">2</span>).fit_transform(X_hd)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">4</span>))</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].scatter(pca_2d[:,<span class="dv">0</span>], pca_2d[:,<span class="dv">1</span>], c<span class="op">=</span>y_hd, cmap<span class="op">=</span><span class="st">'viridis'</span>, s<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">"PCA"</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].scatter(tsne_2d[:,<span class="dv">0</span>], tsne_2d[:,<span class="dv">1</span>], c<span class="op">=</span>y_hd, cmap<span class="op">=</span><span class="st">'viridis'</span>, s<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">"t-SNE"</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[5], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">sklearn</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">manifold</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">import</span> TSNE
+<span class="ansi-green-fg ansi-bold">      2</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">sklearn</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">decomposition</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">import</span> PCA
+<span class="ansi-green-fg ansi-bold">      4</span> <span style="font-style:italic;color:rgb(95,135,135)"># compare PCA vs t-SNE on a slightly higher-dimensional synthetic dataset</span>
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named 'sklearn'</pre>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-evaluation-unsupervised" class="level2" data-number="17.4">
+<h2 data-number="17.4" class="anchored" data-anchor-id="sec-evaluation-unsupervised"><span class="header-section-number">17.4</span> Evaluation &amp; Interpretation</h2>
+<p>Since there is no ground truth <span class="math inline">\(y\)</span> to compare against, evaluating unsupervised learning is inherently less direct than computing an accuracy or MSE (<a href="supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>). Two complementary strategies are used in practice.</p>
+<section id="internal-validation" class="level3" data-number="17.4.1">
+<h3 data-number="17.4.1" class="anchored" data-anchor-id="internal-validation"><span class="header-section-number">17.4.1</span> Internal Validation</h3>
+<p><strong>Internal validation metrics</strong> assess the quality of a clustering using only the data and the cluster assignments themselves, with no external reference. The most common is the <strong>silhouette score</strong>. For a point <span class="math inline">\(i\)</span>, let <span class="math inline">\(a(i)\)</span> be the mean distance to other points in its own cluster, and <span class="math inline">\(b(i)\)</span> the mean distance to points in the nearest <em>other</em> cluster. The silhouette coefficient is:</p>
+<p><span class="math display">\[
+s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}
+\]</span></p>
+<p>which lies in <span class="math inline">\([-1, 1]\)</span>: values near <span class="math inline">\(+1\)</span> indicate the point is well-matched to its own cluster and poorly matched to neighbouring clusters (a good clustering); values near <span class="math inline">\(0\)</span> indicate the point sits near a cluster boundary; negative values suggest the point may have been assigned to the wrong cluster entirely.</p>
+<div id="5217b9b6" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]:</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>k, n_init<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">1</span>).fit_predict(X)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"k=</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">: silhouette score = </span><span class="sc">{</span>silhouette_score(X, labels)<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[6], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">sklearn</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">metrics</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">import</span> silhouette_score
+<span class="ansi-green-fg ansi-bold">      3</span> <span style="font-weight:bold;color:rgb(0,135,0)">for</span> k <span style="font-weight:bold;color:rgb(175,0,255)">in</span> [<span style="color:rgb(98,98,98)">2</span>, <span style="color:rgb(98,98,98)">3</span>, <span style="color:rgb(98,98,98)">4</span>, <span style="color:rgb(98,98,98)">5</span>, <span style="color:rgb(98,98,98)">6</span>]:
+<span class="ansi-green-fg ansi-bold">      4</span>     labels <span style="color:rgb(98,98,98)">=</span> KMeans(n_clusters<span style="color:rgb(98,98,98)">=</span>k, n_init<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">10</span>, random_state<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">1</span>)<span style="color:rgb(98,98,98)">.</span>fit_predict(X)
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named 'sklearn'</pre>
+</div>
+</div>
+</div>
+<p>The silhouette score peaking at <span class="math inline">\(k=4\)</span> here correctly recovers the number of clusters actually used to generate the synthetic data above — this “peak silhouette” approach is a common, principled alternative to the elbow method for choosing <span class="math inline">\(k\)</span>.</p>
+</section>
+<section id="comparison-to-known-physics" class="level3" data-number="17.4.2">
+<h3 data-number="17.4.2" class="anchored" data-anchor-id="comparison-to-known-physics"><span class="header-section-number">17.4.2</span> Comparison to Known Physics</h3>
+<p>Where domain knowledge is available, a second and often more convincing form of validation is to check whether the discovered structure is physically sensible: do the clusters found correspond to known physical classes or regimes (e.g.&nbsp;distinct particle types, phases of matter, stellar populations)? Do the principal axes found by PCA align with known physical degrees of freedom, as in the normal-mode example above? This kind of validation cannot be automated, but is often the most persuasive evidence that an unsupervised method has found something real rather than an artefact of the algorithm.</p>
+</section>
+<section id="sec-interpretability" class="level3" data-number="17.4.3">
+<h3 data-number="17.4.3" class="anchored" data-anchor-id="sec-interpretability"><span class="header-section-number">17.4.3</span> Interpretability</h3>
+<p>A recurring theme above is worth stating explicitly: <strong>the structure found by unsupervised methods is not guaranteed to be physically meaningful.</strong> PCA axes are, by construction, directions of maximum variance in the data — this <em>may</em> correspond to a genuine physical mode (as in the oscillator example above), or it may simply reflect the way the data happened to be measured or scaled. Similarly, clusters found by K-means or DBSCAN may or may not correspond to genuine physical classes — they may instead reflect measurement artefacts, sampling biases, or arbitrary choices in feature preprocessing. As with the “interpretability” concern already raised for machine learning generally in <a href="intro-ml.html" class="quarto-xref"><span>Chapter 14</span></a>, some scepticism and physical cross-checking is warranted before treating any discovered structure as a genuine scientific discovery.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

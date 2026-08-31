@@ -26,7 +26,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -36,8 +91,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../references.html" rel="next">
-<link href="../ml/transformer.html" rel="prev">
+<link href="../ml/transformer.html" rel="next">
+<link href="../ml/rnn.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -47,7 +102,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c0a149fb89f594c50928677855dd0036.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9ae487f9dc81c977a28b7be194272750.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -76,6 +131,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -128,7 +212,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../prog/programming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Programming</span></a>
+ <span class="menu-text">Programming</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -143,7 +227,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../prog/oo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object Oriented Programming</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object-Oriented Programming</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -213,14 +297,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../num/mle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../num/optimisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Optimisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></span></a>
   </div>
 </li>
       </ul>
@@ -237,7 +315,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/intro-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ml/mle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -260,26 +344,32 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../ml/gradients.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../ml/cnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/rnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ml/transformer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/autoencoder.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ml/transformer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
   </div>
 </li>
       </ul>
@@ -295,8 +385,25 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#standard-autoencoders" id="toc-standard-autoencoders" class="nav-link active" data-scroll-target="#standard-autoencoders"><span class="header-section-number">22.1</span> Standard Autoencoders</a>
+  <ul class="collapse">
+  <li><a href="#the-connection-to-pca" id="toc-the-connection-to-pca" class="nav-link" data-scroll-target="#the-connection-to-pca"><span class="header-section-number">22.1.1</span> The Connection to PCA</a></li>
+  <li><a href="#limitations-for-generation" id="toc-limitations-for-generation" class="nav-link" data-scroll-target="#limitations-for-generation"><span class="header-section-number">22.1.2</span> Limitations for Generation</a></li>
+  </ul></li>
+  <li><a href="#variational-autoencoders" id="toc-variational-autoencoders" class="nav-link" data-scroll-target="#variational-autoencoders"><span class="header-section-number">22.2</span> Variational Autoencoders</a>
+  <ul class="collapse">
+  <li><a href="#the-loss-function-reconstruction-kl-divergence" id="toc-the-loss-function-reconstruction-kl-divergence" class="nav-link" data-scroll-target="#the-loss-function-reconstruction-kl-divergence"><span class="header-section-number">22.2.1</span> The Loss Function: Reconstruction + KL Divergence</a></li>
+  <li><a href="#the-reparameterisation-trick" id="toc-the-reparameterisation-trick" class="nav-link" data-scroll-target="#the-reparameterisation-trick"><span class="header-section-number">22.2.2</span> The Reparameterisation Trick</a></li>
+  <li><a href="#generating-new-data" id="toc-generating-new-data" class="nav-link" data-scroll-target="#generating-new-data"><span class="header-section-number">22.2.3</span> Generating New Data</a></li>
+  </ul></li>
+  <li><a href="#comparison-to-other-generative-approaches" id="toc-comparison-to-other-generative-approaches" class="nav-link" data-scroll-target="#comparison-to-other-generative-approaches"><span class="header-section-number">22.3</span> Comparison to Other Generative Approaches</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -320,9 +427,154 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Content coming soon</p>
+<p>EDIT THIS SECTION</p>
+<section id="standard-autoencoders" class="level2" data-number="22.1">
+<h2 data-number="22.1" class="anchored" data-anchor-id="standard-autoencoders"><span class="header-section-number">22.1</span> Standard Autoencoders</h2>
+<p>An <strong>autoencoder</strong> is a neural network trained to reconstruct its own input. It is composed of two parts:</p>
+<ul>
+<li>An <strong>encoder</strong>, <span class="math inline">\(\mathbf{z} = f_{\text{enc}}(\mathbf{x})\)</span>, which compresses the input <span class="math inline">\(\mathbf{x}\)</span> down to a lower-dimensional representation <span class="math inline">\(\mathbf{z}\)</span>, known as the <strong>latent code</strong> or <strong>bottleneck</strong>.</li>
+<li>A <strong>decoder</strong>, <span class="math inline">\(\hat{\mathbf{x}} = f_{\text{dec}}(\mathbf{z})\)</span>, which attempts to reconstruct the original input from the latent code alone.</li>
+</ul>
+<p>The network is trained, exactly as in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>, by minimising a loss function — typically Mean Squared Error between the input and its reconstruction:</p>
+<p><span class="math display">\[
+L = \| \mathbf{x} - \hat{\mathbf{x}} \|_2^2
+\]</span></p>
+<p>using the same L2 norm defined in <a href="../num/matrix.html#sec-norms" class="quarto-xref"><span>Section 9.5</span></a>, and trained by gradient descent (<span class="quarto-unresolved-ref">?sec-optimisation</span>) and backpropagation (<a href="neural-networks.html#sec-backpropagation" class="quarto-xref"><span>Section 18.3.2</span></a>) exactly as for any other network in this unit.</p>
+<p>What makes this interesting is that <span class="math inline">\(\mathbf{z}\)</span> has far fewer dimensions than <span class="math inline">\(\mathbf{x}\)</span>. Since the network is <em>forced</em> to reconstruct the full input from this compressed bottleneck, it must learn a representation that captures the most important structure in the data — the network cannot simply copy the input through unchanged. In this sense, an autoencoder is a form of <strong>unsupervised learning</strong> (<a href="unsupervised-ml.html" class="quarto-xref"><span>Chapter 17</span></a>): no labels are required, only the data itself.</p>
+<section id="the-connection-to-pca" class="level3" data-number="22.1.1">
+<h3 data-number="22.1.1" class="anchored" data-anchor-id="the-connection-to-pca"><span class="header-section-number">22.1.1</span> The Connection to PCA</h3>
+<p>This should sound familiar. If the encoder and decoder are both restricted to be purely <em>linear</em> functions, and the loss is Mean Squared Error, it can be shown that the optimal such autoencoder learns to project the data onto exactly the same subspace as PCA (<a href="unsupervised-ml.html" class="quarto-xref"><span>Chapter 17</span></a>) — the top <span class="math inline">\(k\)</span> principal components of the data, found there via eigendecomposition (<a href="../num/eigenproblems.html" class="quarto-xref"><span>Chapter 11</span></a>) or SVD (<a href="../num/sim-eqn.html#sec-svd" class="quarto-xref"><span>Section 10.4</span></a>). A (non-linear) neural network autoencoder is best understood as a direct generalisation of PCA: instead of restricting the compression to a linear projection, the encoder and decoder are allowed to be arbitrarily non-linear functions, letting the network capture curved, non-linear structure in the data that PCA’s flat subspaces cannot.</p>
+</section>
+<section id="limitations-for-generation" class="level3" data-number="22.1.2">
+<h3 data-number="22.1.2" class="anchored" data-anchor-id="limitations-for-generation"><span class="header-section-number">22.1.2</span> Limitations for Generation</h3>
+<p>A standard autoencoder is very good at compression and reconstruction, but it makes a poor <strong>generative model</strong> — that is, it’s not naturally suited to <em>creating new</em>, realistic examples similar to the training data by sampling from the latent space. The reason is that nothing in the training objective above encourages the latent space to have any particular structure. Points corresponding to real data may be scattered arbitrarily throughout <span class="math inline">\(\mathbb{R}^k\)</span>, with large “gaps” that don’t decode to anything sensible. If you picked a random point <span class="math inline">\(\mathbf{z}\)</span> and passed it through the decoder, there’s no guarantee you’d get a realistic output at all.</p>
+<p>This is precisely the problem the Variational Autoencoder was designed to solve.</p>
+</section>
+</section>
+<section id="variational-autoencoders" class="level2" data-number="22.2">
+<h2 data-number="22.2" class="anchored" data-anchor-id="variational-autoencoders"><span class="header-section-number">22.2</span> Variational Autoencoders</h2>
+<p>A <strong>Variational Autoencoder (VAE)</strong> <span class="citation" data-cites="kingma2013">(<a href="../references.html#ref-kingma2013" role="doc-biblioref">Kingma &amp; Welling, 2022</a>)</span> modifies the standard autoencoder in one crucial way: instead of the encoder mapping each input to a single point <span class="math inline">\(\mathbf{z}\)</span>, it maps each input to a <em>probability distribution</em> over the latent space — in practice, almost always a diagonal Gaussian:</p>
+<p><span class="math display">\[
+q_\phi(\mathbf{z} \mid \mathbf{x}) = \mathcal{N}\!\left(\mathbf{z}; \, \boldsymbol{\mu}_\phi(\mathbf{x}), \, \boldsymbol{\sigma}_\phi^2(\mathbf{x}) \right)
+\]</span></p>
+<p>The encoder network, with parameters <span class="math inline">\(\phi\)</span>, now outputs <em>two</em> vectors for a given input — a mean <span class="math inline">\(\boldsymbol{\mu}\)</span> and a (log-)variance <span class="math inline">\(\boldsymbol{\sigma}^2\)</span> — rather than a single latent code. A sample <span class="math inline">\(\mathbf{z}\)</span> is then drawn from this distribution and passed to the decoder network, <span class="math inline">\(p_\theta(\mathbf{x} \mid \mathbf{z})\)</span>, which attempts the reconstruction just as before.</p>
+<p>To make this a genuinely useful generative model, we additionally want the aggregate of all these per-input distributions to fill out the latent space smoothly, with no gaps, so that <em>any</em> point sampled from a simple, known distribution decodes to something realistic. The VAE achieves this by pushing every input’s latent distribution <span class="math inline">\(q_\phi(\mathbf{z}\mid\mathbf{x})\)</span> towards a fixed, simple <strong>prior</strong> distribution, almost always chosen to be a standard normal, <span class="math inline">\(p(\mathbf{z}) = \mathcal{N}(\mathbf{0}, I)\)</span>.</p>
+<section id="the-loss-function-reconstruction-kl-divergence" class="level3" data-number="22.2.1">
+<h3 data-number="22.2.1" class="anchored" data-anchor-id="the-loss-function-reconstruction-kl-divergence"><span class="header-section-number">22.2.1</span> The Loss Function: Reconstruction + KL Divergence</h3>
+<p>This gives the VAE two competing objectives, combined into a single loss function (technically, the negative of a quantity called the <strong>Evidence Lower Bound</strong>, or ELBO — a direct relative of the log-likelihood objective from <a href="mle.html" class="quarto-xref"><span>Chapter 15</span></a>, since a VAE is ultimately trying to maximise the likelihood of the training data under the generative model <span class="math inline">\(p_\theta\)</span>):</p>
+<p><span class="math display">\[
+L(\theta, \phi; \mathbf{x}) = \underbrace{\mathbb{E}_{\mathbf{z}\sim q_\phi}\big[-\log p_\theta(\mathbf{x}\mid\mathbf{z})\big]}_{\text{reconstruction loss}} \; + \; \underbrace{D_{\text{KL}}\big(q_\phi(\mathbf{z}\mid\mathbf{x}) \,\|\, p(\mathbf{z})\big)}_{\text{regularisation towards the prior}}
+\]</span></p>
+<ul>
+<li>The first term is just the reconstruction error again — for Gaussian-distributed reconstructions this reduces to the same Mean Squared Error used in a standard autoencoder above, and, exactly as shown for supervised regression in <a href="mle.html" class="quarto-xref"><span>Chapter 15</span></a>, is itself a negative log-likelihood term in disguise.</li>
+<li>The second term, the <strong>Kullback-Leibler (KL) divergence</strong>, measures how different the encoder’s distribution <span class="math inline">\(q_\phi(\mathbf{z}\mid\mathbf{x})\)</span> is from the prior <span class="math inline">\(p(\mathbf{z})\)</span>, and penalises the encoder for straying too far from it. This is what forces the latent space, in aggregate across the whole dataset, to fill out smoothly around the origin rather than leaving unstructured gaps.</li>
+</ul>
+<p>For two diagonal Gaussians, this KL divergence term has a convenient closed form, so it does not need to be estimated numerically:</p>
+<p><span class="math display">\[
+D_{\text{KL}}\big(\mathcal{N}(\mu,\sigma^2) \,\|\, \mathcal{N}(0,1)\big) = -\frac{1}{2}\sum_{i} \left(1 + \log\sigma_i^2 - \mu_i^2 - \sigma_i^2\right)
+\]</span></p>
+<div id="3cfc991a" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kl_divergence_to_standard_normal(mu, log_var):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""KL(N(mu, sigma^2) || N(0, 1)) for a diagonal Gaussian, given log(sigma^2)."""</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> np.<span class="bu">sum</span>(<span class="dv">1</span> <span class="op">+</span> log_var <span class="op">-</span> mu<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> np.exp(log_var))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># a latent distribution that's already close to the prior: small penalty</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>mu_close <span class="op">=</span> np.array([<span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.05</span>])</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>logvar_close <span class="op">=</span> np.array([<span class="fl">0.0</span>, <span class="fl">0.0</span>])   <span class="co"># sigma^2 = 1</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"KL divergence (close to prior)   :"</span>, kl_divergence_to_standard_normal(mu_close, logvar_close))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># a latent distribution far from the prior: larger penalty</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>mu_far <span class="op">=</span> np.array([<span class="fl">3.0</span>, <span class="op">-</span><span class="fl">2.5</span>])</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>logvar_far <span class="op">=</span> np.array([<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">2.0</span>])    <span class="co"># sigma^2 far from 1</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"KL divergence (far from prior)   :"</span>, kl_divergence_to_standard_normal(mu_far, logvar_far))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>KL divergence (close to prior)   : 0.006249999999999978
+KL divergence (far from prior)   : 10.18109312953954</code></pre>
+</div>
+</div>
+<p>The tradeoff between these two loss terms is exactly what makes a VAE’s latent space useful: the reconstruction term alone would encourage the encoder to spread inputs far apart in latent space (making reconstruction easier), while the KL term pulls everything back towards a shared, compact, well-structured region — the balance between the two is what produces a latent space where every nearby point decodes to something plausible.</p>
+</section>
+<section id="the-reparameterisation-trick" class="level3" data-number="22.2.2">
+<h3 data-number="22.2.2" class="anchored" data-anchor-id="the-reparameterisation-trick"><span class="header-section-number">22.2.2</span> The Reparameterisation Trick</h3>
+<p>There is a subtlety in training a VAE that is worth making explicit, because it’s a direct, practical application of the chain rule from <a href="gradients.html" class="quarto-xref"><span>Chapter 19</span></a>. Sampling <span class="math inline">\(\mathbf{z} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\sigma}^2)\)</span> is a <em>random</em>, non-differentiable operation — gradients cannot flow backwards through a random sampling step during backpropagation (<a href="neural-networks.html#sec-backpropagation" class="quarto-xref"><span>Section 18.3.2</span></a>), since there is no well-defined derivative of “draw a random sample” with respect to <span class="math inline">\(\boldsymbol{\mu}\)</span> and <span class="math inline">\(\boldsymbol{\sigma}\)</span>.</p>
+<p>The fix is to rewrite the sampling step so that all the randomness is isolated in a term that does <em>not</em> depend on the network’s parameters:</p>
+<p><span class="math display">\[
+\mathbf{z} = \boldsymbol{\mu}_\phi(\mathbf{x}) + \boldsymbol{\sigma}_\phi(\mathbf{x}) \odot \boldsymbol{\epsilon}, \qquad \boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, I)
+\]</span></p>
+<p>where <span class="math inline">\(\odot\)</span> denotes elementwise multiplication. Now <span class="math inline">\(\mathbf{z}\)</span> is written as a deterministic, differentiable function of <span class="math inline">\(\boldsymbol{\mu}\)</span>, <span class="math inline">\(\boldsymbol{\sigma}\)</span>, and a separately-sampled noise term <span class="math inline">\(\boldsymbol{\epsilon}\)</span> that carries no trainable parameters. This means the chain rule (<a href="gradients.html" class="quarto-xref"><span>Chapter 19</span></a>) can be applied straight through the sampling step exactly as through any other layer, and the whole network — encoder and decoder together — can be trained end-to-end with ordinary backpropagation.</p>
+<div id="7d0e75e1" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reparameterise(mu, log_var, rng):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    sigma <span class="op">=</span> np.exp(<span class="fl">0.5</span> <span class="op">*</span> log_var)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    epsilon <span class="op">=</span> rng.normal(size<span class="op">=</span>mu.shape)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mu <span class="op">+</span> sigma <span class="op">*</span> epsilon</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">0</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="op">-</span><span class="fl">0.5</span>])</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>log_var <span class="op">=</span> np.array([<span class="fl">0.2</span>, <span class="op">-</span><span class="fl">0.3</span>])</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> np.array([reparameterise(mu, log_var, rng) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5000</span>)])</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sample mean     :"</span>, samples.mean(axis<span class="op">=</span><span class="dv">0</span>), <span class="st">" (target mu ="</span>, mu, <span class="st">")"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sample variance :"</span>, samples.var(axis<span class="op">=</span><span class="dv">0</span>), <span class="st">" (target sigma^2 ="</span>, np.exp(log_var), <span class="st">")"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Sample mean     : [ 1.01267893 -0.49900897]  (target mu = [ 1.  -0.5] )
+Sample variance : [1.23696171 0.72564848]  (target sigma^2 = [1.22140276 0.74081822] )</code></pre>
+</div>
+</div>
+<p>Repeated sampling via this reparameterisation recovers the intended mean and variance, confirming the trick produces samples statistically indistinguishable from directly sampling <span class="math inline">\(\mathcal{N}(\boldsymbol{\mu},\boldsymbol{\sigma}^2)\)</span> — while remaining differentiable with respect to <span class="math inline">\(\boldsymbol{\mu}\)</span> and <span class="math inline">\(\boldsymbol{\sigma}\)</span>.</p>
+</section>
+<section id="generating-new-data" class="level3" data-number="22.2.3">
+<h3 data-number="22.2.3" class="anchored" data-anchor-id="generating-new-data"><span class="header-section-number">22.2.3</span> Generating New Data</h3>
+<p>Once trained, generating a new sample no longer requires an input <span class="math inline">\(\mathbf{x}\)</span> or the encoder at all: simply draw <span class="math inline">\(\mathbf{z} \sim \mathcal{N}(\mathbf{0}, I)\)</span> directly from the prior, and pass it through the decoder, <span class="math inline">\(\hat{\mathbf{x}} = f_{\text{dec}}(\mathbf{z})\)</span>. Because training pushed the aggregate latent distribution to fill out this same prior smoothly, decoded samples from arbitrary points in the prior tend to look like plausible, novel examples from the training distribution, rather than the exact reconstructions of specific training points that a standard autoencoder is limited to.</p>
+</section>
+</section>
+<section id="comparison-to-other-generative-approaches" class="level2" data-number="22.3">
+<h2 data-number="22.3" class="anchored" data-anchor-id="comparison-to-other-generative-approaches"><span class="header-section-number">22.3</span> Comparison to Other Generative Approaches</h2>
+<p>VAEs are one of several major families of deep generative model. Two others worth being aware of, though beyond the scope of a detailed treatment here:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Core idea</th>
+<th>Notable trait</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>VAE</td>
+<td>Encode to a structured (Gaussian) latent space; decode to reconstruct</td>
+<td>Stable to train; latent space is smooth and structured; samples can be somewhat blurry</td>
+</tr>
+<tr class="even">
+<td>GAN <span class="citation" data-cites="goodfellow2014">(<a href="../references.html#ref-goodfellow2014" role="doc-biblioref">Goodfellow et al., 2014</a>)</span></td>
+<td>A generator network competes against a discriminator network trying to distinguish real from generated samples</td>
+<td>Often sharper samples; training can be unstable (the two networks must remain balanced)</td>
+</tr>
+<tr class="odd">
+<td>Diffusion models</td>
+<td>Learn to reverse a gradual noising process applied to training data</td>
+<td>State of the art for image generation as of the early-to-mid 2020s; computationally expensive to sample from</td>
+</tr>
+</tbody>
+</table>
+<p>All three ultimately rely on the same underlying toolkit developed across this unit: gradients and the chain rule (<a href="gradients.html" class="quarto-xref"><span>Chapter 19</span></a>), gradient-based optimisation (<span class="quarto-unresolved-ref">?sec-optimisation</span>), and — as made explicit above — maximum likelihood as a guiding principle for what “loss function” even means (<a href="mle.html" class="quarto-xref"><span>Chapter 15</span></a>).</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-goodfellow2014" class="csl-entry" role="listitem">
+Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., … Bengio, Y. (2014). Generative adversarial networks. <em>Advances in Neural Information Processing Systems</em>, <em>27</em>.
+</div>
+<div id="ref-kingma2013" class="csl-entry" role="listitem">
+Kingma, D. P., &amp; Welling, M. (2022). <em>Auto-encoding variational bayes</em>. Retrieved from <a href="https://arxiv.org/abs/1312.6114">https://arxiv.org/abs/1312.6114</a>
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -727,13 +979,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../ml/transformer.html" class="pagination-link" aria-label="Transformers">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Transformers</span></span>
+      <a href="../ml/rnn.html" class="pagination-link" aria-label="Recurrent Neural Networks">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../ml/transformer.html" class="pagination-link" aria-label="Transformers">
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Transformers</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

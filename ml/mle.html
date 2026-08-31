@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>13&nbsp; Maximum Likelihood Estimation – Advanced Computational Physics &amp; Machine Learning</title>
+<title>15&nbsp; Maximum Likelihood Estimation – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -36,8 +71,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../num/optimisation.html" rel="next">
-<link href="../num/monte-carlo.html" rel="prev">
+<link href="../ml/supervised-ml.html" rel="next">
+<link href="../ml/intro-ml.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -47,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c0a149fb89f594c50928677855dd0036.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9ae487f9dc81c977a28b7be194272750.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -76,6 +111,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -88,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../num/numeric.html">Numerical Methods</a></li><li class="breadcrumb-item"><a href="../num/mle.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/mle.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -128,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../prog/programming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Programming</span></a>
+ <span class="menu-text">Programming</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -143,7 +207,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../prog/oo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object Oriented Programming</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Object-Oriented Programming</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -213,14 +277,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../num/mle.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../num/optimisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Optimisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></span></a>
   </div>
 </li>
       </ul>
@@ -237,7 +295,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/intro-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ml/mle.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -260,26 +324,32 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../ml/gradients.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../ml/cnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/rnn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ml/transformer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Recurrent Neural Networks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/autoencoder.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ml/transformer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
   </div>
 </li>
       </ul>
@@ -295,15 +365,32 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#estimators" id="toc-estimators" class="nav-link active" data-scroll-target="#estimators"><span class="header-section-number">15.1</span> Estimators</a>
+  <ul class="collapse">
+  <li><a href="#bias" id="toc-bias" class="nav-link" data-scroll-target="#bias"><span class="header-section-number">15.1.1</span> Bias</a></li>
+  <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance"><span class="header-section-number">15.1.2</span> Variance</a></li>
+  <li><a href="#the-biasvariance-decomposition" id="toc-the-biasvariance-decomposition" class="nav-link" data-scroll-target="#the-biasvariance-decomposition"><span class="header-section-number">15.1.3</span> The Bias–Variance Decomposition</a></li>
+  </ul></li>
+  <li><a href="#likelihood" id="toc-likelihood" class="nav-link" data-scroll-target="#likelihood"><span class="header-section-number">15.2</span> Likelihood</a></li>
+  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation"><span class="header-section-number">15.3</span> Maximum Likelihood Estimation</a>
+  <ul class="collapse">
+  <li><a href="#worked-example-fitting-a-gaussian" id="toc-worked-example-fitting-a-gaussian" class="nav-link" data-scroll-target="#worked-example-fitting-a-gaussian"><span class="header-section-number">15.3.1</span> Worked example: fitting a Gaussian</a></li>
+  </ul></li>
+  <li><a href="#mle-is-the-hidden-justification-for-your-loss-functions" id="toc-mle-is-the-hidden-justification-for-your-loss-functions" class="nav-link" data-scroll-target="#mle-is-the-hidden-justification-for-your-loss-functions"><span class="header-section-number">15.4</span> MLE Is the Hidden Justification for Your Loss Functions</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../num/numeric.html">Numerical Methods</a></li><li class="breadcrumb-item"><a href="../num/mle.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/mle.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></h1>
+<h1 class="title"><span id="sec-mle" class="quarto-section-identifier"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></h1>
 </div>
 
 
@@ -320,8 +407,132 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>EDIT THIS SECTION</p>
+<p>Machine learning models make predictions from data that is inherently noisy, and are themselves trained using randomly-sampled batches of data (<a href="neural-networks.html#sec-sgd" class="quarto-xref"><span>Section 18.4.1</span></a>). Probability and statistics provide the language for reasoning rigorously about both of these sources of uncertainty. This section introduces the small set of concepts genuinely load-bearing for the rest of the unit: estimators and their bias/variance, and maximum likelihood estimation — which turns out to be the hidden justification for the loss functions already used, without derivation, in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>.</p>
+<p>For generating and sampling from probability distributions numerically, see <a href="../num/monte-carlo.html" class="quarto-xref"><span>Chapter 12</span></a>, which covers this in detail and is not repeated here.</p>
+<section id="estimators" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="estimators"><span class="header-section-number">15.1</span> Estimators</h2>
+<p>An <strong>estimator</strong> is simply a function of observed data that produces a guess at some unknown quantity. For example, given <span class="math inline">\(N\)</span> samples <span class="math inline">\(x_1, \ldots, x_N\)</span> drawn from some distribution, the sample mean</p>
+<p><span class="math display">\[
+\hat{\mu} = \frac{1}{N}\sum_{i=1}^N x_i
+\]</span></p>
+<p>is an estimator of the true (unknown) population mean <span class="math inline">\(\mu\)</span>.</p>
+<p>Because the data is random, the estimator itself is a random variable — if you drew a different sample of <span class="math inline">\(N\)</span> points, you’d get a different value of <span class="math inline">\(\hat{\mu}\)</span>. This means an estimator has its own distribution, and in particular its own mean and variance, which turn out to be exactly analogous to the bias–variance tradeoff already introduced for machine learning models in <a href="supervised-ml.html#sec-overfitting" class="quarto-xref"><span>Section 16.9</span></a>.</p>
+<section id="bias" class="level3" data-number="15.1.1">
+<h3 data-number="15.1.1" class="anchored" data-anchor-id="bias"><span class="header-section-number">15.1.1</span> Bias</h3>
+<p>The <strong>bias</strong> of an estimator is the difference between its expected value and the true value it’s estimating:</p>
+<p><span class="math display">\[
+\text{Bias}(\hat{\theta}) = \mathbb{E}[\hat{\theta}] - \theta
+\]</span></p>
+<p>An estimator is <strong>unbiased</strong> if this is zero — i.e.&nbsp;if, averaged over infinitely many repeated samples, it would recover the true value exactly.</p>
+</section>
+<section id="variance" class="level3" data-number="15.1.2">
+<h3 data-number="15.1.2" class="anchored" data-anchor-id="variance"><span class="header-section-number">15.1.2</span> Variance</h3>
+<p>The <strong>variance</strong> of an estimator measures how much it fluctuates from one sample to the next:</p>
+<p><span class="math display">\[
+\text{Var}(\hat{\theta}) = \mathbb{E}\left[(\hat{\theta} - \mathbb{E}[\hat\theta])^2\right]
+\]</span></p>
+<div id="60d300fe" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">1</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>true_mu <span class="op">=</span> <span class="fl">5.0</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>n_experiments <span class="op">=</span> <span class="dv">5000</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>estimates <span class="op">=</span> [rng.normal(true_mu, <span class="fl">2.0</span>, size<span class="op">=</span>N).mean() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n_experiments)]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean of estimator across experiments : </span><span class="sc">{</span>np<span class="sc">.</span>mean(estimates)<span class="sc">:.3f}</span><span class="ss">  (true value = </span><span class="sc">{</span>true_mu<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Bias                                  : </span><span class="sc">{</span>np<span class="sc">.</span>mean(estimates) <span class="op">-</span> true_mu<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Variance of estimator                 : </span><span class="sc">{</span>np<span class="sc">.</span>var(estimates)<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mean of estimator across experiments : 4.991  (true value = 5.0)
+Bias                                  : -0.0092
+Variance of estimator                 : 0.1928</code></pre>
+</div>
+</div>
+<p>The sample mean is unbiased and its variance shrinks as <span class="math inline">\(N\)</span> grows — a direct, quantitative version of the intuition that “more data gives a more reliable estimate.”</p>
+</section>
+<section id="the-biasvariance-decomposition" class="level3" data-number="15.1.3">
+<h3 data-number="15.1.3" class="anchored" data-anchor-id="the-biasvariance-decomposition"><span class="header-section-number">15.1.3</span> The Bias–Variance Decomposition</h3>
+<p>It’s a standard (and important) result that the expected squared error of an estimator decomposes as:</p>
+<p><span class="math display">\[
+\mathbb{E}\left[(\hat\theta - \theta)^2\right] = \text{Bias}(\hat\theta)^2 + \text{Var}(\hat\theta)
+\]</span></p>
+<p>This is worth comparing directly to the bias–variance tradeoff of <a href="supervised-ml.html#sec-overfitting" class="quarto-xref"><span>Section 16.9</span></a>: an <strong>underfit</strong> model is analogous to a high-bias estimator (systematically wrong, but consistent across different training sets), while an <strong>overfit</strong> model is analogous to a high-variance estimator (correct on average, but wildly sensitive to exactly which training data it saw). The two “bias–variance tradeoffs” you’ll meet in this unit — one for statistical estimators, one for ML models — are, in fact, the <em>same</em> tradeoff, since fitting a model is itself just estimating parameters from a finite random sample of data.</p>
+</section>
+</section>
+<section id="likelihood" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="likelihood"><span class="header-section-number">15.2</span> Likelihood</h2>
+<p>Given some observed data <span class="math inline">\(\mathcal{D}\)</span> and a model with parameters <span class="math inline">\(\theta\)</span>, the <strong>likelihood</strong> is a function of <span class="math inline">\(\theta\)</span> that says how probable the observed data would have been, under a given choice of parameters:</p>
+<p><span class="math display">\[
+\mathcal{L}(\theta) = P(\mathcal{D} \mid \theta)
+\]</span></p>
+<p>Note carefully: the likelihood is a function of <span class="math inline">\(\theta\)</span>, with the data held fixed — this is the opposite of a probability distribution over the data, and is a common point of confusion.</p>
+<p>For <span class="math inline">\(N\)</span> independent data points, the likelihood factorises as a product:</p>
+<p><span class="math display">\[
+\mathcal{L}(\theta) = \prod_{i=1}^N P(x_i \mid \theta)
+\]</span></p>
+</section>
+<section id="maximum-likelihood-estimation" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="maximum-likelihood-estimation"><span class="header-section-number">15.3</span> Maximum Likelihood Estimation</h2>
+<p><strong>Maximum Likelihood Estimation (MLE)</strong> is the principle of choosing the parameters <span class="math inline">\(\theta\)</span> that make the observed data as probable as possible:</p>
+<p><span class="math display">\[
+\hat{\theta}_{\text{MLE}} = \arg\max_\theta \mathcal{L}(\theta)
+\]</span></p>
+<p>Because a product of many small probabilities is numerically awkward (it underflows very quickly), and because logarithms turn products into sums, it is standard practice to instead maximise the <strong>log-likelihood</strong>:</p>
+<p><span class="math display">\[
+\ell(\theta) = \log \mathcal{L}(\theta) = \sum_{i=1}^N \log P(x_i \mid \theta)
+\]</span></p>
+<p>Since <span class="math inline">\(\log\)</span> is monotonic, this doesn’t change the location of the maximum. And since we’ve been minimising things throughout <span class="quarto-unresolved-ref">?sec-optimisation</span>, it’s conventional to instead minimise the <strong>negative log-likelihood</strong> (NLL):</p>
+<p><span class="math display">\[
+\hat{\theta}_{\text{MLE}} = \arg\min_\theta \left[ -\sum_{i=1}^N \log P(x_i \mid \theta) \right]
+\]</span></p>
+<p>This connects MLE directly to everything in <span class="quarto-unresolved-ref">?sec-optimisation</span>: fitting a model by MLE is just another instance of the minimisation problem already studied there, and can be solved using exactly the same gradient descent machinery (<a href="neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>).</p>
+<section id="worked-example-fitting-a-gaussian" class="level3" data-number="15.3.1">
+<h3 data-number="15.3.1" class="anchored" data-anchor-id="worked-example-fitting-a-gaussian"><span class="header-section-number">15.3.1</span> Worked example: fitting a Gaussian</h3>
+<p>Suppose we assume our data is drawn from a Gaussian with unknown mean <span class="math inline">\(\mu\)</span> and known variance <span class="math inline">\(\sigma^2\)</span>. The log-likelihood is:</p>
+<p><span class="math display">\[
+\ell(\mu) = -\frac{1}{2\sigma^2}\sum_{i=1}^N (x_i - \mu)^2 + \text{const.}
+\]</span></p>
+<p>Maximising this with respect to <span class="math inline">\(\mu\)</span> (by setting the derivative to zero — a one-line application of <a href="gradients.html" class="quarto-xref"><span>Chapter 19</span></a>) gives <span class="math inline">\(\hat\mu = \frac{1}{N}\sum x_i\)</span>: the maximum likelihood estimate of a Gaussian’s mean is exactly the sample mean used as our running example above.</p>
+<div id="248f1528" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.optimize <span class="im">as</span> opt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> rng.normal(loc<span class="op">=</span><span class="fl">7.0</span>, scale<span class="op">=</span><span class="fl">2.0</span>, size<span class="op">=</span><span class="dv">200</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> negative_log_likelihood(mu):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    sigma <span class="op">=</span> <span class="fl">2.0</span>  <span class="co"># assumed known</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.<span class="bu">sum</span>(<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>np.log(<span class="dv">2</span><span class="op">*</span>np.pi<span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>) <span class="op">-</span> (data <span class="op">-</span> mu)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> opt.minimize_scalar(negative_log_likelihood)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MLE estimate of mu : </span><span class="sc">{</span>result<span class="sc">.</span>x<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Sample mean         : </span><span class="sc">{</span>data<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MLE estimate of mu : 7.206
+Sample mean         : 7.206</code></pre>
+</div>
+</div>
+<p>As expected, numerically minimising the negative log-likelihood recovers the sample mean.</p>
+</section>
+</section>
+<section id="mle-is-the-hidden-justification-for-your-loss-functions" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="mle-is-the-hidden-justification-for-your-loss-functions"><span class="header-section-number">15.4</span> MLE Is the Hidden Justification for Your Loss Functions</h2>
+<p>This is the key payoff of this section, and it directly explains material presented without derivation in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>.</p>
+<p><strong>Mean Squared Error is MLE under a Gaussian noise assumption.</strong> If we assume that observed targets are the model’s prediction plus Gaussian noise, <span class="math inline">\(y_i = f(x_i) + \varepsilon_i\)</span> with <span class="math inline">\(\varepsilon_i \sim \mathcal{N}(0, \sigma^2)\)</span>, then (following exactly the derivation above) the negative log-likelihood is, up to an additive and a multiplicative constant that don’t affect the location of the minimum:</p>
+<p><span class="math display">\[
+-\ell(\theta) = \frac{1}{2\sigma^2}\sum_{i=1}^N (y_i - f(x_i))^2 + \text{const.}
+\]</span></p>
+<p>which is minimised by exactly the same <span class="math inline">\(\theta\)</span> as the Mean Squared Error loss already defined in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>. In other words: using MSE as a loss function is <em>implicitly</em> assuming Gaussian-distributed errors, whether or not that assumption is stated explicitly.</p>
+<p><strong>Binary Cross-Entropy is MLE under a Bernoulli assumption.</strong> If each label <span class="math inline">\(y_i \in \{0, 1\}\)</span> is modelled as a Bernoulli random variable with success probability <span class="math inline">\(\hat{P}_i\)</span> (the model’s predicted probability), the likelihood of one observation is <span class="math inline">\(\hat{P}_i^{y_i}(1-\hat{P}_i)^{1-y_i}\)</span>, and the negative log-likelihood over <span class="math inline">\(N\)</span> points is:</p>
+<p><span class="math display">\[
+-\ell(\theta) = -\sum_{i=1}^N \Big[ y_i \log \hat{P}_i + (1-y_i)\log(1-\hat{P}_i) \Big]
+\]</span></p>
+<p>which is, term for term, exactly the Binary Cross-Entropy loss already given in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>. That loss function was not an arbitrary design choice — it is precisely the MLE objective for a binary classification model.</p>
+<p>This is a genuinely useful piece of insight for a physicist: it means that <em>choosing a loss function is equivalent to making an assumption about the noise model generating your data</em>, and the “right” loss function for a given problem is the one implied by however you believe your measurement errors are actually distributed.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -726,13 +937,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../num/monte-carlo.html" class="pagination-link" aria-label="Monte Carlo Methods">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span>
+      <a href="../ml/intro-ml.html" class="pagination-link" aria-label="Introduction to Machine Learning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../num/optimisation.html" class="pagination-link" aria-label="Optimisation">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Optimisation</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../ml/supervised-ml.html" class="pagination-link" aria-label="Supervised Learning">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
