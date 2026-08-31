@@ -24,7 +24,7 @@ book:
         - num/sim-eqn.qmd
         - num/eigenproblems.qmd
         - num/monte-carlo.qmd
-        - num/optimisation.qmd
+        - num/minimisation.qmd
     - part: ml/ml.qmd
       chapters:
         - ml/intro-ml.qmd
@@ -32,7 +32,7 @@ book:
         - ml/supervised-ml.qmd
         - ml/unsupervised-ml.qmd
         - ml/neural-networks.qmd
-        - ml/gradients.qmd
+        - ml/backpropagation.qmd
         - ml/cnn.qmd
         - ml/rnn.qmd
         - ml/autoencoder.qmd

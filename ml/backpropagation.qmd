@@ -4,9 +4,14 @@ execute:
   error: true
 ---
 
-# Gradients & Multivariate Calculus {#sec-gradients}
+# Backpropagation {@sec-backpropagation}
 
-EDIT THIS SECTION - IS IT REALLY NEEDED ?
+In this section, we will understand the backpropagation method, which allows us to compute the gradient of a neural network's loss function with respect to its parameters.  This method is essential for training neural networks, since it allows us to use gradient descent (@sec-optimisation) to minimise the loss function.
+
+
+
+
+
 
 Every training algorithm used later in this unit — gradient descent (@sec-optimisation), backpropagation (@sec-backpropagation), the Adam optimiser (@sec-adaptive-learning-rate) — relies on the ability to compute the derivative of a function with respect to *many* variables at once. This section introduces the vocabulary and the key result (the multivariate chain rule) needed to make that precise, before we return to see it in action in @sec-optimisation and @sec-nn.
 
