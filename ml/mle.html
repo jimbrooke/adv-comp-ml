@@ -277,7 +277,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../num/optimisation.html" class="sidebar-item-text sidebar-link">
+  <a href="../num/minimisation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></span></a>
   </div>
 </li>
@@ -324,8 +324,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/gradients.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span></a>
+  <a href="../ml/backpropagation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Backpropagation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -432,7 +432,7 @@ window.Quarto = {
 <p><span class="math display">\[
 \text{Var}(\hat{\theta}) = \mathbb{E}\left[(\hat{\theta} - \mathbb{E}[\hat\theta])^2\right]
 \]</span></p>
-<div id="60d300fe" class="cell" data-execution_count="1">
+<div id="b44048d4" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">1</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -495,8 +495,8 @@ Variance of estimator                 : 0.1928</code></pre>
 <p><span class="math display">\[
 \ell(\mu) = -\frac{1}{2\sigma^2}\sum_{i=1}^N (x_i - \mu)^2 + \text{const.}
 \]</span></p>
-<p>Maximising this with respect to <span class="math inline">\(\mu\)</span> (by setting the derivative to zero — a one-line application of <a href="gradients.html" class="quarto-xref"><span>Chapter 19</span></a>) gives <span class="math inline">\(\hat\mu = \frac{1}{N}\sum x_i\)</span>: the maximum likelihood estimate of a Gaussian’s mean is exactly the sample mean used as our running example above.</p>
-<div id="248f1528" class="cell" data-execution_count="2">
+<p>Maximising this with respect to <span class="math inline">\(\mu\)</span> (by setting the derivative to zero — a one-line application of <span class="quarto-unresolved-ref">?sec-gradients</span>) gives <span class="math inline">\(\hat\mu = \frac{1}{N}\sum x_i\)</span>: the maximum likelihood estimate of a Gaussian’s mean is exactly the sample mean used as our running example above.</p>
+<div id="4811b196" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.optimize <span class="im">as</span> opt</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> rng.normal(loc<span class="op">=</span><span class="fl">7.0</span>, scale<span class="op">=</span><span class="fl">2.0</span>, size<span class="op">=</span><span class="dv">200</span>)</span>

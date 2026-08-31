@@ -57,7 +57,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../ml/rnn.html" rel="next">
-<link href="../ml/gradients.html" rel="prev">
+<link href="../ml/backpropagation.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -262,7 +262,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../num/optimisation.html" class="sidebar-item-text sidebar-link">
+  <a href="../num/minimisation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></span></a>
   </div>
 </li>
@@ -309,8 +309,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/gradients.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span></a>
+  <a href="../ml/backpropagation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Backpropagation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -485,7 +485,7 @@ The building blocks above were not all introduced at once — they were develope
 
 **VGGNet** [@simonyan2015vgg] (2014) explored the effect of depth directly, using up to 19 layers, but with a key structural insight: it replaced the larger filters used in LeNet/AlexNet (e.g. $11\times11$, $5\times5$) with a *stack* of small $3\times3$ filters. Two stacked $3\times3$ filters have the same effective receptive field as one $5\times5$ filter, but use fewer parameters and add an extra non-linear activation in between — a direct illustration of the stride/receptive-field trade-off discussed above.
 
-::: {#10a9fe94 .cell execution_count=1}
+::: {#f7e3b387 .cell execution_count=1}
 ``` {.python .cell-code}
 # illustrating VGG's parameter-efficiency argument: one 5x5 filter vs two stacked 3x3 filters,
 # for a single input/output channel
@@ -984,8 +984,8 @@ Lecun, Y., Bottou, L., Bengio, Y., &amp; Haffner, P. (1998). Gradient-based lear
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../ml/gradients.html" class="pagination-link" aria-label="Gradients &amp; Multivariate Calculus">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span>
+      <a href="../ml/backpropagation.html" class="pagination-link" aria-label="Backpropagation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Backpropagation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

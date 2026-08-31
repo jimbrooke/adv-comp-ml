@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>13&nbsp; Minimisation – Advanced Computational Physics &amp; Machine Learning</title>
+<title>19&nbsp; Backpropagation – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,8 +71,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../ml/ml.html" rel="next">
-<link href="../num/monte-carlo.html" rel="prev">
+<link href="../ml/cnn.html" rel="next">
+<link href="../ml/neural-networks.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -152,7 +152,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../num/numeric.html">Numerical Methods</a></li><li class="breadcrumb-item"><a href="../num/optimisation.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/backpropagation.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Backpropagation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -277,7 +277,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../num/optimisation.html" class="sidebar-item-text sidebar-link active">
+  <a href="../num/minimisation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></span></a>
   </div>
 </li>
@@ -324,8 +324,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/gradients.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span></a>
+  <a href="../ml/backpropagation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Backpropagation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -370,31 +370,24 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#multivariate-calculus" id="toc-multivariate-calculus" class="nav-link active" data-scroll-target="#multivariate-calculus"><span class="header-section-number">13.1</span> Multivariate calculus</a>
+  <li><a href="#partial-derivatives-and-the-gradient" id="toc-partial-derivatives-and-the-gradient" class="nav-link active" data-scroll-target="#partial-derivatives-and-the-gradient"><span class="header-section-number">19.1</span> Partial Derivatives and the Gradient</a>
   <ul class="collapse">
-  <li><a href="#directional-derivative" id="toc-directional-derivative" class="nav-link" data-scroll-target="#directional-derivative"><span class="header-section-number">13.1.1</span> Directional Derivative</a></li>
-  <li><a href="#the-jacobian" id="toc-the-jacobian" class="nav-link" data-scroll-target="#the-jacobian"><span class="header-section-number">13.1.2</span> The Jacobian</a></li>
-  <li><a href="#the-hessian" id="toc-the-hessian" class="nav-link" data-scroll-target="#the-hessian"><span class="header-section-number">13.1.3</span> The Hessian</a></li>
+  <li><a href="#directional-derivatives" id="toc-directional-derivatives" class="nav-link" data-scroll-target="#directional-derivatives"><span class="header-section-number">19.1.1</span> Directional Derivatives</a></li>
   </ul></li>
-  <li><a href="#the-shape-of-the-problem" id="toc-the-shape-of-the-problem" class="nav-link" data-scroll-target="#the-shape-of-the-problem"><span class="header-section-number">13.2</span> The Shape of the Problem</a>
+  <li><a href="#the-multivariate-chain-rule" id="toc-the-multivariate-chain-rule" class="nav-link" data-scroll-target="#the-multivariate-chain-rule"><span class="header-section-number">19.2</span> The Multivariate Chain Rule</a>
   <ul class="collapse">
-  <li><a href="#convexity" id="toc-convexity" class="nav-link" data-scroll-target="#convexity"><span class="header-section-number">13.2.1</span> Convexity</a></li>
+  <li><a href="#automatic-differentiation" id="toc-automatic-differentiation" class="nav-link" data-scroll-target="#automatic-differentiation"><span class="header-section-number">19.2.1</span> Automatic Differentiation</a></li>
   </ul></li>
-  <li><a href="#gradient-descent-formally" id="toc-gradient-descent-formally" class="nav-link" data-scroll-target="#gradient-descent-formally"><span class="header-section-number">13.3</span> Gradient Descent, Formally</a>
-  <ul class="collapse">
-  <li><a href="#choosing-the-learning-rate" id="toc-choosing-the-learning-rate" class="nav-link" data-scroll-target="#choosing-the-learning-rate"><span class="header-section-number">13.3.1</span> Choosing the Learning Rate</a></li>
-  </ul></li>
-  <li><a href="#second-order-methods" id="toc-second-order-methods" class="nav-link" data-scroll-target="#second-order-methods"><span class="header-section-number">13.4</span> Second-Order Methods</a></li>
-  <li><a href="#constrained-optimisation" id="toc-constrained-optimisation" class="nav-link" data-scroll-target="#constrained-optimisation"><span class="header-section-number">13.5</span> Constrained Optimisation</a></li>
+  <li><a href="#checking-gradients-numerically" id="toc-checking-gradients-numerically" class="nav-link" data-scroll-target="#checking-gradients-numerically"><span class="header-section-number">19.3</span> Checking Gradients Numerically</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../num/numeric.html">Numerical Methods</a></li><li class="breadcrumb-item"><a href="../num/optimisation.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/backpropagation.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Backpropagation</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-minimisation" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></span></h1>
+<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Backpropagation</span></h1>
 </div>
 
 
@@ -411,190 +404,99 @@ window.Quarto = {
 </header>
 
 
-<p>Minimisation is the general problem of locating the minimum of a function. We may equally be interested in the maximum of a function, but this can be converted to a minimisation problem by negating the function, so typically the problem is always framed as minimisation.</p>
-<p>More formally, we are interested in finding the value of <span class="math inline">\(\theta\)</span> that minimises <span class="math inline">\(f(\theta)\)</span>: <span class="math display">\[
-\theta^* = \arg\min_{\theta} f(\theta)
+<p>In this section, we will understand the backpropagation method, which allows us to compute the gradient of a neural network’s loss function with respect to its parameters. This method is essential for training neural networks, since it allows us to use gradient descent (<span class="quarto-unresolved-ref">?sec-optimisation</span>) to minimise the loss function.</p>
+<p>Every training algorithm used later in this unit — gradient descent (<span class="quarto-unresolved-ref">?sec-optimisation</span>), backpropagation (<a href="neural-networks.html#sec-backpropagation" class="quarto-xref"><span>Section 18.3.2</span></a>), the Adam optimiser (<a href="neural-networks.html#sec-adaptive-learning-rate" class="quarto-xref"><span>Section 18.4.3</span></a>) — relies on the ability to compute the derivative of a function with respect to <em>many</em> variables at once. This section introduces the vocabulary and the key result (the multivariate chain rule) needed to make that precise, before we return to see it in action in <span class="quarto-unresolved-ref">?sec-optimisation</span> and <a href="neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>.</p>
+<section id="partial-derivatives-and-the-gradient" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="partial-derivatives-and-the-gradient"><span class="header-section-number">19.1</span> Partial Derivatives and the Gradient</h2>
+<p>For a scalar function of several variables, <span class="math inline">\(f(x_1, x_2, \ldots, x_n)\)</span>, the <strong>partial derivative</strong> <span class="math inline">\(\partial f / \partial x_i\)</span> measures the rate of change of <span class="math inline">\(f\)</span> as <span class="math inline">\(x_i\)</span> varies, holding all other variables fixed. Collecting all partial derivatives into a vector gives the <strong>gradient</strong>:</p>
+<p><span class="math display">\[
+\nabla f = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \ldots, \frac{\partial f}{\partial x_n} \right)
 \]</span></p>
-<p>We are primarily interested in the case where <span class="math inline">\(f\)</span> is the loss function of a machine learning model, as discussed in <a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>. More generally, minimisation is a fundamental problem in mathematics and physics. We will also encounter it in fitting functions to data, and in the maximum likelihood methods (where we minimise the negative log likelihood) discussed in <a href="../ml/mle.html" class="quarto-xref"><span>Chapter 15</span></a>.</p>
-<section id="multivariate-calculus" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="multivariate-calculus"><span class="header-section-number">13.1</span> Multivariate calculus</h2>
-<p>In this section, we will describe gradient descent, a simple and widely used method for minimisation. In general, and especially in the case of minimising loss functions for machine learning, the function we need to minimise is a function of many variables. In order to understand gradient descent for multivariate functions, we will first need to introdue (or review) some underlying concepts in multivariate calculus.</p>
-<section id="directional-derivative" class="level3" data-number="13.1.1">
-<h3 data-number="13.1.1" class="anchored" data-anchor-id="directional-derivative"><span class="header-section-number">13.1.1</span> Directional Derivative</h3>
-<p>The rate of change of <span class="math inline">\(f\)</span> in an arbitrary direction <span class="math inline">\(\hat{\mathbf{u}}\)</span> (a unit vector) is given by the directional derivative :</p>
+<p>The gradient has an important geometric meaning: it points in the direction of steepest <em>increase</em> of <span class="math inline">\(f\)</span>, and its magnitude gives the rate of increase in that direction. This is precisely why gradient <em>descent</em> (<span class="quarto-unresolved-ref">?sec-optimisation</span>) moves in the direction of <span class="math inline">\(-\nabla f\)</span>.</p>
+<div id="0d85d56c" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">'x y'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> y <span class="op">+</span> sp.sin(y)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>grad <span class="op">=</span> [sp.diff(f, var) <span class="cf">for</span> var <span class="kw">in</span> (x, y)]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"f(x,y)      ="</span>, f)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"gradient    ="</span>, grad)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"at (1, 0)   ="</span>, [g.subs({x: <span class="dv">1</span>, y: <span class="dv">0</span>}) <span class="cf">for</span> g <span class="kw">in</span> grad])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[1], line 2</span>
+<span class="ansi-green-fg ansi-bold">      1</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">numpy</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">as</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">np</span>
+<span class="ansi-green-fg">----&gt; 2</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">sympy</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">as</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">sp</span>
+<span class="ansi-green-fg ansi-bold">      4</span> x, y <span style="color:rgb(98,98,98)">=</span> sp<span style="color:rgb(98,98,98)">.</span>symbols(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">x y</span><span style="color:rgb(175,0,0)">'</span>)
+<span class="ansi-green-fg ansi-bold">      5</span> f <span style="color:rgb(98,98,98)">=</span> x<span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">2</span> <span style="color:rgb(98,98,98)">*</span> y <span style="color:rgb(98,98,98)">+</span> sp<span style="color:rgb(98,98,98)">.</span>sin(y)
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named 'sympy'</pre>
+</div>
+</div>
+</div>
+<section id="directional-derivatives" class="level3" data-number="19.1.1">
+<h3 data-number="19.1.1" class="anchored" data-anchor-id="directional-derivatives"><span class="header-section-number">19.1.1</span> Directional Derivatives</h3>
+<p>More generally, the rate of change of <span class="math inline">\(f\)</span> in an arbitrary direction <span class="math inline">\(\hat{\mathbf{u}}\)</span> (a unit vector) is given by the <strong>directional derivative</strong>:</p>
 <p><span class="math display">\[
 D_{\hat{\mathbf{u}}} f = \nabla f \cdot \hat{\mathbf{u}}
 \]</span></p>
-<p>This is maximised when <span class="math inline">\(\hat{\mathbf{u}}\)</span> points in the same direction as <span class="math inline">\(\nabla f\)</span>.</p>
+<p>This is maximised when <span class="math inline">\(\hat{\mathbf{u}}\)</span> points in the same direction as <span class="math inline">\(\nabla f\)</span> — confirming the claim above that the gradient points in the direction of steepest ascent.</p>
 </section>
-<section id="the-jacobian" class="level3" data-number="13.1.2">
-<h3 data-number="13.1.2" class="anchored" data-anchor-id="the-jacobian"><span class="header-section-number">13.1.2</span> The Jacobian</h3>
-<p>The Jacobian is the generalisation of the derivative to functions of multiple variables. It is a matrix containing the partial derivative of every output variable with respect to every input variable:</p>
+</section>
+<section id="the-multivariate-chain-rule" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="the-multivariate-chain-rule"><span class="header-section-number">19.2</span> The Multivariate Chain Rule</h2>
+<p>This is the single most important result in this section, because it is the entire mathematical content of <strong>backpropagation</strong> (<a href="neural-networks.html#sec-backpropagation" class="quarto-xref"><span>Section 18.3.2</span></a>). For a composite function — one built by feeding the output of one function into another, exactly as happens layer-by-layer in a neural network — the chain rule states that the Jacobian of the composition is the <em>matrix product</em> of the individual Jacobians:</p>
 <p><span class="math display">\[
-J = \begin{pmatrix}
-\dfrac{\partial f_1}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial f_1}{\partial x_n} \\
-\vdots &amp; \ddots &amp; \vdots \\
-\dfrac{\partial f_m}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial f_m}{\partial x_n}
-\end{pmatrix}
+\frac{\partial \mathbf{z}}{\partial \mathbf{x}} = \frac{\partial \mathbf{z}}{\partial \mathbf{y}} \cdot \frac{\partial \mathbf{y}}{\partial \mathbf{x}}
 \]</span></p>
-</section>
-<section id="the-hessian" class="level3" data-number="13.1.3">
-<h3 data-number="13.1.3" class="anchored" data-anchor-id="the-hessian"><span class="header-section-number">13.1.3</span> The Hessian</h3>
-<p>In a similar way, the Hessian is defined as the matrix of all second partial derivatives:</p>
+<p>where <span class="math inline">\(\mathbf{x} \to \mathbf{y} \to \mathbf{z}\)</span> is a chain of function compositions.</p>
+<p>Compare this directly with the single-node backpropagation example already worked through in <a href="neural-networks.html#sec-backpropagation" class="quarto-xref"><span>Section 18.3.2</span></a>:</p>
 <p><span class="math display">\[
-H_{ij} = \frac{\partial^2 f}{\partial x_i \, \partial x_j}
+\frac{\partial L}{\partial \alpha} = \frac{\partial L}{\partial \hat{y}} \frac{\partial \hat{y}}{\partial z} \frac{\partial z}{\partial \alpha}
 \]</span></p>
-<p>The Hessian encodes the local <em>curvature</em> of <span class="math inline">\(f\)</span>, and is important in minimisation since it will classify stationary points of the function (minima, maxima, saddle points).</p>
-<!--
-
-::: {#4ae827df .cell execution_count=1}
-``` {.python .cell-code}
-hess = sp.hessian(f, (x, y))
-print("Hessian :")
-sp.pprint(hess)
-```
-
-::: {.cell-output .cell-output-error}
-
-::: {.ansi-escaped-output}
-```{=html}
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[1], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> hess <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">sp</span><span style="color:rgb(98,98,98)">.</span>hessian(f, (x, y))
-<span class="ansi-green-fg ansi-bold">      2</span> <span style="color:rgb(0,135,0)">print</span>(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Hessian :</span><span style="color:rgb(175,0,0)">"</span>)
-<span class="ansi-green-fg ansi-bold">      3</span> sp<span style="color:rgb(98,98,98)">.</span>pprint(hess)
-
-<span class="ansi-red-fg">NameError</span>: name 'sp' is not defined</pre>
-```
-:::
-
-:::
-:::
-
-
--->
+<p>This is exactly the multivariate chain rule above, specialised to the case where every quantity happens to be a scalar. In a full network with vector-valued activations at each layer, the <em>same</em> rule applies, but each factor becomes a Jacobian matrix rather than a scalar derivative, and the “multiplication” becomes genuine matrix multiplication. This is precisely why efficient matrix multiplication (<a href="../num/matrix.html" class="quarto-xref"><span>Chapter 9</span></a>) is not just a computational convenience for neural networks, but the literal mathematical mechanism by which gradients are propagated backwards through the network.</p>
+<section id="automatic-differentiation" class="level3" data-number="19.2.1">
+<h3 data-number="19.2.1" class="anchored" data-anchor-id="automatic-differentiation"><span class="header-section-number">19.2.1</span> Automatic Differentiation</h3>
+<p>Modern deep learning frameworks (PyTorch, TensorFlow, JAX — see <a href="neural-networks.html#sec-programming-nn" class="quarto-xref"><span>Section 18.6</span></a>) don’t compute derivatives symbolically (as <code>sympy</code> does above) or numerically (see below); instead they use <strong>automatic differentiation</strong>, which applies the chain rule mechanically to the sequence of elementary operations (add, multiply, exponentiate, …) that make up a computation, accumulating Jacobians as it goes. Applying the chain rule <em>backwards</em> through the computation graph, from output to input, is what “reverse-mode” automatic differentiation means — and reverse-mode automatic differentiation applied to a neural network’s loss function is, precisely, backpropagation. This is why backpropagation, once understood as an instance of the chain rule, generalises immediately to arbitrarily complex network architectures (CNNs, RNNs, Transformers) without needing a new derivation for each one — the chain rule doesn’t care what the individual layers compute.</p>
 </section>
 </section>
-<section id="the-shape-of-the-problem" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="the-shape-of-the-problem"><span class="header-section-number">13.2</span> The Shape of the Problem</h2>
-<p>For a function of a single variable, minimisation is something you likely already associate with setting <span class="math inline">\(f'(\theta)=0\)</span> and checking the sign of <span class="math inline">\(f''(\theta)\)</span>. This generalises directly using the gradient and Hessian (<a href="../ml/gradients.html" class="quarto-xref"><span>Chapter 19</span></a>): a point <span class="math inline">\(\theta^*\)</span> is a <strong>stationary point</strong> if <span class="math inline">\(\nabla f(\theta^*) = 0\)</span>, and it is a local minimum if, additionally, the Hessian <span class="math inline">\(H(\theta^*)\)</span> is positive definite (loosely: the function curves upward in every direction).</p>
-<p>Not all stationary points are minima:</p>
-<ul>
-<li>If <span class="math inline">\(H\)</span> is negative definite, the point is a local <strong>maximum</strong>.</li>
-<li>If <span class="math inline">\(H\)</span> has both positive and negative eigenvalues, the point is a <strong>saddle point</strong> — a minimum along some directions and a maximum along others.</li>
-</ul>
-<div id="5521e2e5" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># a simple non-convex function with a saddle point at the origin: f(x,y) = x^2 - y^2</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">50</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">50</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> X<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> Y<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">5</span>))</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>ax.plot_surface(X, Y, Z, cmap<span class="op">=</span><span class="st">'viridis'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'x'</span>)<span class="op">;</span> ax.set_ylabel(<span class="st">'y'</span>)<span class="op">;</span> ax.set_zlabel(<span class="st">'f(x,y)'</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="optimisation_files/figure-html/cell-3-output-1.png" width="402" height="396" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Saddle points matter for neural network training in particular: loss landscapes for networks with many parameters (<a href="../ml/neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>) are high-dimensional and non-convex, and turn out to contain vastly more saddle points than actual local minima. Much of the practical difficulty of training large models is really about <em>escaping saddle points and flat regions</em> rather than avoiding local minima as such.</p>
-<section id="convexity" class="level3" data-number="13.2.1">
-<h3 data-number="13.2.1" class="anchored" data-anchor-id="convexity"><span class="header-section-number">13.2.1</span> Convexity</h3>
-<p>A function is <strong>convex</strong> if the line segment joining any two points on its graph lies on or above the graph. Convex functions are extremely well-behaved for optimisation: any local minimum is automatically the global minimum, and reliable convergence guarantees exist for gradient-based methods.</p>
-<p>The mean squared error loss for <em>linear</em> regression (<a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>) is convex in its parameters — this is why linear regression can be solved directly (indeed, in closed form, using the linear algebra of <a href="sim-eqn.html" class="quarto-xref"><span>Chapter 10</span></a>). Neural network loss surfaces, by contrast, are generally non-convex, which is precisely why training is iterative, sensitive to initialisation, and not guaranteed to find a global minimum.</p>
-</section>
-</section>
-<section id="gradient-descent-formally" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="gradient-descent-formally"><span class="header-section-number">13.3</span> Gradient Descent, Formally</h2>
-<p>Gradient descent updates parameters by taking a step in the direction of steepest descent — the negative gradient (<a href="../ml/gradients.html" class="quarto-xref"><span>Chapter 19</span></a>):</p>
+<section id="checking-gradients-numerically" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="checking-gradients-numerically"><span class="header-section-number">19.3</span> Checking Gradients Numerically</h2>
+<p>A gradient computed by hand (or by an automatic differentiation library) can always be sanity-checked against a direct numerical approximation, using the definition of the derivative as a limit:</p>
 <p><span class="math display">\[
-\theta_{i+1} = \theta_i - \eta \, \nabla f(\theta_i)
+\frac{\partial f}{\partial x_i} \approx \frac{f(\ldots, x_i + \epsilon, \ldots) - f(\ldots, x_i - \epsilon, \ldots)}{2\epsilon}
 \]</span></p>
-<p>where <span class="math inline">\(\eta\)</span> is the <strong>learning rate</strong> (or step size). This is exactly the update rule already used, without derivation, in <a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a> and <a href="../ml/neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>. The justification is a direct consequence of the definition of the gradient: <span class="math inline">\(-\nabla f(\theta)\)</span> is, locally, the direction of steepest decrease of <span class="math inline">\(f\)</span>, so a small enough step in that direction is guaranteed to decrease <span class="math inline">\(f\)</span> (provided <span class="math inline">\(f\)</span> is smooth enough, and the step isn’t too large).</p>
-<div id="09208468" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(theta):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> theta</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span><span class="op">*</span>(y<span class="op">+</span><span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span></span>
+<p>for some small <span class="math inline">\(\epsilon\)</span>. This “finite difference” check is slow (it requires re-evaluating <span class="math inline">\(f\)</span> once per parameter) and not used for actual training, but it is an extremely useful debugging tool — if your analytic gradient and your numerical gradient disagree, you have a bug.</p>
+<div id="0bbfa7b7" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f_np(v):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> v</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> y <span class="op">+</span> np.sin(y)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_f(theta):</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> theta</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([<span class="dv">2</span><span class="op">*</span>(x<span class="op">-</span><span class="dv">1</span>), <span class="dv">10</span><span class="op">*</span>(y<span class="op">+</span><span class="dv">2</span>)])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_analytic(v):</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> v</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([<span class="dv">2</span><span class="op">*</span>x<span class="op">*</span>y, x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> np.cos(y)])</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> np.array([<span class="op">-</span><span class="fl">3.</span>, <span class="fl">3.</span>])</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>eta <span class="op">=</span> <span class="fl">0.08</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> [theta.copy()]</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">60</span>):</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    theta <span class="op">=</span> theta <span class="op">-</span> eta <span class="op">*</span> grad_f(theta)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    history.append(theta.copy())</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> np.array(history)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Converged to :"</span>, theta, <span class="st">" (true minimum is [1, -2])"</span>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>plt.plot(history[:,<span class="dv">0</span>], history[:,<span class="dv">1</span>], marker<span class="op">=</span><span class="st">'.'</span>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>plt.scatter([<span class="dv">1</span>], [<span class="op">-</span><span class="dv">2</span>], color<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'x'</span>, s<span class="op">=</span><span class="dv">100</span>, label<span class="op">=</span><span class="st">'true minimum'</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)<span class="op">;</span> plt.ylabel(<span class="st">'y'</span>)<span class="op">;</span> plt.legend()</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_numerical(func, v, eps<span class="op">=</span><span class="fl">1e-6</span>):</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    grad <span class="op">=</span> np.zeros_like(v)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(v)):</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        v_plus, v_minus <span class="op">=</span> v.copy(), v.copy()</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        v_plus[i] <span class="op">+=</span> eps</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        v_minus[i] <span class="op">-=</span> eps</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        grad[i] <span class="op">=</span> (func(v_plus) <span class="op">-</span> func(v_minus)) <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>eps)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> grad</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>v0 <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">0.5</span>])</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Analytic gradient  :"</span>, grad_analytic(v0))</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Numerical gradient :"</span>, grad_numerical(f_np, v0))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Converged to : [ 0.9998855 -2.       ]  (true minimum is [1, -2])</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="optimisation_files/figure-html/cell-4-output-2.png" width="587" height="429" class="figure-img"></p>
-</figure>
+<pre><code>Analytic gradient  : [1.         1.87758256]
+Numerical gradient : [1.         1.87758256]</code></pre>
 </div>
 </div>
-</div>
-<section id="choosing-the-learning-rate" class="level3" data-number="13.3.1">
-<h3 data-number="13.3.1" class="anchored" data-anchor-id="choosing-the-learning-rate"><span class="header-section-number">13.3.1</span> Choosing the Learning Rate</h3>
-<p>The learning rate controls a fundamental trade-off:</p>
-<ul>
-<li>Too <strong>small</strong>, and convergence is reliable but painfully slow.</li>
-<li>Too <strong>large</strong>, and the algorithm can overshoot the minimum, oscillate, or diverge entirely.</li>
-</ul>
-<div id="d5ae8b80" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> eta_test <span class="kw">in</span> [<span class="fl">0.01</span>, <span class="fl">0.08</span>, <span class="fl">0.21</span>]:</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    theta <span class="op">=</span> np.array([<span class="op">-</span><span class="fl">3.</span>, <span class="fl">3.</span>])</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">30</span>):</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        theta <span class="op">=</span> theta <span class="op">-</span> eta_test <span class="op">*</span> grad_f(theta)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"eta=</span><span class="sc">{</span>eta_test<span class="sc">:&lt;5}</span><span class="ss"> -&gt; theta after 30 steps = </span><span class="sc">{</span>theta<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>eta=0.01  -&gt; theta after 30 steps = [-1.18193728 -1.78804421]
-eta=0.08  -&gt; theta after 30 steps = [ 0.97859878 -2.        ]
-eta=0.21  -&gt; theta after 30 steps = [ 0.99999968 85.24701134]</code></pre>
-</div>
-</div>
-<p>Notice how a learning rate that is too large causes the iterate to move <em>away</em> from the minimum rather than towards it. This single issue is the motivation for essentially all of the “adaptive learning rate” methods described in <a href="../ml/neural-networks.html#sec-adaptive-learning-rate" class="quarto-xref"><span>Section 18.4.3</span></a> (AdaGrad, Adam) — rather than fixing <span class="math inline">\(\eta\)</span> once and for all, they adjust it automatically, per-parameter, during training.</p>
-<p>A more classical alternative, not covered elsewhere in these notes, is <strong>line search</strong>: at each step, instead of committing to a fixed <span class="math inline">\(\eta\)</span>, a 1D search is performed along the gradient direction to find a good step size before moving on. This is more expensive per step, but requires far less manual tuning — a trade-off worth being aware of, even though stochastic and mini-batch methods (<a href="../ml/neural-networks.html#sec-sgd" class="quarto-xref"><span>Section 18.4.1</span></a>, <a href="../ml/neural-networks.html#sec-batch-gd" class="quarto-xref"><span>Section 18.4.2</span></a>) make full line search impractical for most modern ML training.</p>
-</section>
-</section>
-<section id="second-order-methods" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="second-order-methods"><span class="header-section-number">13.4</span> Second-Order Methods</h2>
-<p>Gradient descent uses only <em>first</em>-order information (the gradient). <strong>Newton’s method</strong> additionally uses the Hessian, and updates parameters using:</p>
-<p><span class="math display">\[
-\theta_{i+1} = \theta_i - H(\theta_i)^{-1} \nabla f(\theta_i)
-\]</span></p>
-<p>This can converge dramatically faster than gradient descent near a minimum, since it accounts for the local curvature of <span class="math inline">\(f\)</span> rather than just its slope. However, it has a fatal practical flaw for machine learning: computing and inverting the Hessian costs <span class="math inline">\(O(n^3)\)</span> operations for <span class="math inline">\(n\)</span> parameters (using the same LU/inversion machinery as <a href="sim-eqn.html" class="quarto-xref"><span>Chapter 10</span></a>). For a neural network with millions or billions of parameters, this is completely infeasible. This is the fundamental reason why gradient descent and its first-order variants (SGD, momentum, AdaGrad, Adam — <a href="../ml/neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>) dominate in deep learning, despite their slower convergence: they only ever require <span class="math inline">\(O(n)\)</span> storage and computation per step.</p>
-</section>
-<section id="constrained-optimisation" class="level2" data-number="13.5">
-<h2 data-number="13.5" class="anchored" data-anchor-id="constrained-optimisation"><span class="header-section-number">13.5</span> Constrained Optimisation</h2>
-<p>So far we’ve assumed <span class="math inline">\(\theta\)</span> is free to take any value. Sometimes, however, we want to minimise <span class="math inline">\(f(\theta)\)</span> subject to a constraint, <span class="math inline">\(g(\theta) = 0\)</span>. The standard approach is the method of <strong>Lagrange multipliers</strong>: introduce an auxiliary variable <span class="math inline">\(\lambda\)</span> and form the Lagrangian</p>
-<p><span class="math display">\[
-\mathcal{L}(\theta, \lambda) = f(\theta) + \lambda \, g(\theta)
-\]</span></p>
-<p>At a constrained optimum, the gradient of <span class="math inline">\(\mathcal{L}\)</span> with respect to <em>both</em> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\lambda\)</span> must vanish. Geometrically, this condition says that at the constrained optimum, the gradient of <span class="math inline">\(f\)</span> is parallel to the gradient of the constraint <span class="math inline">\(g\)</span> — there is no direction you could move along the constraint surface that would still decrease <span class="math inline">\(f\)</span>.</p>
-<p>This is more than a mathematical curiosity for this course: regularisation (<a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>) can be understood exactly as constrained optimisation. Minimising <span class="math inline">\(\text{MSE} + \lambda \sum |w_i|\)</span> (LASSO) or <span class="math inline">\(\text{MSE} + \lambda \sum w_i^2\)</span> (Ridge) is the Lagrangian form of the constrained problem “minimise MSE subject to the weights lying within some norm-ball” — the regularisation strength <span class="math inline">\(\lambda\)</span> plays exactly the role of the Lagrange multiplier above.</p>
 
 
 </section>
@@ -1002,13 +904,13 @@ eta=0.21  -&gt; theta after 30 steps = [ 0.99999968 85.24701134]</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../num/monte-carlo.html" class="pagination-link" aria-label="Monte Carlo Methods">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span>
+      <a href="../ml/neural-networks.html" class="pagination-link" aria-label="Neural Networks">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Neural Networks</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../ml/ml.html" class="pagination-link" aria-label="Machine Learning">
-        <span class="nav-page-text">Machine Learning</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../ml/cnn.html" class="pagination-link" aria-label="Convolutional Neural Networks">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Convolutional Neural Networks</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

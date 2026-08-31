@@ -297,7 +297,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../num/optimisation.html" class="sidebar-item-text sidebar-link">
+  <a href="../num/minimisation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></span></a>
   </div>
 </li>
@@ -344,8 +344,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/gradients.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span></a>
+  <a href="../ml/backpropagation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Backpropagation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -473,7 +473,7 @@ L(\theta, \phi; \mathbf{x}) = \underbrace{\mathbb{E}_{\mathbf{z}\sim q_\phi}\big
 <p><span class="math display">\[
 D_{\text{KL}}\big(\mathcal{N}(\mu,\sigma^2) \,\|\, \mathcal{N}(0,1)\big) = -\frac{1}{2}\sum_{i} \left(1 + \log\sigma_i^2 - \mu_i^2 - \sigma_i^2\right)
 \]</span></p>
-<div id="3cfc991a" class="cell" data-execution_count="1">
+<div id="97ac1bad" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kl_divergence_to_standard_normal(mu, log_var):</span>
@@ -498,13 +498,13 @@ KL divergence (far from prior)   : 10.18109312953954</code></pre>
 </section>
 <section id="the-reparameterisation-trick" class="level3" data-number="22.2.2">
 <h3 data-number="22.2.2" class="anchored" data-anchor-id="the-reparameterisation-trick"><span class="header-section-number">22.2.2</span> The Reparameterisation Trick</h3>
-<p>There is a subtlety in training a VAE that is worth making explicit, because it’s a direct, practical application of the chain rule from <a href="gradients.html" class="quarto-xref"><span>Chapter 19</span></a>. Sampling <span class="math inline">\(\mathbf{z} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\sigma}^2)\)</span> is a <em>random</em>, non-differentiable operation — gradients cannot flow backwards through a random sampling step during backpropagation (<a href="neural-networks.html#sec-backpropagation" class="quarto-xref"><span>Section 18.3.2</span></a>), since there is no well-defined derivative of “draw a random sample” with respect to <span class="math inline">\(\boldsymbol{\mu}\)</span> and <span class="math inline">\(\boldsymbol{\sigma}\)</span>.</p>
+<p>There is a subtlety in training a VAE that is worth making explicit, because it’s a direct, practical application of the chain rule from <span class="quarto-unresolved-ref">?sec-gradients</span>. Sampling <span class="math inline">\(\mathbf{z} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\sigma}^2)\)</span> is a <em>random</em>, non-differentiable operation — gradients cannot flow backwards through a random sampling step during backpropagation (<a href="neural-networks.html#sec-backpropagation" class="quarto-xref"><span>Section 18.3.2</span></a>), since there is no well-defined derivative of “draw a random sample” with respect to <span class="math inline">\(\boldsymbol{\mu}\)</span> and <span class="math inline">\(\boldsymbol{\sigma}\)</span>.</p>
 <p>The fix is to rewrite the sampling step so that all the randomness is isolated in a term that does <em>not</em> depend on the network’s parameters:</p>
 <p><span class="math display">\[
 \mathbf{z} = \boldsymbol{\mu}_\phi(\mathbf{x}) + \boldsymbol{\sigma}_\phi(\mathbf{x}) \odot \boldsymbol{\epsilon}, \qquad \boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, I)
 \]</span></p>
-<p>where <span class="math inline">\(\odot\)</span> denotes elementwise multiplication. Now <span class="math inline">\(\mathbf{z}\)</span> is written as a deterministic, differentiable function of <span class="math inline">\(\boldsymbol{\mu}\)</span>, <span class="math inline">\(\boldsymbol{\sigma}\)</span>, and a separately-sampled noise term <span class="math inline">\(\boldsymbol{\epsilon}\)</span> that carries no trainable parameters. This means the chain rule (<a href="gradients.html" class="quarto-xref"><span>Chapter 19</span></a>) can be applied straight through the sampling step exactly as through any other layer, and the whole network — encoder and decoder together — can be trained end-to-end with ordinary backpropagation.</p>
-<div id="7d0e75e1" class="cell" data-execution_count="2">
+<p>where <span class="math inline">\(\odot\)</span> denotes elementwise multiplication. Now <span class="math inline">\(\mathbf{z}\)</span> is written as a deterministic, differentiable function of <span class="math inline">\(\boldsymbol{\mu}\)</span>, <span class="math inline">\(\boldsymbol{\sigma}\)</span>, and a separately-sampled noise term <span class="math inline">\(\boldsymbol{\epsilon}\)</span> that carries no trainable parameters. This means the chain rule (<span class="quarto-unresolved-ref">?sec-gradients</span>) can be applied straight through the sampling step exactly as through any other layer, and the whole network — encoder and decoder together — can be trained end-to-end with ordinary backpropagation.</p>
+<div id="d62ec714" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reparameterise(mu, log_var, rng):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    sigma <span class="op">=</span> np.exp(<span class="fl">0.5</span> <span class="op">*</span> log_var)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    epsilon <span class="op">=</span> rng.normal(size<span class="op">=</span>mu.shape)</span>
@@ -563,7 +563,7 @@ Sample variance : [1.23696171 0.72564848]  (target sigma^2 = [1.22140276 0.74081
 </tr>
 </tbody>
 </table>
-<p>All three ultimately rely on the same underlying toolkit developed across this unit: gradients and the chain rule (<a href="gradients.html" class="quarto-xref"><span>Chapter 19</span></a>), gradient-based optimisation (<span class="quarto-unresolved-ref">?sec-optimisation</span>), and — as made explicit above — maximum likelihood as a guiding principle for what “loss function” even means (<a href="mle.html" class="quarto-xref"><span>Chapter 15</span></a>).</p>
+<p>All three ultimately rely on the same underlying toolkit developed across this unit: gradients and the chain rule (<span class="quarto-unresolved-ref">?sec-gradients</span>), gradient-based optimisation (<span class="quarto-unresolved-ref">?sec-optimisation</span>), and — as made explicit above — maximum likelihood as a guiding principle for what “loss function” even means (<a href="mle.html" class="quarto-xref"><span>Chapter 15</span></a>).</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">

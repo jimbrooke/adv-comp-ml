@@ -277,7 +277,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../num/optimisation.html" class="sidebar-item-text sidebar-link">
+  <a href="../num/minimisation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minimisation</span></span></a>
   </div>
 </li>
@@ -324,8 +324,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/gradients.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gradients &amp; Multivariate Calculus</span></span></a>
+  <a href="../ml/backpropagation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Backpropagation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -405,7 +405,7 @@ window.Quarto = {
 <section id="lambda-functions" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="lambda-functions"><span class="header-section-number">4.1</span> Lambda Functions</h2>
 <p>In Python, lambda functions are created using the lambda keyword, eg.: lambda: x, x**2 returns an “anonymous” function that takes one argument, and returns a value that depends only on the argument (in this case, the square). Compare this to regular functions, which are declared with def and are named. For example, the following function takes one argument and returns a value that depends only on the argument :</p>
-<div id="c4bfbd93" class="cell" data-execution_count="1">
+<div id="c76cea6f" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> function(x):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.5</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> x <span class="op">+</span> <span class="dv">1</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>function(<span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -414,7 +414,7 @@ window.Quarto = {
 </div>
 </div>
 <p>The equivalent using a lambda function would be :</p>
-<div id="9d7c85b2" class="cell" data-execution_count="2">
+<div id="c30e1078" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">lambda</span> x: <span class="fl">0.5</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> x <span class="op">+</span> <span class="dv">1</span>)(<span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>13.0</code></pre>
@@ -424,7 +424,7 @@ window.Quarto = {
 <section id="anonymous-functions" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="anonymous-functions"><span class="header-section-number">4.2</span> Anonymous functions</h2>
 <p>Lambdas can be useful when implementing mathematical expressions, and when working with functions that expect other functions as arguments. Eg. suppose I want to calculate <span class="math inline">\(\int_1^4 e^{−x}\)</span>. I can do this in one line with a lambda function :</p>
-<div id="04e10554" class="cell" data-execution_count="3">
+<div id="adea32c0" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.integrate</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -439,7 +439,7 @@ window.Quarto = {
 <p>Another area where lambda functions are useful is in the “map-reduce” paradigm. The idea here is that when processing large amounts of data, you want to do as much processing in parallel as possible. A given algorithm is divided into a parallel part (map), and a non-parallel part (reduce). When processing huge datasets, the map will be running in parallel on multiple machines. In Python, the map() function takes a function and a list as arguments. The function is applied to each element in the list, and then a list of the results is returned. Eg. to calculate the expression below for for n = 1000 : <span class="math display">\[
 \sum_{i=1}^n i^2
 \]</span></p>
-<div id="2f5cafd7" class="cell" data-execution_count="4">
+<div id="596a0c69" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
