@@ -1,25 +1,146 @@
 ---
-title: "Profiling"
 format: html
 execute:
   error: true
 ---
 
-  In this chapter, we discuss methods for measuring code performance, also known as profiling.  In general, we are interested in the amount of computing 'resources' used by a program, which can be measured in terms of execution time, memory usage, or other metrics.  Profiling is the process of measuring these resources.  By identifying the code that is responsible for greatest resource use, we can refine the code and improve the performance.  Here we discuss methods for measuring the execution time and the memory usage of a program.
-  
-  ## Execution time
+# Profiling {#sec-profiling}
 
+In this chapter, we discuss methods for measuring code performance, also known as profiling.  In general, we are interested in the amount of computing 'resources' used by a program, which can be measured in terms of execution time, memory usage, or other metrics.  Profiling is the process of measuring these resources.  By identifying the code that is responsible for greatest resource use, we can refine the code and improve the performance.  Here we discuss methods for measuring the execution time and the memory usage of a program.  These are the natural first steps before reaching for the more heavyweight solutions discussed in the coming sections, @sec-parallel and @sec-distributed.  In particular, we want to establish, that a single-threaded version is genuinely too slow, and knowing *which part* of it is slow is essential in deciding what steps are needed to improve it.
+
+This section covers four standard tools, of increasing specificity: the `time` module (general purpose wall-clock timing), `timeit` (reliable timing of small code snippets), `sys` (basic memory inspection), and `memory_profiler` (detailed, line-by-line memory usage).
+
+## Execution time
 
 ### The `time` module
 
+The simplest way to measure how long a piece of code takes is to record a timestamp before and after it runs, and subtract. Python's built-in `time` module provides `time.perf_counter()` for exactly this purpose.  Note that this is preferred over `time.time()` since it uses the most precise available clock and is guaranteed to be monotonic.
 
+In the example below, we use `time.perf_counter()` to measure the execution time of a simple Python loop, and compare it to the equivalent vectorised numpy operation.
+
+```{python}
+import time
+import numpy as np
+
+n = 2_000_000
+
+# a plain Python loop
+start = time.perf_counter()
+total = 0.0
+for i in range(n):
+    total += i**2
+end = time.perf_counter()
+print(f"Python loop   : {end - start:.4f} s")
+
+# the vectorised numpy equivalent
+start = time.perf_counter()
+total_np = np.sum(np.arange(n)**2)
+end = time.perf_counter()
+print(f"Vectorised numpy : {end - start:.4f} s")
+```
+
+`time.perf_counter()` is fine for timing something that takes at least fraction of a second, but it has two weaknesses for profiling short pieces of code.  First, a single measurement is subject to noise (due to other processes running on your machine, CPU frequency scaling, etc.).  Second, the overhead of the measurement itself will distort the result for code that runs in less than a few milliseconds.  For this purpose, the `timeit` module is more appropriate.
 
 ### The `timeit` module
 
+`timeit` is purpose-built for benchmarking small code snippets reliably. Rather than a single measurement, it runs the code many times and reports statistics, and it takes care of some common pitfalls automatically — notably, it temporarily disables the garbage collector during timing, so that an unlucky garbage-collection pause doesn't distort one particular run.  (Garbage collection is the process by which Python automatically frees memory that is no longer in use, and can be triggered at any time.)
+
+You may wonder why we need to time evry short pieces of code in the first place.  Frequently, a function or code fragment may be called many times in a program (eg. within a loop), in which case the total time spent in that function may be significant.  In these case, optimisation of the function may be worthwhile, and `timeit` can be used to compare different approaches or options.
+
+
+```{python}
+import timeit
+
+def python_sum_squares(n):
+    total = 0.0
+    for i in range(n):
+        total += i**2
+    return total
+
+def numpy_sum_squares(n):
+    return np.sum(np.arange(n)**2)
+
+n = 100_000
+t_python = timeit.timeit(lambda: python_sum_squares(n), number=5)
+t_numpy  = timeit.timeit(lambda: numpy_sum_squares(n), number=5)
+
+print(f"Python loop, mean of 5 runs   : {t_python/5*1000:.2f} ms")
+print(f"Vectorised numpy, mean of 5 runs : {t_numpy/5*1000:.2f} ms")
+```
+
+The `number` argument controls how many times the snippet is executed; `timeit` returns the *total* time for all runs, so dividing by `number` gives the mean time per run, as above. For very short snippets it's often better to let `timeit` choose a suitable repeat count automatically, using `timeit.repeat()`, which returns several such totals so you can also see the spread between them:
+
+```{python}
+results = timeit.repeat(lambda: numpy_sum_squares(n), number=5, repeat=3)
+print("Total time for each of 3 repeats of 5 runs :", [f"{r*1000:.2f} ms" for r in results])
+```
+
+It is worth knowing that, when working interactively in a Jupyter notebook with an active Python kernel, the `%timeit` magic command wraps all of this for you automatically (choosing sensible values of `number` and `repeat`, and printing a clean summary).
 
 ## Memory usage
 
-### The `sys` module
+### Individual Python objects
+
+The memory footprint of a Python object can be measured using `sys.getsizeof()`.  This is a simple, general-purpose tool that reports the size of a single object in bytes.  It does not report the size of any objects that the object refers to, so it will under-report the total memory usage for complex objects (eg. a list of lists).  For numpy arrays, the `.nbytes` attribute is more useful, since it reports the total number of bytes used by the array's data buffer.
+
+The example below illustrates these methods.  It also demonstrates the advantage of numpy's compact, fixed-type storage over a general-purpose Python list, which stores each element as a full Python object with its own overhead.
+
+```{python}
+import sys
+
+a_list = list(range(1000))
+a_numpy_array = np.arange(1000)
+a_numpy_array_float64 = np.arange(1000, dtype=np.float64)
+
+print(f"Python list of 1000 ints        : {sys.getsizeof(a_list):,} bytes")
+print(f"numpy array of 1000 ints        : {a_numpy_array.nbytes:,} bytes (via .nbytes)")
+print(f"numpy float64 array of 1000     : {a_numpy_array_float64.nbytes:,} bytes")
+```
 
 
 ### The `memory_profiler` module
+
+`memory_profiler` is a third-party package (install with `pip install memory_profiler --break-system-packages`) that measures memory usage *line by line* as a function executes, rather than just reporting the size of one object at a time. This makes it much better suited to answering the practical question "which line of my function is actually responsible for the memory usage?"
+
+Its most common interface is the `@profile` decorator, combined with running your script via `python -m memory_profiler your_script.py`. Because this requires a real, standalone script rather than an inline code cell, we show the pattern here rather than executing it directly:
+
+```{python}
+#| eval: false
+from memory_profiler import profile
+
+@profile
+def build_arrays():
+    a = np.zeros((1000, 1000))       # ~8 MB
+    b = np.ones((2000, 2000))        # ~32 MB
+    c = a.sum() + b.sum()
+    del b                            # explicitly free b
+    return c
+
+build_arrays()
+```
+
+Running this via `python -m memory_profiler your_script.py` produces a report showing the memory usage *after* each line executes, and the incremental change caused by that line — making it immediately clear, for example, that allocating `b` is responsible for the largest single jump in memory usage, and that the `del b` line frees it again. This line-by-line resolution is exactly what `sys.getsizeof()` cannot provide, since it only ever measures one object at a fixed point in time, not the evolving memory footprint of a running function.
+
+If you only need a quick, lower-effort memory check (rather than full line-by-line detail), `memory_profiler` also provides `memory_usage()`, which can be called directly within a script or notebook without the `-m` invocation:
+
+```{python}
+#| eval: false
+from memory_profiler import memory_usage
+
+mem_before = memory_usage()[0]
+big_array = np.zeros((5000, 5000))   # ~200 MB
+mem_after = memory_usage()[0]
+print(f"Memory increase : {mem_after - mem_before:.1f} MiB")
+```
+
+<!-- ## Summary
+
+| Tool | Measures | Best for |
+|---|---|---|
+| `time` | Wall-clock time | Quick, one-off timing of larger blocks of code |
+| `timeit` | Wall-clock time, averaged over many runs | Reliable benchmarking of small snippets, especially when comparing alternatives |
+| `sys.getsizeof()` | Memory of a single object | Quick sanity checks on the size of one variable |
+| `memory_profiler` | Memory usage over time / line-by-line | Diagnosing which part of a function is responsible for high memory usage |
+
+As a general workflow: use `time` or `timeit` first to establish *whether* a piece of code is actually slow, and `memory_profiler` to establish *whether* it's using more memory than expected — only once you know which resource (time or memory) is the actual constraint, and roughly where in the code it arises, does it make sense to reach for the heavier tools of vectorisation (@sec-matrix), parallel programming (@sec-parallel), or distributed/cloud computing (@sec-cloud) covered elsewhere in this unit.
+-->

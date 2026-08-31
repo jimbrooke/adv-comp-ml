@@ -1,9 +1,10 @@
 ---
-title: "Simultaneous Equations"
 format: html
 execute:
   error: true
 ---
+
+# Simultaneous Equations {#sec-sim-eqn}
 
 Many problems in physics require solving simultaneous equations. When these become large and complex, numerical routines are required.
 
@@ -31,7 +32,7 @@ $$Ax = y$$  {#eq-c}
 where A is the matrix of coefficients, x is the vector of unknown variables $x_1$, $x_2$, ... and y is the known vector of constants.
 
 
-## Inverse Matrix
+## Inverse Matrix {#sec-inv}
 
 One way to solve the above equation is to multiply both sides by the inverse of A:
 
@@ -176,7 +177,7 @@ $$  {#eq-o}
 
 @press2007 provides a detailed discussion of Gaussian elimination, and the Scipy routine `scipy.linalg.solve()` uses this technique to solve simultaneous equations.
 
-## LU Decomposition
+## LU Decomposition {#sec-lud}
 
 Matrix decomposition techniques involve factorising a general matrix into a product of several matrices. LU decomposition involves writing the general matrix, $A$, as the product of two triangular matrices, $L$ and $U$. A brief discussion of LU decomposition is given here, for more information see @golub1996.
 
@@ -228,7 +229,7 @@ Note that the general purpose solvers provided by both numpy and scipy both util
 - [scipy.linalg.solve](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.solve.html)
 
 
-## SVD Decomposition
+## SVD Decomposition {#sec-svd}
 
 LU decomposition will find an exact solution to the matrix equation in a wide variety of cases.  However, a solution may not exist, or there may be infinite solutions. In such cases, the Singular Value Decomposition may be of use.  @trefethen1997 provides a detailed discussion of SVD decomposition, and @golub1996 provides a more general discussion of matrix decomposition techniques.
 

@@ -1,13 +1,23 @@
 ---
-title: "Basic Matrix Operations"
 format: html
 execute:
   error: true
 ---
 
+# Basic Matrix Operations {#sec-matrix}
+
 Python/numpy/scipy provide a range of options for achieving basic matrix operations. You will need to take a little care to ensure that your code implements the operations you intend it to. This is largely due to the fact that some operators/functions will change their behaviour depending on the input you provide. This section includes some recommendations for simple linear algebra, which should ensure your code behaves as desired.
 
-Matrices can be implemented as a 2D `np.ndarray`. Basic matrix arithmetic can then be performed using standard operators `+`,`-` and `@`. You can also use `np.matmul()` for matrix multiplication. Numpy will also perform matrix multiplication with `np.dot()`, but this is not recommended if you can use `@` or `np.matmul()`.
+For further information, look at the reference pages : 
+[https://numpy.org/doc/stable/reference/routines.array-manipulation.html](https://numpy.org/doc/stable/reference/routines.array-manipulation.html)
+[https://numpy.org/doc/stable/reference/routines.linalg.html](https://numpy.org/doc/stable/reference/routines.linalg.html)
+and
+
+
+
+## Matrix representation
+
+Matrices can be implemented as a 2D `np.ndarray`. Basic matrix arithmetic can then be performed using standard operators `+`,`-` and `@`. 
 
 ```{python}
 import numpy as np
@@ -29,6 +39,10 @@ print(np.matmul(A, B))
 print(A @ B)
 ```
 
+The transpose of a matrix is given by `np.transpose()` or `ndarray.T`.
+
+## Vector representation
+
 Vectors can be implemented as 1D arrays, or as 2D arrays. A 1D array will be interpreted as row or column vector depending on the context in which it is used. Use of 2D arrays allows you to specify row or column form. This can be useful, since `np.matmul()` or `@` will throw an exception if you accidentally try to perform an illegal matrix operation.
 
 ```{python}
@@ -48,16 +62,68 @@ print(vr@A)
 print(A@vr)
 ```
 
-Numpy will also provide the usual forms of vector product via `np.vdot()`, `np.cross()`, `np.inner()` and `np.outer()`. Again, `np.dot()` will provide a vector dot product, but is not recommended if you can use `vdot()`.
+## Vector and Matrix Products
 
-Other useful matrix operations are provided by numpy, such as : 
-- `np.transpose()` (also available via `ndarray.T`) 
-- `np.norm()` 
-- `np.trace()`
+The usual vector dot and cross products are provided by 
+`np.vdot()`, `np.cross()`.  The inner and outer products are provided by `np.inner()` and `np.outer()`.
 
-For further information, look at the reference pages : 
-[https://numpy.org/doc/stable/reference/routines.array-manipulation.html](https://numpy.org/doc/stable/reference/routines.array-manipulation.html)
-[https://numpy.org/doc/stable/reference/routines.linalg.html](https://numpy.org/doc/stable/reference/routines.linalg.html)
+The matrix product is provided by `np.matmul()` or the `@` operator. Numpy will also perform matrix multiplication with `np.dot()`, but it is not recommended if you can use `@` or `np.matmul()`.
+
+## Broadcasting rules
+
+ADD THIS SECTION
+
+## Norms {#sec-norms}
+
+A norm is a function that assigns a single non-negative number to a vector (or matrix), intended to represent its "size" or "length".  This is a generalisation of the vector magnitude, defined as the square root of the sum of the squares of its components.  This is known as the Euclidean norm or L2 norm.  We can define other norms, which have different properties and uses.  For a vector $\mathbf{x} = (x_1, x_2, \ldots, x_n)$, the most commonly used norms are:
+
+<!-- Norms come up throughout machine learning: they measure how large a set of model weights is (used in regularisation, @sec-supervised-ml), how large a gradient is (used in gradient clipping, @sec-optimisation), and how far apart two vectors are (used in nearest-neighbour methods and clustering, @sec-unsupervised-ml). -->
+
+$$
+\|\mathbf{x}\|_1 = \sum_{i=1}^n |x_i| \qquad \text{(L1 / "Manhattan" norm)}
+$$
+
+$$
+\|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^n x_i^2} \qquad \text{(L2 / Euclidean norm)}
+$$
+
+$$
+\|\mathbf{x}\|_\infty = \max_i |x_i| \qquad \text{(max / Chebyshev norm)}
+$$
+
+Matrices also have norms. The most commonly used is the Frobenius norm, which simply treats the matrix as a long vector of all its entries:
+
+$$
+\|A\|_F = \sqrt{\sum_{i,j} a_{ij}^2}
+$$
+
+```{python}
+import numpy as np
+
+x = np.array([3., -4., 1.])
+print("L1 norm  :", np.linalg.norm(x, ord=1))
+print("L2 norm  :", np.linalg.norm(x, ord=2))
+print("Max norm :", np.linalg.norm(x, ord=np.inf))
+
+A = np.array([[1., 2.], [3., 4.]])
+print("Frobenius norm :", np.linalg.norm(A, ord='fro'))
+```
+
+## Rank {#sec-rank}
+
+The rank of a matrix $A$ is the number of linearly independent rows (equivalently, columns) it contains. For an $m \times n$ matrix, the rank can be at most $\min(m,n)$; if it achieves this maximum it is called full rank, otherwise it is rank-deficient.
+
+```{python}
+A_full = np.array([[1., 2.], [3., 5.]])
+A_deficient = np.array([[1., 2.], [2., 4.]])   # second row is 2x the first
+
+print("Rank of full-rank matrix      :", np.linalg.matrix_rank(A_full))
+print("Rank of rank-deficient matrix :", np.linalg.matrix_rank(A_deficient))
+```
+
+The rank of a matrix is related to the solvability of $Ax=y$. If $A$ is full rank, the equation has a unique solution. When $A$ is rank-deficient, an exact solution may not exist and other approaches must be used, as discussed in @sec-sim-eqn.  A rank deficient matrix must also have at least one zero eigenvalue, which is why $\det(A)=0$ when $A$ is not invertible.
+
+## Other matrix operations
 
 Finally, `scipy.linalg` provides some additional basic operations such as the determinant and the inverse.
 
@@ -72,3 +138,54 @@ print(detA)
 invA = linalg.inv(A)
 print(invA)
 ```
+
+
+<!-- ### Why this matters for training
+
+When training a neural network (@sec-nn), the gradient of the loss with respect to all the weights can occasionally become very large — for example early in training, or with recurrent networks over long sequences (@sec-rnn). If left unchecked, a single large gradient step can destabilise training. A standard mitigation, **gradient clipping**, simply rescales the gradient vector if its norm exceeds some threshold $\tau$:
+
+$$
+\mathbf{g} \leftarrow \mathbf{g} \times \min\left(1, \frac{\tau}{\|\mathbf{g}\|_2}\right)
+$$
+
+This is a direct, practical use of the L2 norm defined above, and is worth keeping in mind when we return to gradient descent in @sec-optimisation. -->
+
+
+
+<!--
+### Low-rank approximation
+
+A remarkable and practically important fact is that any matrix can be approximated by a matrix of lower rank, and the *best* possible rank-$k$ approximation (in the sense of minimising the Frobenius norm of the difference) is obtained by truncating its Singular Value Decomposition (@sec-simeqn) to keep only the $k$ largest singular values:
+
+$$
+A \approx A_k = U_k \Sigma_k V_k^T
+$$
+-->
+
+<!-- This single idea underpins:
+
+- **PCA** (@sec-unsupervised-ml): keeping only the top few principal components *is* a low-rank approximation of the data's covariance structure.
+- **LoRA (Low-Rank Adaptation):** a widely used technique for efficiently fine-tuning large pre-trained neural networks, in which a large weight matrix update is constrained to be low-rank, drastically reducing the number of parameters that need to be trained. -->
+
+<!--
+```{python}
+import scipy.linalg as linalg
+
+# a matrix with some redundant structure
+rng = np.random.default_rng(0)
+u = rng.normal(size=(20, 2))
+v = rng.normal(size=(2, 20))
+M = u @ v + 0.01 * rng.normal(size=(20, 20))   # approximately rank-2, plus small noise
+
+U, s, Vt = linalg.svd(M)
+print("Singular values :", np.round(s[:6], 3))
+
+# best rank-2 approximation
+k = 2
+M_approx = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]
+print("Approximation error (Frobenius norm) :", np.linalg.norm(M - M_approx, ord='fro'))
+```
+
+Note how the singular values drop off sharply after the first two — this is the numerical signature of the approximately rank-2 structure we built into `M`.
+-->
+

@@ -1,10 +1,10 @@
 ---
-title: "Distributed Computing"
 format: html
 execute:
   error: true
 ---
 
+# Distributed Computing {#sec-distributed}
 
 Some tasks cannot be performed by a single computer.  Or they can, but they would take far too long.  Or they can, but the risk of failure associated with a single computer is too high.  Or they can, but sometimes a huge number of tasks are required at the same time.  In all these cases, methods of delegating those tasks to multiple computers are required.
 
@@ -12,7 +12,7 @@ Some tasks cannot be performed by a single computer.  Or they can, but they woul
 
 Distributed computing is a broad term that refers to applications which rely on a network of computers.  Such applications can provide greater resilience and reliability, as well as being able to solve "bigger" problems.
 
-### Distributed vs Parallel Computing{#sec-htc-vs-hpc}
+### Distributed vs Parallel Computing {#sec-htc-vs-hpc}
 
 It is helpful to draw a distinction between "distributed computing" and "parallel computing". Parallel computing is another broad term, covering techniques which allow a computational problem to be split between several processors. There is clearly some overlap between the two terms, but parallel computing tends to apply to tighly-coupled problems, where the computation requires high-bandwith, low-latency messaging between processors, which potentially have access to shared memory.  Typical problems might include domain decomposition solvers, linear algebra, FFTs, N-body systems.
 
@@ -65,7 +65,7 @@ This is the software upon which clouds are built. Typically, the big cloud provi
    - Containers
    - Cluster Management
 
-## Virtual Machines
+## Virtual Machines {#sec-vms}
 
 A virtual machine (VM) is a simulation of a computer. It is a software programme which runs on a 'host' machine, but then allows a 'guest' operating system to be installed, which can then be used as if it were running on real computer hardware.
 
@@ -88,7 +88,7 @@ Much as a computer is simulated by a virtual machine, a virtual network is a sim
 
 However, virtual networks are not limited to running within a single host, and may cross multiple physical networks.  For example, a virtual private network (VPN) is a simulated network that securely connects two endpoints via the internet, using encryption.  A virtual local area network (VLAN) is a virtual network usually used to sub-divide a larger network into smaller management pieces.
 
-## Containers
+## Containers {#sec-containers}
 
 Containers are an extension of the VM concept and are now a foundational technology in cloud computing. A container is a lightweight, standalone, and executable software package that includes everything needed to run a piece of software. It will include code, runtime, libraries and system tools.
 

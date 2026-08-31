@@ -16,7 +16,7 @@ Below we describe a successful recurrent model, followed by the key concept of "
 ## seq2seq {#sec-seq2seq}
 
 
-The seq2seq model was a highly successful (for the time) recurrent model introduced in 2014 [@sutskever2014sseq2seq].  It uses a pair of LSTM networks, in an encoder/decoder architecture, reflecting a view of translation compatible with information theory type models of communication. Use of an end-of-sentence token `<eos>` allowed the encoder LSTM to convert an arbitrary length sequence into a fixed-size hidden vector.  This vector effectively encodes the information contained in the sentence, which is passed to the decoder LSTM for converstion to another arbitrary length sentence (again using the `<eos>` token).
+The seq2seq model was a highly successful (for the time) recurrent model introduced in 2014 [@sutskever2014].  It uses a pair of LSTM networks, in an encoder/decoder architecture, reflecting a view of translation compatible with information theory type models of communication. Use of an end-of-sentence token `<eos>` allowed the encoder LSTM to convert an arbitrary length sequence into a fixed-size hidden vector.  This vector effectively encodes the information contained in the sentence, which is passed to the decoder LSTM for converstion to another arbitrary length sentence (again using the `<eos>` token).
 
 As for most language models of the time, the input sequence use a one-hot encoding over the input vocabulary. The network output is a softmax, ie. a probability distribution, over the output vocabulary. During training the output ground truth is encoded using a one-hot encoding, allowing a cross-entropy based loss to be calculated.
 
@@ -25,10 +25,9 @@ As for most language models of the time, the input sequence use a one-hot encodi
 
 ## Attention {#sec-attention}
 
-Attention is a mechanism for determining context in sequence processing.  The general concept is that the importance of individual elements (or tokens) in a sequence is encoded in a set of "soft" weights, which are computed during the forward pass.  Attention was originally proposed in the context of translation models [@bahdanau2016neuralmachinetranslationjointly].  For a given decoder hidden state, $h'_t$, the mechanism aims to determine the importance of each input token, using the encoder hidden state $h_i$.  The original mechanism achieved this using a small neural network, which outputs a score $e_{t,i}$ for each encoder hidden state.  These scores can be converted to a probabilistic basis $\varepsilon_{t,i}$ using softmax. An example of the attention (ie. the matrix $\varepsilon_{t,i}$) is shown in @fig-attention-matrix.
+Attention is a mechanism for determining context in sequence processing.  The general concept is that the importance of individual elements (or tokens) in a sequence is encoded in a set of "soft" weights, which are computed during the forward pass.  Attention was originally proposed in the context of translation models [@bahdanau2016].  For a given decoder hidden state, $h'_t$, the mechanism aims to determine the importance of each input token, using the encoder hidden state $h_i$.  The original mechanism achieved this using a small neural network, which outputs a score $e_{t,i}$ for each encoder hidden state.  These scores can be converted to a probabilistic basis $\varepsilon_{t,i}$ using softmax. An example of the attention (ie. the matrix $\varepsilon_{t,i}$) is shown in @fig-attention-matrix.
 
-![Example attention matrix from [@bahdanau2016neuralmachinetranslationjointly]](figures/attention-matrix.png){width=70%}
-{#fig-attention-matrix}
+![Example attention matrix from [@bahdanau2016]](figures/attention-matrix.png){width=70%, #fig-attention-matrix}
 
 The attention is used to compute a weighted sum over all the encoder hidden states, known as the context vector :
 $$c_t = \sum_i \varepsilon_{t,i} h_i$$

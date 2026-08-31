@@ -1,9 +1,10 @@
 ---
-title: "Object Oriented Programming"
 format: html
 execute:
   error: true
 ---
+
+# Object-Oriented Programming {#sec-oo}
 
 Object oriented (OO) programming is a programming paradigm that organises code around objects rather than functions and logic. Here we introduce some of the fundamental concepts (which you may have encountered before) including classes and objects.  The four core principles of OO programming are then introduced, followed by some practical tips.
 

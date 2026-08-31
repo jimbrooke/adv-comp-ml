@@ -1,39 +1,203 @@
 ---
-title: "Unsupervised Learning"
 format: html
 execute:
   error: true
 ---
 
+# Unsupervised Learning {#sec-unsupervised-ml}
 
+EDIT THIS SECTION
+
+## Introduction
+
+In supervised learning (@sec-supervised-ml) every training example comes with a known label $y_i$, and the model learns a mapping from inputs to those labels. In **unsupervised learning**, no labels are available at all — we are given only a set of feature vectors $\{\mathbf{x}_i\}_{i=1}^N$, and the goal is to discover structure, patterns, or a more compact representation of the data on its own terms.
+
+This is a genuinely different kind of problem to supervised learning: there is no ground truth to compare against, and so (as discussed in @sec-evaluation-unsupervised below) evaluating whether an unsupervised method has "succeeded" is far less clear-cut than computing an accuracy or an MSE.
+
+Unsupervised learning techniques fall broadly into two families, covered in turn below:
+
+- **Clustering** — grouping data points into subsets ("clusters") such that points within a cluster are more similar to each other than to points in other clusters.
+- **Dimensionality reduction** — finding a lower-dimensional representation of the data that preserves as much of its structure as possible.
 
 ## Clustering
-K-means clustering
-Hierarchical clustering.
-DBSCAN.
 
+### K-means Clustering
+
+K-means is the simplest and most widely used clustering algorithm. Given a desired number of clusters $k$, it aims to partition the data into $k$ clusters so as to minimise the total within-cluster variance:
+
+$$
+J = \sum_{j=1}^{k} \sum_{\mathbf{x}_i \in C_j} \| \mathbf{x}_i - \boldsymbol{\mu}_j \|_2^2
+$$
+
+where $C_j$ is the set of points assigned to cluster $j$, and $\boldsymbol{\mu}_j$ is that cluster's centroid (mean). Note this uses exactly the L2 norm introduced in @sec-norms.
+
+K-means minimises $J$ using a simple iterative scheme (closely related in spirit to the iterative refinement seen elsewhere in this unit, e.g. gradient descent, @sec-optimisation):
+
+1. Initialise $k$ centroids (commonly, at $k$ randomly chosen data points).
+2. **Assign**: assign every point to its nearest centroid.
+3. **Update**: recompute each centroid as the mean of the points currently assigned to it.
+4. Repeat steps 2–3 until assignments stop changing.
+
+```{python}
+import numpy as np
+from sklearn.datasets import make_blobs
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+
+X, true_labels = make_blobs(n_samples=300, centers=4, cluster_std=0.8, random_state=1)
+
+km = KMeans(n_clusters=4, n_init=10, random_state=1)
+km.fit(X)
+
+fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+axes[0].scatter(X[:,0], X[:,1], c=true_labels, cmap='viridis', s=15)
+axes[0].set_title("True groups")
+axes[1].scatter(X[:,0], X[:,1], c=km.labels_, cmap='viridis', s=15)
+axes[1].scatter(km.cluster_centers_[:,0], km.cluster_centers_[:,1], c='red', marker='x', s=100)
+axes[1].set_title("K-means clusters (x = centroids)")
+plt.show()
+```
+
+K-means has two important limitations worth being aware of:
+
+- **$k$ must be chosen in advance.** A common heuristic is the "elbow method" — plotting $J$ against $k$ and looking for the point where adding further clusters gives diminishing returns.
+- **It assumes roughly spherical, similarly-sized clusters**, since it minimises variance around a single centroid per cluster. It performs poorly on elongated, irregularly shaped, or unevenly sized clusters.
+
+### Hierarchical Clustering
+
+Rather than committing to a fixed number of clusters upfront, **agglomerative hierarchical clustering** starts with every point as its own cluster, and repeatedly merges the two closest clusters, according to some **linkage criterion** (e.g. the distance between the nearest pair of points in each cluster, "single linkage"; or the distance between cluster centroids, "average linkage"), until only one cluster remains.
+
+The result is naturally represented as a **dendrogram** — a tree showing the order in which clusters were merged, and at what distance. Cutting the dendrogram at a chosen height yields a clustering with a corresponding number of clusters, without having to have fixed $k$ in advance.
+
+```{python}
+from scipy.cluster.hierarchy import dendrogram, linkage
+
+Z = linkage(X[:60], method='average')  # subset, for a readable dendrogram
+plt.figure(figsize=(8,4))
+dendrogram(Z)
+plt.xlabel("Sample index")
+plt.ylabel("Distance")
+plt.show()
+```
+
+### DBSCAN
+
+DBSCAN (Density-Based Spatial Clustering of Applications with Noise) takes a different approach again: rather than grouping points around centroids, it groups together points that are closely packed (many nearby neighbours within a distance $\varepsilon$), and marks points in low-density regions as **noise/outliers** rather than forcing them into a cluster.
+
+This gives DBSCAN two properties K-means lacks: it can find clusters of arbitrary shape, and it does not require the number of clusters to be specified in advance. Its main drawback is sensitivity to the choice of the density parameters ($\varepsilon$ and the minimum number of neighbours).
+
+```{python}
+from sklearn.cluster import DBSCAN
+from sklearn.datasets import make_moons
+
+X_moons, _ = make_moons(n_samples=300, noise=0.06, random_state=0)
+
+fig, axes = plt.subplots(1, 2, figsize=(10,4))
+km_moons = KMeans(n_clusters=2, n_init=10, random_state=0).fit(X_moons)
+db_moons = DBSCAN(eps=0.2, min_samples=5).fit(X_moons)
+
+axes[0].scatter(X_moons[:,0], X_moons[:,1], c=km_moons.labels_, cmap='viridis', s=15)
+axes[0].set_title("K-means (fails on non-convex shape)")
+axes[1].scatter(X_moons[:,0], X_moons[:,1], c=db_moons.labels_, cmap='viridis', s=15)
+axes[1].set_title("DBSCAN")
+plt.show()
+```
+
+This makes explicit a point only implicit above: **no single clustering algorithm is universally best** — the right choice depends on the expected shape and density structure of the clusters in your particular dataset.
 
 ## Dimensionality Reduction
-PCA
-t-SNE
-UMAP
 
-## Evaluation & Interpretation
+### Principal Component Analysis (PCA)
 
-No ground truth: how do we know if unsupervised learning succeeded?
+PCA finds a new set of axes for the data — the **principal components** — chosen so that the first axis captures the greatest possible variance in the data, the second axis captures the greatest remaining variance subject to being orthogonal to the first, and so on.
 
-Use internal validation (e.g., silhouette score for clustering).
+This is not a new numerical technique: it is a direct application of the eigendecomposition already covered in @sec-eigenproblems. Specifically, the principal components are the eigenvectors of the data's covariance matrix $\Sigma$, ordered by the size of their corresponding eigenvalues:
 
-Compare discovered patterns to known physics features.
+$$
+\Sigma \mathbf{v}_j = \lambda_j \mathbf{v}_j
+$$
 
-Interpretability:
+The eigenvalue $\lambda_j$ gives the variance of the data along principal component $\mathbf{v}_j$ — so ranking eigenvalues by size, exactly as done in @sec-eigenproblems, directly ranks the principal components by how much of the data's structure they capture. Equivalently (and often more numerically stable in practice), PCA can be computed directly via the Singular Value Decomposition of the (mean-centred) data matrix, using precisely the low-rank approximation idea introduced in @sec-rank: keeping only the top $k$ singular vectors is exactly a rank-$k$ approximation of the data.
 
-PCA axes may correspond to physical modes or may not.
+```{python}
+import scipy.linalg as linalg
 
-Clusters may or may not align with real physical classes.
+# reuse the coupled-oscillator eigenvalue problem from sec-eigen as a data source:
+# simulate noisy displacement measurements of the 7-mass system dominated by its lowest mode
+rng = np.random.default_rng(3)
+m = np.array([[2,-1,0,0,0,0,0],[-1,2,-1,0,0,0,0],[0,-1,2,-1,0,0,0],
+              [0,0,-1,2,-1,0,0],[0,0,0,-1,2,-1,0],[0,0,0,0,-1,2,-1],[0,0,0,0,0,-1,2]])
+mus, vs = linalg.eig(m)
+lowest_mode = np.real(vs.T[np.argmin(mus)])
 
-Visualization:
+# generate synthetic "measurements": mostly along the lowest mode, plus noise
+data = np.outer(rng.normal(0, 2, 500), lowest_mode) + rng.normal(0, 0.1, (500, 7))
+data -= data.mean(axis=0)  # PCA requires mean-centred data
 
-2D projections, cluster coloring, dendrograms.
+U, s, Vt = linalg.svd(data, full_matrices=False)
+print("Variance explained by each component :", np.round((s**2 / np.sum(s**2))[:3], 3))
+print("First principal component             :", np.round(Vt[0], 3))
+print("Lowest vibrational mode (from sec-eig) :", np.round(lowest_mode, 3))
+```
 
-Demonstrate how PCA + k-means can reveal structure in physical datasets.
+The first principal component recovers the lowest vibrational mode almost exactly — a nice illustration of @sec-interpretability below: here, a principal component axis genuinely does correspond to a physically meaningful quantity (a normal mode of oscillation), which is not guaranteed in general.
+
+### t-SNE
+
+t-distributed Stochastic Neighbour Embedding (t-SNE) is a *non-linear* dimensionality reduction technique, typically used to compress high-dimensional data down to 2 or 3 dimensions purely for visualisation. Unlike PCA, t-SNE does not preserve global distances or produce axes with any particular meaning; instead it tries to preserve **local neighbourhood structure** — points that were close together in the original high-dimensional space should remain close together in the low-dimensional embedding. A key parameter, the **perplexity**, roughly controls the effective number of neighbours considered when deciding what counts as "local."
+
+Because t-SNE does not preserve global structure, distances *between* well-separated clusters in a t-SNE plot, or the relative sizes of clusters, should not be over-interpreted — only the local neighbourhood groupings are meaningful.
+
+### UMAP
+
+Uniform Manifold Approximation and Projection (UMAP) serves a similar purpose to t-SNE — non-linear reduction to 2–3 dimensions for visualisation — but is built on different mathematical foundations (from topological data analysis), and in practice tends to be substantially faster and to preserve more of the global structure of the data than t-SNE, while still capturing local neighbourhood relationships well. It has become the more commonly used default of the two in recent years.
+
+```{python}
+from sklearn.manifold import TSNE
+from sklearn.decomposition import PCA
+
+# compare PCA vs t-SNE on a slightly higher-dimensional synthetic dataset
+X_hd, y_hd = make_blobs(n_samples=400, centers=5, n_features=10, cluster_std=2.0, random_state=2)
+
+pca_2d = PCA(n_components=2).fit_transform(X_hd)
+tsne_2d = TSNE(n_components=2, perplexity=30, random_state=2).fit_transform(X_hd)
+
+fig, axes = plt.subplots(1, 2, figsize=(10,4))
+axes[0].scatter(pca_2d[:,0], pca_2d[:,1], c=y_hd, cmap='viridis', s=15)
+axes[0].set_title("PCA")
+axes[1].scatter(tsne_2d[:,0], tsne_2d[:,1], c=y_hd, cmap='viridis', s=15)
+axes[1].set_title("t-SNE")
+plt.show()
+```
+
+## Evaluation & Interpretation {#sec-evaluation-unsupervised}
+
+Since there is no ground truth $y$ to compare against, evaluating unsupervised learning is inherently less direct than computing an accuracy or MSE (@sec-supervised-ml). Two complementary strategies are used in practice.
+
+### Internal Validation
+
+**Internal validation metrics** assess the quality of a clustering using only the data and the cluster assignments themselves, with no external reference. The most common is the **silhouette score**. For a point $i$, let $a(i)$ be the mean distance to other points in its own cluster, and $b(i)$ the mean distance to points in the nearest *other* cluster. The silhouette coefficient is:
+
+$$
+s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}
+$$
+
+which lies in $[-1, 1]$: values near $+1$ indicate the point is well-matched to its own cluster and poorly matched to neighbouring clusters (a good clustering); values near $0$ indicate the point sits near a cluster boundary; negative values suggest the point may have been assigned to the wrong cluster entirely.
+
+```{python}
+from sklearn.metrics import silhouette_score
+
+for k in [2, 3, 4, 5, 6]:
+    labels = KMeans(n_clusters=k, n_init=10, random_state=1).fit_predict(X)
+    print(f"k={k}: silhouette score = {silhouette_score(X, labels):.3f}")
+```
+
+The silhouette score peaking at $k=4$ here correctly recovers the number of clusters actually used to generate the synthetic data above — this "peak silhouette" approach is a common, principled alternative to the elbow method for choosing $k$.
+
+### Comparison to Known Physics
+
+Where domain knowledge is available, a second and often more convincing form of validation is to check whether the discovered structure is physically sensible: do the clusters found correspond to known physical classes or regimes (e.g. distinct particle types, phases of matter, stellar populations)? Do the principal axes found by PCA align with known physical degrees of freedom, as in the normal-mode example above? This kind of validation cannot be automated, but is often the most persuasive evidence that an unsupervised method has found something real rather than an artefact of the algorithm.
+
+### Interpretability {#sec-interpretability}
+
+A recurring theme above is worth stating explicitly: **the structure found by unsupervised methods is not guaranteed to be physically meaningful.** PCA axes are, by construction, directions of maximum variance in the data — this *may* correspond to a genuine physical mode (as in the oscillator example above), or it may simply reflect the way the data happened to be measured or scaled. Similarly, clusters found by K-means or DBSCAN may or may not correspond to genuine physical classes — they may instead reflect measurement artefacts, sampling biases, or arbitrary choices in feature preprocessing. As with the "interpretability" concern already raised for machine learning generally in @sec-intro-ml, some scepticism and physical cross-checking is warranted before treating any discovered structure as a genuine scientific discovery.

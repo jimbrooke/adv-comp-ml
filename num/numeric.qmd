@@ -1,8 +1,9 @@
 ---
-title: "Numerical Methods"
 format: html
 execute:
   error: true
 ---
+
+# Numerical Methods {#sec-num}
 
 In this section, we cover some of the fundamental numerical methods that underpin modern computational techniques, including (but not limited to) machine learning.  

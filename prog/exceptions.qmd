@@ -1,10 +1,10 @@
 ---
-title: "Exceptions"
 format: html
 execute:
   error: true
 ---
 
+# Exceptions {#sec-exceptions}
 
 This chapter is a short introduction to “Exceptions”, an error handling technique commonly used in modern programming languages. It is the standard way to deal with errors in Python and both numpy and scipy use them. Raising exceptions in your own functions, and knowing how to deal with exceptions raised by other code, will help you write more robust code.
 It’s worth noting that exceptions are not the only way of handling errors. Code using the simple method below will be entirely adequate in many cases. You will need to decide what is appropriate for your particular case. However, understanding exceptions is important when using libbraries (such as SciPy) which raise exceptions when they encounter errors.

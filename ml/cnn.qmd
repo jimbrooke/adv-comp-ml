@@ -9,7 +9,7 @@ execute:
 
 ## Introduction to CNNs
 
-So far in this course the neural networks we have mostly been working with have been types of Multilayer Perceptron (MLPs). These foundational neural networks are not suited to all types of problem. One such example involves images, i.e. a set of pixels - these will be treated independently which will ignore powerful features such as locality. To tackle this issue, Convolutional Neural Networks were devised. 
+So far in this course the neural networks we have mostly been working with have been types of Multilayer Perceptron (MLPs). These foundational neural networks are not suited to all types of problem. One such example involves images, i.e. a set of pixels - these will be treated independently, ignoring the spatial structure of the data. Convolutional Neural Networks (CNNs) were developed to address this issue @lecun1998.
 
 ## How do CNNs work
 
@@ -61,10 +61,45 @@ Padding adds extra pixels around the image, usually just zeros, which allow the 
 CNNs, although very powerful for datasets composed of images, do have their limitations. The networks are frequently complex which take significant resources to train, along with having to use large datasets to be performant. Another issue that commonly occurs is known as the *vanising gradient problem* which occurs with deeper networks. As the gradients become smaller between layers it becomes more difficult for earlier layers to learn. 
 In fact it was shown that deeper networks, which were orignally thought to be more performant, were actually exhibiting signs of poorer performance than shallower ones, with higher training and test errors. 
 
+<!-- 
+## Landmark Architectures
+
+DECIDE IF WE WANT THIS STUFF
+
+The building blocks above were not all introduced at once — they were developed and refined across a sequence of influential architectures, each addressing a specific limitation of the last. It's useful to know this history both because these named architectures are constantly referenced in the literature, and because the sequence itself illustrates the practical trade-offs (depth vs. computational cost vs. trainability) that motivate the design choices discussed throughout this chapter.
+
+**LeNet-5** [@lecun1998gradient], introduced in 1998, is the founding CNN architecture, and is essentially a direct implementation of the building blocks described above: alternating convolutional and pooling layers, followed by fully connected layers, originally applied to handwritten digit recognition. It is small by modern standards (a handful of layers, tens of thousands of parameters), but it established the basic template that every architecture below still follows.
+
+**AlexNet** [@krizhevsky2012imagenet], which won the ImageNet Large Scale Visual Recognition Challenge (ILSVRC) in 2012, is widely regarded as the paper that started the deep learning boom. Architecturally it is a deeper version of LeNet (8 layers rather than 5), but its real significance was in three practical choices that made training a network of that size feasible: the use of ReLU activations (@sec-relu) instead of sigmoid/tanh, which avoids the vanishing gradient problem discussed above; dropout (@sec-dropout) for regularisation; and training across multiple GPUs in parallel, which made the scale of training practically possible for the first time.
+
+**VGGNet** [@simonyan2015vgg] (2014) explored the effect of depth directly, using up to 19 layers, but with a key structural insight: it replaced the larger filters used in LeNet/AlexNet (e.g. $11\times11$, $5\times5$) with a *stack* of small $3\times3$ filters. Two stacked $3\times3$ filters have the same effective receptive field as one $5\times5$ filter, but use fewer parameters and add an extra non-linear activation in between — a direct illustration of the stride/receptive-field trade-off discussed above.
+
+```{python}
+#| echo: true
+# illustrating VGG's parameter-efficiency argument: one 5x5 filter vs two stacked 3x3 filters,
+# for a single input/output channel
+params_5x5 = 5*5
+params_two_3x3 = 2 * (3*3)
+print(f"One 5x5 filter    : {params_5x5} parameters")
+print(f"Two stacked 3x3   : {params_two_3x3} parameters, same receptive field")
+```
+
+**GoogLeNet / Inception** [@szegedy2015going] (2014) took a different approach to depth: rather than simply stacking more layers, it introduced the **Inception module**, which applies several filter sizes ($1\times1$, $3\times3$, $5\times5$) in parallel within the same layer and concatenates the results, allowing the network to capture features at multiple scales simultaneously. This let GoogLeNet outperform VGG on ILSVRC 2014 while using substantially fewer parameters — an efficiency-focused counterpoint to VGG's depth-focused approach.
+
+**ResNet** [@he2016deep] (2015), described in detail in the next section, resolved the degradation problem described above (deeper networks performing *worse*, not just more expensively) using residual/skip connections, and enabled reliable training of networks over 100 layers deep.
+
+| Architecture | Year | Key contribution |
+|---|---|---|
+| LeNet-5 | 1998 | Established the conv/pool/fully-connected template |
+| AlexNet | 2012 | ReLU + dropout + GPU training at scale |
+| VGGNet | 2014 | Stacked small filters for parameter-efficient depth |
+| GoogLeNet | 2014 | Inception module: multi-scale features, parameter efficiency |
+| ResNet | 2015 | Skip connections: solved the degradation problem, enabled extreme depth |
+-->
+
 ## Deep Residual Learning
 
-In 2015 a paper was published which redefined how we use CNNs (https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf).
-It proposed a new structure to CNNs which helped to alleviate some of the issues described above. They key shift was to use *skipped connections* to speed up training, which also had the benefit of preventing the vanishing gradient problem. 
+@kaiming2015 proposed a new structure for CNNs which helped to alleviate some of the issues described above. They key shift was to use *skipped connections* to speed up training, which also had the benefit of preventing the vanishing gradient problem. 
 
 ### ResNet basic idea
 

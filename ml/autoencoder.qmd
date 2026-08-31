@@ -7,4 +7,127 @@ execute:
 
 # Autoencoders {#sec-autoencoder}
 
-Content coming soon
+EDIT THIS SECTION
+
+## Standard Autoencoders
+
+An **autoencoder** is a neural network trained to reconstruct its own input. It is composed of two parts:
+
+- An **encoder**, $\mathbf{z} = f_{\text{enc}}(\mathbf{x})$, which compresses the input $\mathbf{x}$ down to a lower-dimensional representation $\mathbf{z}$, known as the **latent code** or **bottleneck**.
+- A **decoder**, $\hat{\mathbf{x}} = f_{\text{dec}}(\mathbf{z})$, which attempts to reconstruct the original input from the latent code alone.
+
+The network is trained, exactly as in @sec-supervised-ml, by minimising a loss function — typically Mean Squared Error between the input and its reconstruction:
+
+$$
+L = \| \mathbf{x} - \hat{\mathbf{x}} \|_2^2
+$$
+
+using the same L2 norm defined in @sec-norms, and trained by gradient descent (@sec-optimisation) and backpropagation (@sec-backpropagation) exactly as for any other network in this unit.
+
+What makes this interesting is that $\mathbf{z}$ has far fewer dimensions than $\mathbf{x}$. Since the network is *forced* to reconstruct the full input from this compressed bottleneck, it must learn a representation that captures the most important structure in the data — the network cannot simply copy the input through unchanged. In this sense, an autoencoder is a form of **unsupervised learning** (@sec-unsupervised-ml): no labels are required, only the data itself.
+
+### The Connection to PCA
+
+This should sound familiar. If the encoder and decoder are both restricted to be purely *linear* functions, and the loss is Mean Squared Error, it can be shown that the optimal such autoencoder learns to project the data onto exactly the same subspace as PCA (@sec-unsupervised-ml) — the top $k$ principal components of the data, found there via eigendecomposition (@sec-eigenproblems) or SVD (@sec-svd). A (non-linear) neural network autoencoder is best understood as a direct generalisation of PCA: instead of restricting the compression to a linear projection, the encoder and decoder are allowed to be arbitrarily non-linear functions, letting the network capture curved, non-linear structure in the data that PCA's flat subspaces cannot.
+
+### Limitations for Generation
+
+A standard autoencoder is very good at compression and reconstruction, but it makes a poor **generative model** — that is, it's not naturally suited to *creating new*, realistic examples similar to the training data by sampling from the latent space. The reason is that nothing in the training objective above encourages the latent space to have any particular structure. Points corresponding to real data may be scattered arbitrarily throughout $\mathbb{R}^k$, with large "gaps" that don't decode to anything sensible. If you picked a random point $\mathbf{z}$ and passed it through the decoder, there's no guarantee you'd get a realistic output at all.
+
+This is precisely the problem the Variational Autoencoder was designed to solve.
+
+## Variational Autoencoders
+
+A **Variational Autoencoder (VAE)** [@kingma2013] modifies the standard autoencoder in one crucial way: instead of the encoder mapping each input to a single point $\mathbf{z}$, it maps each input to a *probability distribution* over the latent space — in practice, almost always a diagonal Gaussian:
+
+$$
+q_\phi(\mathbf{z} \mid \mathbf{x}) = \mathcal{N}\!\left(\mathbf{z}; \, \boldsymbol{\mu}_\phi(\mathbf{x}), \, \boldsymbol{\sigma}_\phi^2(\mathbf{x}) \right)
+$$
+
+The encoder network, with parameters $\phi$, now outputs *two* vectors for a given input — a mean $\boldsymbol{\mu}$ and a (log-)variance $\boldsymbol{\sigma}^2$ — rather than a single latent code. A sample $\mathbf{z}$ is then drawn from this distribution and passed to the decoder network, $p_\theta(\mathbf{x} \mid \mathbf{z})$, which attempts the reconstruction just as before.
+
+To make this a genuinely useful generative model, we additionally want the aggregate of all these per-input distributions to fill out the latent space smoothly, with no gaps, so that *any* point sampled from a simple, known distribution decodes to something realistic. The VAE achieves this by pushing every input's latent distribution $q_\phi(\mathbf{z}\mid\mathbf{x})$ towards a fixed, simple **prior** distribution, almost always chosen to be a standard normal, $p(\mathbf{z}) = \mathcal{N}(\mathbf{0}, I)$.
+
+### The Loss Function: Reconstruction + KL Divergence
+
+This gives the VAE two competing objectives, combined into a single loss function (technically, the negative of a quantity called the **Evidence Lower Bound**, or ELBO — a direct relative of the log-likelihood objective from @sec-mle, since a VAE is ultimately trying to maximise the likelihood of the training data under the generative model $p_\theta$):
+
+$$
+L(\theta, \phi; \mathbf{x}) = \underbrace{\mathbb{E}_{\mathbf{z}\sim q_\phi}\big[-\log p_\theta(\mathbf{x}\mid\mathbf{z})\big]}_{\text{reconstruction loss}} \; + \; \underbrace{D_{\text{KL}}\big(q_\phi(\mathbf{z}\mid\mathbf{x}) \,\|\, p(\mathbf{z})\big)}_{\text{regularisation towards the prior}}
+$$
+
+- The first term is just the reconstruction error again — for Gaussian-distributed reconstructions this reduces to the same Mean Squared Error used in a standard autoencoder above, and, exactly as shown for supervised regression in @sec-mle, is itself a negative log-likelihood term in disguise.
+- The second term, the **Kullback-Leibler (KL) divergence**, measures how different the encoder's distribution $q_\phi(\mathbf{z}\mid\mathbf{x})$ is from the prior $p(\mathbf{z})$, and penalises the encoder for straying too far from it. This is what forces the latent space, in aggregate across the whole dataset, to fill out smoothly around the origin rather than leaving unstructured gaps.
+
+For two diagonal Gaussians, this KL divergence term has a convenient closed form, so it does not need to be estimated numerically:
+
+$$
+D_{\text{KL}}\big(\mathcal{N}(\mu,\sigma^2) \,\|\, \mathcal{N}(0,1)\big) = -\frac{1}{2}\sum_{i} \left(1 + \log\sigma_i^2 - \mu_i^2 - \sigma_i^2\right)
+$$
+
+```{python}
+#| echo: true
+import numpy as np
+
+def kl_divergence_to_standard_normal(mu, log_var):
+    """KL(N(mu, sigma^2) || N(0, 1)) for a diagonal Gaussian, given log(sigma^2)."""
+    return -0.5 * np.sum(1 + log_var - mu**2 - np.exp(log_var))
+
+# a latent distribution that's already close to the prior: small penalty
+mu_close = np.array([0.1, -0.05])
+logvar_close = np.array([0.0, 0.0])   # sigma^2 = 1
+print("KL divergence (close to prior)   :", kl_divergence_to_standard_normal(mu_close, logvar_close))
+
+# a latent distribution far from the prior: larger penalty
+mu_far = np.array([3.0, -2.5])
+logvar_far = np.array([-1.5, 2.0])    # sigma^2 far from 1
+print("KL divergence (far from prior)   :", kl_divergence_to_standard_normal(mu_far, logvar_far))
+```
+
+The tradeoff between these two loss terms is exactly what makes a VAE's latent space useful: the reconstruction term alone would encourage the encoder to spread inputs far apart in latent space (making reconstruction easier), while the KL term pulls everything back towards a shared, compact, well-structured region — the balance between the two is what produces a latent space where every nearby point decodes to something plausible.
+
+### The Reparameterisation Trick
+
+There is a subtlety in training a VAE that is worth making explicit, because it's a direct, practical application of the chain rule from @sec-gradients. Sampling $\mathbf{z} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\sigma}^2)$ is a *random*, non-differentiable operation — gradients cannot flow backwards through a random sampling step during backpropagation (@sec-backpropagation), since there is no well-defined derivative of "draw a random sample" with respect to $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$.
+
+The fix is to rewrite the sampling step so that all the randomness is isolated in a term that does *not* depend on the network's parameters:
+
+$$
+\mathbf{z} = \boldsymbol{\mu}_\phi(\mathbf{x}) + \boldsymbol{\sigma}_\phi(\mathbf{x}) \odot \boldsymbol{\epsilon}, \qquad \boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, I)
+$$
+
+where $\odot$ denotes elementwise multiplication. Now $\mathbf{z}$ is written as a deterministic, differentiable function of $\boldsymbol{\mu}$, $\boldsymbol{\sigma}$, and a separately-sampled noise term $\boldsymbol{\epsilon}$ that carries no trainable parameters. This means the chain rule (@sec-gradients) can be applied straight through the sampling step exactly as through any other layer, and the whole network — encoder and decoder together — can be trained end-to-end with ordinary backpropagation.
+
+```{python}
+#| echo: true
+def reparameterise(mu, log_var, rng):
+    sigma = np.exp(0.5 * log_var)
+    epsilon = rng.normal(size=mu.shape)
+    return mu + sigma * epsilon
+
+rng = np.random.default_rng(0)
+mu = np.array([1.0, -0.5])
+log_var = np.array([0.2, -0.3])
+
+samples = np.array([reparameterise(mu, log_var, rng) for _ in range(5000)])
+print("Sample mean     :", samples.mean(axis=0), " (target mu =", mu, ")")
+print("Sample variance :", samples.var(axis=0), " (target sigma^2 =", np.exp(log_var), ")")
+```
+
+Repeated sampling via this reparameterisation recovers the intended mean and variance, confirming the trick produces samples statistically indistinguishable from directly sampling $\mathcal{N}(\boldsymbol{\mu},\boldsymbol{\sigma}^2)$ — while remaining differentiable with respect to $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$.
+
+### Generating New Data
+
+Once trained, generating a new sample no longer requires an input $\mathbf{x}$ or the encoder at all: simply draw $\mathbf{z} \sim \mathcal{N}(\mathbf{0}, I)$ directly from the prior, and pass it through the decoder, $\hat{\mathbf{x}} = f_{\text{dec}}(\mathbf{z})$. Because training pushed the aggregate latent distribution to fill out this same prior smoothly, decoded samples from arbitrary points in the prior tend to look like plausible, novel examples from the training distribution, rather than the exact reconstructions of specific training points that a standard autoencoder is limited to.
+
+## Comparison to Other Generative Approaches
+
+VAEs are one of several major families of deep generative model. Two others worth being aware of, though beyond the scope of a detailed treatment here:
+
+| Model | Core idea | Notable trait |
+|---|---|---|
+| VAE | Encode to a structured (Gaussian) latent space; decode to reconstruct | Stable to train; latent space is smooth and structured; samples can be somewhat blurry |
+| GAN [@goodfellow2014] | A generator network competes against a discriminator network trying to distinguish real from generated samples | Often sharper samples; training can be unstable (the two networks must remain balanced) |
+| Diffusion models | Learn to reverse a gradual noising process applied to training data | State of the art for image generation as of the early-to-mid 2020s; computationally expensive to sample from |
+
+All three ultimately rely on the same underlying toolkit developed across this unit: gradients and the chain rule (@sec-gradients), gradient-based optimisation (@sec-optimisation), and — as made explicit above — maximum likelihood as a guiding principle for what "loss function" even means (@sec-mle).

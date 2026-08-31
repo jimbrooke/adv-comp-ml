@@ -1,9 +1,10 @@
 ---
-title: "Computers & Networks"
 format: html
 execute:
   error: true
 ---
+
+# Computers & Networks {#sec-computers}
 
 The sections of these notes on high performance and distributed computing rely on some basic concepts regarding computers and networks, that are described below.  You may be familiar with these concepts already, in which case feel free to skip this section.
 
@@ -62,7 +63,7 @@ An interpreter performs the same task as a compiler, but the conversion to machi
 ### Operating System {#sec-os}
 
 
-[Operating system](figures/os.png){#fig-os}
+![Operating system](figures/os.png){#fig-os}
 
 The operating system is a program (or set of programs) which run when the computer is started. It will manage access to shared components (such as memory, or storage) and provide an interface for applications to access them.  Examples are given in @tbl-os.
 

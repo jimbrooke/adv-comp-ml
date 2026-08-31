@@ -1,9 +1,10 @@
 ---
-title: "Supervised Learning"
 format: html
 execute:
   error: true
 ---
+
+# Supervised Learning {#sec-supervised-ml}
 
 ## Introduction
 

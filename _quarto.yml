@@ -24,18 +24,19 @@ book:
         - num/sim-eqn.qmd
         - num/eigenproblems.qmd
         - num/monte-carlo.qmd
-        - num/mle.qmd
         - num/optimisation.qmd
     - part: ml/ml.qmd
       chapters:
         - ml/intro-ml.qmd
+        - ml/mle.qmd
         - ml/supervised-ml.qmd
         - ml/unsupervised-ml.qmd
         - ml/neural-networks.qmd
+        - ml/gradients.qmd
         - ml/cnn.qmd
         - ml/rnn.qmd
-        - ml/transformer.qmd
         - ml/autoencoder.qmd
+        - ml/transformer.qmd
     - references.qmd
 
 bibliography: references.bib

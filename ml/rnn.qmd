@@ -44,7 +44,7 @@ $$x_0, x_1, ... x_t, ... , x_m \rightarrow y_0, y_1, ... y_t, ... , y_n$$
 
 ![Different types of RNN](figures/rnn-types.png){#fig-rnn-types}
 
-Early RNNs demonstrated the machines could learn sequential data, including basic language models @mikolov10_interspeech.
+Early RNNs demonstrated the machines could learn sequential data, including basic language models @mikolov10.
 
 
 ## Backpropagation for Recurrent Networks
@@ -61,15 +61,15 @@ Another significant disadvantage of recurrent networks is that the forward pass 
 
 ## Long Short Term Memory
 
-The Long Short Term Memory (LSTM) was a highly successful (up to a point) attempt to resolve the vanishing gradient problem which all previous RNNs suffered from.  The LSTM relies on the concept of "gating", which controls the flow of information into and out of a hidden state.  It also introduces two hidden states - one (the "cell" state) which captures all the input information in the sequence so far, the other (the "hidden" state), which depends only on the previous time step.  The LSTM cell is shown in @fig-lstm. It comprises three gates - the "forget" gate, "input" gate, and "output" gate. 
+The Long Short Term Memory (LSTM), introduced in @hochreiter1997, was a highly successful (up to a point) attempt to resolve the vanishing gradient problem which all previous RNNs suffered from.  The LSTM relies on the concept of "gating", which controls the flow of information into and out of a hidden state.  It also introduces two hidden states - one (the "cell" state) which captures all the input information in the sequence so far, the other (the "hidden" state), which depends only on the previous time step.  The LSTM cell is shown in @fig-lstm. It comprises three gates - the "forget" gate, "input" gate, and "output" gate. 
 
 ![The LSTM cell](figures/lstm.png){#fig-lstm}
 
-The LSTM represented a major breakthrough in language modelling in the mid-2010s @sutskever2014sseq2seq, and opened up a broad range of time-series problems to machine learning.  Applications included forecasting energy demand, financial markets, equipment degradation.
+The LSTM represented a major breakthrough in language modelling in the mid-2010s @sutskever2014, and opened up a broad range of time-series problems to machine learning.  Applications included forecasting energy demand, financial markets, equipment degradation.
 
 ## Gated Recurrent Unit 
 
-The Gated Recurrent Unit (GRU) is a simplified version of the LSTM, which dispenses with one hidden state, and uses only two gates.
+The Gated Recurrent Unit (GRU) is a simplified version of the LSTM introduced in @cho2014.  It dispenses with one hidden state, and uses only two gates.
 
 ![The GRU cell](figures/gru.png){#fig-gru}
 

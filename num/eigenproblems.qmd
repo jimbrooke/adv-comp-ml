@@ -1,10 +1,10 @@
 ---
-title: "Eigenproblems"
 format: html
 execute:
   error: true
 ---
 
+# Eigenproblems {#sec-eigenproblems}
 
 A square NxN matrix $A$, has eigenvector $u$ and eigenvalue $\lambda$ that satisfy :
 

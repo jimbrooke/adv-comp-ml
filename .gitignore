@@ -1,6 +1,19 @@
+
+# vscode
+settings.json
+
+# quarto output
 /.quarto/
 /docs
-
+docs.zip
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.pdf
+*.tex
+*.toc
+*.synctex.gz
 .DS_Store
 
 # Jupyter notebook checkpoints
@@ -11,5 +24,9 @@
 
 # datasets
 examples/week15-rnn/cleaned_dataset/data/*.csv
+
+# example output
+examples/*/*
+!examples/*/*.ipynb
 
 **/*.quarto_ipynb

@@ -1,10 +1,10 @@
 ---
-title: "Functional Programming"
 format: html
 execute:
   error: true
 ---
 
+# Functional Programming {#sec-functional}
 
 Functional programming is another programming paradigm.  In some respects it is quite the opposite of OO programming.  Objects intrinsically have some 'state' associated with them, due to their attributes (internal data).  So the result of a function call in OO programming (ie. a method) will depend on both the arguments passed to the function, and the state of the object upon which the method is called.
 

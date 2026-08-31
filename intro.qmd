@@ -1,10 +1,13 @@
 ---
-title: "Introduction"
 format: html
 ---
+
+# Introduction {#sec-intro}
 
 This book is intended to serve as a reasonably comprehensive introduction to machine learning. Before tackling ML, we first introduce modern programming techniques and important numerical methods.
 
 In the Advanced Programming section, we discuss object oriented programming techniques, which are essential for following the examples provided later.  This is followed by an introduction to code profiling and parallelisation, since efficient use of parallel processing is key to modern AI.  We also introduce the concepts of functional programming and distributing computing; although these are not stricly required here, it is useful to be aware of these concepts in the conetxt of large AI models and/or large numbers of users.
 
-In Numerical Methods we cover linear algebra techniques, that underpin all AI/ML computation.  We also discuss numerical differentiation and methods for finding minima, including gradient descent, which are essential for training ML models.  Finally, in the Machine Learning section we introduce the concept of machine learning, including supervised and unsupervised methods, and the principle of minimising loss.  We then introduce neural networks, the backpropagation technique which allows them to be trained, before finally introducing some important variants of the neural network, including convolutional and recurrent neural networks.
+In Numerical Methods we cover linear algebra techniques, that underpin all AI/ML computation.  We also discuss numerical differentiation and methods for finding minima, including gradient descent, which are essential for training ML models.
+
+Finally, in the Machine Learning section we introduce the concept of machine learning, including supervised and unsupervised methods, and the principle of minimising loss.  We then introduce neural networks, the backpropagation technique which allows them to be trained, before finally introducing some important variants of the neural network, including convolutional and recurrent neural networks.

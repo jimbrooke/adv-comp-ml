@@ -1,6 +1,9 @@
 ---
-title: "Machine Learning"
 format: html
 execute:
   error: true
 ---
+
+# Machine Learning {#sec-ml}
+
+This section covers machine learning methods. We start with a general introduction, including some of the statistical concepts that underpin the field, and discuss two key classes of ML : supervised and unsupervised learning. This is followed by an introduction to neural networks, including the method that allows such networks to be trained, backpropagation.  We then cover several important classes of neural network architectures : convolutional neural networks (CNNs), recurrent neural networks (RNNs), and autoencoders.
