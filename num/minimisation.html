@@ -447,7 +447,7 @@ H_{ij} = \frac{\partial^2 f}{\partial x_i \, \partial x_j}
 <p>The Hessian encodes the local <em>curvature</em> of <span class="math inline">\(f\)</span>, and is important in minimisation since it will classify stationary points of the function (minima, maxima, saddle points).</p>
 <!--
 
-::: {#702f323e .cell execution_count=1}
+::: {#b0a21f71 .cell execution_count=1}
 ``` {.python .cell-code}
 hess = sp.hessian(f, (x, y))
 print("Hessian :")
@@ -484,7 +484,7 @@ Cell <span class="ansi-green-fg">In[1], line 1</span>
 <li>If <span class="math inline">\(H\)</span> is negative definite, the point is a local <strong>maximum</strong>.</li>
 <li>If <span class="math inline">\(H\)</span> has both positive and negative eigenvalues, the point is a <strong>saddle point</strong> — a minimum along some directions and a maximum along others.</li>
 </ul>
-<div id="64375d5b" class="cell" data-execution_count="2">
+<div id="51cc2771" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -521,7 +521,7 @@ Cell <span class="ansi-green-fg">In[1], line 1</span>
 \theta_{i+1} = \theta_i - \eta \, \nabla f(\theta_i)
 \]</span></p>
 <p>where <span class="math inline">\(\eta\)</span> is the <strong>learning rate</strong> (or step size). This is exactly the update rule already used, without derivation, in <a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a> and <a href="../ml/neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>. The justification is a direct consequence of the definition of the gradient: <span class="math inline">\(-\nabla f(\theta)\)</span> is, locally, the direction of steepest decrease of <span class="math inline">\(f\)</span>, so a small enough step in that direction is guaranteed to decrease <span class="math inline">\(f\)</span> (provided <span class="math inline">\(f\)</span> is smooth enough, and the step isn’t too large).</p>
-<div id="0f227ed7" class="cell" data-execution_count="3">
+<div id="532de8fe" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(theta):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> theta</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span><span class="op">*</span>(y<span class="op">+</span><span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span></span>
@@ -563,7 +563,7 @@ Cell <span class="ansi-green-fg">In[1], line 1</span>
 <li>Too <strong>small</strong>, and convergence is reliable but painfully slow.</li>
 <li>Too <strong>large</strong>, and the algorithm can overshoot the minimum, oscillate, or diverge entirely.</li>
 </ul>
-<div id="3e5ebf78" class="cell" data-execution_count="4">
+<div id="b60f99e5" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> eta_test <span class="kw">in</span> [<span class="fl">0.01</span>, <span class="fl">0.08</span>, <span class="fl">0.21</span>]:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    theta <span class="op">=</span> np.array([<span class="op">-</span><span class="fl">3.</span>, <span class="fl">3.</span>])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">30</span>):</span>

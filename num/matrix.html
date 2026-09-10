@@ -407,7 +407,7 @@ window.Quarto = {
 <section id="matrix-representation" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="matrix-representation"><span class="header-section-number">9.1</span> Matrix representation</h2>
 <p>Matrices can be implemented as a 2D <code>np.ndarray</code>. Basic matrix arithmetic can then be performed using standard operators <code>+</code>,<code>-</code> and <code>@</code>.</p>
-<div id="5262f131" class="cell" data-execution_count="1">
+<div id="553af405" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,],[<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>]])</span>
@@ -448,7 +448,7 @@ window.Quarto = {
 <section id="vector-representation" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="vector-representation"><span class="header-section-number">9.2</span> Vector representation</h2>
 <p>Vectors can be implemented as 1D arrays, or as 2D arrays. A 1D array will be interpreted as row or column vector depending on the context in which it is used. Use of 2D arrays allows you to specify row or column form. This can be useful, since <code>np.matmul()</code> or <code>@</code> will throw an exception if you accidentally try to perform an illegal matrix operation.</p>
-<div id="327108d9" class="cell" data-execution_count="2">
+<div id="1fbabe25" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>v  <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>vr <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]])</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>vc <span class="op">=</span> np.array([[<span class="dv">1</span>],[<span class="dv">2</span>],[<span class="dv">3</span>]])</span>
@@ -511,7 +511,7 @@ Cell <span class="ansi-green-fg">In[2], line 14</span>
 <p><span class="math display">\[
 \|A\|_F = \sqrt{\sum_{i,j} a_{ij}^2}
 \]</span></p>
-<div id="10dd122c" class="cell" data-execution_count="3">
+<div id="e0caf198" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="fl">3.</span>, <span class="op">-</span><span class="fl">4.</span>, <span class="fl">1.</span>])</span>
@@ -532,7 +532,7 @@ Frobenius norm : 5.477225575051661</code></pre>
 <section id="sec-rank" class="level2" data-number="9.6">
 <h2 data-number="9.6" class="anchored" data-anchor-id="sec-rank"><span class="header-section-number">9.6</span> Rank</h2>
 <p>The rank of a matrix <span class="math inline">\(A\)</span> is the number of linearly independent rows (equivalently, columns) it contains. For an <span class="math inline">\(m \times n\)</span> matrix, the rank can be at most <span class="math inline">\(\min(m,n)\)</span>; if it achieves this maximum it is called full rank, otherwise it is rank-deficient.</p>
-<div id="e34b26d9" class="cell" data-execution_count="4">
+<div id="9bd37ebf" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>A_full <span class="op">=</span> np.array([[<span class="fl">1.</span>, <span class="fl">2.</span>], [<span class="fl">3.</span>, <span class="fl">5.</span>]])</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>A_deficient <span class="op">=</span> np.array([[<span class="fl">1.</span>, <span class="fl">2.</span>], [<span class="fl">2.</span>, <span class="fl">4.</span>]])   <span class="co"># second row is 2x the first</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -548,7 +548,7 @@ Rank of rank-deficient matrix : 1</code></pre>
 <section id="other-matrix-operations" class="level2" data-number="9.7">
 <h2 data-number="9.7" class="anchored" data-anchor-id="other-matrix-operations"><span class="header-section-number">9.7</span> Other matrix operations</h2>
 <p>Finally, <code>scipy.linalg</code> provides some additional basic operations such as the determinant and the inverse.</p>
-<div id="a079c996" class="cell" data-execution_count="5">
+<div id="6cfc53f8" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -589,7 +589,7 @@ $$
 - **LoRA (Low-Rank Adaptation):** a widely used technique for efficiently fine-tuning large pre-trained neural networks, in which a large weight matrix update is constrained to be low-rank, drastically reducing the number of parameters that need to be trained. -->
 <!--
 
-::: {#ae4d7805 .cell execution_count=6}
+::: {#82705963 .cell execution_count=6}
 ``` {.python .cell-code}
 import scipy.linalg as linalg
 
@@ -611,7 +611,7 @@ print("Approximation error (Frobenius norm) :", np.linalg.norm(M - M_approx, ord
 ::: {.cell-output .cell-output-stdout}
 ```
 Singular values : [21.021 12.955  0.084  0.07   0.064  0.058]
-Approximation error (Frobenius norm) : 0.18415923209120422
+Approximation error (Frobenius norm) : 0.18415923209120416
 ```
 :::
 :::

@@ -492,7 +492,7 @@ $$
 
 The gradient has an important geometric meaning: it points in the direction of steepest *increase* of $f$, and its magnitude gives the rate of increase in that direction. This is precisely why gradient *descent* (@sec-optimisation) moves in the direction of $-\nabla f$.
 
-::: {#b472800e .cell execution_count=1}
+::: {#775d5f58 .cell execution_count=1}
 ``` {.python .cell-code}
 import numpy as np
 import sympy as sp
@@ -539,7 +539,7 @@ Cell <span class="ansi-green-fg">In[1], line 2</span>
 \frac{\partial f}{\partial x_i} \approx \frac{f(\ldots, x_i + \epsilon, \ldots) - f(\ldots, x_i - \epsilon, \ldots)}{2\epsilon}
 \]</span></p>
 <p>for some small <span class="math inline">\(\epsilon\)</span>. This “finite difference” check is slow (it requires re-evaluating <span class="math inline">\(f\)</span> once per parameter) and not used for actual training, but it is an extremely useful debugging tool — if your analytic gradient and your numerical gradient disagree, you have a bug.</p>
-<div id="6e82ec9f" class="cell" data-execution_count="2">
+<div id="130d628a" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f_np(v):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> v</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> y <span class="op">+</span> np.sin(y)</span>

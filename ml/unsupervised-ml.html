@@ -441,7 +441,7 @@ J = \sum_{j=1}^{k} \sum_{\mathbf{x}_i \in C_j} \| \mathbf{x}_i - \boldsymbol{\mu
 <li><strong>Update</strong>: recompute each centroid as the mean of the points currently assigned to it.</li>
 <li>Repeat steps 2–3 until assignments stop changing.</li>
 </ol>
-<div id="20c257d5" class="cell" data-execution_count="1">
+<div id="816cf646" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
@@ -483,7 +483,7 @@ Cell <span class="ansi-green-fg">In[1], line 2</span>
 <h3 data-number="17.2.2" class="anchored" data-anchor-id="hierarchical-clustering"><span class="header-section-number">17.2.2</span> Hierarchical Clustering</h3>
 <p>Rather than committing to a fixed number of clusters upfront, <strong>agglomerative hierarchical clustering</strong> starts with every point as its own cluster, and repeatedly merges the two closest clusters, according to some <strong>linkage criterion</strong> (e.g.&nbsp;the distance between the nearest pair of points in each cluster, “single linkage”; or the distance between cluster centroids, “average linkage”), until only one cluster remains.</p>
 <p>The result is naturally represented as a <strong>dendrogram</strong> — a tree showing the order in which clusters were merged, and at what distance. Cutting the dendrogram at a chosen height yields a clustering with a corresponding number of clusters, without having to have fixed <span class="math inline">\(k\)</span> in advance.</p>
-<div id="a7dd576c" class="cell" data-execution_count="2">
+<div id="96b0549d" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram, linkage</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> linkage(X[:<span class="dv">60</span>], method<span class="op">=</span><span class="st">'average'</span>)  <span class="co"># subset, for a readable dendrogram</span></span>
@@ -511,7 +511,7 @@ Cell <span class="ansi-green-fg">In[2], line 3</span>
 <h3 data-number="17.2.3" class="anchored" data-anchor-id="dbscan"><span class="header-section-number">17.2.3</span> DBSCAN</h3>
 <p>DBSCAN (Density-Based Spatial Clustering of Applications with Noise) takes a different approach again: rather than grouping points around centroids, it groups together points that are closely packed (many nearby neighbours within a distance <span class="math inline">\(\varepsilon\)</span>), and marks points in low-density regions as <strong>noise/outliers</strong> rather than forcing them into a cluster.</p>
 <p>This gives DBSCAN two properties K-means lacks: it can find clusters of arbitrary shape, and it does not require the number of clusters to be specified in advance. Its main drawback is sensitivity to the choice of the density parameters (<span class="math inline">\(\varepsilon\)</span> and the minimum number of neighbours).</p>
-<div id="7d4ca2ba" class="cell" data-execution_count="3">
+<div id="728f4916" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> DBSCAN</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_moons</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -552,7 +552,7 @@ Cell <span class="ansi-green-fg">In[3], line 1</span>
 \Sigma \mathbf{v}_j = \lambda_j \mathbf{v}_j
 \]</span></p>
 <p>The eigenvalue <span class="math inline">\(\lambda_j\)</span> gives the variance of the data along principal component <span class="math inline">\(\mathbf{v}_j\)</span> — so ranking eigenvalues by size, exactly as done in <a href="../num/eigenproblems.html" class="quarto-xref"><span>Chapter 11</span></a>, directly ranks the principal components by how much of the data’s structure they capture. Equivalently (and often more numerically stable in practice), PCA can be computed directly via the Singular Value Decomposition of the (mean-centred) data matrix, using precisely the low-rank approximation idea introduced in <a href="../num/matrix.html#sec-rank" class="quarto-xref"><span>Section 9.6</span></a>: keeping only the top <span class="math inline">\(k\)</span> singular vectors is exactly a rank-<span class="math inline">\(k\)</span> approximation of the data.</p>
-<div id="afb247c7" class="cell" data-execution_count="4">
+<div id="2614a013" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># reuse the coupled-oscillator eigenvalue problem from sec-eigen as a data source:</span></span>
@@ -587,7 +587,7 @@ Lowest vibrational mode (from sec-eig) : [-0.191 -0.354 -0.462 -0.5   -0.462 -0.
 <section id="umap" class="level3" data-number="17.3.3">
 <h3 data-number="17.3.3" class="anchored" data-anchor-id="umap"><span class="header-section-number">17.3.3</span> UMAP</h3>
 <p>Uniform Manifold Approximation and Projection (UMAP) serves a similar purpose to t-SNE — non-linear reduction to 2–3 dimensions for visualisation — but is built on different mathematical foundations (from topological data analysis), and in practice tends to be substantially faster and to preserve more of the global structure of the data than t-SNE, while still capturing local neighbourhood relationships well. It has become the more commonly used default of the two in recent years.</p>
-<div id="633b3f0a" class="cell" data-execution_count="5">
+<div id="6607ff6e" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -628,7 +628,7 @@ Cell <span class="ansi-green-fg">In[5], line 1</span>
 s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}
 \]</span></p>
 <p>which lies in <span class="math inline">\([-1, 1]\)</span>: values near <span class="math inline">\(+1\)</span> indicate the point is well-matched to its own cluster and poorly matched to neighbouring clusters (a good clustering); values near <span class="math inline">\(0\)</span> indicate the point sits near a cluster boundary; negative values suggest the point may have been assigned to the wrong cluster entirely.</p>
-<div id="4b68eb71" class="cell" data-execution_count="6">
+<div id="8c409eb0" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]:</span>
