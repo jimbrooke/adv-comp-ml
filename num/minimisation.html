@@ -447,7 +447,7 @@ H_{ij} = \frac{\partial^2 f}{\partial x_i \, \partial x_j}
 <p>The Hessian encodes the local <em>curvature</em> of <span class="math inline">\(f\)</span>, and is important in minimisation since it will classify stationary points of the function (minima, maxima, saddle points).</p>
 <!--
 
-::: {#b0a21f71 .cell execution_count=1}
+::: {#02170699 .cell execution_count=1}
 ``` {.python .cell-code}
 hess = sp.hessian(f, (x, y))
 print("Hessian :")
@@ -484,7 +484,7 @@ Cell <span class="ansi-green-fg">In[1], line 1</span>
 <li>If <span class="math inline">\(H\)</span> is negative definite, the point is a local <strong>maximum</strong>.</li>
 <li>If <span class="math inline">\(H\)</span> has both positive and negative eigenvalues, the point is a <strong>saddle point</strong> — a minimum along some directions and a maximum along others.</li>
 </ul>
-<div id="51cc2771" class="cell" data-execution_count="2">
+<div id="c8b9a6e9" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -521,7 +521,7 @@ Cell <span class="ansi-green-fg">In[1], line 1</span>
 \theta_{i+1} = \theta_i - \eta \, \nabla f(\theta_i)
 \]</span></p>
 <p>where <span class="math inline">\(\eta\)</span> is the <strong>learning rate</strong> (or step size). This is exactly the update rule already used, without derivation, in <a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a> and <a href="../ml/neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>. The justification is a direct consequence of the definition of the gradient: <span class="math inline">\(-\nabla f(\theta)\)</span> is, locally, the direction of steepest decrease of <span class="math inline">\(f\)</span>, so a small enough step in that direction is guaranteed to decrease <span class="math inline">\(f\)</span> (provided <span class="math inline">\(f\)</span> is smooth enough, and the step isn’t too large).</p>
-<div id="532de8fe" class="cell" data-execution_count="3">
+<div id="23287115" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(theta):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> theta</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span><span class="op">*</span>(y<span class="op">+</span><span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span></span>
@@ -563,7 +563,7 @@ Cell <span class="ansi-green-fg">In[1], line 1</span>
 <li>Too <strong>small</strong>, and convergence is reliable but painfully slow.</li>
 <li>Too <strong>large</strong>, and the algorithm can overshoot the minimum, oscillate, or diverge entirely.</li>
 </ul>
-<div id="b60f99e5" class="cell" data-execution_count="4">
+<div id="f8ddfb33" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> eta_test <span class="kw">in</span> [<span class="fl">0.01</span>, <span class="fl">0.08</span>, <span class="fl">0.21</span>]:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    theta <span class="op">=</span> np.array([<span class="op">-</span><span class="fl">3.</span>, <span class="fl">3.</span>])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">30</span>):</span>
@@ -575,8 +575,8 @@ eta=0.08  -&gt; theta after 30 steps = [ 0.97859878 -2.        ]
 eta=0.21  -&gt; theta after 30 steps = [ 0.99999968 85.24701134]</code></pre>
 </div>
 </div>
-<p>Notice how a learning rate that is too large causes the iterate to move <em>away</em> from the minimum rather than towards it. This single issue is the motivation for essentially all of the “adaptive learning rate” methods described in <a href="../ml/neural-networks.html#sec-adaptive-learning-rate" class="quarto-xref"><span>Section 18.4.3</span></a> (AdaGrad, Adam) — rather than fixing <span class="math inline">\(\eta\)</span> once and for all, they adjust it automatically, per-parameter, during training.</p>
-<p>A more classical alternative, not covered elsewhere in these notes, is <strong>line search</strong>: at each step, instead of committing to a fixed <span class="math inline">\(\eta\)</span>, a 1D search is performed along the gradient direction to find a good step size before moving on. This is more expensive per step, but requires far less manual tuning — a trade-off worth being aware of, even though stochastic and mini-batch methods (<a href="../ml/neural-networks.html#sec-sgd" class="quarto-xref"><span>Section 18.4.1</span></a>, <a href="../ml/neural-networks.html#sec-batch-gd" class="quarto-xref"><span>Section 18.4.2</span></a>) make full line search impractical for most modern ML training.</p>
+<p>Notice how a learning rate that is too large causes the iterate to move <em>away</em> from the minimum rather than towards it. This single issue is the motivation for essentially all of the “adaptive learning rate” methods described in <a href="../ml/neural-networks.html#sec-adaptive-learning-rate" class="quarto-xref"><span>Section 18.3.6</span></a> (AdaGrad, Adam) — rather than fixing <span class="math inline">\(\eta\)</span> once and for all, they adjust it automatically, per-parameter, during training.</p>
+<p>A more classical alternative, not covered elsewhere in these notes, is <strong>line search</strong>: at each step, instead of committing to a fixed <span class="math inline">\(\eta\)</span>, a 1D search is performed along the gradient direction to find a good step size before moving on. This is more expensive per step, but requires far less manual tuning — a trade-off worth being aware of, even though stochastic and mini-batch methods (<a href="../ml/neural-networks.html#sec-sgd" class="quarto-xref"><span>Section 18.3.4</span></a>, <a href="../ml/neural-networks.html#sec-batch-gd" class="quarto-xref"><span>Section 18.3.5</span></a>) make full line search impractical for most modern ML training.</p>
 </section>
 </section>
 <section id="second-order-methods" class="level2" data-number="13.4">
@@ -595,6 +595,52 @@ eta=0.21  -&gt; theta after 30 steps = [ 0.99999968 85.24701134]</code></pre>
 \]</span></p>
 <p>At a constrained optimum, the gradient of <span class="math inline">\(\mathcal{L}\)</span> with respect to <em>both</em> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\lambda\)</span> must vanish. Geometrically, this condition says that at the constrained optimum, the gradient of <span class="math inline">\(f\)</span> is parallel to the gradient of the constraint <span class="math inline">\(g\)</span> — there is no direction you could move along the constraint surface that would still decrease <span class="math inline">\(f\)</span>.</p>
 <p>This is more than a mathematical curiosity for this course: regularisation (<a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>) can be understood exactly as constrained optimisation. Minimising <span class="math inline">\(\text{MSE} + \lambda \sum |w_i|\)</span> (LASSO) or <span class="math inline">\(\text{MSE} + \lambda \sum w_i^2\)</span> (Ridge) is the Lagrangian form of the constrained problem “minimise MSE subject to the weights lying within some norm-ball” — the regularisation strength <span class="math inline">\(\lambda\)</span> plays exactly the role of the Lagrange multiplier above.</p>
+<!--
+## Partial Derivatives and the Gradient
+
+For a scalar function of several variables, $f(x_1, x_2, \ldots, x_n)$, the **partial derivative** $\partial f / \partial x_i$ measures the rate of change of $f$ as $x_i$ varies, holding all other variables fixed. Collecting all partial derivatives into a vector gives the **gradient**:
+
+$$
+\nabla f = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \ldots, \frac{\partial f}{\partial x_n} \right)
+$$
+
+The gradient has an important geometric meaning: it points in the direction of steepest *increase* of $f$, and its magnitude gives the rate of increase in that direction. This is precisely why gradient *descent* (@sec-optimisation) moves in the direction of $-\nabla f$.
+
+::: {#6f128784 .cell execution_count=5}
+``` {.python .cell-code}
+import numpy as np
+import sympy as sp
+
+x, y = sp.symbols('x y')
+f = x**2 * y + sp.sin(y)
+
+grad = [sp.diff(f, var) for var in (x, y)]
+print("f(x,y)      =", f)
+print("gradient    =", grad)
+print("at (1, 0)   =", [g.subs({x: 1, y: 0}) for g in grad])
+```
+
+::: {.cell-output .cell-output-error}
+
+::: {.ansi-escaped-output}
+```{=html}
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[5], line 2</span>
+<span class="ansi-green-fg ansi-bold">      1</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">numpy</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">as</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">np</span>
+<span class="ansi-green-fg">----&gt; 2</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">sympy</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">as</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,0,255)">sp</span>
+<span class="ansi-green-fg ansi-bold">      4</span> x, y <span style="color:rgb(98,98,98)">=</span> sp<span style="color:rgb(98,98,98)">.</span>symbols(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">x y</span><span style="color:rgb(175,0,0)">'</span>)
+<span class="ansi-green-fg ansi-bold">      5</span> f <span style="color:rgb(98,98,98)">=</span> x<span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">2</span> <span style="color:rgb(98,98,98)">*</span> y <span style="color:rgb(98,98,98)">+</span> sp<span style="color:rgb(98,98,98)">.</span>sin(y)
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named 'sympy'</pre>
+```
+:::
+
+:::
+:::
+
+
+-->
 
 
 </section>

@@ -442,7 +442,7 @@ $$
 \text{Var}(\hat{\theta}) = \mathbb{E}\left[(\hat{\theta} - \mathbb{E}[\hat\theta])^2\right]
 $$
 
-::: {#731350d4 .cell execution_count=1}
+::: {#b72cc57b .cell execution_count=1}
 ``` {.python .cell-code}
 import numpy as np
 rng = np.random.default_rng(1)
@@ -516,7 +516,7 @@ This is worth comparing directly to the bias–variance tradeoff of @sec-overfit
 <section id="mle-example" class="level3" data-number="16.2.2">
 <h3 data-number="16.2.2" class="anchored" data-anchor-id="mle-example"><span class="header-section-number">16.2.2</span> MLE Example</h3>
 <p>A more simple example is estimation of the decay constant <span class="math inline">\(\lambda\)</span> from a small sample of radioactive decay times. In this case the probability distribution for the data is an exponential function, <span class="math inline">\(P(x|\lambda) = \lambda e^{-\lambda x}\)</span>. Naively, <span class="math inline">\(\lambda\)</span> can be found from the reciprocal of the mean observed decay time, and this will work reasonably well for large samples. However, this is a <em>biased</em> estimator of <span class="math inline">\(\lambda\)</span>, which becomes particularly important with small sample size. Maximum likelihood estimation can be used to properly account for the asymmetric uncertainties that arise in this case as shown in the example below.</p>
-<div id="2e8f248d" class="cell" data-execution_count="2">
+<div id="411a9137" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.optimize <span class="im">as</span> opt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
