@@ -29,8 +29,7 @@ $$
 \frac{\partial z}{\partial \alpha}
 $$
 
-Note that in backpropagation, we are not trying to find a closed-form solution for the derivative, but just to establish an efficient method for computing the numerical values.
-
+By computing each derivativ in turn :
 $$
 \begin{align}
 \frac{\partial L}{\partial \hat{y}} &= 2(\hat{y}-y) \\\\
@@ -38,7 +37,7 @@ $$
 \end{align}
 $$
 
-Hence
+We find that :
 
 $$
 \frac{\partial L}{\partial \alpha} =
@@ -52,7 +51,7 @@ $$
 2(\hat{y}-y) f'(z) 
 $$
 
-Provided the derivative of the activation function, $f'(z)$ is known, we note that the the derivative of the loss can be computed directly *from terms calculated during the forward pass*.
+Note that in backpropagation, we are not trying to find a closed-form solution for the derivative, but just to establish an efficient method for computing the numerical values.  We find that, provided the derivative of the activation function, $f'(z)$, is known, the derivative of the loss can be computed using only the values of $x$, $y$, $\hat{y}$ and $z$.  These terms are all calculated during the forward pass, making this an efficient method for computing the gradient of the loss.
 
 ## Extension to multiple layers
 
@@ -98,92 +97,18 @@ $$
 
 It should now be clear that we can compute all partial derivatives of the loss with respect to each weight, by starting with the final layer and working backwards.  Hence the term backpropagation.
 
-## The Multivariate Chain Rule
+## Extension to multivariate functions
 
-This is the single most important result in this section, because it is the entire mathematical content of **backpropagation** (@sec-backpropagation). For a composite function — one built by feeding the output of one function into another, exactly as happens layer-by-layer in a neural network — the chain rule states that the Jacobian of the composition is the *matrix product* of the individual Jacobians:
+In practice, our networks have multiple input and output variables, represented as vectors, and the weights become matrices. The chain rule still applies, but the derivatives become Jacobian matrices, and the "multiplication" becomes matrix multiplication. The multivariate chain rule states that the Jacobian of a function composition is the *matrix product* of the individual Jacobians:
 
 $$
 \frac{\partial \mathbf{z}}{\partial \mathbf{x}} = \frac{\partial \mathbf{z}}{\partial \mathbf{y}} \cdot \frac{\partial \mathbf{y}}{\partial \mathbf{x}}
 $$
 
-where $\mathbf{x} \to \mathbf{y} \to \mathbf{z}$ is a chain of function compositions.
-
-Compare this directly with the single-node backpropagation example above. In a full network with vector-valued activations at each layer, the *same* rule applies, but each factor becomes a Jacobian matrix rather than a scalar derivative, and the "multiplication" becomes genuine matrix multiplication.
-
-
-<!--
-## Partial Derivatives and the Gradient
-
-For a scalar function of several variables, $f(x_1, x_2, \ldots, x_n)$, the **partial derivative** $\partial f / \partial x_i$ measures the rate of change of $f$ as $x_i$ varies, holding all other variables fixed. Collecting all partial derivatives into a vector gives the **gradient**:
-
-$$
-\nabla f = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \ldots, \frac{\partial f}{\partial x_n} \right)
-$$
-
-The gradient has an important geometric meaning: it points in the direction of steepest *increase* of $f$, and its magnitude gives the rate of increase in that direction. This is precisely why gradient *descent* (@sec-optimisation) moves in the direction of $-\nabla f$.
-
-```{python}
-import numpy as np
-import sympy as sp
-
-x, y = sp.symbols('x y')
-f = x**2 * y + sp.sin(y)
-
-grad = [sp.diff(f, var) for var in (x, y)]
-print("f(x,y)      =", f)
-print("gradient    =", grad)
-print("at (1, 0)   =", [g.subs({x: 1, y: 0}) for g in grad])
-```
--->
-
+where $\mathbf{y} = f(\mathbf{x})$ and $\mathbf{z} = g(\mathbf{y})$.
 
 
 ### Automatic Differentiation
 
-Modern deep learning frameworks (PyTorch, TensorFlow, JAX — see @sec-programming-nn) don't compute derivatives symbolically (as `sympy` does above) or numerically (see below); instead they use **automatic differentiation**, which applies the chain rule mechanically to the sequence of elementary operations (add, multiply, exponentiate, ...) that make up a computation, accumulating Jacobians as it goes. Applying the chain rule *backwards* through the computation graph, from output to input, is what "reverse-mode" automatic differentiation means — and reverse-mode automatic differentiation applied to a neural network's loss function is, precisely, backpropagation. This is why backpropagation, once understood as an instance of the chain rule, generalises immediately to arbitrarily complex network architectures (CNNs, RNNs, Transformers) without needing a new derivation for each one — the chain rule doesn't care what the individual layers compute.
+Modern deep learning frameworks (PyTorch, TensorFlow, JAX — see @sec-programming-nn) don't compute derivatives symbolically or numerically; instead they use *automatic differentiation*.  Given a function implemented in a computer program, automatic differentiation computes the derivative of that function with respect to its inputs, by applying the chain rule to the sequence of elementary operations that make up the function.  When the function is called, theframework records the sequence of operations performed, and stores the intermediate values which are then used to compute the derivative using backpropagation.
 
-## Checking Gradients Numerically
-
-A gradient computed by hand (or by an automatic differentiation library) can always be sanity-checked against a direct numerical approximation, using the definition of the derivative as a limit:
-
-$$
-\frac{\partial f}{\partial x_i} \approx \frac{f(\ldots, x_i + \epsilon, \ldots) - f(\ldots, x_i - \epsilon, \ldots)}{2\epsilon}
-$$
-
-for some small $\epsilon$. This "finite difference" check is slow (it requires re-evaluating $f$ once per parameter) and not used for actual training, but it is an extremely useful debugging tool — if your analytic gradient and your numerical gradient disagree, you have a bug.
-
-```{python}
-def f_np(v):
-    x, y = v
-    return x**2 * y + np.sin(y)
-
-def grad_analytic(v):
-    x, y = v
-    return np.array([2*x*y, x**2 + np.cos(y)])
-
-def grad_numerical(func, v, eps=1e-6):
-    grad = np.zeros_like(v)
-    for i in range(len(v)):
-        v_plus, v_minus = v.copy(), v.copy()
-        v_plus[i] += eps
-        v_minus[i] -= eps
-        grad[i] = (func(v_plus) - func(v_minus)) / (2*eps)
-    return grad
-
-v0 = np.array([1.0, 0.5])
-print("Analytic gradient  :", grad_analytic(v0))
-print("Numerical gradient :", grad_numerical(f_np, v0))
-```
-
-<!--
-### Directional Derivatives
-
-More generally, the rate of change of $f$ in an arbitrary direction $\hat{\mathbf{u}}$ (a unit vector) is given by the **directional derivative**:
-
-$$
-D_{\hat{\mathbf{u}}} f = \nabla f \cdot \hat{\mathbf{u}}
-$$
-
-This is maximised when $\hat{\mathbf{u}}$ points in the same direction as $\nabla f$ — confirming the claim above that the gradient points in the direction of steepest ascent.
-
--->

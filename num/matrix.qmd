@@ -140,18 +140,6 @@ print(invA)
 ```
 
 
-<!-- ### Why this matters for training
-
-When training a neural network (@sec-nn), the gradient of the loss with respect to all the weights can occasionally become very large — for example early in training, or with recurrent networks over long sequences (@sec-rnn). If left unchecked, a single large gradient step can destabilise training. A standard mitigation, **gradient clipping**, simply rescales the gradient vector if its norm exceeds some threshold $\tau$:
-
-$$
-\mathbf{g} \leftarrow \mathbf{g} \times \min\left(1, \frac{\tau}{\|\mathbf{g}\|_2}\right)
-$$
-
-This is a direct, practical use of the L2 norm defined above, and is worth keeping in mind when we return to gradient descent in @sec-optimisation. -->
-
-
-
 <!--
 ### Low-rank approximation
 
