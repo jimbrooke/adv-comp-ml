@@ -8,43 +8,22 @@ execute:
 
 ## Introduction
 
-In computational physics, we often seek to build models that can learn from data. **Supervised learning** is one of the foundational paradigms in machine learning, in which a model learns to predict an output (label or target) given a set of inputs (features). In essence a model is trained to be able to identify patterns in datasets. If the model is trained successfully it should be able to predict outputs on unseen data. 
+Supervised learning is one of the foundational paradigms in machine learning, in which a model learns to predict an output (label or target) given a set of inputs (features). In essence a model is trained to be able to identify patterns in datasets. If the model is trained successfully it should be able to predict outputs on unseen data. 
 
 This part of the course explores how supervised learning is formulated, trained, and evaluated, focusing on applications relevant to physics. 
 
----
-
 ## Training Sets
 
-In supervised learning, the foundation is the **training set**, a collection of **input–output pairs**:
+In supervised learning, the foundation is the *training set*, a collection of $N$ input–output pairs:
 
 $$
 \mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^N
 $$
 
-where:
+where $\mathbf{x}_i$ are the inputs (sometimes called features or feature vectors) and $y_i$ are the outputs (or labels)
+are labels (outputs). The key goal of supervised learning is to learn a mapping from inputs to outputs, $f: \mathbf{x} \rightarrow y$ which can be expressed mathematically as a function $f(\mathbf{x}_i) \approx y_i$.
 
-$$
- (\mathbf{x}_i \in \mathbb{R}^d)
-$$  
-are feature vectors (inputs),
-$$
-(y_i \in \mathbb{R}) 
-$$
-are labels (outputs), and  
-$$ 
-(N) 
-$$
-is the total number of samples.
-
-
-The key goal of supervised learning is to learn a mapping:
-$$
- (f: \mathbf{x} \rightarrow y)  \text{such that}  (f(\mathbf{x}_i) \approx y_i).
-$$
-
-
-The significant point here is that one needs to have a **labelled dataset** to use supervised learning; each data point needs a corresponding label - a common example of this would be vehicles and vehicle types. The dataset would need to include different types of vehicle, such as motorbikes, cars, vans, lorries - and then each vehicle in the dataset would have a label identifiying its type. The different types of dataset used in supervised learning are covered in the next section. 
+The significant point here is that one needs to have a *labelled dataset* to use supervised learning; each data point needs a corresponding label - a common example of this would be vehicles and vehicle types. The dataset would need to include different types of vehicle, such as motorbikes, cars, vans, lorries - and then each vehicle in the dataset would have a label identifiying its type. The different types of dataset used in supervised learning are covered in the next section. 
 
 ## Dataset splitting
 
@@ -58,26 +37,38 @@ The dataset is usually divided into:
 
 Typical split ratios: 70% / 15% / 15%, though this does depend on how large the dataset is and the type of problem you are solving. There are techniques that one can use to augment data in the case of smaller datasets - these will be discussed later in the course. 
 
----
 
 ## Models
 
-A **model** defines the relationship between inputs and outputs. It can be **linear** or **non-linear**, depending on the task the network has to perform and the relationship between the features and labels.
+A *model* defines the relationship between inputs and outputs. It can be linear or non-linear, depending on the task the network has to perform and the relationship between the features and labels.
 
-The majority of the tasks we will deal with can be separated into either Regression or Classification problems. 
+The majority of the tasks we will deal with can be separated into either regression or classification problems. 
 
 Regression is suitable where the output you desire is a number; the most simple example of this would be linear regression. This can also be generalised to N-dimenstional inputs. 
 
 Classification is suitable where you desire the output to be a label. For example, if you are trying to assign the make or model of a car. 
 
+### Boosted Decision Tree
 
----
+The boosted decision tree (BDT) is a commonly used model for classification and regression problems. It is a type of ensemble learning method, which combines the predictions of multiple models to improve overall performance.
+
+Decision trees are flowchart-like structures originally invented to help with decision making processes. At each step in the tree the sample is split accordiing to some criterion and at the end of the tree, the events in the sub-sample are assigned a prediction. 
+
+To create a decision tree you decide on a set of rules that will aid in your classification or regression task. At each step, or node, there should a specific rule on how to split the dataset - domain knowledge on how well the split divdes your dataset between the classes is particularly important. The final nodes are called leaves and rules need to be in place to also decide when to create these leaves. Typically this depends on the sample size, sample purity, among other factors. The prediction assigned to a leaf node is obtained from the sample it contains. 
+
+The "boosting" aspect of this approach comes in when attempting to improve the performance of the tree. As single decision trees can be prone to overfitting (discussed further in these notes), they can often perform poorly on unseen data. As such, "boosting" is the technique of using multiple "weak" or "shallow" trees together sequentially as an "ensemble". The later trees focus on the areas where the earlier trees had misclassifications or high degrees of uncertainty.
+The models are trained iteratively, with the gradient of the loss used to guide the new model.
+When training a boosted decision tree, the prediction assigned to a leaf node is the residual (averaged over the sample in the leaf node) based on the prediction of all previous trees. This is then multiplied by a factor, which is the learning rate. The BDTs produce a score for each input data point and, in the case of classifciation, we can assign a probability that an event is a particular class. 
+
+### Neural Networks
+
+Most of the models we will consider in this unit will be neural networks, which are described later in @sec-nn.  They are composed of layers of interconnected nodes (neurons), where each connection has an associated weight that is adjusted during training to minimise the loss function.  Such models are particularly well-suited to learning complex, non-linear relationships between inputs and outputs. 
 
 ## Loss Functions
 
-To quantify how well a model performs, we define a **loss function** $(L(y, f(\mathbf{x})))$ that measures the discrepancy between predicted and true values. This is a critical concept in machine learning as it effectively quantifies how good a given prediction is. In supervised learning, the loss is based on the difference between the prediction for a given input and the known truth, also called ground truth.
+To quantify how well a model performs, we define a *loss function*, $L(y, f(\mathbf{x}))$, that measures the discrepancy between predicted and true values. This is a critical concept in machine learning as it effectively quantifies how good a given prediction is. In supervised learning, the loss is based on the difference between the prediction for a given input and the known truth, also called ground truth.
 
-Within regression problems commonly used loss functions are Mean Squared Error and Mean Absolute Error. 
+Within regression problems, two commonly used loss functions are Mean Squared Error and Mean Absolute Error. 
 
 MSE:
 $$
@@ -109,17 +100,9 @@ where $\theta_i$ are the current set of parameters, $\Delta L(\theta_i)$ is the 
 
 Standard gradient descent uses the entire dataset when calculating the loss and is therefore computationally expensive and can take a long time to converge. An alternative method, Stochastic gradient descent, uses only a small subset of the data to calculate the loss, and is therefore more efficient and scalable to large datasets. However due to randomly sampling datapoints to calculate the loss, it can be a more erratic process. 
 
-## Boosted Decision Tree
 
-Decision trees are flowchart-like structures originally invented to help with decision making processes. At each step in the tree the sample is split accordiing to some criterion and at the end of the tree, the events in the sub-sample are assigned a prediction. 
 
-To create a decision tree you decide on a set of rules that will aid in your classification or regression task. At each step, or node, there should a specific rule on how to split the dataset - domain knowledge on how well the split divdes your dataset between the classes is particularly important. The final nodes are called leaves and rules need to be in place to also decide when to create these leaves. Typically this depends on the sample size, sample purity, among other factors. The prediction assigned to a leaf node is obtained from the sample it contains. 
-
-The "boosting" aspect of this approach comes in when attempting to improve the performance of the tree. As single decision trees can be prone to overfitting (discussed further in these notes), they can often perform poorly on unseen data. As such, "boosting" is the technique of using multiple "weak" or "shallow" trees together sequentially as an "ensemble". The later trees focus on the areas where the earlier trees had misclassifications or high degrees of uncertainty.
-The models are trained iteratively, with the gradient of the loss used to guide the new model.
-When training a boosted decision tree, the prediction assigned to a leaf node is the residual (averaged over the sample in the leaf node) based on the prediction of all previous trees. This is then multiplied by a factor, which is the learning rate. The BDTs produce a score for each input data point and, in the case of classifciation, we can assign a probability that an event is a particular class. 
-
-## BDT Classifier Performance
+## Classifier Performance
 
 Individual events can be classified by considering the distributions of scores and then assigning a threshold to a particular class. Above this threshold defines one class, and below another class. 
 Given a threshold we can then compute specific metrics to assess the performance of our classifier, assuming we have two classes to select between, class A and B:
