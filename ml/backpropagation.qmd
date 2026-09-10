@@ -6,15 +6,112 @@ execute:
 
 # Backpropagation {@sec-backpropagation}
 
-In this section, we will understand the backpropagation method, which allows us to compute the gradient of a neural network's loss function with respect to its parameters.  This method is essential for training neural networks, since it allows us to use gradient descent (@sec-optimisation) to minimise the loss function.
+In this section, we will explore backpropagation in more depth.  This method is used to compute the gradient of a neural network's loss function with respect to its parameters, which allows us to use gradient descent (@sec-optimisation) to minimise the loss function.
+
+## Simple example
+
+As an example, we can consider a network comprising a single node, with the loss defined as mean squared error.  We can write the loss in terms of the weights, as follows :
+
+$$
+\begin{align}
+L&=(\hat{y}-y)^2 \\\\
+\hat{y}&=f(z) \\\\
+z&=\alpha x + \beta
+\end{align}
+$$
+
+It should be clear that the derivative of the loss with respect to the weight, $\alpha$, can now be computed using the chain rule :
+
+$$
+\frac{\partial L}{\partial \alpha} = 
+\frac{\partial L}{\partial \hat{y}}
+\frac{\partial \hat{y}}{\partial z}
+\frac{\partial z}{\partial \alpha}
+$$
+
+Note that in backpropagation, we are not trying to find a closed-form solution for the derivative, but just to establish an efficient method for computing the numerical values.
+
+$$
+\begin{align}
+\frac{\partial L}{\partial \hat{y}} &= 2(\hat{y}-y) \\\\
+\frac{\partial z}{\partial \alpha} &= x
+\end{align}
+$$
+
+Hence
+
+$$
+\frac{\partial L}{\partial \alpha} =
+2(\hat{y}-y) f'(z) x
+$$
+
+And similarly :
+
+$$
+\frac{\partial L}{\partial \beta} =
+2(\hat{y}-y) f'(z) 
+$$
+
+Provided the derivative of the activation function, $f'(z)$ is known, we note that the the derivative of the loss can be computed directly *from terms calculated during the forward pass*.
+
+## Extension to multiple layers
+
+Now consider a network comprising multiple layers.  We will denote the output (aka activation) of the $i$-th layer as $a_i$, with corresponding subscripts on weights and biases.  So the final layer of an $n$ layer network can be written :
+
+$$
+a_n = f(\alpha_n a_{n-1} + \beta_n)
+$$
+
+The derivative of the loss for this final layer, remains as above :
+
+$$
+\begin{align}
+\frac{\partial L}{\partial \alpha_n} &=
+2(a_n-y) f'(z_n) a_{n-1} \\\\
+\frac{\partial L}{\partial \beta_n} &=
+2(a_n-y) f'(z_n)
+\end{align}
+$$
+
+For the previous layer, we must expand $a_{n-1}$ using the activation function of that layer, ie.
+
+$$
+a_{n-1} = f(\alpha_{n-1}a_{n-2} + \beta_{n-1})
+$$
+
+Which means the derivative of the loss with respect to weights in this $(n-1)$-th layer becomes :
+
+$$
+\frac{\partial L}{\partial \alpha_{n-1}} = 
+\frac{\partial L}{\partial a_n}
+\frac{\partial a_n}{\partial z_n}
+\frac{\partial z_n}{\partial a_{n-1}}
+\frac{\partial a_{n-1}}{\partial \alpha_{n-1}}
+$$
+
+which can again be written in terms that are computed during the forward pass :
+
+$$
+\frac{\partial L}{\partial \alpha_n} =
+2(a_n-y) f'(z_n) \alpha_n x_{n-2}
+$$
+
+It should now be clear that we can compute all partial derivatives of the loss with respect to each weight, by starting with the final layer and working backwards.  Hence the term backpropagation.
+
+## The Multivariate Chain Rule
+
+This is the single most important result in this section, because it is the entire mathematical content of **backpropagation** (@sec-backpropagation). For a composite function — one built by feeding the output of one function into another, exactly as happens layer-by-layer in a neural network — the chain rule states that the Jacobian of the composition is the *matrix product* of the individual Jacobians:
+
+$$
+\frac{\partial \mathbf{z}}{\partial \mathbf{x}} = \frac{\partial \mathbf{z}}{\partial \mathbf{y}} \cdot \frac{\partial \mathbf{y}}{\partial \mathbf{x}}
+$$
+
+where $\mathbf{x} \to \mathbf{y} \to \mathbf{z}$ is a chain of function compositions.
+
+Compare this directly with the single-node backpropagation example above. In a full network with vector-valued activations at each layer, the *same* rule applies, but each factor becomes a Jacobian matrix rather than a scalar derivative, and the "multiplication" becomes genuine matrix multiplication.
 
 
-
-
-
-
-Every training algorithm used later in this unit — gradient descent (@sec-optimisation), backpropagation (@sec-backpropagation), the Adam optimiser (@sec-adaptive-learning-rate) — relies on the ability to compute the derivative of a function with respect to *many* variables at once. This section introduces the vocabulary and the key result (the multivariate chain rule) needed to make that precise, before we return to see it in action in @sec-optimisation and @sec-nn.
-
+<!--
 ## Partial Derivatives and the Gradient
 
 For a scalar function of several variables, $f(x_1, x_2, \ldots, x_n)$, the **partial derivative** $\partial f / \partial x_i$ measures the rate of change of $f$ as $x_i$ varies, holding all other variables fixed. Collecting all partial derivatives into a vector gives the **gradient**:
@@ -37,35 +134,9 @@ print("f(x,y)      =", f)
 print("gradient    =", grad)
 print("at (1, 0)   =", [g.subs({x: 1, y: 0}) for g in grad])
 ```
-
-### Directional Derivatives
-
-More generally, the rate of change of $f$ in an arbitrary direction $\hat{\mathbf{u}}$ (a unit vector) is given by the **directional derivative**:
-
-$$
-D_{\hat{\mathbf{u}}} f = \nabla f \cdot \hat{\mathbf{u}}
-$$
-
-This is maximised when $\hat{\mathbf{u}}$ points in the same direction as $\nabla f$ — confirming the claim above that the gradient points in the direction of steepest ascent.
+-->
 
 
-## The Multivariate Chain Rule
-
-This is the single most important result in this section, because it is the entire mathematical content of **backpropagation** (@sec-backpropagation). For a composite function — one built by feeding the output of one function into another, exactly as happens layer-by-layer in a neural network — the chain rule states that the Jacobian of the composition is the *matrix product* of the individual Jacobians:
-
-$$
-\frac{\partial \mathbf{z}}{\partial \mathbf{x}} = \frac{\partial \mathbf{z}}{\partial \mathbf{y}} \cdot \frac{\partial \mathbf{y}}{\partial \mathbf{x}}
-$$
-
-where $\mathbf{x} \to \mathbf{y} \to \mathbf{z}$ is a chain of function compositions.
-
-Compare this directly with the single-node backpropagation example already worked through in @sec-backpropagation:
-
-$$
-\frac{\partial L}{\partial \alpha} = \frac{\partial L}{\partial \hat{y}} \frac{\partial \hat{y}}{\partial z} \frac{\partial z}{\partial \alpha}
-$$
-
-This is exactly the multivariate chain rule above, specialised to the case where every quantity happens to be a scalar. In a full network with vector-valued activations at each layer, the *same* rule applies, but each factor becomes a Jacobian matrix rather than a scalar derivative, and the "multiplication" becomes genuine matrix multiplication. This is precisely why efficient matrix multiplication (@sec-matrix) is not just a computational convenience for neural networks, but the literal mathematical mechanism by which gradients are propagated backwards through the network.
 
 ### Automatic Differentiation
 
@@ -103,3 +174,16 @@ v0 = np.array([1.0, 0.5])
 print("Analytic gradient  :", grad_analytic(v0))
 print("Numerical gradient :", grad_numerical(f_np, v0))
 ```
+
+<!--
+### Directional Derivatives
+
+More generally, the rate of change of $f$ in an arbitrary direction $\hat{\mathbf{u}}$ (a unit vector) is given by the **directional derivative**:
+
+$$
+D_{\hat{\mathbf{u}}} f = \nabla f \cdot \hat{\mathbf{u}}
+$$
+
+This is maximised when $\hat{\mathbf{u}}$ points in the same direction as $\nabla f$ — confirming the claim above that the gradient points in the direction of steepest ascent.
+
+-->

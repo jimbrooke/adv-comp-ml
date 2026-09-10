@@ -8,12 +8,12 @@ execute:
 
 Minimisation is the general problem of locating the minimum of a function.  We may equally be interested in the maximum of a function, but this can be converted to a minimisation problem by negating the function, so typically the problem is always framed as minimisation.
 
-More formally, we are interested in finding the value of $\theta$ that minimises $f(\theta)$:
-$$
+More formally, we are interested in finding the value of $\theta$ that minimises $f(\theta)$.
+<!-- $$
 \theta^* = \arg\min_{\theta} f(\theta)
-$$
+$$-->
 
-We are primarily interested in the case where $f$ is the loss function of a machine learning model, as discussed in @sec-supervised-ml.  More generally, minimisation is a fundamental problem in mathematics and physics.  We will also encounter it in fitting functions to data, and in the maximum likelihood methods (where we minimise the negative log likelihood) discussed in @sec-mle.
+In this unit, we are primarily interested in the case where $f$ is the loss function of a machine learning model, as discussed in @sec-supervised-ml.  However, minimisation is a fundamental problem in mathematics and physics.  We also encounter it in fitting functions to data, and in the maximum likelihood methods (where we minimise the negative log likelihood) discussed in @sec-mle.
 
 
 ## Multivariate calculus

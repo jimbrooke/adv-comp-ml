@@ -31,7 +31,7 @@ $$
 
 where $C_j$ is the set of points assigned to cluster $j$, and $\boldsymbol{\mu}_j$ is that cluster's centroid (mean). Note this uses exactly the L2 norm introduced in @sec-norms.
 
-K-means minimises $J$ using a simple iterative scheme (closely related in spirit to the iterative refinement seen elsewhere in this unit, e.g. gradient descent, @sec-optimisation):
+K-means minimises $J$ using a simple iterative scheme (closely related in spirit to the iterative refinement seen elsewhere in this unit, e.g. gradient descent, @sec-minimisation):
 
 1. Initialise $k$ centroids (commonly, at $k$ randomly chosen data points).
 2. **Assign**: assign every point to its nearest centroid.
