@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9ae487f9dc81c977a28b7be194272750.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e49fe94e7c8471cb6eac0ecf78abda4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -320,14 +320,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/mle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
+  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+  <a href="../ml/stats-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ML and Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -435,7 +435,7 @@ window.Quarto = {
 <li>An <strong>encoder</strong>, <span class="math inline">\(\mathbf{z} = f_{\text{enc}}(\mathbf{x})\)</span>, which compresses the input <span class="math inline">\(\mathbf{x}\)</span> down to a lower-dimensional representation <span class="math inline">\(\mathbf{z}\)</span>, known as the <strong>latent code</strong> or <strong>bottleneck</strong>.</li>
 <li>A <strong>decoder</strong>, <span class="math inline">\(\hat{\mathbf{x}} = f_{\text{dec}}(\mathbf{z})\)</span>, which attempts to reconstruct the original input from the latent code alone.</li>
 </ul>
-<p>The network is trained, exactly as in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>, by minimising a loss function — typically Mean Squared Error between the input and its reconstruction:</p>
+<p>The network is trained, exactly as in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>, by minimising a loss function — typically Mean Squared Error between the input and its reconstruction:</p>
 <p><span class="math display">\[
 L = \| \mathbf{x} - \hat{\mathbf{x}} \|_2^2
 \]</span></p>
@@ -461,19 +461,19 @@ q_\phi(\mathbf{z} \mid \mathbf{x}) = \mathcal{N}\!\left(\mathbf{z}; \, \boldsymb
 <p>To make this a genuinely useful generative model, we additionally want the aggregate of all these per-input distributions to fill out the latent space smoothly, with no gaps, so that <em>any</em> point sampled from a simple, known distribution decodes to something realistic. The VAE achieves this by pushing every input’s latent distribution <span class="math inline">\(q_\phi(\mathbf{z}\mid\mathbf{x})\)</span> towards a fixed, simple <strong>prior</strong> distribution, almost always chosen to be a standard normal, <span class="math inline">\(p(\mathbf{z}) = \mathcal{N}(\mathbf{0}, I)\)</span>.</p>
 <section id="the-loss-function-reconstruction-kl-divergence" class="level3" data-number="22.2.1">
 <h3 data-number="22.2.1" class="anchored" data-anchor-id="the-loss-function-reconstruction-kl-divergence"><span class="header-section-number">22.2.1</span> The Loss Function: Reconstruction + KL Divergence</h3>
-<p>This gives the VAE two competing objectives, combined into a single loss function (technically, the negative of a quantity called the <strong>Evidence Lower Bound</strong>, or ELBO — a direct relative of the log-likelihood objective from <a href="mle.html" class="quarto-xref"><span>Chapter 15</span></a>, since a VAE is ultimately trying to maximise the likelihood of the training data under the generative model <span class="math inline">\(p_\theta\)</span>):</p>
+<p>This gives the VAE two competing objectives, combined into a single loss function (technically, the negative of a quantity called the <strong>Evidence Lower Bound</strong>, or ELBO — a direct relative of the log-likelihood objective from <span class="quarto-unresolved-ref">?sec-mle</span>, since a VAE is ultimately trying to maximise the likelihood of the training data under the generative model <span class="math inline">\(p_\theta\)</span>):</p>
 <p><span class="math display">\[
 L(\theta, \phi; \mathbf{x}) = \underbrace{\mathbb{E}_{\mathbf{z}\sim q_\phi}\big[-\log p_\theta(\mathbf{x}\mid\mathbf{z})\big]}_{\text{reconstruction loss}} \; + \; \underbrace{D_{\text{KL}}\big(q_\phi(\mathbf{z}\mid\mathbf{x}) \,\|\, p(\mathbf{z})\big)}_{\text{regularisation towards the prior}}
 \]</span></p>
 <ul>
-<li>The first term is just the reconstruction error again — for Gaussian-distributed reconstructions this reduces to the same Mean Squared Error used in a standard autoencoder above, and, exactly as shown for supervised regression in <a href="mle.html" class="quarto-xref"><span>Chapter 15</span></a>, is itself a negative log-likelihood term in disguise.</li>
+<li>The first term is just the reconstruction error again — for Gaussian-distributed reconstructions this reduces to the same Mean Squared Error used in a standard autoencoder above, and, exactly as shown for supervised regression in <span class="quarto-unresolved-ref">?sec-mle</span>, is itself a negative log-likelihood term in disguise.</li>
 <li>The second term, the <strong>Kullback-Leibler (KL) divergence</strong>, measures how different the encoder’s distribution <span class="math inline">\(q_\phi(\mathbf{z}\mid\mathbf{x})\)</span> is from the prior <span class="math inline">\(p(\mathbf{z})\)</span>, and penalises the encoder for straying too far from it. This is what forces the latent space, in aggregate across the whole dataset, to fill out smoothly around the origin rather than leaving unstructured gaps.</li>
 </ul>
 <p>For two diagonal Gaussians, this KL divergence term has a convenient closed form, so it does not need to be estimated numerically:</p>
 <p><span class="math display">\[
 D_{\text{KL}}\big(\mathcal{N}(\mu,\sigma^2) \,\|\, \mathcal{N}(0,1)\big) = -\frac{1}{2}\sum_{i} \left(1 + \log\sigma_i^2 - \mu_i^2 - \sigma_i^2\right)
 \]</span></p>
-<div id="97ac1bad" class="cell" data-execution_count="1">
+<div id="1c3908cd" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kl_divergence_to_standard_normal(mu, log_var):</span>
@@ -504,7 +504,7 @@ KL divergence (far from prior)   : 10.18109312953954</code></pre>
 \mathbf{z} = \boldsymbol{\mu}_\phi(\mathbf{x}) + \boldsymbol{\sigma}_\phi(\mathbf{x}) \odot \boldsymbol{\epsilon}, \qquad \boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, I)
 \]</span></p>
 <p>where <span class="math inline">\(\odot\)</span> denotes elementwise multiplication. Now <span class="math inline">\(\mathbf{z}\)</span> is written as a deterministic, differentiable function of <span class="math inline">\(\boldsymbol{\mu}\)</span>, <span class="math inline">\(\boldsymbol{\sigma}\)</span>, and a separately-sampled noise term <span class="math inline">\(\boldsymbol{\epsilon}\)</span> that carries no trainable parameters. This means the chain rule (<span class="quarto-unresolved-ref">?sec-gradients</span>) can be applied straight through the sampling step exactly as through any other layer, and the whole network — encoder and decoder together — can be trained end-to-end with ordinary backpropagation.</p>
-<div id="d62ec714" class="cell" data-execution_count="2">
+<div id="bbc5eee6" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reparameterise(mu, log_var, rng):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    sigma <span class="op">=</span> np.exp(<span class="fl">0.5</span> <span class="op">*</span> log_var)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    epsilon <span class="op">=</span> rng.normal(size<span class="op">=</span>mu.shape)</span>
@@ -563,7 +563,7 @@ Sample variance : [1.23696171 0.72564848]  (target sigma^2 = [1.22140276 0.74081
 </tr>
 </tbody>
 </table>
-<p>All three ultimately rely on the same underlying toolkit developed across this unit: gradients and the chain rule (<span class="quarto-unresolved-ref">?sec-gradients</span>), gradient-based optimisation (<span class="quarto-unresolved-ref">?sec-optimisation</span>), and — as made explicit above — maximum likelihood as a guiding principle for what “loss function” even means (<a href="mle.html" class="quarto-xref"><span>Chapter 15</span></a>).</p>
+<p>All three ultimately rely on the same underlying toolkit developed across this unit: gradients and the chain rule (<span class="quarto-unresolved-ref">?sec-gradients</span>), gradient-based optimisation (<span class="quarto-unresolved-ref">?sec-optimisation</span>), and — as made explicit above — maximum likelihood as a guiding principle for what “loss function” even means (<span class="quarto-unresolved-ref">?sec-mle</span>).</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">

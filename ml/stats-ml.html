@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>15&nbsp; Maximum Likelihood Estimation – Advanced Computational Physics &amp; Machine Learning</title>
+<title>16&nbsp; ML and Statistics – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,8 +71,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../ml/supervised-ml.html" rel="next">
-<link href="../ml/intro-ml.html" rel="prev">
+<link href="../ml/unsupervised-ml.html" rel="next">
+<link href="../ml/supervised-ml.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9ae487f9dc81c977a28b7be194272750.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e49fe94e7c8471cb6eac0ecf78abda4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -152,7 +152,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/mle.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/stats-ml.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ML and Statistics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -300,14 +300,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/mle.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
+  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+  <a href="../ml/stats-ml.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ML and Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -370,27 +370,26 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#estimators" id="toc-estimators" class="nav-link active" data-scroll-target="#estimators"><span class="header-section-number">15.1</span> Estimators</a>
+  <li><a href="#likelihood" id="toc-likelihood" class="nav-link active" data-scroll-target="#likelihood"><span class="header-section-number">16.1</span> Likelihood</a></li>
+  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation"><span class="header-section-number">16.2</span> Maximum Likelihood Estimation</a>
   <ul class="collapse">
-  <li><a href="#bias" id="toc-bias" class="nav-link" data-scroll-target="#bias"><span class="header-section-number">15.1.1</span> Bias</a></li>
-  <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance"><span class="header-section-number">15.1.2</span> Variance</a></li>
-  <li><a href="#the-biasvariance-decomposition" id="toc-the-biasvariance-decomposition" class="nav-link" data-scroll-target="#the-biasvariance-decomposition"><span class="header-section-number">15.1.3</span> The Bias–Variance Decomposition</a></li>
+  <li><a href="#mle-in-practice" id="toc-mle-in-practice" class="nav-link" data-scroll-target="#mle-in-practice"><span class="header-section-number">16.2.1</span> MLE in Practice</a></li>
+  <li><a href="#mle-example" id="toc-mle-example" class="nav-link" data-scroll-target="#mle-example"><span class="header-section-number">16.2.2</span> MLE Example</a></li>
   </ul></li>
-  <li><a href="#likelihood" id="toc-likelihood" class="nav-link" data-scroll-target="#likelihood"><span class="header-section-number">15.2</span> Likelihood</a></li>
-  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation"><span class="header-section-number">15.3</span> Maximum Likelihood Estimation</a>
+  <li><a href="#mle-and-machine-learning" id="toc-mle-and-machine-learning" class="nav-link" data-scroll-target="#mle-and-machine-learning"><span class="header-section-number">16.3</span> MLE and Machine Learning</a>
   <ul class="collapse">
-  <li><a href="#worked-example-fitting-a-gaussian" id="toc-worked-example-fitting-a-gaussian" class="nav-link" data-scroll-target="#worked-example-fitting-a-gaussian"><span class="header-section-number">15.3.1</span> Worked example: fitting a Gaussian</a></li>
+  <li><a href="#mean-squared-error" id="toc-mean-squared-error" class="nav-link" data-scroll-target="#mean-squared-error"><span class="header-section-number">16.3.1</span> Mean Squared Error</a></li>
+  <li><a href="#binary-cross-entropy" id="toc-binary-cross-entropy" class="nav-link" data-scroll-target="#binary-cross-entropy"><span class="header-section-number">16.3.2</span> Binary Cross-Entropy</a></li>
   </ul></li>
-  <li><a href="#mle-is-the-hidden-justification-for-your-loss-functions" id="toc-mle-is-the-hidden-justification-for-your-loss-functions" class="nav-link" data-scroll-target="#mle-is-the-hidden-justification-for-your-loss-functions"><span class="header-section-number">15.4</span> MLE Is the Hidden Justification for Your Loss Functions</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/mle.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/stats-ml.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ML and Statistics</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-mle" class="quarto-section-identifier"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></h1>
+<h1 class="title"><span id="sec-stats-ml" class="quarto-section-identifier"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ML and Statistics</span></span></h1>
 </div>
 
 
@@ -407,131 +406,244 @@ window.Quarto = {
 </header>
 
 
-<p>EDIT THIS SECTION</p>
-<p>Machine learning models make predictions from data that is inherently noisy, and are themselves trained using randomly-sampled batches of data (<a href="neural-networks.html#sec-sgd" class="quarto-xref"><span>Section 18.4.1</span></a>). Probability and statistics provide the language for reasoning rigorously about both of these sources of uncertainty. This section introduces the small set of concepts genuinely load-bearing for the rest of the unit: estimators and their bias/variance, and maximum likelihood estimation — which turns out to be the hidden justification for the loss functions already used, without derivation, in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>.</p>
-<p>For generating and sampling from probability distributions numerically, see <a href="../num/monte-carlo.html" class="quarto-xref"><span>Chapter 12</span></a>, which covers this in detail and is not repeated here.</p>
-<section id="estimators" class="level2" data-number="15.1">
-<h2 data-number="15.1" class="anchored" data-anchor-id="estimators"><span class="header-section-number">15.1</span> Estimators</h2>
-<p>An <strong>estimator</strong> is simply a function of observed data that produces a guess at some unknown quantity. For example, given <span class="math inline">\(N\)</span> samples <span class="math inline">\(x_1, \ldots, x_N\)</span> drawn from some distribution, the sample mean</p>
-<p><span class="math display">\[
+<p>In this section, we will discuss the relationship between machine learning and statistical inference. In particular we will explore the technique of maximum likelihood estimation (MLE). This is an important method in it’s own right, which allows the parameters of a model to be estimated from data. We relate this to the loss functions introduced in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>.</p>
+<!--
+Machine learning models make predictions from data that is inherently noisy, and are themselves trained using randomly-sampled batches of data (@sec-sgd). Probability and statistics provide the language for reasoning rigorously about both of these sources of uncertainty. This section introduces the small set of concepts genuinely load-bearing for the rest of the unit: estimators and their bias/variance, and maximum likelihood estimation — which turns out to be the hidden justification for the loss functions already used, without derivation, in @sec-supervised-ml.
+
+For generating and sampling from probability distributions numerically, see @sec-monte-carlo, which covers this in detail and is not repeated here.
+
+## Estimators
+
+An **estimator** is simply a function of observed data that produces a guess at some unknown quantity. For example, given $N$ samples $x_1, \ldots, x_N$ drawn from some distribution, the sample mean
+
+$$
 \hat{\mu} = \frac{1}{N}\sum_{i=1}^N x_i
-\]</span></p>
-<p>is an estimator of the true (unknown) population mean <span class="math inline">\(\mu\)</span>.</p>
-<p>Because the data is random, the estimator itself is a random variable — if you drew a different sample of <span class="math inline">\(N\)</span> points, you’d get a different value of <span class="math inline">\(\hat{\mu}\)</span>. This means an estimator has its own distribution, and in particular its own mean and variance, which turn out to be exactly analogous to the bias–variance tradeoff already introduced for machine learning models in <a href="supervised-ml.html#sec-overfitting" class="quarto-xref"><span>Section 16.9</span></a>.</p>
-<section id="bias" class="level3" data-number="15.1.1">
-<h3 data-number="15.1.1" class="anchored" data-anchor-id="bias"><span class="header-section-number">15.1.1</span> Bias</h3>
-<p>The <strong>bias</strong> of an estimator is the difference between its expected value and the true value it’s estimating:</p>
-<p><span class="math display">\[
+$$
+
+is an estimator of the true (unknown) population mean $\mu$.
+
+Because the data is random, the estimator itself is a random variable — if you drew a different sample of $N$ points, you'd get a different value of $\hat{\mu}$. This means an estimator has its own distribution, and in particular its own mean and variance, which turn out to be exactly analogous to the bias–variance tradeoff already introduced for machine learning models in @sec-overfitting.
+
+### Bias
+
+The **bias** of an estimator is the difference between its expected value and the true value it's estimating:
+
+$$
 \text{Bias}(\hat{\theta}) = \mathbb{E}[\hat{\theta}] - \theta
-\]</span></p>
-<p>An estimator is <strong>unbiased</strong> if this is zero — i.e.&nbsp;if, averaged over infinitely many repeated samples, it would recover the true value exactly.</p>
-</section>
-<section id="variance" class="level3" data-number="15.1.2">
-<h3 data-number="15.1.2" class="anchored" data-anchor-id="variance"><span class="header-section-number">15.1.2</span> Variance</h3>
-<p>The <strong>variance</strong> of an estimator measures how much it fluctuates from one sample to the next:</p>
-<p><span class="math display">\[
+$$
+
+An estimator is **unbiased** if this is zero — i.e. if, averaged over infinitely many repeated samples, it would recover the true value exactly.
+
+### Variance
+
+The **variance** of an estimator measures how much it fluctuates from one sample to the next:
+
+$$
 \text{Var}(\hat{\theta}) = \mathbb{E}\left[(\hat{\theta} - \mathbb{E}[\hat\theta])^2\right]
-\]</span></p>
-<div id="b44048d4" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">1</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>true_mu <span class="op">=</span> <span class="fl">5.0</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>n_experiments <span class="op">=</span> <span class="dv">5000</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>estimates <span class="op">=</span> [rng.normal(true_mu, <span class="fl">2.0</span>, size<span class="op">=</span>N).mean() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n_experiments)]</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean of estimator across experiments : </span><span class="sc">{</span>np<span class="sc">.</span>mean(estimates)<span class="sc">:.3f}</span><span class="ss">  (true value = </span><span class="sc">{</span>true_mu<span class="sc">}</span><span class="ss">)"</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Bias                                  : </span><span class="sc">{</span>np<span class="sc">.</span>mean(estimates) <span class="op">-</span> true_mu<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Variance of estimator                 : </span><span class="sc">{</span>np<span class="sc">.</span>var(estimates)<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Mean of estimator across experiments : 4.991  (true value = 5.0)
+$$
+
+::: {#7827af95 .cell execution_count=1}
+``` {.python .cell-code}
+import numpy as np
+rng = np.random.default_rng(1)
+
+true_mu = 5.0
+N = 20
+n_experiments = 5000
+
+estimates = [rng.normal(true_mu, 2.0, size=N).mean() for _ in range(n_experiments)]
+
+print(f"Mean of estimator across experiments : {np.mean(estimates):.3f}  (true value = {true_mu})")
+print(f"Bias                                  : {np.mean(estimates) - true_mu:.4f}")
+print(f"Variance of estimator                 : {np.var(estimates):.4f}")
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+Mean of estimator across experiments : 4.991  (true value = 5.0)
 Bias                                  : -0.0092
-Variance of estimator                 : 0.1928</code></pre>
-</div>
-</div>
-<p>The sample mean is unbiased and its variance shrinks as <span class="math inline">\(N\)</span> grows — a direct, quantitative version of the intuition that “more data gives a more reliable estimate.”</p>
-</section>
-<section id="the-biasvariance-decomposition" class="level3" data-number="15.1.3">
-<h3 data-number="15.1.3" class="anchored" data-anchor-id="the-biasvariance-decomposition"><span class="header-section-number">15.1.3</span> The Bias–Variance Decomposition</h3>
-<p>It’s a standard (and important) result that the expected squared error of an estimator decomposes as:</p>
-<p><span class="math display">\[
+Variance of estimator                 : 0.1928
+```
+:::
+:::
+
+
+The sample mean is unbiased and its variance shrinks as $N$ grows — a direct, quantitative version of the intuition that "more data gives a more reliable estimate."
+
+### The Bias–Variance Decomposition
+
+It's a standard (and important) result that the expected squared error of an estimator decomposes as:
+
+$$
 \mathbb{E}\left[(\hat\theta - \theta)^2\right] = \text{Bias}(\hat\theta)^2 + \text{Var}(\hat\theta)
-\]</span></p>
-<p>This is worth comparing directly to the bias–variance tradeoff of <a href="supervised-ml.html#sec-overfitting" class="quarto-xref"><span>Section 16.9</span></a>: an <strong>underfit</strong> model is analogous to a high-bias estimator (systematically wrong, but consistent across different training sets), while an <strong>overfit</strong> model is analogous to a high-variance estimator (correct on average, but wildly sensitive to exactly which training data it saw). The two “bias–variance tradeoffs” you’ll meet in this unit — one for statistical estimators, one for ML models — are, in fact, the <em>same</em> tradeoff, since fitting a model is itself just estimating parameters from a finite random sample of data.</p>
-</section>
-</section>
-<section id="likelihood" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="likelihood"><span class="header-section-number">15.2</span> Likelihood</h2>
-<p>Given some observed data <span class="math inline">\(\mathcal{D}\)</span> and a model with parameters <span class="math inline">\(\theta\)</span>, the <strong>likelihood</strong> is a function of <span class="math inline">\(\theta\)</span> that says how probable the observed data would have been, under a given choice of parameters:</p>
+$$
+
+This is worth comparing directly to the bias–variance tradeoff of @sec-overfitting: an **underfit** model is analogous to a high-bias estimator (systematically wrong, but consistent across different training sets), while an **overfit** model is analogous to a high-variance estimator (correct on average, but wildly sensitive to exactly which training data it saw). The two "bias–variance tradeoffs" you'll meet in this unit — one for statistical estimators, one for ML models — are, in fact, the *same* tradeoff, since fitting a model is itself just estimating parameters from a finite random sample of data.
+-->
+<section id="likelihood" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="likelihood"><span class="header-section-number">16.1</span> Likelihood</h2>
+<p>You will be familiar with the concept of a probability distribution, <span class="math inline">\(\mathcal{P}(x)\)</span>, which describes the probability of observing a particular value, or outcome, <span class="math inline">\(x\)</span>. Frequently such a distribution is characterised by a set of parameters, <span class="math inline">\(\theta\)</span>, which describe the shape of the distribution. For example, a Gaussian distribution is characterised by its mean and variance, <span class="math inline">\(\theta = (\mu, \sigma^2)\)</span>. We can write this <span class="math inline">\(P(x \mid \theta)\)</span>, which is the probability of observing <span class="math inline">\(x\)</span> given a particular choice of parameters <span class="math inline">\(\theta\)</span>.</p>
+<p>The likelihood is a related concept, which describes how likely a particular set of parameters is, given some observed data. It is defined as the probability of observing the data, <span class="math inline">\(\mathcal{D} = \{x_1, x_2, \ldots, x_N\}\)</span>, as a function of the parameters <span class="math inline">\(\theta\)</span> :</p>
 <p><span class="math display">\[
 \mathcal{L}(\theta) = P(\mathcal{D} \mid \theta)
 \]</span></p>
-<p>Note carefully: the likelihood is a function of <span class="math inline">\(\theta\)</span>, with the data held fixed — this is the opposite of a probability distribution over the data, and is a common point of confusion.</p>
-<p>For <span class="math inline">\(N\)</span> independent data points, the likelihood factorises as a product:</p>
+<p>Note the difference : the likelihood is a function of <span class="math inline">\(\theta\)</span>, with the data <span class="math inline">\(\mathcal{D}\)</span> fixed, whereas the probablity distribution is a function of <span class="math inline">\(x\)</span> with <span class="math inline">\(\theta\)</span> fixed.</p>
+<p>When <span class="math inline">\(\mathcal{D}\)</span>$ comprises <span class="math inline">\(N\)</span> independent data points as above, the likelihood factorises as a product:</p>
 <p><span class="math display">\[
 \mathcal{L}(\theta) = \prod_{i=1}^N P(x_i \mid \theta)
 \]</span></p>
 </section>
-<section id="maximum-likelihood-estimation" class="level2" data-number="15.3">
-<h2 data-number="15.3" class="anchored" data-anchor-id="maximum-likelihood-estimation"><span class="header-section-number">15.3</span> Maximum Likelihood Estimation</h2>
-<p><strong>Maximum Likelihood Estimation (MLE)</strong> is the principle of choosing the parameters <span class="math inline">\(\theta\)</span> that make the observed data as probable as possible:</p>
+<section id="maximum-likelihood-estimation" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="maximum-likelihood-estimation"><span class="header-section-number">16.2</span> Maximum Likelihood Estimation</h2>
+<p>Maximum likelihood estimation is the principle of finding the parameters <span class="math inline">\(\theta\)</span> that make the observed data as probable as possible:</p>
 <p><span class="math display">\[
 \hat{\theta}_{\text{MLE}} = \arg\max_\theta \mathcal{L}(\theta)
 \]</span></p>
-<p>Because a product of many small probabilities is numerically awkward (it underflows very quickly), and because logarithms turn products into sums, it is standard practice to instead maximise the <strong>log-likelihood</strong>:</p>
+<p>Because a product of many small probabilities is numerically awkward (it underflows very quickly), and because logarithms turn products into sums, it is standard practice to instead maximise the <em>log-likelihood</em>:</p>
 <p><span class="math display">\[
 \ell(\theta) = \log \mathcal{L}(\theta) = \sum_{i=1}^N \log P(x_i \mid \theta)
 \]</span></p>
-<p>Since <span class="math inline">\(\log\)</span> is monotonic, this doesn’t change the location of the maximum. And since we’ve been minimising things throughout <span class="quarto-unresolved-ref">?sec-optimisation</span>, it’s conventional to instead minimise the <strong>negative log-likelihood</strong> (NLL):</p>
+<p>Since <span class="math inline">\(\log\)</span> is monotonic, this doesn’t change the location of the maximum. And since it is conventional to find minima (see <a href="../num/minimisation.html" class="quarto-xref"><span>Chapter 13</span></a>) we will minimise the <em>negative log-likelihood</em> (NLL):</p>
 <p><span class="math display">\[
 \hat{\theta}_{\text{MLE}} = \arg\min_\theta \left[ -\sum_{i=1}^N \log P(x_i \mid \theta) \right]
 \]</span></p>
-<p>This connects MLE directly to everything in <span class="quarto-unresolved-ref">?sec-optimisation</span>: fitting a model by MLE is just another instance of the minimisation problem already studied there, and can be solved using exactly the same gradient descent machinery (<a href="neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>).</p>
-<section id="worked-example-fitting-a-gaussian" class="level3" data-number="15.3.1">
-<h3 data-number="15.3.1" class="anchored" data-anchor-id="worked-example-fitting-a-gaussian"><span class="header-section-number">15.3.1</span> Worked example: fitting a Gaussian</h3>
-<p>Suppose we assume our data is drawn from a Gaussian with unknown mean <span class="math inline">\(\mu\)</span> and known variance <span class="math inline">\(\sigma^2\)</span>. The log-likelihood is:</p>
-<p><span class="math display">\[
-\ell(\mu) = -\frac{1}{2\sigma^2}\sum_{i=1}^N (x_i - \mu)^2 + \text{const.}
-\]</span></p>
-<p>Maximising this with respect to <span class="math inline">\(\mu\)</span> (by setting the derivative to zero — a one-line application of <span class="quarto-unresolved-ref">?sec-gradients</span>) gives <span class="math inline">\(\hat\mu = \frac{1}{N}\sum x_i\)</span>: the maximum likelihood estimate of a Gaussian’s mean is exactly the sample mean used as our running example above.</p>
-<div id="4811b196" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.optimize <span class="im">as</span> opt</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> rng.normal(loc<span class="op">=</span><span class="fl">7.0</span>, scale<span class="op">=</span><span class="fl">2.0</span>, size<span class="op">=</span><span class="dv">200</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> negative_log_likelihood(mu):</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    sigma <span class="op">=</span> <span class="fl">2.0</span>  <span class="co"># assumed known</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.<span class="bu">sum</span>(<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>np.log(<span class="dv">2</span><span class="op">*</span>np.pi<span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>) <span class="op">-</span> (data <span class="op">-</span> mu)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>))</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> opt.minimize_scalar(negative_log_likelihood)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MLE estimate of mu : </span><span class="sc">{</span>result<span class="sc">.</span>x<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Sample mean         : </span><span class="sc">{</span>data<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Any suitable numerical optimisation method can be used to find the MLE, including gradient descent (<a href="../num/minimisation.html" class="quarto-xref"><span>Chapter 13</span></a>) and its variants.</p>
+<section id="mle-in-practice" class="level3" data-number="16.2.1">
+<h3 data-number="16.2.1" class="anchored" data-anchor-id="mle-in-practice"><span class="header-section-number">16.2.1</span> MLE in Practice</h3>
+<p>MLE is a powerful method for extracting parameters of interest from data. Consider measuring the mass of the Higgs boson at the Large Hadron Collider, where the data comprises invariant mass measurements taken from a sample of collision events. The probability distribution for such data can be described by a Breit-Wigner distribution, characterised by two parameters: the mass of the Higgs boson, <span class="math inline">\(m_H\)</span>, and its decay width, <span class="math inline">\(\Gamma_H\)</span>. In order to measure these parameters, we construct the likelihood of observing the data given a particular choice of these parameters, and then find the values of <span class="math inline">\(m_H\)</span> and <span class="math inline">\(\Gamma_H\)</span> that maximise this likelihood.</p>
+<p>The method can be further extended to include the effect of measurement uncertainty. For example, the uncertainty on our invariant mass measurements can be modelled with a Crystal Ball function (essentially a Gaussian distribution with a power-law tail, which is often a better model for the detector response than a simple Gaussian). The likelihood is then the convolution of the Breit-Wigner distribution with the Crystal Ball function. Maximum likelihood estimation will again find the values of <span class="math inline">\(m_H\)</span> and <span class="math inline">\(\Gamma_H\)</span>, but potentially also the parameters of the Crystal Ball function that describe the detector response. Such parameters are known as <em>nuisance parameters</em>, since they are not of direct interest, but must be included in the model in order to properly model the distribution of data.</p>
+</section>
+<section id="mle-example" class="level3" data-number="16.2.2">
+<h3 data-number="16.2.2" class="anchored" data-anchor-id="mle-example"><span class="header-section-number">16.2.2</span> MLE Example</h3>
+<p>A more simple example is estimation of the decay constant <span class="math inline">\(\lambda\)</span> from a small sample of radioactive decay times. In this case the probability distribution for the data is an exponential function, <span class="math inline">\(P(x|\lambda) = \lambda e^{-\lambda x}\)</span>. Naively, <span class="math inline">\(\lambda\)</span> can be found from the reciprocal of the mean observed decay time, and this will work reasonably well for large samples. However, this is a <em>biased</em> estimator of <span class="math inline">\(\lambda\)</span>, which becomes particularly important with small sample size. Maximum likelihood estimation can be used to properly account for the asymmetric uncertainties that arise in this case as shown in the example below.</p>
+<div id="0291e55a" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.optimize <span class="im">as</span> opt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- 1. Generate synthetic data ----</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>tau_true <span class="op">=</span> <span class="fl">5.0</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>N_events <span class="op">=</span> <span class="dv">150</span>          <span class="co"># deliberately low statistics, to expose the problem</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>decay_times <span class="op">=</span> rng.exponential(scale<span class="op">=</span>tau_true, size<span class="op">=</span>N_events)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># bin into a histogram, as a real detector would record counts per time bin</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>bin_edges <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">16</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>bin_centres <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> (bin_edges[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> bin_edges[<span class="dv">1</span>:])</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>counts, _ <span class="op">=</span> np.histogram(decay_times, bins<span class="op">=</span>bin_edges)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Bin counts :"</span>, counts)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- 2. The naive (statistically incorrect) approach ----</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># log(counts) + ordinary least squares: undefined for zero-count bins,</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># and implicitly assumes Gaussian errors on the counts (poor at low N)</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> counts <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>log_counts <span class="op">=</span> np.log(counts[mask])</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>t_masked <span class="op">=</span> bin_centres[mask]</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>design <span class="op">=</span> np.vstack([t_masked, np.ones_like(t_masked)]).T</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>slope, intercept <span class="op">=</span> np.linalg.lstsq(design, log_counts, rcond<span class="op">=</span><span class="va">None</span>)[<span class="dv">0</span>]</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>tau_naive <span class="op">=</span> <span class="op">-</span><span class="dv">1</span> <span class="op">/</span> slope</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Naive log-linear fit : tau = </span><span class="sc">{</span>tau_naive<span class="sc">:.2f}</span><span class="ss">  "</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"(</span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(<span class="op">~</span>mask)<span class="sc">}</span><span class="ss"> of </span><span class="sc">{</span><span class="bu">len</span>(counts)<span class="sc">}</span><span class="ss"> bins discarded)"</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- 3. Correct approach: Poisson maximum likelihood ----</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expected_counts(params, edges):</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Expected count per bin: exponential decay law integrated over the bin."""</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    A, tau <span class="op">=</span> params</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    lo, hi <span class="op">=</span> edges[:<span class="op">-</span><span class="dv">1</span>], edges[<span class="dv">1</span>:]</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A <span class="op">*</span> (np.exp(<span class="op">-</span>lo<span class="op">/</span>tau) <span class="op">-</span> np.exp(<span class="op">-</span>hi<span class="op">/</span>tau))</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> neg_log_likelihood(params, counts, edges):</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    mu <span class="op">=</span> np.clip(expected_counts(params, edges), <span class="fl">1e-10</span>, <span class="va">None</span>)  <span class="co"># guard log(0)</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Poisson log-likelihood; the count! normalisation is dropped since it</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># doesn't depend on the fit parameters</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">sum</span>(mu <span class="op">-</span> counts <span class="op">*</span> np.log(mu))</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> opt.minimize(</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    neg_log_likelihood, x0<span class="op">=</span>[N_events, <span class="fl">3.0</span>],</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    args<span class="op">=</span>(counts, bin_edges), method<span class="op">=</span><span class="st">'Nelder-Mead'</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>A_mle, tau_mle <span class="op">=</span> result.x</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Poisson MLE fit       : tau = </span><span class="sc">{</span>tau_mle<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- 4. Gold standard: unbinned MLE, using every decay time individually ----</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="co"># for an exponential distribution the MLE of the mean lifetime has a simple</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co"># closed form: it is just the sample mean of the (unbinned) decay times</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>tau_unbinned_mle <span class="op">=</span> np.mean(decay_times)</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Unbinned MLE (exact)  : tau = </span><span class="sc">{</span>tau_unbinned_mle<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"True value             : tau = </span><span class="sc">{</span>tau_true<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- 5. Plot ----</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>t_fine <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">200</span>)</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>bin_width <span class="op">=</span> bin_edges[<span class="dv">1</span>] <span class="op">-</span> bin_edges[<span class="dv">0</span>]</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>naive_smooth <span class="op">=</span> np.exp(intercept) <span class="op">*</span> np.exp(<span class="op">-</span>t_fine<span class="op">/</span>tau_naive)</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>mle_smooth <span class="op">=</span> (A_mle<span class="op">/</span>tau_mle) <span class="op">*</span> bin_width <span class="op">*</span> np.exp(<span class="op">-</span>t_fine<span class="op">/</span>tau_mle)</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">5</span>))</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>plt.bar(bin_centres, counts, width<span class="op">=</span>bin_width<span class="op">*</span><span class="fl">0.9</span>, alpha<span class="op">=</span><span class="fl">0.4</span>, label<span class="op">=</span><span class="st">'Observed counts'</span>)</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>plt.plot(t_fine, naive_smooth, <span class="st">'r--'</span>, label<span class="op">=</span><span class="ss">f'Naive log-linear fit (tau=</span><span class="sc">{</span>tau_naive<span class="sc">:.2f}</span><span class="ss">)'</span>)</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>plt.plot(t_fine, mle_smooth, <span class="st">'g-'</span>, label<span class="op">=</span><span class="ss">f'Poisson MLE fit (tau=</span><span class="sc">{</span>tau_mle<span class="sc">:.2f}</span><span class="ss">)'</span>)</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Decay time'</span>)</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Counts per bin'</span>)</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Naive least-squares vs Poisson MLE, low-count exponential decay'</span>)</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>MLE estimate of mu : 7.206
-Sample mean         : 7.206</code></pre>
+<pre><code>Bin counts : [57 26 23 18  9  9  3  2  0  1  0  0  0  2  0]
+
+Naive log-linear fit : tau = 6.57  (5 of 15 bins discarded)
+Poisson MLE fit       : tau = 4.63
+Unbinned MLE (exact)  : tau = 4.63
+True value             : tau = 5.00</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stats-ml_files/figure-html/cell-3-output-2.png" width="586" height="449" class="figure-img"></p>
+</figure>
 </div>
 </div>
-<p>As expected, numerically minimising the negative log-likelihood recovers the sample mean.</p>
+</div>
 </section>
 </section>
-<section id="mle-is-the-hidden-justification-for-your-loss-functions" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="mle-is-the-hidden-justification-for-your-loss-functions"><span class="header-section-number">15.4</span> MLE Is the Hidden Justification for Your Loss Functions</h2>
-<p>This is the key payoff of this section, and it directly explains material presented without derivation in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>.</p>
-<p><strong>Mean Squared Error is MLE under a Gaussian noise assumption.</strong> If we assume that observed targets are the model’s prediction plus Gaussian noise, <span class="math inline">\(y_i = f(x_i) + \varepsilon_i\)</span> with <span class="math inline">\(\varepsilon_i \sim \mathcal{N}(0, \sigma^2)\)</span>, then (following exactly the derivation above) the negative log-likelihood is, up to an additive and a multiplicative constant that don’t affect the location of the minimum:</p>
+<section id="mle-and-machine-learning" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="mle-and-machine-learning"><span class="header-section-number">16.3</span> MLE and Machine Learning</h2>
+<p>MLE is closely related to the loss functions used in machine learning. We can use MLE to derive the loss functions used in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>, and hence justify their use from a statistical perspective.</p>
+<section id="mean-squared-error" class="level3" data-number="16.3.1">
+<h3 data-number="16.3.1" class="anchored" data-anchor-id="mean-squared-error"><span class="header-section-number">16.3.1</span> Mean Squared Error</h3>
+<p>Suppose we have an underlying model <span class="math inline">\(\hat{y} = f(\theta, x)\)</span> that describes our data <span class="math inline">\(x,y\)</span> in terms of some parameters <span class="math inline">\(\theta\)</span>. Now we assume that the observed data is the model’s prediction plus Gaussian noise :</p>
 <p><span class="math display">\[
--\ell(\theta) = \frac{1}{2\sigma^2}\sum_{i=1}^N (y_i - f(x_i))^2 + \text{const.}
+y_i = f(\theta, x_i) + \varepsilon_i
+\]</span> with <span class="math display">\[
+P(\varepsilon_i) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{\varepsilon_i}{\sigma}\right)^2}
 \]</span></p>
-<p>which is minimised by exactly the same <span class="math inline">\(\theta\)</span> as the Mean Squared Error loss already defined in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>. In other words: using MSE as a loss function is <em>implicitly</em> assuming Gaussian-distributed errors, whether or not that assumption is stated explicitly.</p>
-<p><strong>Binary Cross-Entropy is MLE under a Bernoulli assumption.</strong> If each label <span class="math inline">\(y_i \in \{0, 1\}\)</span> is modelled as a Bernoulli random variable with success probability <span class="math inline">\(\hat{P}_i\)</span> (the model’s predicted probability), the likelihood of one observation is <span class="math inline">\(\hat{P}_i^{y_i}(1-\hat{P}_i)^{1-y_i}\)</span>, and the negative log-likelihood over <span class="math inline">\(N\)</span> points is:</p>
+<p>(i.e.&nbsp;the <span class="math inline">\(\varepsilon_i\)</span> are independent and identically distributed Gaussian random variables with mean zero and variance <span class="math inline">\(\sigma^2\)</span>).</p>
+<p>The likelihood of observing a single data point is then :</p>
 <p><span class="math display">\[
--\ell(\theta) = -\sum_{i=1}^N \Big[ y_i \log \hat{P}_i + (1-y_i)\log(1-\hat{P}_i) \Big]
+-\ell(\theta) = \frac{1}{2\sigma^2}\sum_{i=1}^N (y_i - f(\theta, x_i))^2 + \text{const.}
 \]</span></p>
-<p>which is, term for term, exactly the Binary Cross-Entropy loss already given in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>. That loss function was not an arbitrary design choice — it is precisely the MLE objective for a binary classification model.</p>
-<p>This is a genuinely useful piece of insight for a physicist: it means that <em>choosing a loss function is equivalent to making an assumption about the noise model generating your data</em>, and the “right” loss function for a given problem is the one implied by however you believe your measurement errors are actually distributed.</p>
+<p>Note that this is identical to the Mean Squared Error loss function defined in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>, up to a multiplicative constant and an additive constant that do not affect the location of the minimum : <span class="math display">\[
+\frac{1}{n{}} \sum^{N}_{i=1}(y_i-\hat{y}_i)^2.
+\]</span></p>
+<p>In other words, minimising the MSE loss is equivalent to maximising the likelihood of observing the data under a Gaussian noise model. Using MSE as a loss function is an implicity assumption that errors are Gaussian-distributed, whether or not that assumption is stated explicitly.</p>
+</section>
+<section id="binary-cross-entropy" class="level3" data-number="16.3.2">
+<h3 data-number="16.3.2" class="anchored" data-anchor-id="binary-cross-entropy"><span class="header-section-number">16.3.2</span> Binary Cross-Entropy</h3>
+<p>As discussed in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>, the Binary Cross-Entropy (BCE) loss function is commonly used for binary classification problems. Here our targets are binary, <span class="math inline">\(y_i \in \{0, 1\}\)</span>, and our model outputs a <em>probability</em> <span class="math inline">\(\hat{P}_i = f(\theta, x_i) \in [0, 1]\)</span> of observing <span class="math inline">\(y_i = 1\)</span>.</p>
+<p>We can justify the choice of loss function from a statistical perspective, by assuming that the observed data is drawn from a Bernoulli distribution. The Bernoulli distribution is a special case of the Binomial distribution, for a single trial, <span class="math inline">\(N=1\)</span>. It has the probability distribution :</p>
+<p><span class="math display">\[
+P(y_i=0) = 1 - \hat{P}_i, \quad P(y_i=1) = \hat{P}_i
+\]</span></p>
+<p>The likelihood of one observation is <span class="math inline">\(\hat{P}_i^{y_i}(1-\hat{P}_i)^{1-y_i}\)</span>, and the negative log-likelihood over <span class="math inline">\(N\)</span> points is:</p>
+<p><span class="math display">\[
+-\ell(\theta) = -\sum_{i=1}^N \Big[ y_i \ln \hat{P}_i + (1-y_i)\ln(1-\hat{P}_i) \Big]
+\]</span></p>
+<p>This is identical (within a multiplicative factor, which doesn’t affect the location of the minimum)to the Binary Cross-Entropy loss given in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>. Similarly to above, we interpret the use of BCE loss as an implicit assumption that uncertainties are Bernoulli-distributed.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -937,13 +1049,13 @@ Sample mean         : 7.206</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../ml/intro-ml.html" class="pagination-link" aria-label="Introduction to Machine Learning">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introduction to Machine Learning</span></span>
+      <a href="../ml/supervised-ml.html" class="pagination-link" aria-label="Supervised Learning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../ml/supervised-ml.html" class="pagination-link" aria-label="Supervised Learning">
-        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../ml/unsupervised-ml.html" class="pagination-link" aria-label="Unsupervised Learning">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

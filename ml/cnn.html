@@ -67,7 +67,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9ae487f9dc81c977a28b7be194272750.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e49fe94e7c8471cb6eac0ecf78abda4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -285,14 +285,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/mle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
+  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+  <a href="../ml/stats-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ML and Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -485,7 +485,7 @@ The building blocks above were not all introduced at once — they were develope
 
 **VGGNet** [@simonyan2015vgg] (2014) explored the effect of depth directly, using up to 19 layers, but with a key structural insight: it replaced the larger filters used in LeNet/AlexNet (e.g. $11\times11$, $5\times5$) with a *stack* of small $3\times3$ filters. Two stacked $3\times3$ filters have the same effective receptive field as one $5\times5$ filter, but use fewer parameters and add an extra non-linear activation in between — a direct illustration of the stride/receptive-field trade-off discussed above.
 
-::: {#f7e3b387 .cell execution_count=1}
+::: {#f2ebe7d9 .cell execution_count=1}
 ``` {.python .cell-code}
 # illustrating VGG's parameter-efficiency argument: one 5x5 filter vs two stacked 3x3 filters,
 # for a single input/output channel

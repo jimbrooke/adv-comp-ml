@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9ae487f9dc81c977a28b7be194272750.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e49fe94e7c8471cb6eac0ecf78abda4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -271,14 +271,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/mle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
+  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+  <a href="../ml/stats-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ML and Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -374,7 +374,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="simple-error-handling" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="simple-error-handling"><span class="header-section-number">5.1</span> Simple Error Handling</h2>
 <p>Suppose I have a function that works for positive number, but I know it will fail if given a negative input. Rather than let the code crash, or (worse) return incorrect results, we can detect this problem and do something sensible. One option might be to test the argument given to the function, print an error message, and return a default value (NaN, in this case) :</p>
-<div id="529602de" class="cell" data-execution_count="1">
+<div id="db1aa69a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mySqrt(x):</span>
@@ -384,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> math.sqrt(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let’s test this with a couple of examples :</p>
-<div id="187dde51" class="cell" data-execution_count="2">
+<div id="e0f220b9" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mySqrt(<span class="dv">4</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mySqrt(<span class="op">-</span><span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -399,7 +399,7 @@ nan</code></pre>
 <section id="error-handling-with-exceptions" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="error-handling-with-exceptions"><span class="header-section-number">5.2</span> Error Handling with Exceptions</h2>
 <p>Exceptions are the standard way to deal with errors in Python, and both numpy and scipy use them. Raising exceptions in your own functions, and knowing how to deal with exceptions raised by other code, can help you write more robust code. However, exceptions are just an error han- dling technique - you will still need to analyse where errors can occur in your code and make suitable provisions for handling them. The key feature of exceptions is that they allow the programmer to decide where in the code is the appropriate place to take action. In the example here, this might be in the function that calls mySqrt(). But in other circumstances, it might be in the function that calls that function. When an exception is generated, it is communciated back through all function calls until a block of code ‘catches’ the exception(and takes some action. Ultimately, if nothing handles the exception, the program will stop. Here is how we would handle this error using an exception :</p>
-<div id="92db8bd1" class="cell" data-execution_count="3">
+<div id="93512842" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mySqrt(x):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x<span class="op">&lt;</span><span class="dv">0</span>:</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">"Negative input"</span>)</span>
@@ -434,7 +434,7 @@ Cell <span class="ansi-green-fg">In[3], line 3</span>, in <span class="ansi-cyan
 <section id="catching-exceptions" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="catching-exceptions"><span class="header-section-number">5.3</span> Catching Exceptions</h2>
 <p>Raising an exception is only half of the process. The other half is “catching” them. Let’s say we have a function that calls mySqrt() but it knows what to do if the exception is raised. We can use a “try-except” (also known as “try-catch”, from the corresponding C++ keywords) block to catch that exception and take the correct course of action.</p>
-<div id="bd39eae8" class="cell" data-execution_count="4">
+<div id="43227ef9" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> mySqrt(x)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span>:</span>
@@ -472,7 +472,7 @@ Cell <span class="ansi-green-fg">In[4], line 4</span>
 <section id="handling-other-exceptions" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="handling-other-exceptions"><span class="header-section-number">5.4</span> Handling Other Exceptions</h2>
 <p>You might find you can get away without raising any exceptions in your code. However, scipy and numpy will raise exceptions, and knowing how to handle them can be useful. For example, a number of linear algebra routines in scipy.linalg cannot proceed if given a singular matrix. In this case, they will raise a <code>numpy.linalg.LinAlgError</code> exception : https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.LinAlgError.html#numpy.linalg.LinAlg As well as the built-in Exception, Python allows us to define dedicated exception types, like this one. This allows exception handling code to distinguish different classes of error condition, which is useful when deciding what to do. An example of how to catch this kind of exception is below.</p>
-<div id="c1284639" class="cell" data-execution_count="5">
+<div id="d7a395db" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> np.zeros((<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(m)</span>

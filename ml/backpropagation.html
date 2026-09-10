@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9ae487f9dc81c977a28b7be194272750.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e49fe94e7c8471cb6eac0ecf78abda4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -300,14 +300,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/mle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
+  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+  <a href="../ml/stats-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ML and Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -370,15 +370,13 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#partial-derivatives-and-the-gradient" id="toc-partial-derivatives-and-the-gradient" class="nav-link active" data-scroll-target="#partial-derivatives-and-the-gradient"><span class="header-section-number">19.1</span> Partial Derivatives and the Gradient</a>
+  <li><a href="#simple-example" id="toc-simple-example" class="nav-link active" data-scroll-target="#simple-example"><span class="header-section-number">19.1</span> Simple example</a></li>
+  <li><a href="#extension-to-multiple-layers" id="toc-extension-to-multiple-layers" class="nav-link" data-scroll-target="#extension-to-multiple-layers"><span class="header-section-number">19.2</span> Extension to multiple layers</a></li>
+  <li><a href="#the-multivariate-chain-rule" id="toc-the-multivariate-chain-rule" class="nav-link" data-scroll-target="#the-multivariate-chain-rule"><span class="header-section-number">19.3</span> The Multivariate Chain Rule</a>
   <ul class="collapse">
-  <li><a href="#directional-derivatives" id="toc-directional-derivatives" class="nav-link" data-scroll-target="#directional-derivatives"><span class="header-section-number">19.1.1</span> Directional Derivatives</a></li>
+  <li><a href="#automatic-differentiation" id="toc-automatic-differentiation" class="nav-link" data-scroll-target="#automatic-differentiation"><span class="header-section-number">19.3.1</span> Automatic Differentiation</a></li>
   </ul></li>
-  <li><a href="#the-multivariate-chain-rule" id="toc-the-multivariate-chain-rule" class="nav-link" data-scroll-target="#the-multivariate-chain-rule"><span class="header-section-number">19.2</span> The Multivariate Chain Rule</a>
-  <ul class="collapse">
-  <li><a href="#automatic-differentiation" id="toc-automatic-differentiation" class="nav-link" data-scroll-target="#automatic-differentiation"><span class="header-section-number">19.2.1</span> Automatic Differentiation</a></li>
-  </ul></li>
-  <li><a href="#checking-gradients-numerically" id="toc-checking-gradients-numerically" class="nav-link" data-scroll-target="#checking-gradients-numerically"><span class="header-section-number">19.3</span> Checking Gradients Numerically</a></li>
+  <li><a href="#checking-gradients-numerically" id="toc-checking-gradients-numerically" class="nav-link" data-scroll-target="#checking-gradients-numerically"><span class="header-section-number">19.4</span> Checking Gradients Numerically</a></li>
   </ul>
 </nav>
     </div>
@@ -404,28 +402,114 @@ window.Quarto = {
 </header>
 
 
-<p>In this section, we will understand the backpropagation method, which allows us to compute the gradient of a neural network’s loss function with respect to its parameters. This method is essential for training neural networks, since it allows us to use gradient descent (<span class="quarto-unresolved-ref">?sec-optimisation</span>) to minimise the loss function.</p>
-<p>Every training algorithm used later in this unit — gradient descent (<span class="quarto-unresolved-ref">?sec-optimisation</span>), backpropagation (<a href="neural-networks.html#sec-backpropagation" class="quarto-xref"><span>Section 18.3.2</span></a>), the Adam optimiser (<a href="neural-networks.html#sec-adaptive-learning-rate" class="quarto-xref"><span>Section 18.4.3</span></a>) — relies on the ability to compute the derivative of a function with respect to <em>many</em> variables at once. This section introduces the vocabulary and the key result (the multivariate chain rule) needed to make that precise, before we return to see it in action in <span class="quarto-unresolved-ref">?sec-optimisation</span> and <a href="neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>.</p>
-<section id="partial-derivatives-and-the-gradient" class="level2" data-number="19.1">
-<h2 data-number="19.1" class="anchored" data-anchor-id="partial-derivatives-and-the-gradient"><span class="header-section-number">19.1</span> Partial Derivatives and the Gradient</h2>
-<p>For a scalar function of several variables, <span class="math inline">\(f(x_1, x_2, \ldots, x_n)\)</span>, the <strong>partial derivative</strong> <span class="math inline">\(\partial f / \partial x_i\)</span> measures the rate of change of <span class="math inline">\(f\)</span> as <span class="math inline">\(x_i\)</span> varies, holding all other variables fixed. Collecting all partial derivatives into a vector gives the <strong>gradient</strong>:</p>
+<p>In this section, we will explore backpropagation in more depth. This method is used to compute the gradient of a neural network’s loss function with respect to its parameters, which allows us to use gradient descent (<span class="quarto-unresolved-ref">?sec-optimisation</span>) to minimise the loss function.</p>
+<section id="simple-example" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="simple-example"><span class="header-section-number">19.1</span> Simple example</h2>
+<p>As an example, we can consider a network comprising a single node, with the loss defined as mean squared error. We can write the loss in terms of the weights, as follows :</p>
 <p><span class="math display">\[
-\nabla f = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \ldots, \frac{\partial f}{\partial x_n} \right)
+\begin{align}
+L&amp;=(\hat{y}-y)^2 \\\\
+\hat{y}&amp;=f(z) \\\\
+z&amp;=\alpha x + \beta
+\end{align}
 \]</span></p>
-<p>The gradient has an important geometric meaning: it points in the direction of steepest <em>increase</em> of <span class="math inline">\(f\)</span>, and its magnitude gives the rate of increase in that direction. This is precisely why gradient <em>descent</em> (<span class="quarto-unresolved-ref">?sec-optimisation</span>) moves in the direction of <span class="math inline">\(-\nabla f\)</span>.</p>
-<div id="0d85d56c" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">'x y'</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> y <span class="op">+</span> sp.sin(y)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>grad <span class="op">=</span> [sp.diff(f, var) <span class="cf">for</span> var <span class="kw">in</span> (x, y)]</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"f(x,y)      ="</span>, f)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"gradient    ="</span>, grad)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"at (1, 0)   ="</span>, [g.subs({x: <span class="dv">1</span>, y: <span class="dv">0</span>}) <span class="cf">for</span> g <span class="kw">in</span> grad])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
+<p>It should be clear that the derivative of the loss with respect to the weight, <span class="math inline">\(\alpha\)</span>, can now be computed using the chain rule :</p>
+<p><span class="math display">\[
+\frac{\partial L}{\partial \alpha} =
+\frac{\partial L}{\partial \hat{y}}
+\frac{\partial \hat{y}}{\partial z}
+\frac{\partial z}{\partial \alpha}
+\]</span></p>
+<p>Note that in backpropagation, we are not trying to find a closed-form solution for the derivative, but just to establish an efficient method for computing the numerical values.</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial L}{\partial \hat{y}} &amp;= 2(\hat{y}-y) \\\\
+\frac{\partial z}{\partial \alpha} &amp;= x
+\end{align}
+\]</span></p>
+<p>Hence</p>
+<p><span class="math display">\[
+\frac{\partial L}{\partial \alpha} =
+2(\hat{y}-y) f'(z) x
+\]</span></p>
+<p>And similarly :</p>
+<p><span class="math display">\[
+\frac{\partial L}{\partial \beta} =
+2(\hat{y}-y) f'(z)
+\]</span></p>
+<p>Provided the derivative of the activation function, <span class="math inline">\(f'(z)\)</span> is known, we note that the the derivative of the loss can be computed directly <em>from terms calculated during the forward pass</em>.</p>
+</section>
+<section id="extension-to-multiple-layers" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="extension-to-multiple-layers"><span class="header-section-number">19.2</span> Extension to multiple layers</h2>
+<p>Now consider a network comprising multiple layers. We will denote the output (aka activation) of the <span class="math inline">\(i\)</span>-th layer as <span class="math inline">\(a_i\)</span>, with corresponding subscripts on weights and biases. So the final layer of an <span class="math inline">\(n\)</span> layer network can be written :</p>
+<p><span class="math display">\[
+a_n = f(\alpha_n a_{n-1} + \beta_n)
+\]</span></p>
+<p>The derivative of the loss for this final layer, remains as above :</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial L}{\partial \alpha_n} &amp;=
+2(a_n-y) f'(z_n) a_{n-1} \\\\
+\frac{\partial L}{\partial \beta_n} &amp;=
+2(a_n-y) f'(z_n)
+\end{align}
+\]</span></p>
+<p>For the previous layer, we must expand <span class="math inline">\(a_{n-1}\)</span> using the activation function of that layer, ie.</p>
+<p><span class="math display">\[
+a_{n-1} = f(\alpha_{n-1}a_{n-2} + \beta_{n-1})
+\]</span></p>
+<p>Which means the derivative of the loss with respect to weights in this <span class="math inline">\((n-1)\)</span>-th layer becomes :</p>
+<p><span class="math display">\[
+\frac{\partial L}{\partial \alpha_{n-1}} =
+\frac{\partial L}{\partial a_n}
+\frac{\partial a_n}{\partial z_n}
+\frac{\partial z_n}{\partial a_{n-1}}
+\frac{\partial a_{n-1}}{\partial \alpha_{n-1}}
+\]</span></p>
+<p>which can again be written in terms that are computed during the forward pass :</p>
+<p><span class="math display">\[
+\frac{\partial L}{\partial \alpha_n} =
+2(a_n-y) f'(z_n) \alpha_n x_{n-2}
+\]</span></p>
+<p>It should now be clear that we can compute all partial derivatives of the loss with respect to each weight, by starting with the final layer and working backwards. Hence the term backpropagation.</p>
+</section>
+<section id="the-multivariate-chain-rule" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="the-multivariate-chain-rule"><span class="header-section-number">19.3</span> The Multivariate Chain Rule</h2>
+<p>This is the single most important result in this section, because it is the entire mathematical content of <strong>backpropagation</strong> (<a href="neural-networks.html#sec-backpropagation" class="quarto-xref"><span>Section 18.3.2</span></a>). For a composite function — one built by feeding the output of one function into another, exactly as happens layer-by-layer in a neural network — the chain rule states that the Jacobian of the composition is the <em>matrix product</em> of the individual Jacobians:</p>
+<p><span class="math display">\[
+\frac{\partial \mathbf{z}}{\partial \mathbf{x}} = \frac{\partial \mathbf{z}}{\partial \mathbf{y}} \cdot \frac{\partial \mathbf{y}}{\partial \mathbf{x}}
+\]</span></p>
+<p>where <span class="math inline">\(\mathbf{x} \to \mathbf{y} \to \mathbf{z}\)</span> is a chain of function compositions.</p>
+<p>Compare this directly with the single-node backpropagation example above. In a full network with vector-valued activations at each layer, the <em>same</em> rule applies, but each factor becomes a Jacobian matrix rather than a scalar derivative, and the “multiplication” becomes genuine matrix multiplication.</p>
+<!--
+## Partial Derivatives and the Gradient
+
+For a scalar function of several variables, $f(x_1, x_2, \ldots, x_n)$, the **partial derivative** $\partial f / \partial x_i$ measures the rate of change of $f$ as $x_i$ varies, holding all other variables fixed. Collecting all partial derivatives into a vector gives the **gradient**:
+
+$$
+\nabla f = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \ldots, \frac{\partial f}{\partial x_n} \right)
+$$
+
+The gradient has an important geometric meaning: it points in the direction of steepest *increase* of $f$, and its magnitude gives the rate of increase in that direction. This is precisely why gradient *descent* (@sec-optimisation) moves in the direction of $-\nabla f$.
+
+::: {#b472800e .cell execution_count=1}
+``` {.python .cell-code}
+import numpy as np
+import sympy as sp
+
+x, y = sp.symbols('x y')
+f = x**2 * y + sp.sin(y)
+
+grad = [sp.diff(f, var) for var in (x, y)]
+print("f(x,y)      =", f)
+print("gradient    =", grad)
+print("at (1, 0)   =", [g.subs({x: 1, y: 0}) for g in grad])
+```
+
+::: {.cell-output .cell-output-error}
+
+::: {.ansi-escaped-output}
+```{=html}
 <pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
 Cell <span class="ansi-green-fg">In[1], line 2</span>
@@ -435,68 +519,64 @@ Cell <span class="ansi-green-fg">In[1], line 2</span>
 <span class="ansi-green-fg ansi-bold">      5</span> f <span style="color:rgb(98,98,98)">=</span> x<span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">2</span> <span style="color:rgb(98,98,98)">*</span> y <span style="color:rgb(98,98,98)">+</span> sp<span style="color:rgb(98,98,98)">.</span>sin(y)
 
 <span class="ansi-red-fg">ModuleNotFoundError</span>: No module named 'sympy'</pre>
-</div>
-</div>
-</div>
-<section id="directional-derivatives" class="level3" data-number="19.1.1">
-<h3 data-number="19.1.1" class="anchored" data-anchor-id="directional-derivatives"><span class="header-section-number">19.1.1</span> Directional Derivatives</h3>
-<p>More generally, the rate of change of <span class="math inline">\(f\)</span> in an arbitrary direction <span class="math inline">\(\hat{\mathbf{u}}\)</span> (a unit vector) is given by the <strong>directional derivative</strong>:</p>
-<p><span class="math display">\[
-D_{\hat{\mathbf{u}}} f = \nabla f \cdot \hat{\mathbf{u}}
-\]</span></p>
-<p>This is maximised when <span class="math inline">\(\hat{\mathbf{u}}\)</span> points in the same direction as <span class="math inline">\(\nabla f\)</span> — confirming the claim above that the gradient points in the direction of steepest ascent.</p>
-</section>
-</section>
-<section id="the-multivariate-chain-rule" class="level2" data-number="19.2">
-<h2 data-number="19.2" class="anchored" data-anchor-id="the-multivariate-chain-rule"><span class="header-section-number">19.2</span> The Multivariate Chain Rule</h2>
-<p>This is the single most important result in this section, because it is the entire mathematical content of <strong>backpropagation</strong> (<a href="neural-networks.html#sec-backpropagation" class="quarto-xref"><span>Section 18.3.2</span></a>). For a composite function — one built by feeding the output of one function into another, exactly as happens layer-by-layer in a neural network — the chain rule states that the Jacobian of the composition is the <em>matrix product</em> of the individual Jacobians:</p>
-<p><span class="math display">\[
-\frac{\partial \mathbf{z}}{\partial \mathbf{x}} = \frac{\partial \mathbf{z}}{\partial \mathbf{y}} \cdot \frac{\partial \mathbf{y}}{\partial \mathbf{x}}
-\]</span></p>
-<p>where <span class="math inline">\(\mathbf{x} \to \mathbf{y} \to \mathbf{z}\)</span> is a chain of function compositions.</p>
-<p>Compare this directly with the single-node backpropagation example already worked through in <a href="neural-networks.html#sec-backpropagation" class="quarto-xref"><span>Section 18.3.2</span></a>:</p>
-<p><span class="math display">\[
-\frac{\partial L}{\partial \alpha} = \frac{\partial L}{\partial \hat{y}} \frac{\partial \hat{y}}{\partial z} \frac{\partial z}{\partial \alpha}
-\]</span></p>
-<p>This is exactly the multivariate chain rule above, specialised to the case where every quantity happens to be a scalar. In a full network with vector-valued activations at each layer, the <em>same</em> rule applies, but each factor becomes a Jacobian matrix rather than a scalar derivative, and the “multiplication” becomes genuine matrix multiplication. This is precisely why efficient matrix multiplication (<a href="../num/matrix.html" class="quarto-xref"><span>Chapter 9</span></a>) is not just a computational convenience for neural networks, but the literal mathematical mechanism by which gradients are propagated backwards through the network.</p>
-<section id="automatic-differentiation" class="level3" data-number="19.2.1">
-<h3 data-number="19.2.1" class="anchored" data-anchor-id="automatic-differentiation"><span class="header-section-number">19.2.1</span> Automatic Differentiation</h3>
+```
+:::
+
+:::
+:::
+
+
+-->
+<section id="automatic-differentiation" class="level3" data-number="19.3.1">
+<h3 data-number="19.3.1" class="anchored" data-anchor-id="automatic-differentiation"><span class="header-section-number">19.3.1</span> Automatic Differentiation</h3>
 <p>Modern deep learning frameworks (PyTorch, TensorFlow, JAX — see <a href="neural-networks.html#sec-programming-nn" class="quarto-xref"><span>Section 18.6</span></a>) don’t compute derivatives symbolically (as <code>sympy</code> does above) or numerically (see below); instead they use <strong>automatic differentiation</strong>, which applies the chain rule mechanically to the sequence of elementary operations (add, multiply, exponentiate, …) that make up a computation, accumulating Jacobians as it goes. Applying the chain rule <em>backwards</em> through the computation graph, from output to input, is what “reverse-mode” automatic differentiation means — and reverse-mode automatic differentiation applied to a neural network’s loss function is, precisely, backpropagation. This is why backpropagation, once understood as an instance of the chain rule, generalises immediately to arbitrarily complex network architectures (CNNs, RNNs, Transformers) without needing a new derivation for each one — the chain rule doesn’t care what the individual layers compute.</p>
 </section>
 </section>
-<section id="checking-gradients-numerically" class="level2" data-number="19.3">
-<h2 data-number="19.3" class="anchored" data-anchor-id="checking-gradients-numerically"><span class="header-section-number">19.3</span> Checking Gradients Numerically</h2>
+<section id="checking-gradients-numerically" class="level2" data-number="19.4">
+<h2 data-number="19.4" class="anchored" data-anchor-id="checking-gradients-numerically"><span class="header-section-number">19.4</span> Checking Gradients Numerically</h2>
 <p>A gradient computed by hand (or by an automatic differentiation library) can always be sanity-checked against a direct numerical approximation, using the definition of the derivative as a limit:</p>
 <p><span class="math display">\[
 \frac{\partial f}{\partial x_i} \approx \frac{f(\ldots, x_i + \epsilon, \ldots) - f(\ldots, x_i - \epsilon, \ldots)}{2\epsilon}
 \]</span></p>
 <p>for some small <span class="math inline">\(\epsilon\)</span>. This “finite difference” check is slow (it requires re-evaluating <span class="math inline">\(f\)</span> once per parameter) and not used for actual training, but it is an extremely useful debugging tool — if your analytic gradient and your numerical gradient disagree, you have a bug.</p>
-<div id="0bbfa7b7" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f_np(v):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> v</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> y <span class="op">+</span> np.sin(y)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_analytic(v):</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> v</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([<span class="dv">2</span><span class="op">*</span>x<span class="op">*</span>y, x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> np.cos(y)])</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_numerical(func, v, eps<span class="op">=</span><span class="fl">1e-6</span>):</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    grad <span class="op">=</span> np.zeros_like(v)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(v)):</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        v_plus, v_minus <span class="op">=</span> v.copy(), v.copy()</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        v_plus[i] <span class="op">+=</span> eps</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        v_minus[i] <span class="op">-=</span> eps</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        grad[i] <span class="op">=</span> (func(v_plus) <span class="op">-</span> func(v_minus)) <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>eps)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> grad</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>v0 <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">0.5</span>])</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Analytic gradient  :"</span>, grad_analytic(v0))</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Numerical gradient :"</span>, grad_numerical(f_np, v0))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="6e82ec9f" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f_np(v):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> v</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> y <span class="op">+</span> np.sin(y)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_analytic(v):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> v</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([<span class="dv">2</span><span class="op">*</span>x<span class="op">*</span>y, x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> np.cos(y)])</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_numerical(func, v, eps<span class="op">=</span><span class="fl">1e-6</span>):</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    grad <span class="op">=</span> np.zeros_like(v)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(v)):</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        v_plus, v_minus <span class="op">=</span> v.copy(), v.copy()</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        v_plus[i] <span class="op">+=</span> eps</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        v_minus[i] <span class="op">-=</span> eps</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        grad[i] <span class="op">=</span> (func(v_plus) <span class="op">-</span> func(v_minus)) <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>eps)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> grad</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>v0 <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">0.5</span>])</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Analytic gradient  :"</span>, grad_analytic(v0))</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Numerical gradient :"</span>, grad_numerical(f_np, v0))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analytic gradient  : [1.         1.87758256]
 Numerical gradient : [1.         1.87758256]</code></pre>
 </div>
 </div>
+<!--
+### Directional Derivatives
+
+More generally, the rate of change of $f$ in an arbitrary direction $\hat{\mathbf{u}}$ (a unit vector) is given by the **directional derivative**:
+
+$$
+D_{\hat{\mathbf{u}}} f = \nabla f \cdot \hat{\mathbf{u}}
+$$
+
+This is maximised when $\hat{\mathbf{u}}$ points in the same direction as $\nabla f$ — confirming the claim above that the gradient points in the direction of steepest ascent.
+
+-->
 
 
 </section>

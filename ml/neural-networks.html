@@ -47,7 +47,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9ae487f9dc81c977a28b7be194272750.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e49fe94e7c8471cb6eac0ecf78abda4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -265,14 +265,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/mle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
+  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+  <a href="../ml/stats-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ML and Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -450,7 +450,7 @@ y = f\left(\sum_{i=0}^{n}{\alpha_i x_i + \beta_i} \right)
 y = {\rm tanh}(x) = \frac{e^{2x}-1}{e^{2x}+1}
 \]</span></p>
 <p>And plotted in the figure below.</p>
-<div id="955f4b14" class="cell" data-execution_count="1">
+<div id="77f75ac9" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -467,7 +467,7 @@ y = {\rm tanh}(x) = \frac{e^{2x}-1}{e^{2x}+1}
 <p><span class="math display">\[
 y=\frac{1}{1+e^{-x}}
 \]</span></p>
-<div id="57b51d9a" class="cell" data-execution_count="2">
+<div id="2fe641d4" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -491,7 +491,7 @@ y = \, &amp;x \quad (x \gt 0) \\\\
 <p><span class="math display">\[
 y = \rm{ max}(x, 0)
 \]</span></p>
-<div id="2eade801" class="cell" data-execution_count="3">
+<div id="02477641" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -520,71 +520,6 @@ y_j=\frac{e^{x_j}}{\Sigma_{i=0}^n e^{x_i}}
 <section id="sec-backpropagation" class="level3" data-number="18.3.2">
 <h3 data-number="18.3.2" class="anchored" data-anchor-id="sec-backpropagation"><span class="header-section-number">18.3.2</span> Backpropagation</h3>
 <p>In order to train a neural network, we need to compute the gradient of the loss <span class="math inline">\(L\)</span> with respect to the weights <span class="math inline">\(\theta\)</span>, ie. <span class="math inline">\(\nabla L\)</span>. Backpropagation is an efficient method for achieving this.</p>
-<p>As an example, we can consider a network comprising a single node, with the loss defined as mean squared error. We can write the loss in terms of the weights, as follows :</p>
-<p><span class="math display">\[
-\begin{align}
-L&amp;=(\hat{y}-y)^2 \\\\
-\hat{y}&amp;=f(z) \\\\
-z&amp;=\alpha x + \beta
-\end{align}
-\]</span></p>
-<p>It should be clear that the derivative of the loss with respect to the weight, <span class="math inline">\(\alpha\)</span>, can now be computed using the chain rule :</p>
-<p><span class="math display">\[
-\frac{\partial L}{\partial \alpha} =
-\frac{\partial L}{\partial \hat{y}}
-\frac{\partial \hat{y}}{\partial z}
-\frac{\partial z}{\partial \alpha}
-\]</span></p>
-<p>Note that in backpropagation, we are not trying to find a closed-form solution for the derivative, but just to establish an efficient method for computing the numerical values.</p>
-<p><span class="math display">\[
-\begin{align}
-\frac{\partial L}{\partial \hat{y}} &amp;= 2(\hat{y}-y) \\\\
-\frac{\partial z}{\partial \alpha} &amp;= x
-\end{align}
-\]</span></p>
-<p>Hence</p>
-<p><span class="math display">\[
-\frac{\partial L}{\partial \alpha} =
-2(\hat{y}-y) f'(z) x
-\]</span></p>
-<p>And similarly :</p>
-<p><span class="math display">\[
-\frac{\partial L}{\partial \beta} =
-2(\hat{y}-y) f'(z)
-\]</span></p>
-<p>Provided the derivative of the activation function, <span class="math inline">\(f'(z)\)</span> is known, we note that the the derivative of the loss can be computed directly <em>from terms calculated during the forward pass</em>.</p>
-<p>Now consider a network comprising multiple layers. We will denote the output (aka activation) of the <span class="math inline">\(i\)</span>-th layer as <span class="math inline">\(a_i\)</span>, with corresponding subscripts on weights and biases. So the final layer of an <span class="math inline">\(n\)</span> layer network can be written :</p>
-<p><span class="math display">\[
-a_n = f(\alpha_n a_{n-1} + \beta_n)
-\]</span></p>
-<p>The derivative of the loss for this final layer, remains as above :</p>
-<p><span class="math display">\[
-\begin{align}
-\frac{\partial L}{\partial \alpha_n} &amp;=
-2(a_n-y) f'(z_n) a_{n-1} \\\\
-\frac{\partial L}{\partial \beta_n} &amp;=
-2(a_n-y) f'(z_n)
-\end{align}
-\]</span></p>
-<p>For the previous layer, we must expand <span class="math inline">\(a_{n-1}\)</span> using the activation function of that layer, ie.</p>
-<p><span class="math display">\[
-a_{n-1} = f(\alpha_{n-1}a_{n-2} + \beta_{n-1})
-\]</span></p>
-<p>Which means the derivative of the loss with respect to weights in this <span class="math inline">\((n-1)\)</span>-th layer becomes :</p>
-<p><span class="math display">\[
-\frac{\partial L}{\partial \alpha_{n-1}} =
-\frac{\partial L}{\partial a_n}
-\frac{\partial a_n}{\partial z_n}
-\frac{\partial z_n}{\partial a_{n-1}}
-\frac{\partial a_{n-1}}{\partial \alpha_{n-1}}
-\]</span></p>
-<p>which can again be written in terms that are computed during the forward pass :</p>
-<p><span class="math display">\[
-\frac{\partial L}{\partial \alpha_n} =
-2(a_n-y) f'(z_n) \alpha_n x_{n-2}
-\]</span></p>
-<p>or more simply</p>
-<p>It should now be clear that we can compute all partial derivatives of the loss with respect to each weight, by starting with the final layer and working backwards. Hence the term backpropagation.</p>
 </section>
 </section>
 <section id="sec-gradient-descent" class="level2" data-number="18.4">
@@ -615,7 +550,7 @@ a_{n-1} = f(\alpha_{n-1}a_{n-2} + \beta_{n-1})
 </section>
 <section id="overfitting-in-neural-networks" class="level2" data-number="18.5">
 <h2 data-number="18.5" class="anchored" data-anchor-id="overfitting-in-neural-networks"><span class="header-section-number">18.5</span> Overfitting in Neural Networks</h2>
-<p>As discussed in <a href="supervised-ml.html#sec-overfitting" class="quarto-xref"><span>Section 16.9</span></a>, to avoid overfitting it is useful to monitor the loss as it evolves during training. Typically we monitor both the loss computed on the training dataset, and the loss computed on the validation dataset, as shown in <a href="#fig-loss-evolution" class="quarto-xref">Figure&nbsp;<span>18.2</span></a>.</p>
+<p>As discussed in <a href="supervised-ml.html#sec-overfitting" class="quarto-xref"><span>Section 15.9</span></a>, to avoid overfitting it is useful to monitor the loss as it evolves during training. Typically we monitor both the loss computed on the training dataset, and the loss computed on the validation dataset, as shown in <a href="#fig-loss-evolution" class="quarto-xref">Figure&nbsp;<span>18.2</span></a>.</p>
 <div id="fig-loss-evolution" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-loss-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">

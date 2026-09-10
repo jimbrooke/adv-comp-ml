@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9ae487f9dc81c977a28b7be194272750.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e49fe94e7c8471cb6eac0ecf78abda4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -300,14 +300,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/mle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
+  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+  <a href="../ml/stats-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ML and Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -412,10 +412,10 @@ window.Quarto = {
 
 
 <p>Minimisation is the general problem of locating the minimum of a function. We may equally be interested in the maximum of a function, but this can be converted to a minimisation problem by negating the function, so typically the problem is always framed as minimisation.</p>
-<p>More formally, we are interested in finding the value of <span class="math inline">\(\theta\)</span> that minimises <span class="math inline">\(f(\theta)\)</span>: <span class="math display">\[
+<p>More formally, we are interested in finding the value of <span class="math inline">\(\theta\)</span> that minimises <span class="math inline">\(f(\theta)\)</span>. <!-- $$
 \theta^* = \arg\min_{\theta} f(\theta)
-\]</span></p>
-<p>We are primarily interested in the case where <span class="math inline">\(f\)</span> is the loss function of a machine learning model, as discussed in <a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>. More generally, minimisation is a fundamental problem in mathematics and physics. We will also encounter it in fitting functions to data, and in the maximum likelihood methods (where we minimise the negative log likelihood) discussed in <a href="../ml/mle.html" class="quarto-xref"><span>Chapter 15</span></a>.</p>
+$$--></p>
+<p>In this unit, we are primarily interested in the case where <span class="math inline">\(f\)</span> is the loss function of a machine learning model, as discussed in <a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>. However, minimisation is a fundamental problem in mathematics and physics. We also encounter it in fitting functions to data, and in the maximum likelihood methods (where we minimise the negative log likelihood) discussed in <span class="quarto-unresolved-ref">?sec-mle</span>.</p>
 <section id="multivariate-calculus" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="multivariate-calculus"><span class="header-section-number">13.1</span> Multivariate calculus</h2>
 <p>In this section, we will describe gradient descent, a simple and widely used method for minimisation. In general, and especially in the case of minimising loss functions for machine learning, the function we need to minimise is a function of many variables. In order to understand gradient descent for multivariate functions, we will first need to introdue (or review) some underlying concepts in multivariate calculus.</p>
@@ -447,7 +447,7 @@ H_{ij} = \frac{\partial^2 f}{\partial x_i \, \partial x_j}
 <p>The Hessian encodes the local <em>curvature</em> of <span class="math inline">\(f\)</span>, and is important in minimisation since it will classify stationary points of the function (minima, maxima, saddle points).</p>
 <!--
 
-::: {#4ca1bba6 .cell execution_count=1}
+::: {#702f323e .cell execution_count=1}
 ``` {.python .cell-code}
 hess = sp.hessian(f, (x, y))
 print("Hessian :")
@@ -484,7 +484,7 @@ Cell <span class="ansi-green-fg">In[1], line 1</span>
 <li>If <span class="math inline">\(H\)</span> is negative definite, the point is a local <strong>maximum</strong>.</li>
 <li>If <span class="math inline">\(H\)</span> has both positive and negative eigenvalues, the point is a <strong>saddle point</strong> — a minimum along some directions and a maximum along others.</li>
 </ul>
-<div id="b9c295c6" class="cell" data-execution_count="2">
+<div id="64375d5b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -511,7 +511,7 @@ Cell <span class="ansi-green-fg">In[1], line 1</span>
 <section id="convexity" class="level3" data-number="13.2.1">
 <h3 data-number="13.2.1" class="anchored" data-anchor-id="convexity"><span class="header-section-number">13.2.1</span> Convexity</h3>
 <p>A function is <strong>convex</strong> if the line segment joining any two points on its graph lies on or above the graph. Convex functions are extremely well-behaved for optimisation: any local minimum is automatically the global minimum, and reliable convergence guarantees exist for gradient-based methods.</p>
-<p>The mean squared error loss for <em>linear</em> regression (<a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>) is convex in its parameters — this is why linear regression can be solved directly (indeed, in closed form, using the linear algebra of <a href="sim-eqn.html" class="quarto-xref"><span>Chapter 10</span></a>). Neural network loss surfaces, by contrast, are generally non-convex, which is precisely why training is iterative, sensitive to initialisation, and not guaranteed to find a global minimum.</p>
+<p>The mean squared error loss for <em>linear</em> regression (<a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>) is convex in its parameters — this is why linear regression can be solved directly (indeed, in closed form, using the linear algebra of <a href="sim-eqn.html" class="quarto-xref"><span>Chapter 10</span></a>). Neural network loss surfaces, by contrast, are generally non-convex, which is precisely why training is iterative, sensitive to initialisation, and not guaranteed to find a global minimum.</p>
 </section>
 </section>
 <section id="gradient-descent-formally" class="level2" data-number="13.3">
@@ -520,8 +520,8 @@ Cell <span class="ansi-green-fg">In[1], line 1</span>
 <p><span class="math display">\[
 \theta_{i+1} = \theta_i - \eta \, \nabla f(\theta_i)
 \]</span></p>
-<p>where <span class="math inline">\(\eta\)</span> is the <strong>learning rate</strong> (or step size). This is exactly the update rule already used, without derivation, in <a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a> and <a href="../ml/neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>. The justification is a direct consequence of the definition of the gradient: <span class="math inline">\(-\nabla f(\theta)\)</span> is, locally, the direction of steepest decrease of <span class="math inline">\(f\)</span>, so a small enough step in that direction is guaranteed to decrease <span class="math inline">\(f\)</span> (provided <span class="math inline">\(f\)</span> is smooth enough, and the step isn’t too large).</p>
-<div id="bd0c34be" class="cell" data-execution_count="3">
+<p>where <span class="math inline">\(\eta\)</span> is the <strong>learning rate</strong> (or step size). This is exactly the update rule already used, without derivation, in <a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a> and <a href="../ml/neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>. The justification is a direct consequence of the definition of the gradient: <span class="math inline">\(-\nabla f(\theta)\)</span> is, locally, the direction of steepest decrease of <span class="math inline">\(f\)</span>, so a small enough step in that direction is guaranteed to decrease <span class="math inline">\(f\)</span> (provided <span class="math inline">\(f\)</span> is smooth enough, and the step isn’t too large).</p>
+<div id="0f227ed7" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(theta):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> theta</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span><span class="op">*</span>(y<span class="op">+</span><span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span></span>
@@ -563,7 +563,7 @@ Cell <span class="ansi-green-fg">In[1], line 1</span>
 <li>Too <strong>small</strong>, and convergence is reliable but painfully slow.</li>
 <li>Too <strong>large</strong>, and the algorithm can overshoot the minimum, oscillate, or diverge entirely.</li>
 </ul>
-<div id="1112392c" class="cell" data-execution_count="4">
+<div id="3e5ebf78" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> eta_test <span class="kw">in</span> [<span class="fl">0.01</span>, <span class="fl">0.08</span>, <span class="fl">0.21</span>]:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    theta <span class="op">=</span> np.array([<span class="op">-</span><span class="fl">3.</span>, <span class="fl">3.</span>])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">30</span>):</span>
@@ -594,7 +594,7 @@ eta=0.21  -&gt; theta after 30 steps = [ 0.99999968 85.24701134]</code></pre>
 \mathcal{L}(\theta, \lambda) = f(\theta) + \lambda \, g(\theta)
 \]</span></p>
 <p>At a constrained optimum, the gradient of <span class="math inline">\(\mathcal{L}\)</span> with respect to <em>both</em> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\lambda\)</span> must vanish. Geometrically, this condition says that at the constrained optimum, the gradient of <span class="math inline">\(f\)</span> is parallel to the gradient of the constraint <span class="math inline">\(g\)</span> — there is no direction you could move along the constraint surface that would still decrease <span class="math inline">\(f\)</span>.</p>
-<p>This is more than a mathematical curiosity for this course: regularisation (<a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 16</span></a>) can be understood exactly as constrained optimisation. Minimising <span class="math inline">\(\text{MSE} + \lambda \sum |w_i|\)</span> (LASSO) or <span class="math inline">\(\text{MSE} + \lambda \sum w_i^2\)</span> (Ridge) is the Lagrangian form of the constrained problem “minimise MSE subject to the weights lying within some norm-ball” — the regularisation strength <span class="math inline">\(\lambda\)</span> plays exactly the role of the Lagrange multiplier above.</p>
+<p>This is more than a mathematical curiosity for this course: regularisation (<a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>) can be understood exactly as constrained optimisation. Minimising <span class="math inline">\(\text{MSE} + \lambda \sum |w_i|\)</span> (LASSO) or <span class="math inline">\(\text{MSE} + \lambda \sum w_i^2\)</span> (Ridge) is the Lagrangian form of the constrained problem “minimise MSE subject to the weights lying within some norm-ball” — the regularisation strength <span class="math inline">\(\lambda\)</span> plays exactly the role of the Lagrange multiplier above.</p>
 
 
 </section>

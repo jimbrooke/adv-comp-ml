@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9ae487f9dc81c977a28b7be194272750.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e49fe94e7c8471cb6eac0ecf78abda4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -320,14 +320,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/mle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
+  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/supervised-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span></a>
+  <a href="../ml/stats-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ML and Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -453,7 +453,7 @@ cx_1 + dx_2 &amp;= y_2
 \left(\begin{array}{c} x_1 \\ x_2 \\ x_3\end{array}\right) =
 \left(\begin{array}{c} 2 \\ 7 \\ 1\end{array}\right)
 \tag{10.6}\]</span></span></p>
-<div id="844ea14c" class="cell" data-execution_count="1">
+<div id="ccc8e9af" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg <span class="im">as</span> linalg</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -481,7 +481,7 @@ cx_1 + dx_2 &amp;= y_2
 </div>
 </div>
 <p>Is this the solution? We can easily check by inserting the solution into the original equation.</p>
-<div id="45d273b9" class="cell" data-execution_count="2">
+<div id="e005a179" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">@</span> x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[2.]
@@ -598,7 +598,7 @@ A=LU=
 <li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu.html">scipy.linalg.lu</a></p></li>
 <li><p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lu_solve.html">scipy.linalg.lu_solve</a></p></li>
 </ul>
-<div id="d110ca4f" class="cell" data-execution_count="3">
+<div id="a20d3ce3" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> solve_lu(a,y):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    lu, piv <span class="op">=</span> linalg.lu_factor(a)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> linalg.lu_solve((lu, piv), y)</span>
@@ -637,7 +637,7 @@ A^Tu &amp;=\sigma v
 <p>The pseudoinverse (also known as the Moore-Penrose inverse) can always be computed, even when <span class="math inline">\(A\)</span> is singular, ie. when when <span class="math inline">\(\frac{1}{|A|}=0\)</span> and the inverse cannot be found.</p>
 <p>In the context of solving a matrix equation <span class="math inline">\(Ax=y\)</span>, the product of pseudoinverse and the RHS, (i.e.&nbsp;<span class="math inline">\(\bar{X}=A^\dagger y\)</span>) has various properties. When A is non-singular, <span class="math inline">\(\bar{x}\)</span> gives the solution to <span class="math inline">\(Ax=y\)</span>. When <span class="math inline">\(A\)</span> is singular, <span class="math inline">\(\bar{x}\)</span> is a least squares approximation to the nearest solution. When <span class="math inline">\(Ax=y\)</span> has a space of solutions (equivalent to a set of simultaneous equations with degeneracy), then <span class="math inline">\(\bar{x}\)</span> is a vector which describes this space.</p>
 <p>SVD decomposition is available in Scipy using <code>scipy.linalg.svd()</code>. For further information, see <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.svd.html">scipy.linalg.svd</a>. Note that, unlike LU decomposition, no <code>solve()</code> function is supplied, and instead we must write some code to calculate <span class="math inline">\(\bar{x}\)</span>.</p>
-<div id="00bd6b55" class="cell" data-execution_count="4">
+<div id="fc52d208" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> solve_svd(a,y):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    u, s, v <span class="op">=</span> linalg.svd(a)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> v.T <span class="op">@</span> np.diag(<span class="dv">1</span><span class="op">/</span>s) <span class="op">@</span> u.T <span class="op">@</span> y</span>
@@ -651,7 +651,7 @@ A^Tu &amp;=\sigma v
 </div>
 </div>
 <p>Alternatively, a function to compute the pseudoinverse directly is provided, <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.pinv.html">scipy.linalg.pinv</a>.</p>
-<div id="a9f6d5ec" class="cell" data-execution_count="5">
+<div id="f924fa1e" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( linalg.pinv(a) <span class="op">@</span> y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[ 1. ]
@@ -697,7 +697,7 @@ V_1 \\
 \tag{10.23}\]</span></span></p>
 <p>Solving this matrix equation will provide the current at all points in the circuit. This method is known as “mesh analysis” of circuits.</p>
 <p>We can write a simple function that, given the voltage and resistor values, will return the currents :</p>
-<div id="ccda9708" class="cell" data-execution_count="6">
+<div id="d8091235" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> meshAnalysis(v1, v2, r1, r2, r3, r4, r5):</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> np.array ([[r1<span class="op">+</span>r2, <span class="op">-</span>r2, <span class="dv">0</span>],[<span class="op">-</span>r2,r2<span class="op">+</span>r3<span class="op">+</span>r4,<span class="op">-</span>r4],[<span class="dv">0</span>,<span class="op">-</span>r4,r4<span class="op">+</span>r5]])</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> np.array([[v1],[<span class="dv">0</span>],[<span class="op">-</span>v2]])</span>
@@ -705,7 +705,7 @@ V_1 \\
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> i</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Which, for the values given, will return the three currents :</p>
-<div id="4c0b7f4d" class="cell" data-execution_count="7">
+<div id="de518c72" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> meshAnalysis(<span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">10</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(i)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -716,7 +716,7 @@ V_1 \\
 </div>
 </div>
 <p>Or we could calculate, for example, how <span class="math inline">\(I_2\)</span> will vary as a function of <span class="math inline">\(R_4\)</span>, with all other values fixed :</p>
-<div id="0017ecf7" class="cell" data-execution_count="8">
+<div id="3d2cc558" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>r4s <span class="op">=</span> np.linspace(<span class="fl">0.1</span>, <span class="fl">5.0</span>, <span class="dv">100</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>i2s <span class="op">=</span> np.empty(<span class="bu">len</span>(r4s))</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
