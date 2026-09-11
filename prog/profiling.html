@@ -384,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="6.1.1" class="anchored" data-anchor-id="the-time-module"><span class="header-section-number">6.1.1</span> The <code>time</code> module</h3>
 <p>The simplest way to measure how long a piece of code takes is to record a timestamp before and after it runs, and subtract. Python’s built-in <code>time</code> module provides <code>time.perf_counter()</code> for exactly this purpose. Note that this is preferred over <code>time.time()</code> since it uses the most precise available clock and is guaranteed to be monotonic.</p>
 <p>In the example below, we use <code>time.perf_counter()</code> to measure the execution time of a simple Python loop, and compare it to the equivalent vectorised numpy operation.</p>
-<div id="c6c32f59" class="cell" data-execution_count="1">
+<div id="a92607be" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -404,8 +404,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>end <span class="op">=</span> time.perf_counter()</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Vectorised numpy : </span><span class="sc">{</span>end <span class="op">-</span> start<span class="sc">:.4f}</span><span class="ss"> s"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Python loop   : 0.6160 s
-Vectorised numpy : 0.0067 s</code></pre>
+<pre><code>Python loop   : 0.4863 s
+Vectorised numpy : 0.0079 s</code></pre>
 </div>
 </div>
 <p><code>time.perf_counter()</code> is fine for timing something that takes at least fraction of a second, but it has two weaknesses for profiling short pieces of code. First, a single measurement is subject to noise (due to other processes running on your machine, CPU frequency scaling, etc.). Second, the overhead of the measurement itself will distort the result for code that runs in less than a few milliseconds. For this purpose, the <code>timeit</code> module is more appropriate.</p>
@@ -414,7 +414,7 @@ Vectorised numpy : 0.0067 s</code></pre>
 <h3 data-number="6.1.2" class="anchored" data-anchor-id="the-timeit-module"><span class="header-section-number">6.1.2</span> The <code>timeit</code> module</h3>
 <p><code>timeit</code> is purpose-built for benchmarking small code snippets reliably. Rather than a single measurement, it runs the code many times and reports statistics, and it takes care of some common pitfalls automatically — notably, it temporarily disables the garbage collector during timing, so that an unlucky garbage-collection pause doesn’t distort one particular run. (Garbage collection is the process by which Python automatically frees memory that is no longer in use, and can be triggered at any time.)</p>
 <p>You may wonder why we need to time evry short pieces of code in the first place. Frequently, a function or code fragment may be called many times in a program (eg. within a loop), in which case the total time spent in that function may be significant. In these case, optimisation of the function may be worthwhile, and <code>timeit</code> can be used to compare different approaches or options.</p>
-<div id="35a3aead" class="cell" data-execution_count="2">
+<div id="0233e309" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> timeit</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> python_sum_squares(n):</span>
@@ -433,16 +433,16 @@ Vectorised numpy : 0.0067 s</code></pre>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Python loop, mean of 5 runs   : </span><span class="sc">{</span>t_python<span class="op">/</span><span class="dv">5</span><span class="op">*</span><span class="dv">1000</span><span class="sc">:.2f}</span><span class="ss"> ms"</span>)</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Vectorised numpy, mean of 5 runs : </span><span class="sc">{</span>t_numpy<span class="op">/</span><span class="dv">5</span><span class="op">*</span><span class="dv">1000</span><span class="sc">:.2f}</span><span class="ss"> ms"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Python loop, mean of 5 runs   : 26.71 ms
-Vectorised numpy, mean of 5 runs : 0.20 ms</code></pre>
+<pre><code>Python loop, mean of 5 runs   : 19.22 ms
+Vectorised numpy, mean of 5 runs : 0.17 ms</code></pre>
 </div>
 </div>
 <p>The <code>number</code> argument controls how many times the snippet is executed; <code>timeit</code> returns the <em>total</em> time for all runs, so dividing by <code>number</code> gives the mean time per run, as above. For very short snippets it’s often better to let <code>timeit</code> choose a suitable repeat count automatically, using <code>timeit.repeat()</code>, which returns several such totals so you can also see the spread between them:</p>
-<div id="d4852a37" class="cell" data-execution_count="3">
+<div id="f4466df1" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> timeit.repeat(<span class="kw">lambda</span>: numpy_sum_squares(n), number<span class="op">=</span><span class="dv">5</span>, repeat<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total time for each of 3 repeats of 5 runs :"</span>, [<span class="ss">f"</span><span class="sc">{</span>r<span class="op">*</span><span class="dv">1000</span><span class="sc">:.2f}</span><span class="ss"> ms"</span> <span class="cf">for</span> r <span class="kw">in</span> results])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Total time for each of 3 repeats of 5 runs : ['0.84 ms', '0.43 ms', '0.45 ms']</code></pre>
+<pre><code>Total time for each of 3 repeats of 5 runs : ['0.85 ms', '0.37 ms', '0.30 ms']</code></pre>
 </div>
 </div>
 <p>It is worth knowing that, when working interactively in a Jupyter notebook with an active Python kernel, the <code>%timeit</code> magic command wraps all of this for you automatically (choosing sensible values of <code>number</code> and <code>repeat</code>, and printing a clean summary).</p>
@@ -454,7 +454,7 @@ Vectorised numpy, mean of 5 runs : 0.20 ms</code></pre>
 <h3 data-number="6.2.1" class="anchored" data-anchor-id="individual-python-objects"><span class="header-section-number">6.2.1</span> Individual Python objects</h3>
 <p>The memory footprint of a Python object can be measured using <code>sys.getsizeof()</code>. This is a simple, general-purpose tool that reports the size of a single object in bytes. It does not report the size of any objects that the object refers to, so it will under-report the total memory usage for complex objects (eg. a list of lists). For numpy arrays, the <code>.nbytes</code> attribute is more useful, since it reports the total number of bytes used by the array’s data buffer.</p>
 <p>The example below illustrates these methods. It also demonstrates the advantage of numpy’s compact, fixed-type storage over a general-purpose Python list, which stores each element as a full Python object with its own overhead.</p>
-<div id="2c8fae62" class="cell" data-execution_count="4">
+<div id="42739956" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>a_list <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1000</span>))</span>
@@ -475,7 +475,7 @@ numpy float64 array of 1000     : 8,000 bytes</code></pre>
 <h3 data-number="6.2.2" class="anchored" data-anchor-id="the-memory_profiler-module"><span class="header-section-number">6.2.2</span> The <code>memory_profiler</code> module</h3>
 <p><code>memory_profiler</code> is a third-party package (install with <code>pip install memory_profiler --break-system-packages</code>) that measures memory usage <em>line by line</em> as a function executes, rather than just reporting the size of one object at a time. This makes it much better suited to answering the practical question “which line of my function is actually responsible for the memory usage?”</p>
 <p>Its most common interface is the <code>@profile</code> decorator, combined with running your script via <code>python -m memory_profiler your_script.py</code>. Because this requires a real, standalone script rather than an inline code cell, we show the pattern here rather than executing it directly:</p>
-<div id="7ad8c909" class="cell" data-execution_count="5">
+<div id="a60733f6" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> memory_profiler <span class="im">import</span> profile</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">@profile</span></span>
@@ -490,7 +490,7 @@ numpy float64 array of 1000     : 8,000 bytes</code></pre>
 </div>
 <p>Running this via <code>python -m memory_profiler your_script.py</code> produces a report showing the memory usage <em>after</em> each line executes, and the incremental change caused by that line — making it immediately clear, for example, that allocating <code>b</code> is responsible for the largest single jump in memory usage, and that the <code>del b</code> line frees it again. This line-by-line resolution is exactly what <code>sys.getsizeof()</code> cannot provide, since it only ever measures one object at a fixed point in time, not the evolving memory footprint of a running function.</p>
 <p>If you only need a quick, lower-effort memory check (rather than full line-by-line detail), <code>memory_profiler</code> also provides <code>memory_usage()</code>, which can be called directly within a script or notebook without the <code>-m</code> invocation:</p>
-<div id="5e7cb019" class="cell" data-execution_count="6">
+<div id="e119b747" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> memory_profiler <span class="im">import</span> memory_usage</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>mem_before <span class="op">=</span> memory_usage()[<span class="dv">0</span>]</span>

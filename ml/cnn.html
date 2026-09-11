@@ -485,7 +485,7 @@ The building blocks above were not all introduced at once — they were develope
 
 **VGGNet** [@simonyan2015vgg] (2014) explored the effect of depth directly, using up to 19 layers, but with a key structural insight: it replaced the larger filters used in LeNet/AlexNet (e.g. $11\times11$, $5\times5$) with a *stack* of small $3\times3$ filters. Two stacked $3\times3$ filters have the same effective receptive field as one $5\times5$ filter, but use fewer parameters and add an extra non-linear activation in between — a direct illustration of the stride/receptive-field trade-off discussed above.
 
-::: {#015dc4ba .cell execution_count=1}
+::: {#90c4c6f9 .cell execution_count=1}
 ``` {.python .cell-code}
 # illustrating VGG's parameter-efficiency argument: one 5x5 filter vs two stacked 3x3 filters,
 # for a single input/output channel

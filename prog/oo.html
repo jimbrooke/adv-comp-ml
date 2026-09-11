@@ -383,7 +383,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Unsurprisingly, the fundamental building block of OO programming is the ‘object’. An object can be thought of as an entity which encapsulates some data and some functions. The data associated with an object are often known as its ‘attributes’, while the functions are often called its ‘methods’. An object can be assigned to a variable, which can then be used to access the data and call the functions.</p>
 <p>A class is a definition for a type of object. It will describe the attributes and methods that an object of this class must contain. Multiple objects of the same class can be generated in a program. Typically, these objects will contain different data. The method definitions are usually common to all objects of a given class, but are always called in the context of a particular object, whose data they will likely act upon.</p>
 <p>To illustrate these, we will define a class that describes a 3D vector. Note that this is purely an example - if you need a representation of 3D vectors in practise, there are already many good ones available, eg. numpy.ndarray</p>
-<div id="cb1c769d" class="cell" data-execution_count="1">
+<div id="d705d4fa" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vector():</span>
@@ -428,7 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The <code>magnitude()</code> method does what it says on the tin and returns the magnitude of the vector. This method is intended for the end-user, so it doesn’t include the double-underscores.</p>
 <p>Note the <code>self</code> keyword as an argument to all methods. This is used within a method definition to refer to the particular object upon which the method is being called. Eg. when we call <code>v.magnitude()</code> in the example below, <code>self</code> is equal to <code>v</code>.</p>
 <p>Now we can create some vectors and access their components.</p>
-<div id="0845fbdb" class="cell" data-execution_count="2">
+<div id="1b4bf13d" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use the constructor to create a vector and set its components</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> Vector(<span class="fl">3.</span>, <span class="fl">4.</span>, <span class="fl">0.</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(v)</span>
@@ -449,7 +449,7 @@ x:3.0 y:4.0 z:5.0 norm:7.0710678118654755
 <h2 data-number="3.2" class="anchored" data-anchor-id="operator-overloading"><span class="header-section-number">3.2</span> Operator overloading</h2>
 <p>Python defines a large number of “internal” functions, some of which correspond to operators, such as +, -, /, *. For example, the operation <code>a + a</code> result in a call to the <code>__add__()</code> function. We can redefine these functions to change how these operators behave when operating on a particular class. This is known as operator overloading.</p>
 <p>In the context of our Vector class, we can encode vector algebra in the class methods. In the code below, note that we pass TWO arguments to each of the operator methods <strong>add</strong>(), <strong>sub</strong>(), <strong>mul</strong>(). The first, self, is the LHS of the operator, the second, a, is the RHS. Also note how we create and return a new Vector object for the + and - methods.</p>
-<div id="111d1d29" class="cell" data-execution_count="3">
+<div id="77efdd98" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vector():</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    n_dimensions <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x<span class="op">=</span><span class="fl">0.</span>, y<span class="op">=</span><span class="fl">0.</span>, z<span class="op">=</span><span class="fl">0.</span>):</span>
@@ -480,7 +480,7 @@ x:3.0 y:4.0 z:5.0 norm:7.0710678118654755
 <span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._x<span class="op">*</span>a._x <span class="op">+</span> <span class="va">self</span>._y<span class="op">*</span>a._y <span class="op">+</span> <span class="va">self</span>._z<span class="op">*</span>a._z</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Clearly we have made a choice to define * as the dot product. We could have defined it as the cross product.</p>
-<div id="879e889e" class="cell" data-execution_count="4">
+<div id="321d9840" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> Vector(<span class="fl">4.</span>, <span class="fl">3.</span>, <span class="fl">0.</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> Vector(<span class="fl">1.</span>, <span class="fl">1.</span>, <span class="fl">1.</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(u<span class="op">+</span>v)</span>
@@ -512,7 +512,7 @@ x:-3.0 y:-2.0 z:1.0 norm:3.7416573867739413
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="inheritance"><span class="header-section-number">3.3.2</span> Inheritance</h3>
 <p>Inheritance is a mechanism of OO programming whereby a class can be derived from another class, “inheriting” its properties. Here we’ll talk about a child class inheriting attributes and methods from a parent class. Usually, the child class will have some additional attributes or methods that do not belong to the parent class.</p>
 <p>To illustrate this, we could consider extending the Vector class to represent a force acting on a point, which might be a useful class in describing problems in mechanics. The force vector would be inherited from Vector, and the point would be an additional Vector member.</p>
-<div id="9a27e887" class="cell" data-execution_count="5">
+<div id="b60a38f5" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ForceOnPoint(Vector):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x<span class="op">=</span><span class="fl">0.</span>, y<span class="op">=</span><span class="fl">0.</span>, z<span class="op">=</span><span class="fl">0.</span>, rx<span class="op">=</span><span class="fl">0.</span>, ry<span class="op">=</span><span class="fl">0.</span>, rz<span class="op">=</span><span class="fl">0.</span>):</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        Vector.<span class="fu">__init__</span>(<span class="va">self</span>,x, y, z)</span>
@@ -550,7 +550,7 @@ x:-3.0 y:-2.0 z:1.0 norm:3.7416573867739413
 </div>
 <p>Note how the ForceOnPoint defines a new constructor, which calls the Vector constructor and then an additional line to add the new attribute (the point). We have provided methods to access components of the point vector, which themselves use the component access methods of Vector. So if we wanted to change the internal representation of Vector later, we could do that.</p>
 <p>Note that we’ve used the Vector class to define the <code>r</code> attribute that represents the point. This inclusion of a class within a class is known as “composition”. This is an alternative method to inheritance that will incorporate a class within a class. We could extend this to define the ForceOnPoint class using composition and not inheritance :</p>
-<div id="eb2d0143" class="cell" data-execution_count="6">
+<div id="5962ac03" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ForceOnPoint(<span class="bu">object</span>):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x<span class="op">=</span><span class="fl">0.</span>, y<span class="op">=</span><span class="fl">0.</span>, z<span class="op">=</span><span class="fl">0.</span>, rx<span class="op">=</span><span class="fl">0.</span>, ry<span class="op">=</span><span class="fl">0.</span>, rz<span class="op">=</span><span class="fl">0.</span>):</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the force vector</span></span>
@@ -565,7 +565,7 @@ x:-3.0 y:-2.0 z:1.0 norm:3.7416573867739413
 <h2 data-number="3.4" class="anchored" data-anchor-id="sec-abstraction"><span class="header-section-number">3.4</span> Abstraction</h2>
 <p>Abstraction refers to defining the interface to a type of object as a set of methods. It is related to encapsulation, since it is another way of hiding internal details or complexity. To fully exploit this concept, we can define a so-called “abstract base class” which contains only method definitions (not implementation) and no attributes. The abstract class cannot be instantiated as an object, because it has no attributes and no methods that can be called - it is simply an interface definition. Sometimes it is referred to as a blueprint for real classes. A child class which inherits from this class must provide implementations for the methods, together with any required attributes. Sometimes the child class is called a “concrete class”, as it can be instantiated.</p>
 <p>Typically, abstract base classes are used when we have a collection of related classes, which we want to have some common features. This is illustrated with a simple example of an abstract base class that describes a vehicle, with several concrete classes that inherit from it.</p>
-<div id="9dad355c" class="cell" data-execution_count="7">
+<div id="512a0268" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vehicle(<span class="bu">object</span>):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> n_wheels(<span class="va">self</span>):</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span>

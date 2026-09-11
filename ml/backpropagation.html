@@ -438,7 +438,15 @@ a_{n-1} = f(\alpha_{n-1}a_{n-2} + \beta_{n-1})
 </section>
 <section id="extension-to-multivariate-functions" class="level2" data-number="19.3">
 <h2 data-number="19.3" class="anchored" data-anchor-id="extension-to-multivariate-functions"><span class="header-section-number">19.3</span> Extension to multivariate functions</h2>
-<p>In practice, our networks have multiple input and output variables, represented as vectors, and the weights become matrices. The chain rule still applies, but the derivatives become Jacobian matrices, and the “multiplication” becomes matrix multiplication. The multivariate chain rule states that the Jacobian of a function composition is the <em>matrix product</em> of the individual Jacobians:</p>
+<p>In practice, our networks have multiple input and output variables, represented as vectors, and the weights become matrices. To extend the chain rule to multivariate functions, we require the Jacobian. Given a general vector function of a vector, <span class="math inline">\(\mathbf{f}(\mathbf{x})\)</span>, the Jacobian is defined as a matrix containing the partial derivative of every output variable with respect to every input variable:</p>
+<p><span class="math display">\[
+J = \begin{pmatrix}
+\dfrac{\partial f_1}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial f_1}{\partial x_n} \\
+\vdots &amp; \ddots &amp; \vdots \\
+\dfrac{\partial f_m}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial f_m}{\partial x_n}
+\end{pmatrix}
+\]</span></p>
+<p>In extending the chain rule to such functions, we replace partial derivatives with Jacobians. The multivariate chain rule then states that the Jacobian of a function composition is the <em>matrix product</em> of the individual Jacobians:</p>
 <p><span class="math display">\[
 \frac{\partial \mathbf{z}}{\partial \mathbf{x}} = \frac{\partial \mathbf{z}}{\partial \mathbf{y}} \cdot \frac{\partial \mathbf{y}}{\partial \mathbf{x}}
 \]</span></p>

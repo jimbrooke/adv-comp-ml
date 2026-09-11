@@ -374,13 +374,13 @@ window.Quarto = {
   <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation"><span class="header-section-number">16.2</span> Maximum Likelihood Estimation</a>
   <ul class="collapse">
   <li><a href="#mle-in-practice" id="toc-mle-in-practice" class="nav-link" data-scroll-target="#mle-in-practice"><span class="header-section-number">16.2.1</span> MLE in Practice</a></li>
-  <li><a href="#mle-example" id="toc-mle-example" class="nav-link" data-scroll-target="#mle-example"><span class="header-section-number">16.2.2</span> MLE Example</a></li>
   </ul></li>
   <li><a href="#mle-and-machine-learning" id="toc-mle-and-machine-learning" class="nav-link" data-scroll-target="#mle-and-machine-learning"><span class="header-section-number">16.3</span> MLE and Machine Learning</a>
   <ul class="collapse">
   <li><a href="#mean-squared-error" id="toc-mean-squared-error" class="nav-link" data-scroll-target="#mean-squared-error"><span class="header-section-number">16.3.1</span> Mean Squared Error</a></li>
   <li><a href="#binary-cross-entropy" id="toc-binary-cross-entropy" class="nav-link" data-scroll-target="#binary-cross-entropy"><span class="header-section-number">16.3.2</span> Binary Cross-Entropy</a></li>
   </ul></li>
+  <li><a href="#simple-mle-example" id="toc-simple-mle-example" class="nav-link" data-scroll-target="#simple-mle-example"><span class="header-section-number">16.4</span> Simple MLE Example</a></li>
   </ul>
 </nav>
     </div>
@@ -442,7 +442,7 @@ $$
 \text{Var}(\hat{\theta}) = \mathbb{E}\left[(\hat{\theta} - \mathbb{E}[\hat\theta])^2\right]
 $$
 
-::: {#b72cc57b .cell execution_count=1}
+::: {#2dd12fea .cell execution_count=1}
 ``` {.python .cell-code}
 import numpy as np
 rng = np.random.default_rng(1)
@@ -512,100 +512,7 @@ This is worth comparing directly to the bias–variance tradeoff of @sec-overfit
 <h3 data-number="16.2.1" class="anchored" data-anchor-id="mle-in-practice"><span class="header-section-number">16.2.1</span> MLE in Practice</h3>
 <p>MLE is a powerful method for extracting parameters of interest from data. Consider measuring the mass of the Higgs boson at the Large Hadron Collider, where the data comprises invariant mass measurements taken from a sample of collision events. The probability distribution for such data can be described by a Breit-Wigner distribution, characterised by two parameters: the mass of the Higgs boson, <span class="math inline">\(m_H\)</span>, and its decay width, <span class="math inline">\(\Gamma_H\)</span>. In order to measure these parameters, we construct the likelihood of observing the data given a particular choice of these parameters, and then find the values of <span class="math inline">\(m_H\)</span> and <span class="math inline">\(\Gamma_H\)</span> that maximise this likelihood.</p>
 <p>The method can be further extended to include the effect of measurement uncertainty. For example, the uncertainty on our invariant mass measurements can be modelled with a Crystal Ball function (essentially a Gaussian distribution with a power-law tail, which is often a better model for the detector response than a simple Gaussian). The likelihood is then the convolution of the Breit-Wigner distribution with the Crystal Ball function. Maximum likelihood estimation will again find the values of <span class="math inline">\(m_H\)</span> and <span class="math inline">\(\Gamma_H\)</span>, but potentially also the parameters of the Crystal Ball function that describe the detector response. Such parameters are known as <em>nuisance parameters</em>, since they are not of direct interest, but must be included in the model in order to properly model the distribution of data.</p>
-</section>
-<section id="mle-example" class="level3" data-number="16.2.2">
-<h3 data-number="16.2.2" class="anchored" data-anchor-id="mle-example"><span class="header-section-number">16.2.2</span> MLE Example</h3>
-<p>A more simple example is estimation of the decay constant <span class="math inline">\(\lambda\)</span> from a small sample of radioactive decay times. In this case the probability distribution for the data is an exponential function, <span class="math inline">\(P(x|\lambda) = \lambda e^{-\lambda x}\)</span>. Naively, <span class="math inline">\(\lambda\)</span> can be found from the reciprocal of the mean observed decay time, and this will work reasonably well for large samples. However, this is a <em>biased</em> estimator of <span class="math inline">\(\lambda\)</span>, which becomes particularly important with small sample size. Maximum likelihood estimation can be used to properly account for the asymmetric uncertainties that arise in this case as shown in the example below.</p>
-<div id="411a9137" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.optimize <span class="im">as</span> opt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- 1. Generate synthetic data ----</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>tau_true <span class="op">=</span> <span class="fl">5.0</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>N_events <span class="op">=</span> <span class="dv">150</span>          <span class="co"># deliberately low statistics, to expose the problem</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>decay_times <span class="op">=</span> rng.exponential(scale<span class="op">=</span>tau_true, size<span class="op">=</span>N_events)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># bin into a histogram, as a real detector would record counts per time bin</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>bin_edges <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">16</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>bin_centres <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> (bin_edges[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> bin_edges[<span class="dv">1</span>:])</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>counts, _ <span class="op">=</span> np.histogram(decay_times, bins<span class="op">=</span>bin_edges)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Bin counts :"</span>, counts)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- 2. The naive (statistically incorrect) approach ----</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># log(counts) + ordinary least squares: undefined for zero-count bins,</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># and implicitly assumes Gaussian errors on the counts (poor at low N)</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> counts <span class="op">&gt;</span> <span class="dv">0</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>log_counts <span class="op">=</span> np.log(counts[mask])</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>t_masked <span class="op">=</span> bin_centres[mask]</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>design <span class="op">=</span> np.vstack([t_masked, np.ones_like(t_masked)]).T</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>slope, intercept <span class="op">=</span> np.linalg.lstsq(design, log_counts, rcond<span class="op">=</span><span class="va">None</span>)[<span class="dv">0</span>]</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>tau_naive <span class="op">=</span> <span class="op">-</span><span class="dv">1</span> <span class="op">/</span> slope</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Naive log-linear fit : tau = </span><span class="sc">{</span>tau_naive<span class="sc">:.2f}</span><span class="ss">  "</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"(</span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(<span class="op">~</span>mask)<span class="sc">}</span><span class="ss"> of </span><span class="sc">{</span><span class="bu">len</span>(counts)<span class="sc">}</span><span class="ss"> bins discarded)"</span>)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- 3. Correct approach: Poisson maximum likelihood ----</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expected_counts(params, edges):</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Expected count per bin: exponential decay law integrated over the bin."""</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    A, tau <span class="op">=</span> params</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    lo, hi <span class="op">=</span> edges[:<span class="op">-</span><span class="dv">1</span>], edges[<span class="dv">1</span>:]</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A <span class="op">*</span> (np.exp(<span class="op">-</span>lo<span class="op">/</span>tau) <span class="op">-</span> np.exp(<span class="op">-</span>hi<span class="op">/</span>tau))</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> neg_log_likelihood(params, counts, edges):</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    mu <span class="op">=</span> np.clip(expected_counts(params, edges), <span class="fl">1e-10</span>, <span class="va">None</span>)  <span class="co"># guard log(0)</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Poisson log-likelihood; the count! normalisation is dropped since it</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># doesn't depend on the fit parameters</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">sum</span>(mu <span class="op">-</span> counts <span class="op">*</span> np.log(mu))</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> opt.minimize(</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    neg_log_likelihood, x0<span class="op">=</span>[N_events, <span class="fl">3.0</span>],</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    args<span class="op">=</span>(counts, bin_edges), method<span class="op">=</span><span class="st">'Nelder-Mead'</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>A_mle, tau_mle <span class="op">=</span> result.x</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Poisson MLE fit       : tau = </span><span class="sc">{</span>tau_mle<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- 4. Gold standard: unbinned MLE, using every decay time individually ----</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="co"># for an exponential distribution the MLE of the mean lifetime has a simple</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co"># closed form: it is just the sample mean of the (unbinned) decay times</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>tau_unbinned_mle <span class="op">=</span> np.mean(decay_times)</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Unbinned MLE (exact)  : tau = </span><span class="sc">{</span>tau_unbinned_mle<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"True value             : tau = </span><span class="sc">{</span>tau_true<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- 5. Plot ----</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>t_fine <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">200</span>)</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>bin_width <span class="op">=</span> bin_edges[<span class="dv">1</span>] <span class="op">-</span> bin_edges[<span class="dv">0</span>]</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>naive_smooth <span class="op">=</span> np.exp(intercept) <span class="op">*</span> np.exp(<span class="op">-</span>t_fine<span class="op">/</span>tau_naive)</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>mle_smooth <span class="op">=</span> (A_mle<span class="op">/</span>tau_mle) <span class="op">*</span> bin_width <span class="op">*</span> np.exp(<span class="op">-</span>t_fine<span class="op">/</span>tau_mle)</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">5</span>))</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>plt.bar(bin_centres, counts, width<span class="op">=</span>bin_width<span class="op">*</span><span class="fl">0.9</span>, alpha<span class="op">=</span><span class="fl">0.4</span>, label<span class="op">=</span><span class="st">'Observed counts'</span>)</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>plt.plot(t_fine, naive_smooth, <span class="st">'r--'</span>, label<span class="op">=</span><span class="ss">f'Naive log-linear fit (tau=</span><span class="sc">{</span>tau_naive<span class="sc">:.2f}</span><span class="ss">)'</span>)</span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>plt.plot(t_fine, mle_smooth, <span class="st">'g-'</span>, label<span class="op">=</span><span class="ss">f'Poisson MLE fit (tau=</span><span class="sc">{</span>tau_mle<span class="sc">:.2f}</span><span class="ss">)'</span>)</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Decay time'</span>)</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Counts per bin'</span>)</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Naive least-squares vs Poisson MLE, low-count exponential decay'</span>)</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Bin counts : [57 26 23 18  9  9  3  2  0  1  0  0  0  2  0]
-
-Naive log-linear fit : tau = 6.57  (5 of 15 bins discarded)
-Poisson MLE fit       : tau = 4.63
-Unbinned MLE (exact)  : tau = 4.63
-True value             : tau = 5.00</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stats-ml_files/figure-html/cell-3-output-2.png" width="586" height="449" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
+<p>At the end of this chapter, we present a very simple example of an MLE fit to an exponential distribution. This illustrates both how MLE can be implemented in Python, as well as the importance of understanding the correct error distribution for the data.</p>
 </section>
 </section>
 <section id="mle-and-machine-learning" class="level2" data-number="16.3">
@@ -641,9 +548,97 @@ P(y_i=0) = 1 - \hat{P}_i, \quad P(y_i=1) = \hat{P}_i
 -\ell(\theta) = -\sum_{i=1}^N \Big[ y_i \ln \hat{P}_i + (1-y_i)\ln(1-\hat{P}_i) \Big]
 \]</span></p>
 <p>This is identical (within a multiplicative factor, which doesn’t affect the location of the minimum)to the Binary Cross-Entropy loss given in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>. Similarly to above, we interpret the use of BCE loss as an implicit assumption that uncertainties are Bernoulli-distributed.</p>
-
-
 </section>
+</section>
+<section id="simple-mle-example" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="simple-mle-example"><span class="header-section-number">16.4</span> Simple MLE Example</h2>
+<p>A simple example is estimation of the decay constant <span class="math inline">\(\lambda\)</span> from a small sample of radioactive decay times. In this case the probability distribution for the data is an exponential function, <span class="math inline">\(P(x|\lambda) = \lambda e^{-\lambda x}\)</span>. Performaing a least squares fit to the logarithm of the data is a common approach, but this is statistically incorrect since it implicitly assumes Gaussian errors on the counts, which is not valid for low-count data. These can be accounted for correctly using a Poisson likelihood, which is maximised to find the MLE of <span class="math inline">\(\lambda\)</span>. The example below compares the naive least-squares approach to the correct Poisson MLE, and also shows that an unbinned MLE gives the same result. (In this case, the unbinned MLE is exact and trivial - note that this is not generally true!)</p>
+<div id="e341e7bc" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.optimize <span class="im">as</span> opt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># generate some fake data</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>tau_true <span class="op">=</span> <span class="fl">5.0</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>N_events <span class="op">=</span> <span class="dv">150</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>decay_times <span class="op">=</span> rng.exponential(scale<span class="op">=</span>tau_true, size<span class="op">=</span>N_events)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram the fake data, as we would in a real experiment</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>bin_edges <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">16</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>bin_centres <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> (bin_edges[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> bin_edges[<span class="dv">1</span>:])</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>counts, _ <span class="op">=</span> np.histogram(decay_times, bins<span class="op">=</span>bin_edges)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># naive least-squares fit to log(counts)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> counts <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>log_counts <span class="op">=</span> np.log(counts[mask])</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>t_masked <span class="op">=</span> bin_centres[mask]</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>design <span class="op">=</span> np.vstack([t_masked, np.ones_like(t_masked)]).T</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>slope, intercept <span class="op">=</span> np.linalg.lstsq(design, log_counts, rcond<span class="op">=</span><span class="va">None</span>)[<span class="dv">0</span>]</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>tau_naive <span class="op">=</span> <span class="op">-</span><span class="dv">1</span> <span class="op">/</span> slope</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Naive log-linear fit : tau = </span><span class="sc">{</span>tau_naive<span class="sc">:.2f}</span><span class="ss">  "</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"(</span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(<span class="op">~</span>mask)<span class="sc">}</span><span class="ss"> of </span><span class="sc">{</span><span class="bu">len</span>(counts)<span class="sc">}</span><span class="ss"> bins discarded)"</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Poisson maximum likelihood estimation</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expected_counts(params, edges):</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Expected count per bin: exponential decay law integrated over the bin."""</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    A, tau <span class="op">=</span> params</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    lo, hi <span class="op">=</span> edges[:<span class="op">-</span><span class="dv">1</span>], edges[<span class="dv">1</span>:]</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A <span class="op">*</span> (np.exp(<span class="op">-</span>lo<span class="op">/</span>tau) <span class="op">-</span> np.exp(<span class="op">-</span>hi<span class="op">/</span>tau))</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> neg_log_likelihood(params, counts, edges):</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    mu <span class="op">=</span> np.clip(expected_counts(params, edges), <span class="fl">1e-10</span>, <span class="va">None</span>)  <span class="co"># guard log(0)</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Poisson log-likelihood; the count! normalisation is dropped since it</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># doesn't depend on the fit parameters</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">sum</span>(mu <span class="op">-</span> counts <span class="op">*</span> np.log(mu))</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> opt.minimize(</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    neg_log_likelihood, x0<span class="op">=</span>[N_events, <span class="fl">3.0</span>],</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    args<span class="op">=</span>(counts, bin_edges), method<span class="op">=</span><span class="st">'Nelder-Mead'</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>A_mle, tau_mle <span class="op">=</span> result.x</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Poisson MLE fit       : tau = </span><span class="sc">{</span>tau_mle<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co"># unbinned MLE - trivial in this case, since the MLE of the exponential distribution is just the mean of the sample</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>tau_unbinned_mle <span class="op">=</span> np.mean(decay_times)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Unbinned MLE (exact)  : tau = </span><span class="sc">{</span>tau_unbinned_mle<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"True value            : tau = </span><span class="sc">{</span>tau_true<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co"># plot this histogram, both fits, and the true distribution</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>t_fine <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">200</span>)</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>bin_width <span class="op">=</span> bin_edges[<span class="dv">1</span>] <span class="op">-</span> bin_edges[<span class="dv">0</span>]</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>naive_smooth <span class="op">=</span> np.exp(intercept) <span class="op">*</span> np.exp(<span class="op">-</span>t_fine<span class="op">/</span>tau_naive)</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>mle_smooth <span class="op">=</span> (A_mle<span class="op">/</span>tau_mle) <span class="op">*</span> bin_width <span class="op">*</span> np.exp(<span class="op">-</span>t_fine<span class="op">/</span>tau_mle)</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">5</span>))</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>plt.bar(bin_centres, counts, width<span class="op">=</span>bin_width<span class="op">*</span><span class="fl">0.9</span>, alpha<span class="op">=</span><span class="fl">0.4</span>, label<span class="op">=</span><span class="st">'Observed counts'</span>)</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>plt.plot(t_fine, naive_smooth, <span class="st">'r--'</span>, label<span class="op">=</span><span class="ss">f'Naive log-linear fit (tau=</span><span class="sc">{</span>tau_naive<span class="sc">:.2f}</span><span class="ss">)'</span>)</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>plt.plot(t_fine, mle_smooth, <span class="st">'g-'</span>, label<span class="op">=</span><span class="ss">f'Poisson MLE fit (tau=</span><span class="sc">{</span>tau_mle<span class="sc">:.2f}</span><span class="ss">)'</span>)</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Decay time'</span>)</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Counts per bin'</span>)</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Naive least-squares vs Poisson MLE, low-count exponential decay'</span>)</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Naive log-linear fit : tau = 6.57  (5 of 15 bins discarded)
+Poisson MLE fit       : tau = 4.63
+Unbinned MLE (exact)  : tau = 4.63
+True value            : tau = 5.00</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stats-ml_files/figure-html/cell-3-output-2.png" width="586" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->

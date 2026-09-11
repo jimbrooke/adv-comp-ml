@@ -473,7 +473,7 @@ L(\theta, \phi; \mathbf{x}) = \underbrace{\mathbb{E}_{\mathbf{z}\sim q_\phi}\big
 <p><span class="math display">\[
 D_{\text{KL}}\big(\mathcal{N}(\mu,\sigma^2) \,\|\, \mathcal{N}(0,1)\big) = -\frac{1}{2}\sum_{i} \left(1 + \log\sigma_i^2 - \mu_i^2 - \sigma_i^2\right)
 \]</span></p>
-<div id="bf048921" class="cell" data-execution_count="1">
+<div id="c0c25b5a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kl_divergence_to_standard_normal(mu, log_var):</span>
@@ -504,7 +504,7 @@ KL divergence (far from prior)   : 10.18109312953954</code></pre>
 \mathbf{z} = \boldsymbol{\mu}_\phi(\mathbf{x}) + \boldsymbol{\sigma}_\phi(\mathbf{x}) \odot \boldsymbol{\epsilon}, \qquad \boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, I)
 \]</span></p>
 <p>where <span class="math inline">\(\odot\)</span> denotes elementwise multiplication. Now <span class="math inline">\(\mathbf{z}\)</span> is written as a deterministic, differentiable function of <span class="math inline">\(\boldsymbol{\mu}\)</span>, <span class="math inline">\(\boldsymbol{\sigma}\)</span>, and a separately-sampled noise term <span class="math inline">\(\boldsymbol{\epsilon}\)</span> that carries no trainable parameters. This means the chain rule (<span class="quarto-unresolved-ref">?sec-gradients</span>) can be applied straight through the sampling step exactly as through any other layer, and the whole network — encoder and decoder together — can be trained end-to-end with ordinary backpropagation.</p>
-<div id="90e41941" class="cell" data-execution_count="2">
+<div id="caf84dc2" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reparameterise(mu, log_var, rng):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    sigma <span class="op">=</span> np.exp(<span class="fl">0.5</span> <span class="op">*</span> log_var)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    epsilon <span class="op">=</span> rng.normal(size<span class="op">=</span>mu.shape)</span>

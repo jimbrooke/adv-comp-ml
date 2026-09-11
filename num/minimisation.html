@@ -370,22 +370,15 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#multivariate-calculus" id="toc-multivariate-calculus" class="nav-link active" data-scroll-target="#multivariate-calculus"><span class="header-section-number">13.1</span> Multivariate calculus</a>
+  <li><a href="#multi-dimensional-minimisation" id="toc-multi-dimensional-minimisation" class="nav-link active" data-scroll-target="#multi-dimensional-minimisation"><span class="header-section-number">13.1</span> Multi-dimensional minimisation</a>
   <ul class="collapse">
-  <li><a href="#directional-derivative" id="toc-directional-derivative" class="nav-link" data-scroll-target="#directional-derivative"><span class="header-section-number">13.1.1</span> Directional Derivative</a></li>
-  <li><a href="#the-jacobian" id="toc-the-jacobian" class="nav-link" data-scroll-target="#the-jacobian"><span class="header-section-number">13.1.2</span> The Jacobian</a></li>
-  <li><a href="#the-hessian" id="toc-the-hessian" class="nav-link" data-scroll-target="#the-hessian"><span class="header-section-number">13.1.3</span> The Hessian</a></li>
+  <li><a href="#minimisation-and-machine-learning" id="toc-minimisation-and-machine-learning" class="nav-link" data-scroll-target="#minimisation-and-machine-learning"><span class="header-section-number">13.1.1</span> Minimisation and Machine Learning</a></li>
   </ul></li>
-  <li><a href="#the-shape-of-the-problem" id="toc-the-shape-of-the-problem" class="nav-link" data-scroll-target="#the-shape-of-the-problem"><span class="header-section-number">13.2</span> The Shape of the Problem</a>
+  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent"><span class="header-section-number">13.2</span> Gradient Descent</a>
   <ul class="collapse">
-  <li><a href="#convexity" id="toc-convexity" class="nav-link" data-scroll-target="#convexity"><span class="header-section-number">13.2.1</span> Convexity</a></li>
+  <li><a href="#learning-rate" id="toc-learning-rate" class="nav-link" data-scroll-target="#learning-rate"><span class="header-section-number">13.2.1</span> Learning Rate</a></li>
   </ul></li>
-  <li><a href="#gradient-descent-formally" id="toc-gradient-descent-formally" class="nav-link" data-scroll-target="#gradient-descent-formally"><span class="header-section-number">13.3</span> Gradient Descent, Formally</a>
-  <ul class="collapse">
-  <li><a href="#choosing-the-learning-rate" id="toc-choosing-the-learning-rate" class="nav-link" data-scroll-target="#choosing-the-learning-rate"><span class="header-section-number">13.3.1</span> Choosing the Learning Rate</a></li>
-  </ul></li>
-  <li><a href="#second-order-methods" id="toc-second-order-methods" class="nav-link" data-scroll-target="#second-order-methods"><span class="header-section-number">13.4</span> Second-Order Methods</a></li>
-  <li><a href="#constrained-optimisation" id="toc-constrained-optimisation" class="nav-link" data-scroll-target="#constrained-optimisation"><span class="header-section-number">13.5</span> Constrained Optimisation</a></li>
+  <li><a href="#second-order-methods" id="toc-second-order-methods" class="nav-link" data-scroll-target="#second-order-methods"><span class="header-section-number">13.3</span> Second-Order Methods</a></li>
   </ul>
 </nav>
     </div>
@@ -412,79 +405,20 @@ window.Quarto = {
 
 
 <p>Minimisation is the general problem of locating the minimum of a function. We may equally be interested in the maximum of a function, but this can be converted to a minimisation problem by negating the function, so typically the problem is always framed as minimisation.</p>
-<p>More formally, we are interested in finding the value of <span class="math inline">\(\theta\)</span> that minimises <span class="math inline">\(f(\theta)\)</span>. <!-- $$
+<p>More formally, we are interested in finding the value of <span class="math inline">\(\theta\)</span> that minimises <span class="math inline">\(f(\theta)\)</span>. THis is sometimes written as: <span class="math display">\[
 \theta^* = \arg\min_{\theta} f(\theta)
-$$--></p>
-<p>In this unit, we are primarily interested in the case where <span class="math inline">\(f\)</span> is the loss function of a machine learning model, as discussed in <a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>. However, minimisation is a fundamental problem in mathematics and physics. We also encounter it in fitting functions to data, and in the maximum likelihood methods (where we minimise the negative log likelihood) discussed in <span class="quarto-unresolved-ref">?sec-mle</span>.</p>
-<section id="multivariate-calculus" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="multivariate-calculus"><span class="header-section-number">13.1</span> Multivariate calculus</h2>
-<p>In this section, we will describe gradient descent, a simple and widely used method for minimisation. In general, and especially in the case of minimising loss functions for machine learning, the function we need to minimise is a function of many variables. In order to understand gradient descent for multivariate functions, we will first need to introdue (or review) some underlying concepts in multivariate calculus.</p>
-<section id="directional-derivative" class="level3" data-number="13.1.1">
-<h3 data-number="13.1.1" class="anchored" data-anchor-id="directional-derivative"><span class="header-section-number">13.1.1</span> Directional Derivative</h3>
-<p>The rate of change of <span class="math inline">\(f\)</span> in an arbitrary direction <span class="math inline">\(\hat{\mathbf{u}}\)</span> (a unit vector) is given by the directional derivative :</p>
-<p><span class="math display">\[
-D_{\hat{\mathbf{u}}} f = \nabla f \cdot \hat{\mathbf{u}}
 \]</span></p>
-<p>This is maximised when <span class="math inline">\(\hat{\mathbf{u}}\)</span> points in the same direction as <span class="math inline">\(\nabla f\)</span>.</p>
-</section>
-<section id="the-jacobian" class="level3" data-number="13.1.2">
-<h3 data-number="13.1.2" class="anchored" data-anchor-id="the-jacobian"><span class="header-section-number">13.1.2</span> The Jacobian</h3>
-<p>The Jacobian is the generalisation of the derivative to functions of multiple variables. It is a matrix containing the partial derivative of every output variable with respect to every input variable:</p>
-<p><span class="math display">\[
-J = \begin{pmatrix}
-\dfrac{\partial f_1}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial f_1}{\partial x_n} \\
-\vdots &amp; \ddots &amp; \vdots \\
-\dfrac{\partial f_m}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial f_m}{\partial x_n}
-\end{pmatrix}
-\]</span></p>
-</section>
-<section id="the-hessian" class="level3" data-number="13.1.3">
-<h3 data-number="13.1.3" class="anchored" data-anchor-id="the-hessian"><span class="header-section-number">13.1.3</span> The Hessian</h3>
-<p>In a similar way, the Hessian is defined as the matrix of all second partial derivatives:</p>
+<p>In this unit, we are primarily interested in the case where <span class="math inline">\(f\)</span> is the loss function of a machine learning model, as discussed in <a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>. However, minimisation is a fundamental problem in mathematics and physics. We also encounter it in fitting functions to data, and in the maximum likelihood methods (where we minimise the negative log likelihood) discussed in <a href="../ml/stats-ml.html" class="quarto-xref"><span>Chapter 16</span></a>.</p>
+<section id="multi-dimensional-minimisation" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="multi-dimensional-minimisation"><span class="header-section-number">13.1</span> Multi-dimensional minimisation</h2>
+<p>You will be familiar with analytically finding minima in single valued functions. We find stationary points by setting <span class="math inline">\(f'(\theta)=0\)</span> and identify minima by checking the second derivative <span class="math inline">\(f''(\theta)\)</span>.</p>
+<p>Here we want to generalise to multi-dimensional functions. WHile the general approach is the same, the addition of multiple dimensions introduces some new ideas and complications. We will again identify stationary points by requiring the gradient <span class="math inline">\(\nabla f(\theta) = 0\)</span>. In order to identify the nature of the stationary point, we need to compute the Hessian <span class="math inline">\(H(x)\)</span>, defined as the matrix of all second partial derivatives:</p>
 <p><span class="math display">\[
 H_{ij} = \frac{\partial^2 f}{\partial x_i \, \partial x_j}
 \]</span></p>
-<p>The Hessian encodes the local <em>curvature</em> of <span class="math inline">\(f\)</span>, and is important in minimisation since it will classify stationary points of the function (minima, maxima, saddle points).</p>
-<!--
-
-::: {#02170699 .cell execution_count=1}
-``` {.python .cell-code}
-hess = sp.hessian(f, (x, y))
-print("Hessian :")
-sp.pprint(hess)
-```
-
-::: {.cell-output .cell-output-error}
-
-::: {.ansi-escaped-output}
-```{=html}
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[1], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> hess <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">sp</span><span style="color:rgb(98,98,98)">.</span>hessian(f, (x, y))
-<span class="ansi-green-fg ansi-bold">      2</span> <span style="color:rgb(0,135,0)">print</span>(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Hessian :</span><span style="color:rgb(175,0,0)">"</span>)
-<span class="ansi-green-fg ansi-bold">      3</span> sp<span style="color:rgb(98,98,98)">.</span>pprint(hess)
-
-<span class="ansi-red-fg">NameError</span>: name 'sp' is not defined</pre>
-```
-:::
-
-:::
-:::
-
-
--->
-</section>
-</section>
-<section id="the-shape-of-the-problem" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="the-shape-of-the-problem"><span class="header-section-number">13.2</span> The Shape of the Problem</h2>
-<p>For a function of a single variable, minimisation is something you likely already associate with setting <span class="math inline">\(f'(\theta)=0\)</span> and checking the sign of <span class="math inline">\(f''(\theta)\)</span>. This generalises directly using the gradient and Hessian (<span class="quarto-unresolved-ref">?sec-gradients</span>): a point <span class="math inline">\(\theta^*\)</span> is a <strong>stationary point</strong> if <span class="math inline">\(\nabla f(\theta^*) = 0\)</span>, and it is a local minimum if, additionally, the Hessian <span class="math inline">\(H(\theta^*)\)</span> is positive definite (loosely: the function curves upward in every direction).</p>
-<p>Not all stationary points are minima:</p>
-<ul>
-<li>If <span class="math inline">\(H\)</span> is negative definite, the point is a local <strong>maximum</strong>.</li>
-<li>If <span class="math inline">\(H\)</span> has both positive and negative eigenvalues, the point is a <strong>saddle point</strong> — a minimum along some directions and a maximum along others.</li>
-</ul>
-<div id="c8b9a6e9" class="cell" data-execution_count="2">
+<p>The Hessian encodes the local <em>curvature</em> of <span class="math inline">\(f\)</span>. A stationary point <span class="math inline">\(\theta^*\)</span> is a local minimum if the <span class="math inline">\(H(\theta^*)\)</span> is positive definite (all its eigenvalues are strictly positive). Loosely speaking, this indicates the function curves upward in every direction around the stationary point. If <span class="math inline">\(H(\theta^*)\)</span> is negative definite (all eigenvalues are strictly negative), the point is a local maximum. If <span class="math inline">\(H(\theta^*)\)</span> has both positive and negative eigenvalues, the point is a saddle point — a minimum along some directions and a maximum along others.</p>
+<p>We visualise a saddle point (at the origin) in the following example of a simple non-convex function : <span class="math inline">\(f(x,y) = x^2 - y^2\)</span>.</p>
+<div id="d74a97cb" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -502,26 +436,26 @@ Cell <span class="ansi-green-fg">In[1], line 1</span>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="minimisation_files/figure-html/cell-3-output-1.png" width="402" height="396" class="figure-img"></p>
+<p><img src="minimisation_files/figure-html/cell-2-output-1.png" width="402" height="396" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Saddle points matter for neural network training in particular: loss landscapes for networks with many parameters (<a href="../ml/neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>) are high-dimensional and non-convex, and turn out to contain vastly more saddle points than actual local minima. Much of the practical difficulty of training large models is really about <em>escaping saddle points and flat regions</em> rather than avoiding local minima as such.</p>
-<section id="convexity" class="level3" data-number="13.2.1">
-<h3 data-number="13.2.1" class="anchored" data-anchor-id="convexity"><span class="header-section-number">13.2.1</span> Convexity</h3>
-<p>A function is <strong>convex</strong> if the line segment joining any two points on its graph lies on or above the graph. Convex functions are extremely well-behaved for optimisation: any local minimum is automatically the global minimum, and reliable convergence guarantees exist for gradient-based methods.</p>
-<p>The mean squared error loss for <em>linear</em> regression (<a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>) is convex in its parameters — this is why linear regression can be solved directly (indeed, in closed form, using the linear algebra of <a href="sim-eqn.html" class="quarto-xref"><span>Chapter 10</span></a>). Neural network loss surfaces, by contrast, are generally non-convex, which is precisely why training is iterative, sensitive to initialisation, and not guaranteed to find a global minimum.</p>
+<p>A function is <em>convex</em> if the line segment joining any two points on its graph lies on or above the graph. Convex functions are extremely well-behaved for optimisation: any local minimum is automatically the global minimum, and reliable convergence guarantees exist for gradient-based methods. However, typically we want to minimise functions which are <em>non-convex</em>, and may contain many local minima and saddle points.</p>
+<section id="minimisation-and-machine-learning" class="level3" data-number="13.1.1">
+<h3 data-number="13.1.1" class="anchored" data-anchor-id="minimisation-and-machine-learning"><span class="header-section-number">13.1.1</span> Minimisation and Machine Learning</h3>
+<p>The mean squared error loss for <em>linear</em> regression (<a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>) is convex in its parameters, which is why linear regression can be solved directly in closed form. Machine learning loss surfaces, by contrast, are generally non-convex. This is why training is iterative, sensitive to initialisation, and not guaranteed to find a global minimum. This is particularly true for neural networks, which are highly non-linear and have extremely high-dimensional parameter spaces. The resulting loss surfacescontain vastly more saddle points than actual local minima. Much of the practical difficulty of training large models is really about <em>escaping saddle points and flat regions</em> rather than avoiding local minima as such.</p>
 </section>
 </section>
-<section id="gradient-descent-formally" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="gradient-descent-formally"><span class="header-section-number">13.3</span> Gradient Descent, Formally</h2>
-<p>Gradient descent updates parameters by taking a step in the direction of steepest descent — the negative gradient (<span class="quarto-unresolved-ref">?sec-gradients</span>):</p>
+<section id="gradient-descent" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">13.2</span> Gradient Descent</h2>
+<p>Gradient descent is an iterative method for locating minima within a multi-dimensional surface <span class="math inline">\(f(\theta)\)</span>. From a (randomly chosen) starting point, <span class="math inline">\(\theta_0\)</span>, the method identifies a new point by taking a step in the direction of the negative gradient :</p>
 <p><span class="math display">\[
 \theta_{i+1} = \theta_i - \eta \, \nabla f(\theta_i)
 \]</span></p>
-<p>where <span class="math inline">\(\eta\)</span> is the <strong>learning rate</strong> (or step size). This is exactly the update rule already used, without derivation, in <a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a> and <a href="../ml/neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>. The justification is a direct consequence of the definition of the gradient: <span class="math inline">\(-\nabla f(\theta)\)</span> is, locally, the direction of steepest decrease of <span class="math inline">\(f\)</span>, so a small enough step in that direction is guaranteed to decrease <span class="math inline">\(f\)</span> (provided <span class="math inline">\(f\)</span> is smooth enough, and the step isn’t too large).</p>
-<div id="23287115" class="cell" data-execution_count="3">
+<p>where <span class="math inline">\(\eta\)</span> is the learning rate or step size. The gradient <span class="math inline">\(-\nabla f(\theta)\)</span> is, locally, the direction of steepest decrease of <span class="math inline">\(f\)</span>, so a small step in that direction will decrease <span class="math inline">\(f\)</span>, provided <span class="math inline">\(f\)</span> is smooth enough, and the step isn’t too large.</p>
+<p>In the example below, we locate the minimum in the function <span class="math inline">\(f(x,y)=(x-1)^2+5(y+2)\)</span> which has a true miminum at <span class="math inline">\((x=1, y=-2)\)</span>.</p>
+<div id="ce86f0a0" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(theta):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> theta</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span><span class="op">*</span>(y<span class="op">+</span><span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span></span>
@@ -551,19 +485,16 @@ Cell <span class="ansi-green-fg">In[1], line 1</span>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="minimisation_files/figure-html/cell-4-output-2.png" width="587" height="429" class="figure-img"></p>
+<p><img src="minimisation_files/figure-html/cell-3-output-2.png" width="587" height="429" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="choosing-the-learning-rate" class="level3" data-number="13.3.1">
-<h3 data-number="13.3.1" class="anchored" data-anchor-id="choosing-the-learning-rate"><span class="header-section-number">13.3.1</span> Choosing the Learning Rate</h3>
-<p>The learning rate controls a fundamental trade-off:</p>
-<ul>
-<li>Too <strong>small</strong>, and convergence is reliable but painfully slow.</li>
-<li>Too <strong>large</strong>, and the algorithm can overshoot the minimum, oscillate, or diverge entirely.</li>
-</ul>
-<div id="f8ddfb33" class="cell" data-execution_count="4">
+<section id="learning-rate" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="learning-rate"><span class="header-section-number">13.2.1</span> Learning Rate</h3>
+<p>The learning rate controls a fundamental trade-off. Too small and convergence is reliable but painfully slow. Too large, and the algorithm can overshoot the minimum, oscillate, or diverge entirely.</p>
+<p>Now we repeat the gradient descent example above with three different learning rates :</p>
+<div id="21c67e3c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> eta_test <span class="kw">in</span> [<span class="fl">0.01</span>, <span class="fl">0.08</span>, <span class="fl">0.21</span>]:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    theta <span class="op">=</span> np.array([<span class="op">-</span><span class="fl">3.</span>, <span class="fl">3.</span>])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">30</span>):</span>
@@ -575,27 +506,91 @@ eta=0.08  -&gt; theta after 30 steps = [ 0.97859878 -2.        ]
 eta=0.21  -&gt; theta after 30 steps = [ 0.99999968 85.24701134]</code></pre>
 </div>
 </div>
-<p>Notice how a learning rate that is too large causes the iterate to move <em>away</em> from the minimum rather than towards it. This single issue is the motivation for essentially all of the “adaptive learning rate” methods described in <a href="../ml/neural-networks.html#sec-adaptive-learning-rate" class="quarto-xref"><span>Section 18.3.6</span></a> (AdaGrad, Adam) — rather than fixing <span class="math inline">\(\eta\)</span> once and for all, they adjust it automatically, per-parameter, during training.</p>
-<p>A more classical alternative, not covered elsewhere in these notes, is <strong>line search</strong>: at each step, instead of committing to a fixed <span class="math inline">\(\eta\)</span>, a 1D search is performed along the gradient direction to find a good step size before moving on. This is more expensive per step, but requires far less manual tuning — a trade-off worth being aware of, even though stochastic and mini-batch methods (<a href="../ml/neural-networks.html#sec-sgd" class="quarto-xref"><span>Section 18.3.4</span></a>, <a href="../ml/neural-networks.html#sec-batch-gd" class="quarto-xref"><span>Section 18.3.5</span></a>) make full line search impractical for most modern ML training.</p>
+<p>Notice how a learning rate that is too large causes the iterate to move <em>away</em> from the minimum rather than towards it.</p>
+<p>This issue motivates adaptive learning rate approaches that are discussed in <a href="../ml/neural-networks.html#sec-adaptive-learning-rate" class="quarto-xref"><span>Section 18.3.6</span></a>. In these methods, the rate is adjusted automatically, per-parameter, during training.</p>
+<!-- A more classical alternative, not covered elsewhere in these notes, is **line search**: at each step, instead of committing to a fixed $\eta$, a 1D search is performed along the gradient direction to find a good step size before moving on. This is more expensive per step, but requires far less manual tuning — a trade-off worth being aware of, even though stochastic and mini-batch methods (@sec-sgd, @sec-batch-gd) make full line search impractical for most modern ML training.-->
 </section>
 </section>
-<section id="second-order-methods" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="second-order-methods"><span class="header-section-number">13.4</span> Second-Order Methods</h2>
-<p>Gradient descent uses only <em>first</em>-order information (the gradient). <strong>Newton’s method</strong> additionally uses the Hessian, and updates parameters using:</p>
+<section id="second-order-methods" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="second-order-methods"><span class="header-section-number">13.3</span> Second-Order Methods</h2>
+<p>Gradient descent uses only <em>first</em>-order information (the gradient). Newton’s method additionally uses the Hessian, and updates parameters using:</p>
 <p><span class="math display">\[
 \theta_{i+1} = \theta_i - H(\theta_i)^{-1} \nabla f(\theta_i)
 \]</span></p>
-<p>This can converge dramatically faster than gradient descent near a minimum, since it accounts for the local curvature of <span class="math inline">\(f\)</span> rather than just its slope. However, it has a fatal practical flaw for machine learning: computing and inverting the Hessian costs <span class="math inline">\(O(n^3)\)</span> operations for <span class="math inline">\(n\)</span> parameters (using the same LU/inversion machinery as <a href="sim-eqn.html" class="quarto-xref"><span>Chapter 10</span></a>). For a neural network with millions or billions of parameters, this is completely infeasible. This is the fundamental reason why gradient descent and its first-order variants (SGD, momentum, AdaGrad, Adam — <a href="../ml/neural-networks.html" class="quarto-xref"><span>Chapter 18</span></a>) dominate in deep learning, despite their slower convergence: they only ever require <span class="math inline">\(O(n)\)</span> storage and computation per step.</p>
-</section>
-<section id="constrained-optimisation" class="level2" data-number="13.5">
-<h2 data-number="13.5" class="anchored" data-anchor-id="constrained-optimisation"><span class="header-section-number">13.5</span> Constrained Optimisation</h2>
-<p>So far we’ve assumed <span class="math inline">\(\theta\)</span> is free to take any value. Sometimes, however, we want to minimise <span class="math inline">\(f(\theta)\)</span> subject to a constraint, <span class="math inline">\(g(\theta) = 0\)</span>. The standard approach is the method of <strong>Lagrange multipliers</strong>: introduce an auxiliary variable <span class="math inline">\(\lambda\)</span> and form the Lagrangian</p>
-<p><span class="math display">\[
-\mathcal{L}(\theta, \lambda) = f(\theta) + \lambda \, g(\theta)
-\]</span></p>
-<p>At a constrained optimum, the gradient of <span class="math inline">\(\mathcal{L}\)</span> with respect to <em>both</em> <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\lambda\)</span> must vanish. Geometrically, this condition says that at the constrained optimum, the gradient of <span class="math inline">\(f\)</span> is parallel to the gradient of the constraint <span class="math inline">\(g\)</span> — there is no direction you could move along the constraint surface that would still decrease <span class="math inline">\(f\)</span>.</p>
-<p>This is more than a mathematical curiosity for this course: regularisation (<a href="../ml/supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>) can be understood exactly as constrained optimisation. Minimising <span class="math inline">\(\text{MSE} + \lambda \sum |w_i|\)</span> (LASSO) or <span class="math inline">\(\text{MSE} + \lambda \sum w_i^2\)</span> (Ridge) is the Lagrangian form of the constrained problem “minimise MSE subject to the weights lying within some norm-ball” — the regularisation strength <span class="math inline">\(\lambda\)</span> plays exactly the role of the Lagrange multiplier above.</p>
+<p>This can converge dramatically faster than gradient descent near a minimum, since it accounts for the local curvature of <span class="math inline">\(f\)</span> rather than just its slope. However, it has a fatal practical flaw for most applicaiotns. Computing and inverting the Hessian costs <span class="math inline">\(O(n^3)\)</span> operations for <span class="math inline">\(n\)</span> parameters (using the LU/inversion method described in <a href="sim-eqn.html" class="quarto-xref"><span>Chapter 10</span></a>).</p>
+<p>In the context of machine learning, a deep neural network may have millions or billions of parameters, making such methods completely infeasible. For this reason, gradient descent and its first-order variants dominate in deep learning, despite their slower convergence, since they only ever require <span class="math inline">\(O(n)\)</span> storage and computation per step.</p>
 <!--
+## Constrained Optimisation
+
+So far we've assumed $\theta$ is free to take any value. Sometimes, however, we want to minimise $f(\theta)$ subject to a constraint, $g(\theta) = 0$. The standard approach is the method of **Lagrange multipliers**: introduce an auxiliary variable $\lambda$ and form the Lagrangian
+
+$$
+\mathcal{L}(\theta, \lambda) = f(\theta) + \lambda \, g(\theta)
+$$
+
+At a constrained optimum, the gradient of $\mathcal{L}$ with respect to *both* $\theta$ and $\lambda$ must vanish. Geometrically, this condition says that at the constrained optimum, the gradient of $f$ is parallel to the gradient of the constraint $g$ — there is no direction you could move along the constraint surface that would still decrease $f$.
+
+This is more than a mathematical curiosity for this course: regularisation (@sec-supervised-ml) can be understood exactly as constrained optimisation. Minimising $\text{MSE} + \lambda \sum |w_i|$ (LASSO) or $\text{MSE} + \lambda \sum w_i^2$ (Ridge) is the Lagrangian form of the constrained problem "minimise MSE subject to the weights lying within some norm-ball" — the regularisation strength $\lambda$ plays exactly the role of the Lagrange multiplier above.
+-->
+<!--
+## Multivariate calculus
+
+In this section, we will describe gradient descent, a simple and widely used method for minimisation.  In general, and especially in the case of minimising loss functions for machine learning, the function we need to minimise is a function of many variables. In order to understand gradient descent for multivariate functions, we will first need to introdue (or review) some underlying concepts in multivariate calculus.
+
+### Directional Derivative
+
+The rate of change of $f$ in an arbitrary direction $\hat{\mathbf{u}}$ (a unit vector) is given by the directional derivative :
+
+$$
+D_{\hat{\mathbf{u}}} f = \nabla f \cdot \hat{\mathbf{u}}
+$$
+
+This is maximised when $\hat{\mathbf{u}}$ points in the same direction as $\nabla f$.
+
+### The Jacobian
+
+
+
+### The Hessian
+
+In a similar way, 
+
+::: {#d5385966 .cell execution_count=4}
+``` {.python .cell-code}
+hess = sp.hessian(f, (x, y))
+print("Hessian :")
+sp.pprint(hess)
+```
+
+::: {.cell-output .cell-output-error}
+
+::: {.ansi-escaped-output}
+```{=html}
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[4], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> hess <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">sp</span><span style="color:rgb(98,98,98)">.</span>hessian(f, (x, y))
+<span class="ansi-green-fg ansi-bold">      2</span> <span style="color:rgb(0,135,0)">print</span>(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Hessian :</span><span style="color:rgb(175,0,0)">"</span>)
+<span class="ansi-green-fg ansi-bold">      3</span> sp<span style="color:rgb(98,98,98)">.</span>pprint(hess)
+
+<span class="ansi-red-fg">NameError</span>: name 'sp' is not defined</pre>
+```
+:::
+
+:::
+:::
+
+
+## The Shape of the Problem
+
+This generalises directly using the gradient and Hessian (@sec-gradients): a point $\theta^*$ is a **stationary point** if $\nabla f(\theta^*) = 0$, and it is a local minimum if, additionally, the Hessian $H(\theta^*)$ is positive definite (loosely: the function curves upward in every direction).
+
+Not all stationary points are minima:
+
+- If $H$ is negative definite, the point is a local **maximum**.
+- If $H$ has both positive and negative eigenvalues, the point is a **saddle point** — a minimum along some directions and a maximum along others.
+
+
 ## Partial Derivatives and the Gradient
 
 For a scalar function of several variables, $f(x_1, x_2, \ldots, x_n)$, the **partial derivative** $\partial f / \partial x_i$ measures the rate of change of $f$ as $x_i$ varies, holding all other variables fixed. Collecting all partial derivatives into a vector gives the **gradient**:
@@ -606,7 +601,7 @@ $$
 
 The gradient has an important geometric meaning: it points in the direction of steepest *increase* of $f$, and its magnitude gives the rate of increase in that direction. This is precisely why gradient *descent* (@sec-optimisation) moves in the direction of $-\nabla f$.
 
-::: {#6f128784 .cell execution_count=5}
+::: {#53c4cf76 .cell execution_count=5}
 ``` {.python .cell-code}
 import numpy as np
 import sympy as sp
