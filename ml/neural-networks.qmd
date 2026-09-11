@@ -58,7 +58,7 @@ For a network to be fully optimised for a given problem, the hyperparameters mus
 Deep learning is jargon which refers to the used of multiple 'hidden' layers.  These layers allow hierarchical feature extraction.  Any network which includes multiple hidden layers between the input and output may be referred to as deep learning.  Such networks are no ubiquitous.
 
 
-## Activation {#sec-activation}
+## Activation functions {#sec-activation}
 
 The choice of activation function is important. If the activation function is a linear function, then the neural network is reduced to linear regression, i.e. the output of the ANN is a linear function of the ANN inputs. To capture more sophisticated features, it is important that the activation function provides some non-linearity.
 
@@ -163,7 +163,7 @@ $$
 
 ## Training {#sec-training-nn}
 
-Neural networks can be used in both supervised and unsupervised learning scenarios. Here we will focus on supervised learning, where the network weights are optimised using a dedicated training sample.  This sample must contain "ground truth" information. Typically this sample is accompanied by a statistically separate "validation" sample, which can be used to check the performance of the network, but which is not used to train the weights.
+Neural networks can be used in both supervised and unsupervised learning scenarios. Here we will focus on supervised learning, where the network weights are optimised using a dedicated training sample.  This sample must contain "ground truth" information. Typically this sample is accompanied by a statistically separate "validation" sample, which is used to check the performance of the network, but which is not used to train the weights. Training is typically an iterative process, in which the loss is calculated using a given set of weights, before adjusting the weights and repeating the process until a minimum is found.
 
 ### Forward Pass {#sec-forward-pass}
 
@@ -173,15 +173,15 @@ In a feed-forward neural network, the input data is fed into the input layer, an
 
 Having computed the output of the network for a given set of weights, and the loss, we now want to iteratively update the weights to minimise the loss.  This will require computing the gradient of the loss with respect to the weights.  Backpropagation is an efficient method for computing this gradient, and is discussed in more detail in @sec-backpropagation.
 
-### Weights Update {#sec-weights-update}
+### Weight Optimisation {#sec-weights-update}
 
-Many methods exist for updating the weights.  The most commonly used are based on gradient descent, which was described in @sec-optimisation.  In simple gradient descent, a new set of weights is computed by taking a step in the direction of the negative gradient :
+Many methods exist for updating the weights.  The most commonly used are based on gradient descent, described in @sec-minimisation, in which a new set of weights is computed by taking a step in the direction of the negative gradient :
 
 $$
-\theta_{new} = \theta_{old} - \kappa \nabla L
+\theta_{new} = \theta_{old} - \eta \nabla L
 $$
 
-where $\theta$ refers to the full set of weights $\alpha$ and biases $\beta$, and the _learning rate_, $\kappa$ is a parameter which controls the length of the step, ie. how far the new set of weights is from the previous set.
+where $\theta$ refers to the full set of weights $\alpha$ and biases $\beta$, and the _learning rate_, $\eta$ is a parameter which controls the length of the step, ie. how far the new set of weights is from the previous set.
 
 Many NN training methods rely on a version of gradient descent. These methods differ in the data samples used to compute the gradient, and how the learning rate is chosen.  The most straightforward version of gradient descent involves computing the gradient using the full training sample, and then updating the weights.  However, with large datasets this becomes prohibitively computationally expensive, and more efficient methods are required.
 

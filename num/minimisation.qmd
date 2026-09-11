@@ -8,67 +8,26 @@ execute:
 
 Minimisation is the general problem of locating the minimum of a function.  We may equally be interested in the maximum of a function, but this can be converted to a minimisation problem by negating the function, so typically the problem is always framed as minimisation.
 
-More formally, we are interested in finding the value of $\theta$ that minimises $f(\theta)$.
-<!-- $$
+More formally, we are interested in finding the value of $\theta$ that minimises $f(\theta)$.  THis is sometimes written as:
+$$
 \theta^* = \arg\min_{\theta} f(\theta)
-$$-->
-
-In this unit, we are primarily interested in the case where $f$ is the loss function of a machine learning model, as discussed in @sec-supervised-ml.  However, minimisation is a fundamental problem in mathematics and physics.  We also encounter it in fitting functions to data, and in the maximum likelihood methods (where we minimise the negative log likelihood) discussed in @sec-mle.
-
-
-## Multivariate calculus
-
-In this section, we will describe gradient descent, a simple and widely used method for minimisation.  In general, and especially in the case of minimising loss functions for machine learning, the function we need to minimise is a function of many variables. In order to understand gradient descent for multivariate functions, we will first need to introdue (or review) some underlying concepts in multivariate calculus.
-
-### Directional Derivative
-
-The rate of change of $f$ in an arbitrary direction $\hat{\mathbf{u}}$ (a unit vector) is given by the directional derivative :
-
-$$
-D_{\hat{\mathbf{u}}} f = \nabla f \cdot \hat{\mathbf{u}}
 $$
 
-This is maximised when $\hat{\mathbf{u}}$ points in the same direction as $\nabla f$.
+In this unit, we are primarily interested in the case where $f$ is the loss function of a machine learning model, as discussed in @sec-supervised-ml.  However, minimisation is a fundamental problem in mathematics and physics.  We also encounter it in fitting functions to data, and in the maximum likelihood methods (where we minimise the negative log likelihood) discussed in @sec-stats-ml.
 
-### The Jacobian
+## Multi-dimensional minimisation
 
-The Jacobian is the generalisation of the derivative to functions of multiple variables.  It is a matrix containing the partial derivative of every output variable with respect to every input variable:
+You will be familiar with analytically finding minima in single valued functions.  We find stationary points by setting $f'(\theta)=0$ and identify minima by checking the second derivative $f''(\theta)$.
 
-$$
-J = \begin{pmatrix}
-\dfrac{\partial f_1}{\partial x_1} & \cdots & \dfrac{\partial f_1}{\partial x_n} \\
-\vdots & \ddots & \vdots \\
-\dfrac{\partial f_m}{\partial x_1} & \cdots & \dfrac{\partial f_m}{\partial x_n}
-\end{pmatrix}
-$$
-
-### The Hessian
-
-In a similar way, the Hessian is defined as the matrix of all second partial derivatives:
+Here we want to generalise to multi-dimensional functions.  WHile the general approach is the same, the addition of multiple dimensions introduces some new ideas and complications.  We will again identify stationary points by requiring the gradient $\nabla f(\theta) = 0$. In order to identify the nature of the stationary point, we need to compute the Hessian $H(x)$, defined as the matrix of all second partial derivatives:
 
 $$
 H_{ij} = \frac{\partial^2 f}{\partial x_i \, \partial x_j}
 $$
 
-The Hessian encodes the local *curvature* of $f$, and is important in minimisation since it will classify stationary points of the function (minima, maxima, saddle points).
+The Hessian encodes the local *curvature* of $f$. A stationary point $\theta^*$ is a local minimum if the $H(\theta^*)$ is positive definite (all its eigenvalues are strictly positive). Loosely speaking, this indicates the function curves upward in every direction around the stationary point.  If $H(\theta^*)$ is negative definite (all eigenvalues are strictly negative), the point is a local maximum.  If $H(\theta^*)$ has both positive and negative eigenvalues, the point is a saddle point — a minimum along some directions and a maximum along others. 
 
-<!--
-```{python}
-hess = sp.hessian(f, (x, y))
-print("Hessian :")
-sp.pprint(hess)
-```
--->
-
-
-## The Shape of the Problem
-
-For a function of a single variable, minimisation is something you likely already associate with setting $f'(\theta)=0$ and checking the sign of $f''(\theta)$. This generalises directly using the gradient and Hessian (@sec-gradients): a point $\theta^*$ is a **stationary point** if $\nabla f(\theta^*) = 0$, and it is a local minimum if, additionally, the Hessian $H(\theta^*)$ is positive definite (loosely: the function curves upward in every direction).
-
-Not all stationary points are minima:
-
-- If $H$ is negative definite, the point is a local **maximum**.
-- If $H$ has both positive and negative eigenvalues, the point is a **saddle point** — a minimum along some directions and a maximum along others.
+We visualise a saddle point (at the origin) in the following example of a simple non-convex function : $f(x,y) = x^2 - y^2$.
 
 ```{python}
 import numpy as np
@@ -87,23 +46,23 @@ ax.set_xlabel('x'); ax.set_ylabel('y'); ax.set_zlabel('f(x,y)')
 plt.show()
 ```
 
-Saddle points matter for neural network training in particular: loss landscapes for networks with many parameters (@sec-nn) are high-dimensional and non-convex, and turn out to contain vastly more saddle points than actual local minima. Much of the practical difficulty of training large models is really about *escaping saddle points and flat regions* rather than avoiding local minima as such.
+A function is *convex* if the line segment joining any two points on its graph lies on or above the graph. Convex functions are extremely well-behaved for optimisation: any local minimum is automatically the global minimum, and reliable convergence guarantees exist for gradient-based methods.  However, typically we want to minimise functions which are *non-convex*, and may contain many local minima and saddle points.
 
-### Convexity
+### Minimisation and Machine Learning
 
-A function is **convex** if the line segment joining any two points on its graph lies on or above the graph. Convex functions are extremely well-behaved for optimisation: any local minimum is automatically the global minimum, and reliable convergence guarantees exist for gradient-based methods.
+The mean squared error loss for *linear* regression (@sec-supervised-ml) is convex in its parameters, which is why linear regression can be solved directly in closed form. Machine learning loss surfaces, by contrast, are generally non-convex.  This is why training is iterative, sensitive to initialisation, and not guaranteed to find a global minimum. This is particularly true for neural networks, which are highly non-linear and have extremely high-dimensional parameter spaces.  The resulting loss surfacescontain vastly more saddle points than actual local minima.  Much of the practical difficulty of training large models is really about *escaping saddle points and flat regions* rather than avoiding local minima as such.
 
-The mean squared error loss for *linear* regression (@sec-supervised-ml) is convex in its parameters — this is why linear regression can be solved directly (indeed, in closed form, using the linear algebra of @sec-sim-eqn). Neural network loss surfaces, by contrast, are generally non-convex, which is precisely why training is iterative, sensitive to initialisation, and not guaranteed to find a global minimum.
+## Gradient Descent
 
-## Gradient Descent, Formally
-
-Gradient descent updates parameters by taking a step in the direction of steepest descent — the negative gradient (@sec-gradients):
+Gradient descent is an iterative method for locating minima within a multi-dimensional surface $f(\theta)$. From a (randomly chosen) starting point, $\theta_0$, the method identifies a new point by taking a step in the direction of the negative gradient :
 
 $$
 \theta_{i+1} = \theta_i - \eta \, \nabla f(\theta_i)
 $$
 
-where $\eta$ is the **learning rate** (or step size). This is exactly the update rule already used, without derivation, in @sec-supervised-ml and @sec-nn. The justification is a direct consequence of the definition of the gradient: $-\nabla f(\theta)$ is, locally, the direction of steepest decrease of $f$, so a small enough step in that direction is guaranteed to decrease $f$ (provided $f$ is smooth enough, and the step isn't too large).
+where $\eta$ is the learning rate or step size. The gradient $-\nabla f(\theta)$ is, locally, the direction of steepest decrease of $f$, so a small step in that direction will decrease $f$, provided $f$ is smooth enough, and the step isn't too large.
+
+In the example below, we locate the minimum in the function $f(x,y)=(x-1)^2+5(y+2)$ which has a true miminum at $(x=1, y=-2)$.
 
 ```{python}
 def f(theta):
@@ -131,12 +90,11 @@ plt.xlabel('x'); plt.ylabel('y'); plt.legend()
 plt.show()
 ```
 
-### Choosing the Learning Rate
+### Learning Rate
 
-The learning rate controls a fundamental trade-off:
+The learning rate controls a fundamental trade-off.  Too small and convergence is reliable but painfully slow. Too large, and the algorithm can overshoot the minimum, oscillate, or diverge entirely.
 
-- Too **small**, and convergence is reliable but painfully slow.
-- Too **large**, and the algorithm can overshoot the minimum, oscillate, or diverge entirely.
+Now we repeat the gradient descent example above with three different learning rates :
 
 ```{python}
 for eta_test in [0.01, 0.08, 0.21]:
@@ -146,20 +104,26 @@ for eta_test in [0.01, 0.08, 0.21]:
     print(f"eta={eta_test:<5} -> theta after 30 steps = {theta}")
 ```
 
-Notice how a learning rate that is too large causes the iterate to move *away* from the minimum rather than towards it. This single issue is the motivation for essentially all of the "adaptive learning rate" methods described in @sec-adaptive-learning-rate (AdaGrad, Adam) — rather than fixing $\eta$ once and for all, they adjust it automatically, per-parameter, during training.
+Notice how a learning rate that is too large causes the iterate to move *away* from the minimum rather than towards it.
 
-A more classical alternative, not covered elsewhere in these notes, is **line search**: at each step, instead of committing to a fixed $\eta$, a 1D search is performed along the gradient direction to find a good step size before moving on. This is more expensive per step, but requires far less manual tuning — a trade-off worth being aware of, even though stochastic and mini-batch methods (@sec-sgd, @sec-batch-gd) make full line search impractical for most modern ML training.
+This issue motivates adaptive learning rate approaches that are discussed in @sec-adaptive-learning-rate.  In these methods, the rate is adjusted automatically, per-parameter, during training.
+
+
+<!-- A more classical alternative, not covered elsewhere in these notes, is **line search**: at each step, instead of committing to a fixed $\eta$, a 1D search is performed along the gradient direction to find a good step size before moving on. This is more expensive per step, but requires far less manual tuning — a trade-off worth being aware of, even though stochastic and mini-batch methods (@sec-sgd, @sec-batch-gd) make full line search impractical for most modern ML training.-->
 
 ## Second-Order Methods
 
-Gradient descent uses only *first*-order information (the gradient). **Newton's method** additionally uses the Hessian, and updates parameters using:
+Gradient descent uses only *first*-order information (the gradient). Newton's method additionally uses the Hessian, and updates parameters using:
 
 $$
 \theta_{i+1} = \theta_i - H(\theta_i)^{-1} \nabla f(\theta_i)
 $$
 
-This can converge dramatically faster than gradient descent near a minimum, since it accounts for the local curvature of $f$ rather than just its slope. However, it has a fatal practical flaw for machine learning: computing and inverting the Hessian costs $O(n^3)$ operations for $n$ parameters (using the same LU/inversion machinery as @sec-sim-eqn). For a neural network with millions or billions of parameters, this is completely infeasible. This is the fundamental reason why gradient descent and its first-order variants (SGD, momentum, AdaGrad, Adam — @sec-nn) dominate in deep learning, despite their slower convergence: they only ever require $O(n)$ storage and computation per step.
+This can converge dramatically faster than gradient descent near a minimum, since it accounts for the local curvature of $f$ rather than just its slope. However, it has a fatal practical flaw for most applicaiotns.  Computing and inverting the Hessian costs $O(n^3)$ operations for $n$ parameters (using the LU/inversion method described in @sec-sim-eqn). 
 
+In the context of machine learning, a deep neural network may have millions or billions of parameters, making such methods completely infeasible. For this reason, gradient descent and its first-order variants dominate in deep learning, despite their slower convergence, since they only ever require $O(n)$ storage and computation per step.
+
+<!--
 ## Constrained Optimisation
 
 So far we've assumed $\theta$ is free to take any value. Sometimes, however, we want to minimise $f(\theta)$ subject to a constraint, $g(\theta) = 0$. The standard approach is the method of **Lagrange multipliers**: introduce an auxiliary variable $\lambda$ and form the Lagrangian
@@ -171,10 +135,49 @@ $$
 At a constrained optimum, the gradient of $\mathcal{L}$ with respect to *both* $\theta$ and $\lambda$ must vanish. Geometrically, this condition says that at the constrained optimum, the gradient of $f$ is parallel to the gradient of the constraint $g$ — there is no direction you could move along the constraint surface that would still decrease $f$.
 
 This is more than a mathematical curiosity for this course: regularisation (@sec-supervised-ml) can be understood exactly as constrained optimisation. Minimising $\text{MSE} + \lambda \sum |w_i|$ (LASSO) or $\text{MSE} + \lambda \sum w_i^2$ (Ridge) is the Lagrangian form of the constrained problem "minimise MSE subject to the weights lying within some norm-ball" — the regularisation strength $\lambda$ plays exactly the role of the Lagrange multiplier above.
-
-
+-->
 
 <!--
+## Multivariate calculus
+
+In this section, we will describe gradient descent, a simple and widely used method for minimisation.  In general, and especially in the case of minimising loss functions for machine learning, the function we need to minimise is a function of many variables. In order to understand gradient descent for multivariate functions, we will first need to introdue (or review) some underlying concepts in multivariate calculus.
+
+### Directional Derivative
+
+The rate of change of $f$ in an arbitrary direction $\hat{\mathbf{u}}$ (a unit vector) is given by the directional derivative :
+
+$$
+D_{\hat{\mathbf{u}}} f = \nabla f \cdot \hat{\mathbf{u}}
+$$
+
+This is maximised when $\hat{\mathbf{u}}$ points in the same direction as $\nabla f$.
+
+### The Jacobian
+
+
+
+### The Hessian
+
+In a similar way, 
+
+```{python}
+hess = sp.hessian(f, (x, y))
+print("Hessian :")
+sp.pprint(hess)
+```
+
+
+
+## The Shape of the Problem
+
+This generalises directly using the gradient and Hessian (@sec-gradients): a point $\theta^*$ is a **stationary point** if $\nabla f(\theta^*) = 0$, and it is a local minimum if, additionally, the Hessian $H(\theta^*)$ is positive definite (loosely: the function curves upward in every direction).
+
+Not all stationary points are minima:
+
+- If $H$ is negative definite, the point is a local **maximum**.
+- If $H$ has both positive and negative eigenvalues, the point is a **saddle point** — a minimum along some directions and a maximum along others.
+
+
 ## Partial Derivatives and the Gradient
 
 For a scalar function of several variables, $f(x_1, x_2, \ldots, x_n)$, the **partial derivative** $\partial f / \partial x_i$ measures the rate of change of $f$ as $x_i$ varies, holding all other variables fixed. Collecting all partial derivatives into a vector gives the **gradient**:

@@ -99,7 +99,17 @@ It should now be clear that we can compute all partial derivatives of the loss w
 
 ## Extension to multivariate functions
 
-In practice, our networks have multiple input and output variables, represented as vectors, and the weights become matrices. The chain rule still applies, but the derivatives become Jacobian matrices, and the "multiplication" becomes matrix multiplication. The multivariate chain rule states that the Jacobian of a function composition is the *matrix product* of the individual Jacobians:
+In practice, our networks have multiple input and output variables, represented as vectors, and the weights become matrices.  To extend the chain rule to multivariate functions, we require the Jacobian.  Given a general vector function of a vector, $\mathbf{f}(\mathbf{x})$, the Jacobian is defined as a matrix containing the partial derivative of every output variable with respect to every input variable:
+
+$$
+J = \begin{pmatrix}
+\dfrac{\partial f_1}{\partial x_1} & \cdots & \dfrac{\partial f_1}{\partial x_n} \\
+\vdots & \ddots & \vdots \\
+\dfrac{\partial f_m}{\partial x_1} & \cdots & \dfrac{\partial f_m}{\partial x_n}
+\end{pmatrix}
+$$
+
+In extending the chain rule to such functions, we replace partial derivatives with Jacobians.  The multivariate chain rule then states that the Jacobian of a function composition is the *matrix product* of the individual Jacobians:
 
 $$
 \frac{\partial \mathbf{z}}{\partial \mathbf{x}} = \frac{\partial \mathbf{z}}{\partial \mathbf{y}} \cdot \frac{\partial \mathbf{y}}{\partial \mathbf{x}}

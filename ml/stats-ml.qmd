@@ -117,85 +117,7 @@ MLE is a powerful method for extracting parameters of interest from data.  Consi
 
 The method can be further extended to include the effect of measurement uncertainty.  For example, the uncertainty on our invariant mass measurements can be modelled with a Crystal Ball function (essentially a Gaussian distribution with a power-law tail, which is often a better model for the detector response than a simple Gaussian).  The likelihood is then the convolution of the Breit-Wigner distribution with the Crystal Ball function.  Maximum likelihood estimation will again find the values of $m_H$ and $\Gamma_H$, but potentially also the parameters of the Crystal Ball function that describe the detector response.  Such parameters are known as *nuisance parameters*, since they are not of direct interest, but must be included in the model in order to properly model the distribution of data.
 
-### MLE Example
-
-A more simple example is estimation of the decay constant $\lambda$ from a small sample of radioactive decay times.  In this case the probability distribution for the data is an exponential function, $P(x|\lambda) = \lambda e^{-\lambda x}$.  Naively, $\lambda$ can be found from the reciprocal of the mean observed decay time, and this will work reasonably well for large samples. However, this is a *biased* estimator of $\lambda$, which becomes particularly important with small sample size. Maximum likelihood estimation can be used to properly account for the asymmetric uncertainties that arise in this case as shown in the example below.
-
-```{python}
-import numpy as np
-import scipy.optimize as opt
-import matplotlib.pyplot as plt
-
-rng = np.random.default_rng(42)
-
-# ---- 1. Generate synthetic data ----
-tau_true = 5.0
-N_events = 150          # deliberately low statistics, to expose the problem
-decay_times = rng.exponential(scale=tau_true, size=N_events)
-
-# bin into a histogram, as a real detector would record counts per time bin
-bin_edges = np.linspace(0, 30, 16)
-bin_centres = 0.5 * (bin_edges[:-1] + bin_edges[1:])
-counts, _ = np.histogram(decay_times, bins=bin_edges)
-
-print("Bin counts :", counts)
-
-# ---- 2. The naive (statistically incorrect) approach ----
-# log(counts) + ordinary least squares: undefined for zero-count bins,
-# and implicitly assumes Gaussian errors on the counts (poor at low N)
-mask = counts > 0
-log_counts = np.log(counts[mask])
-t_masked = bin_centres[mask]
-
-design = np.vstack([t_masked, np.ones_like(t_masked)]).T
-slope, intercept = np.linalg.lstsq(design, log_counts, rcond=None)[0]
-tau_naive = -1 / slope
-print(f"\nNaive log-linear fit : tau = {tau_naive:.2f}  "
-      f"({np.sum(~mask)} of {len(counts)} bins discarded)")
-
-# ---- 3. Correct approach: Poisson maximum likelihood ----
-def expected_counts(params, edges):
-    """Expected count per bin: exponential decay law integrated over the bin."""
-    A, tau = params
-    lo, hi = edges[:-1], edges[1:]
-    return A * (np.exp(-lo/tau) - np.exp(-hi/tau))
-
-def neg_log_likelihood(params, counts, edges):
-    mu = np.clip(expected_counts(params, edges), 1e-10, None)  # guard log(0)
-    # Poisson log-likelihood; the count! normalisation is dropped since it
-    # doesn't depend on the fit parameters
-    return np.sum(mu - counts * np.log(mu))
-
-result = opt.minimize(
-    neg_log_likelihood, x0=[N_events, 3.0],
-    args=(counts, bin_edges), method='Nelder-Mead'
-)
-A_mle, tau_mle = result.x
-print(f"Poisson MLE fit       : tau = {tau_mle:.2f}")
-
-# ---- 4. Gold standard: unbinned MLE, using every decay time individually ----
-# for an exponential distribution the MLE of the mean lifetime has a simple
-# closed form: it is just the sample mean of the (unbinned) decay times
-tau_unbinned_mle = np.mean(decay_times)
-print(f"Unbinned MLE (exact)  : tau = {tau_unbinned_mle:.2f}")
-print(f"True value             : tau = {tau_true:.2f}")
-
-# ---- 5. Plot ----
-t_fine = np.linspace(0, 30, 200)
-bin_width = bin_edges[1] - bin_edges[0]
-naive_smooth = np.exp(intercept) * np.exp(-t_fine/tau_naive)
-mle_smooth = (A_mle/tau_mle) * bin_width * np.exp(-t_fine/tau_mle)
-
-plt.figure(figsize=(7,5))
-plt.bar(bin_centres, counts, width=bin_width*0.9, alpha=0.4, label='Observed counts')
-plt.plot(t_fine, naive_smooth, 'r--', label=f'Naive log-linear fit (tau={tau_naive:.2f})')
-plt.plot(t_fine, mle_smooth, 'g-', label=f'Poisson MLE fit (tau={tau_mle:.2f})')
-plt.xlabel('Decay time')
-plt.ylabel('Counts per bin')
-plt.legend()
-plt.title('Naive least-squares vs Poisson MLE, low-count exponential decay')
-plt.show()
-```
+At the end of this chapter, we present a very simple example of an MLE fit to an exponential distribution.  This illustrates both how MLE can be implemented in Python, as well as the importance of understanding the correct error distribution for the data.
 
 ## MLE and Machine Learning
 
@@ -245,3 +167,79 @@ $$
 $$
 
 This is identical (within a multiplicative factor, which doesn't affect the location of the minimum)to the Binary Cross-Entropy loss given in @sec-supervised-ml. Similarly to above, we interpret the use of BCE loss as an implicit assumption that uncertainties are Bernoulli-distributed.
+
+
+## Simple MLE Example
+
+A simple example is estimation of the decay constant $\lambda$ from a small sample of radioactive decay times.  In this case the probability distribution for the data is an exponential function, $P(x|\lambda) = \lambda e^{-\lambda x}$.  Performaing a least squares fit to the logarithm of the data is a common approach, but this is statistically incorrect since it implicitly assumes Gaussian errors on the counts, which is not valid for low-count data.  These can be accounted for correctly using a Poisson likelihood, which is maximised to find the MLE of $\lambda$.  The example below compares the naive least-squares approach to the correct Poisson MLE, and also shows that an unbinned MLE gives the same result.  (In this case, the unbinned MLE is exact and trivial - note that this is not generally true!)
+
+```{python}
+import numpy as np
+import scipy.optimize as opt
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(42)
+
+# generate some fake data
+tau_true = 5.0
+N_events = 150
+decay_times = rng.exponential(scale=tau_true, size=N_events)
+
+# histogram the fake data, as we would in a real experiment
+bin_edges = np.linspace(0, 30, 16)
+bin_centres = 0.5 * (bin_edges[:-1] + bin_edges[1:])
+counts, _ = np.histogram(decay_times, bins=bin_edges)
+
+
+# naive least-squares fit to log(counts)
+mask = counts > 0
+log_counts = np.log(counts[mask])
+t_masked = bin_centres[mask]
+
+design = np.vstack([t_masked, np.ones_like(t_masked)]).T
+slope, intercept = np.linalg.lstsq(design, log_counts, rcond=None)[0]
+tau_naive = -1 / slope
+print(f"\nNaive log-linear fit : tau = {tau_naive:.2f}  "
+      f"({np.sum(~mask)} of {len(counts)} bins discarded)")
+
+# Poisson maximum likelihood estimation
+def expected_counts(params, edges):
+    """Expected count per bin: exponential decay law integrated over the bin."""
+    A, tau = params
+    lo, hi = edges[:-1], edges[1:]
+    return A * (np.exp(-lo/tau) - np.exp(-hi/tau))
+
+def neg_log_likelihood(params, counts, edges):
+    mu = np.clip(expected_counts(params, edges), 1e-10, None)  # guard log(0)
+    # Poisson log-likelihood; the count! normalisation is dropped since it
+    # doesn't depend on the fit parameters
+    return np.sum(mu - counts * np.log(mu))
+
+result = opt.minimize(
+    neg_log_likelihood, x0=[N_events, 3.0],
+    args=(counts, bin_edges), method='Nelder-Mead'
+)
+A_mle, tau_mle = result.x
+print(f"Poisson MLE fit       : tau = {tau_mle:.2f}")
+
+# unbinned MLE - trivial in this case, since the MLE of the exponential distribution is just the mean of the sample
+tau_unbinned_mle = np.mean(decay_times)
+print(f"Unbinned MLE (exact)  : tau = {tau_unbinned_mle:.2f}")
+print(f"True value            : tau = {tau_true:.2f}")
+
+# plot this histogram, both fits, and the true distribution
+t_fine = np.linspace(0, 30, 200)
+bin_width = bin_edges[1] - bin_edges[0]
+naive_smooth = np.exp(intercept) * np.exp(-t_fine/tau_naive)
+mle_smooth = (A_mle/tau_mle) * bin_width * np.exp(-t_fine/tau_mle)
+
+plt.figure(figsize=(7,5))
+plt.bar(bin_centres, counts, width=bin_width*0.9, alpha=0.4, label='Observed counts')
+plt.plot(t_fine, naive_smooth, 'r--', label=f'Naive log-linear fit (tau={tau_naive:.2f})')
+plt.plot(t_fine, mle_smooth, 'g-', label=f'Poisson MLE fit (tau={tau_mle:.2f})')
+plt.xlabel('Decay time')
+plt.ylabel('Counts per bin')
+plt.legend()
+plt.title('Naive least-squares vs Poisson MLE, low-count exponential decay')
+plt.show()
+```
