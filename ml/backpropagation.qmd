@@ -6,7 +6,7 @@ execute:
 
 # Backpropagation {@sec-backpropagation}
 
-In this section, we will explore backpropagation in more depth.  This method is used to compute the gradient of a neural network's loss function with respect to its parameters, which allows us to use gradient descent (@sec-optimisation) to minimise the loss function.
+In this section, we will explore backpropagation in more depth.  This method is used to compute the gradient of a neural network's loss function with respect to its parameters, which allows us to use gradient descent (@sec-minimisation) to minimise the loss function.
 
 ## Simple example
 
