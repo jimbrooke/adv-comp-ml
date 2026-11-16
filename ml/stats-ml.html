@@ -443,7 +443,7 @@ $$
 \text{Var}(\hat{\theta}) = \mathbb{E}\left[(\hat{\theta} - \mathbb{E}[\hat\theta])^2\right]
 $$
 
-::: {#9bbba217 .cell execution_count=1}
+::: {#90c03858 .cell execution_count=1}
 ``` {.python .cell-code}
 import numpy as np
 rng = np.random.default_rng(1)
@@ -554,7 +554,7 @@ P(y_i=0) = 1 - \hat{P}_i, \quad P(y_i=1) = \hat{P}_i
 <section id="simple-mle-example" class="level2" data-number="17.4">
 <h2 data-number="17.4" class="anchored" data-anchor-id="simple-mle-example"><span class="header-section-number">17.4</span> Simple MLE Example</h2>
 <p>A simple example is estimation of the decay constant <span class="math inline">\(\lambda\)</span> from a small sample of radioactive decay times. In this case the probability distribution for the data is an exponential function, <span class="math inline">\(P(x|\lambda) = \lambda e^{-\lambda x}\)</span>. Performaing a least squares fit to the logarithm of the data is a common approach, but this is statistically incorrect since it implicitly assumes Gaussian errors on the counts, which is not valid for low-count data. These can be accounted for correctly using a Poisson likelihood, which is maximised to find the MLE of <span class="math inline">\(\lambda\)</span>. The example below compares the naive least-squares approach to the correct Poisson MLE, and also shows that an unbinned MLE gives the same result. (In this case, the unbinned MLE is exact and trivial - note that this is not generally true!)</p>
-<div id="a7af4226" class="cell" data-execution_count="2">
+<div id="c0abdbbc" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.optimize <span class="im">as</span> opt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
