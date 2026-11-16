@@ -419,7 +419,7 @@ H_{ij} = \frac{\partial^2 f}{\partial x_i \, \partial x_j}
 \]</span></p>
 <p>The Hessian encodes the local <em>curvature</em> of <span class="math inline">\(f\)</span>. A stationary point <span class="math inline">\(\theta^*\)</span> is a local minimum if the <span class="math inline">\(H(\theta^*)\)</span> is positive definite (all its eigenvalues are strictly positive). Loosely speaking, this indicates the function curves upward in every direction around the stationary point. If <span class="math inline">\(H(\theta^*)\)</span> is negative definite (all eigenvalues are strictly negative), the point is a local maximum. If <span class="math inline">\(H(\theta^*)\)</span> has both positive and negative eigenvalues, the point is a saddle point — a minimum along some directions and a maximum along others.</p>
 <p>We visualise a saddle point (at the origin) in the following example of a simple non-convex function : <span class="math inline">\(f(x,y) = x^2 - y^2\)</span>.</p>
-<div id="abbbf427" class="cell" data-execution_count="1">
+<div id="a7475c2f" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -456,7 +456,7 @@ H_{ij} = \frac{\partial^2 f}{\partial x_i \, \partial x_j}
 \]</span></p>
 <p>where <span class="math inline">\(\eta\)</span> is the learning rate or step size. The gradient <span class="math inline">\(-\nabla f(\theta)\)</span> is, locally, the direction of steepest decrease of <span class="math inline">\(f\)</span>, so a small step in that direction will decrease <span class="math inline">\(f\)</span>, provided <span class="math inline">\(f\)</span> is smooth enough, and the step isn’t too large.</p>
 <p>In the example below, we locate the minimum in the function <span class="math inline">\(f(x,y)=(x-1)^2+5(y+2)\)</span> which has a true miminum at <span class="math inline">\((x=1, y=-2)\)</span>.</p>
-<div id="d254e8a7" class="cell" data-execution_count="2">
+<div id="f8f3e156" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(theta):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> theta</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span><span class="op">*</span>(y<span class="op">+</span><span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span></span>
@@ -495,7 +495,7 @@ H_{ij} = \frac{\partial^2 f}{\partial x_i \, \partial x_j}
 <h3 data-number="13.2.1" class="anchored" data-anchor-id="learning-rate"><span class="header-section-number">13.2.1</span> Learning Rate</h3>
 <p>The learning rate controls a fundamental trade-off. Too small and convergence is reliable but painfully slow. Too large, and the algorithm can overshoot the minimum, oscillate, or diverge entirely.</p>
 <p>Now we repeat the gradient descent example above with three different learning rates :</p>
-<div id="e7f1d0a6" class="cell" data-execution_count="3">
+<div id="5fa45fe2" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> eta_test <span class="kw">in</span> [<span class="fl">0.01</span>, <span class="fl">0.08</span>, <span class="fl">0.21</span>]:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    theta <span class="op">=</span> np.array([<span class="op">-</span><span class="fl">3.</span>, <span class="fl">3.</span>])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">30</span>):</span>
@@ -556,7 +556,7 @@ This is maximised when $\hat{\mathbf{u}}$ points in the same direction as $\nabl
 
 In a similar way, 
 
-::: {#b6b5ce49 .cell execution_count=4}
+::: {#2652ee0d .cell execution_count=4}
 ``` {.python .cell-code}
 hess = sp.hessian(f, (x, y))
 print("Hessian :")
@@ -602,7 +602,7 @@ $$
 
 The gradient has an important geometric meaning: it points in the direction of steepest *increase* of $f$, and its magnitude gives the rate of increase in that direction. This is precisely why gradient *descent* (@sec-optimisation) moves in the direction of $-\nabla f$.
 
-::: {#101d505d .cell execution_count=5}
+::: {#e10bf42f .cell execution_count=5}
 ``` {.python .cell-code}
 import numpy as np
 import sympy as sp
