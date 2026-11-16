@@ -29,8 +29,8 @@ book:
       chapters:
         - ml/intro-ml.qmd
         - ml/supervised-ml.qmd
-        - ml/stats-ml.qmd
         - ml/unsupervised-ml.qmd
+        - ml/stats-ml.qmd
         - ml/neural-networks.qmd
         - ml/backpropagation.qmd
         - ml/cnn.qmd

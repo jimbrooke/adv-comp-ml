@@ -12,6 +12,6 @@ These notes assume you have studied computational physics up to 2nd year (Level 
    * PHYS20035 - Computational Physics and Data Science
    * SCIF20002 - Programming and Data Analysis for Scientists
    
-This is a Quarto book.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+
+[^1]: This book was produced with Quarto. To learn more visit <https://quarto.org/docs/books>.
