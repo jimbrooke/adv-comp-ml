@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>16&nbsp; ML and Statistics – Advanced Computational Physics &amp; Machine Learning</title>
+<title>17&nbsp; ML and Statistics – Advanced Computational Physics &amp; Machine Learning</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,18 +71,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../ml/unsupervised-ml.html" rel="next">
-<link href="../ml/supervised-ml.html" rel="prev">
+<link href="../ml/neural-networks.html" rel="next">
+<link href="../ml/unsupervised-ml.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e49fe94e7c8471cb6eac0ecf78abda4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-831de61abd8f6376192d29be75f4dc11.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -143,17 +144,17 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/stats-ml.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ML and Statistics</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/stats-ml.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ML and Statistics</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -164,7 +165,7 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Advanced Computational Physics &amp; Machine Learning</a> 
@@ -192,12 +193,12 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../prog/programming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Programming</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Programming</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section: Programming">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../prog/basics.html" class="sidebar-item-text sidebar-link">
@@ -245,12 +246,12 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../num/numeric.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Numerical Methods</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Numerical Methods</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section: Numerical Methods">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../num/matrix.html" class="sidebar-item-text sidebar-link">
@@ -286,12 +287,12 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../ml/ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Machine Learning</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Machine Learning</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section: Machine Learning">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ml/intro-ml.html" class="sidebar-item-text sidebar-link">
@@ -306,14 +307,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/stats-ml.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ML and Statistics</span></span></a>
+  <a href="../ml/unsupervised-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ml/unsupervised-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></span></a>
+  <a href="../ml/stats-ml.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ML and Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -366,30 +367,30 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#likelihood" id="toc-likelihood" class="nav-link active" data-scroll-target="#likelihood"><span class="header-section-number">16.1</span> Likelihood</a></li>
-  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation"><span class="header-section-number">16.2</span> Maximum Likelihood Estimation</a>
+  <li><a href="#likelihood" id="toc-likelihood" class="nav-link active" data-scroll-target="#likelihood"><span class="header-section-number">17.1</span> Likelihood</a></li>
+  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation"><span class="header-section-number">17.2</span> Maximum Likelihood Estimation</a>
   <ul class="collapse">
-  <li><a href="#mle-in-practice" id="toc-mle-in-practice" class="nav-link" data-scroll-target="#mle-in-practice"><span class="header-section-number">16.2.1</span> MLE in Practice</a></li>
+  <li><a href="#mle-in-practice" id="toc-mle-in-practice" class="nav-link" data-scroll-target="#mle-in-practice"><span class="header-section-number">17.2.1</span> MLE in Practice</a></li>
   </ul></li>
-  <li><a href="#mle-and-machine-learning" id="toc-mle-and-machine-learning" class="nav-link" data-scroll-target="#mle-and-machine-learning"><span class="header-section-number">16.3</span> MLE and Machine Learning</a>
+  <li><a href="#mle-and-machine-learning" id="toc-mle-and-machine-learning" class="nav-link" data-scroll-target="#mle-and-machine-learning"><span class="header-section-number">17.3</span> MLE and Machine Learning</a>
   <ul class="collapse">
-  <li><a href="#mean-squared-error" id="toc-mean-squared-error" class="nav-link" data-scroll-target="#mean-squared-error"><span class="header-section-number">16.3.1</span> Mean Squared Error</a></li>
-  <li><a href="#binary-cross-entropy" id="toc-binary-cross-entropy" class="nav-link" data-scroll-target="#binary-cross-entropy"><span class="header-section-number">16.3.2</span> Binary Cross-Entropy</a></li>
+  <li><a href="#mean-squared-error" id="toc-mean-squared-error" class="nav-link" data-scroll-target="#mean-squared-error"><span class="header-section-number">17.3.1</span> Mean Squared Error</a></li>
+  <li><a href="#binary-cross-entropy" id="toc-binary-cross-entropy" class="nav-link" data-scroll-target="#binary-cross-entropy"><span class="header-section-number">17.3.2</span> Binary Cross-Entropy</a></li>
   </ul></li>
-  <li><a href="#simple-mle-example" id="toc-simple-mle-example" class="nav-link" data-scroll-target="#simple-mle-example"><span class="header-section-number">16.4</span> Simple MLE Example</a></li>
+  <li><a href="#simple-mle-example" id="toc-simple-mle-example" class="nav-link" data-scroll-target="#simple-mle-example"><span class="header-section-number">17.4</span> Simple MLE Example</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/stats-ml.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ML and Statistics</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ml/ml.html">Machine Learning</a></li><li class="breadcrumb-item"><a href="../ml/stats-ml.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ML and Statistics</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-stats-ml" class="quarto-section-identifier"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ML and Statistics</span></span></h1>
+<h1 class="title"><span id="sec-stats-ml" class="quarto-section-identifier"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ML and Statistics</span></span></h1>
 </div>
 
 
@@ -442,7 +443,7 @@ $$
 \text{Var}(\hat{\theta}) = \mathbb{E}\left[(\hat{\theta} - \mathbb{E}[\hat\theta])^2\right]
 $$
 
-::: {#2dd12fea .cell execution_count=1}
+::: {#9bbba217 .cell execution_count=1}
 ``` {.python .cell-code}
 import numpy as np
 rng = np.random.default_rng(1)
@@ -480,8 +481,8 @@ $$
 
 This is worth comparing directly to the bias–variance tradeoff of @sec-overfitting: an **underfit** model is analogous to a high-bias estimator (systematically wrong, but consistent across different training sets), while an **overfit** model is analogous to a high-variance estimator (correct on average, but wildly sensitive to exactly which training data it saw). The two "bias–variance tradeoffs" you'll meet in this unit — one for statistical estimators, one for ML models — are, in fact, the *same* tradeoff, since fitting a model is itself just estimating parameters from a finite random sample of data.
 -->
-<section id="likelihood" class="level2" data-number="16.1">
-<h2 data-number="16.1" class="anchored" data-anchor-id="likelihood"><span class="header-section-number">16.1</span> Likelihood</h2>
+<section id="likelihood" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="likelihood"><span class="header-section-number">17.1</span> Likelihood</h2>
 <p>You will be familiar with the concept of a probability distribution, <span class="math inline">\(\mathcal{P}(x)\)</span>, which describes the probability of observing a particular value, or outcome, <span class="math inline">\(x\)</span>. Frequently such a distribution is characterised by a set of parameters, <span class="math inline">\(\theta\)</span>, which describe the shape of the distribution. For example, a Gaussian distribution is characterised by its mean and variance, <span class="math inline">\(\theta = (\mu, \sigma^2)\)</span>. We can write this <span class="math inline">\(P(x \mid \theta)\)</span>, which is the probability of observing <span class="math inline">\(x\)</span> given a particular choice of parameters <span class="math inline">\(\theta\)</span>.</p>
 <p>The likelihood is a related concept, which describes how likely a particular set of parameters is, given some observed data. It is defined as the probability of observing the data, <span class="math inline">\(\mathcal{D} = \{x_1, x_2, \ldots, x_N\}\)</span>, as a function of the parameters <span class="math inline">\(\theta\)</span> :</p>
 <p><span class="math display">\[
@@ -493,8 +494,8 @@ This is worth comparing directly to the bias–variance tradeoff of @sec-overfit
 \mathcal{L}(\theta) = \prod_{i=1}^N P(x_i \mid \theta)
 \]</span></p>
 </section>
-<section id="maximum-likelihood-estimation" class="level2" data-number="16.2">
-<h2 data-number="16.2" class="anchored" data-anchor-id="maximum-likelihood-estimation"><span class="header-section-number">16.2</span> Maximum Likelihood Estimation</h2>
+<section id="maximum-likelihood-estimation" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="maximum-likelihood-estimation"><span class="header-section-number">17.2</span> Maximum Likelihood Estimation</h2>
 <p>Maximum likelihood estimation is the principle of finding the parameters <span class="math inline">\(\theta\)</span> that make the observed data as probable as possible:</p>
 <p><span class="math display">\[
 \hat{\theta}_{\text{MLE}} = \arg\max_\theta \mathcal{L}(\theta)
@@ -508,18 +509,18 @@ This is worth comparing directly to the bias–variance tradeoff of @sec-overfit
 \hat{\theta}_{\text{MLE}} = \arg\min_\theta \left[ -\sum_{i=1}^N \log P(x_i \mid \theta) \right]
 \]</span></p>
 <p>Any suitable numerical optimisation method can be used to find the MLE, including gradient descent (<a href="../num/minimisation.html" class="quarto-xref"><span>Chapter 13</span></a>) and its variants.</p>
-<section id="mle-in-practice" class="level3" data-number="16.2.1">
-<h3 data-number="16.2.1" class="anchored" data-anchor-id="mle-in-practice"><span class="header-section-number">16.2.1</span> MLE in Practice</h3>
+<section id="mle-in-practice" class="level3" data-number="17.2.1">
+<h3 data-number="17.2.1" class="anchored" data-anchor-id="mle-in-practice"><span class="header-section-number">17.2.1</span> MLE in Practice</h3>
 <p>MLE is a powerful method for extracting parameters of interest from data. Consider measuring the mass of the Higgs boson at the Large Hadron Collider, where the data comprises invariant mass measurements taken from a sample of collision events. The probability distribution for such data can be described by a Breit-Wigner distribution, characterised by two parameters: the mass of the Higgs boson, <span class="math inline">\(m_H\)</span>, and its decay width, <span class="math inline">\(\Gamma_H\)</span>. In order to measure these parameters, we construct the likelihood of observing the data given a particular choice of these parameters, and then find the values of <span class="math inline">\(m_H\)</span> and <span class="math inline">\(\Gamma_H\)</span> that maximise this likelihood.</p>
 <p>The method can be further extended to include the effect of measurement uncertainty. For example, the uncertainty on our invariant mass measurements can be modelled with a Crystal Ball function (essentially a Gaussian distribution with a power-law tail, which is often a better model for the detector response than a simple Gaussian). The likelihood is then the convolution of the Breit-Wigner distribution with the Crystal Ball function. Maximum likelihood estimation will again find the values of <span class="math inline">\(m_H\)</span> and <span class="math inline">\(\Gamma_H\)</span>, but potentially also the parameters of the Crystal Ball function that describe the detector response. Such parameters are known as <em>nuisance parameters</em>, since they are not of direct interest, but must be included in the model in order to properly model the distribution of data.</p>
 <p>At the end of this chapter, we present a very simple example of an MLE fit to an exponential distribution. This illustrates both how MLE can be implemented in Python, as well as the importance of understanding the correct error distribution for the data.</p>
 </section>
 </section>
-<section id="mle-and-machine-learning" class="level2" data-number="16.3">
-<h2 data-number="16.3" class="anchored" data-anchor-id="mle-and-machine-learning"><span class="header-section-number">16.3</span> MLE and Machine Learning</h2>
+<section id="mle-and-machine-learning" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="mle-and-machine-learning"><span class="header-section-number">17.3</span> MLE and Machine Learning</h2>
 <p>MLE is closely related to the loss functions used in machine learning. We can use MLE to derive the loss functions used in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>, and hence justify their use from a statistical perspective.</p>
-<section id="mean-squared-error" class="level3" data-number="16.3.1">
-<h3 data-number="16.3.1" class="anchored" data-anchor-id="mean-squared-error"><span class="header-section-number">16.3.1</span> Mean Squared Error</h3>
+<section id="mean-squared-error" class="level3" data-number="17.3.1">
+<h3 data-number="17.3.1" class="anchored" data-anchor-id="mean-squared-error"><span class="header-section-number">17.3.1</span> Mean Squared Error</h3>
 <p>Suppose we have an underlying model <span class="math inline">\(\hat{y} = f(\theta, x)\)</span> that describes our data <span class="math inline">\(x,y\)</span> in terms of some parameters <span class="math inline">\(\theta\)</span>. Now we assume that the observed data is the model’s prediction plus Gaussian noise :</p>
 <p><span class="math display">\[
 y_i = f(\theta, x_i) + \varepsilon_i
@@ -536,8 +537,8 @@ P(\varepsilon_i) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{\vare
 \]</span></p>
 <p>In other words, minimising the MSE loss is equivalent to maximising the likelihood of observing the data under a Gaussian noise model. Using MSE as a loss function is an implicity assumption that errors are Gaussian-distributed, whether or not that assumption is stated explicitly.</p>
 </section>
-<section id="binary-cross-entropy" class="level3" data-number="16.3.2">
-<h3 data-number="16.3.2" class="anchored" data-anchor-id="binary-cross-entropy"><span class="header-section-number">16.3.2</span> Binary Cross-Entropy</h3>
+<section id="binary-cross-entropy" class="level3" data-number="17.3.2">
+<h3 data-number="17.3.2" class="anchored" data-anchor-id="binary-cross-entropy"><span class="header-section-number">17.3.2</span> Binary Cross-Entropy</h3>
 <p>As discussed in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>, the Binary Cross-Entropy (BCE) loss function is commonly used for binary classification problems. Here our targets are binary, <span class="math inline">\(y_i \in \{0, 1\}\)</span>, and our model outputs a <em>probability</em> <span class="math inline">\(\hat{P}_i = f(\theta, x_i) \in [0, 1]\)</span> of observing <span class="math inline">\(y_i = 1\)</span>.</p>
 <p>We can justify the choice of loss function from a statistical perspective, by assuming that the observed data is drawn from a Bernoulli distribution. The Bernoulli distribution is a special case of the Binomial distribution, for a single trial, <span class="math inline">\(N=1\)</span>. It has the probability distribution :</p>
 <p><span class="math display">\[
@@ -550,10 +551,10 @@ P(y_i=0) = 1 - \hat{P}_i, \quad P(y_i=1) = \hat{P}_i
 <p>This is identical (within a multiplicative factor, which doesn’t affect the location of the minimum)to the Binary Cross-Entropy loss given in <a href="supervised-ml.html" class="quarto-xref"><span>Chapter 15</span></a>. Similarly to above, we interpret the use of BCE loss as an implicit assumption that uncertainties are Bernoulli-distributed.</p>
 </section>
 </section>
-<section id="simple-mle-example" class="level2" data-number="16.4">
-<h2 data-number="16.4" class="anchored" data-anchor-id="simple-mle-example"><span class="header-section-number">16.4</span> Simple MLE Example</h2>
+<section id="simple-mle-example" class="level2" data-number="17.4">
+<h2 data-number="17.4" class="anchored" data-anchor-id="simple-mle-example"><span class="header-section-number">17.4</span> Simple MLE Example</h2>
 <p>A simple example is estimation of the decay constant <span class="math inline">\(\lambda\)</span> from a small sample of radioactive decay times. In this case the probability distribution for the data is an exponential function, <span class="math inline">\(P(x|\lambda) = \lambda e^{-\lambda x}\)</span>. Performaing a least squares fit to the logarithm of the data is a common approach, but this is statistically incorrect since it implicitly assumes Gaussian errors on the counts, which is not valid for low-count data. These can be accounted for correctly using a Poisson likelihood, which is maximised to find the MLE of <span class="math inline">\(\lambda\)</span>. The example below compares the naive least-squares approach to the correct Poisson MLE, and also shows that an unbinned MLE gives the same result. (In this case, the unbinned MLE is exact and trivial - note that this is not generally true!)</p>
-<div id="e341e7bc" class="cell" data-execution_count="2">
+<div id="a7af4226" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.optimize <span class="im">as</span> opt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -720,7 +721,8 @@ True value            : tau = 5.00</code></pre>
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -729,8 +731,69 @@ True value            : tau = 5.00</code></pre>
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -744,6 +807,7 @@ True value            : tau = 5.00</code></pre>
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -906,44 +970,54 @@ True value            : tau = 5.00</code></pre>
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1042,15 +1116,18 @@ True value            : tau = 5.00</code></pre>
     }
   });
   </script>
-<nav class="page-navigation">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
-      <a href="../ml/supervised-ml.html" class="pagination-link" aria-label="Supervised Learning">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Supervised Learning</span></span>
+      <a href="../ml/unsupervised-ml.html" class="pagination-link" aria-label="Unsupervised Learning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../ml/unsupervised-ml.html" class="pagination-link" aria-label="Unsupervised Learning">
-        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Unsupervised Learning</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../ml/neural-networks.html" class="pagination-link" aria-label="Neural Networks">
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Neural Networks</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
